@@ -31,7 +31,7 @@ class BackupPolicy {
 
 @JsonSerializable()
 class BasicData {
-  String name = "No group name";
+  String name = "item name";
   String notes = "";
   DateTime createTime = new DateTime.now();
   DateTime deltaTime = new DateTime.now();
@@ -56,7 +56,7 @@ class BasicData {
 
 @JsonSerializable()
 class Data {
-  String key = Util.randomString(240);
+  String key = Util.randomString(1032);
   BackupPolicy backupPolicy = new BackupPolicy();
   PasswordPolicy passwordPolicy = new PasswordPolicy();
   SecurityPolicy securityPolicy = new SecurityPolicy();
@@ -169,10 +169,10 @@ class SecurityPolicy {
       _$SecurityPolicyFromJson(json);
   SecurityPolicy clone() {
     SecurityPolicy o = new SecurityPolicy();
-    o.autoHide = o.autoHide;
-    o.autoHideInterval = o.autoHideInterval;
-    o.autoSave = o.autoSave;
-    o.autoSaveInterval = o.autoSaveInterval;
+    o.autoHide = this.autoHide;
+    o.autoHideInterval = this.autoHideInterval;
+    o.autoSave = this.autoSave;
+    o.autoSaveInterval = this.autoSaveInterval;
     return o;
   }
 

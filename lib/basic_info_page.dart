@@ -36,6 +36,7 @@ class _BasicInfoWidgetState extends State<BasicInfoWidget> {
         padding: const EdgeInsets.all(8.0),
         children: <Widget>[
           TextFormField(
+            readOnly: readOnly,
             decoration: const InputDecoration(
               labelText: "Password collection name:",
               hintText: 'Please enter something',
@@ -50,6 +51,7 @@ class _BasicInfoWidgetState extends State<BasicInfoWidget> {
             initialValue: _basicData.name,
           ),
           TextFormField(
+            readOnly: readOnly,
             decoration: const InputDecoration(
               labelText: 'Notes',
             ),

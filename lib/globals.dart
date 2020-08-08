@@ -5,4 +5,5 @@ import 'utility.dart';
 
 Data data = Util.mockData();
 int changes = 0;
-String version = "0.0.1";
+String password;
+bool readOnly = false;

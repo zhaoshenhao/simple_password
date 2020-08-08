@@ -26,7 +26,6 @@ class SecuritySettingsWidget extends StatefulWidget {
 class _SecuritySettingsWidgetState extends State<SecuritySettingsWidget> {
   final _formKey = GlobalKey<FormState>();
   final _securityPolicy = data.securityPolicy.clone();
-  final _basicData = data.basicData.clone();
 
   @override
   Widget build(BuildContext context) {
@@ -38,8 +37,9 @@ class _SecuritySettingsWidgetState extends State<SecuritySettingsWidget> {
           SwitchListTile(
             title: const Text('Auto-hide password'),
             value: _securityPolicy.autoHide,
-            onChanged: (bool val) =>
-                setState(() => _securityPolicy.autoHide = val),
+            onChanged: readOnly
+                ? null
+                : (bool val) => setState(() => _securityPolicy.autoHide = val),
           ),
           UiUtil.spinRow(
               "Auto-hide interval(seconds)",
@@ -51,8 +51,9 @@ class _SecuritySettingsWidgetState extends State<SecuritySettingsWidget> {
           SwitchListTile(
             title: const Text('Auto-save changes'),
             value: _securityPolicy.autoSave,
-            onChanged: (bool val) =>
-                setState(() => _securityPolicy.autoSave = val),
+            onChanged: readOnly
+                ? null
+                : (bool val) => setState(() => _securityPolicy.autoSave = val),
           ),
           UiUtil.spinRow(
               "Auto-save interval(seconds)",

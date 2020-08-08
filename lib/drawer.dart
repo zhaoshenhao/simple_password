@@ -6,10 +6,17 @@ import 'package:simple_password/basic_info_page.dart';
 import 'package:simple_password/globals.dart';
 import 'package:simple_password/password_settings_page.dart';
 import 'package:simple_password/security_settings_page.dart';
-import 'package:simple_password/sync_page.dart';
 import 'package:simple_password/ui_utility.dart';
+import 'package:simple_password/utility.dart';
 
-class AppDrawer extends StatelessWidget {
+class AppDrawer extends StatefulWidget {
+  AppDrawer({Key key}) : super(key: key);
+
+  @override
+  _AppDrawerWidgetState createState() => _AppDrawerWidgetState();
+}
+
+class _AppDrawerWidgetState extends State<AppDrawer> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -17,9 +24,18 @@ class AppDrawer extends StatelessWidget {
         padding: EdgeInsets.zero,
         children: <Widget>[
           _createHeader(),
-          _createDrawerItem(
-            icon: Icons.content_copy,
-            text: 'Files & Backup',
+          ListTile(
+            leading: Icon(Icons.lock),
+            title: Text('Lock the App'),
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.of(context).push(new MaterialPageRoute(
+                  builder: (BuildContext context) => FilesAndBackupPage()));
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.content_copy),
+            title: Text('Files & Backup'),
             onTap: () {
               Navigator.pop(context);
               Navigator.of(context).push(new MaterialPageRoute(
@@ -27,36 +43,36 @@ class AppDrawer extends StatelessWidget {
             },
           ),
           Divider(),
-          _createDrawerItem(
-            icon: Icons.collections_bookmark,
-            text: 'Basic Information',
+          ListTile(
+            leading: Icon(Icons.collections_bookmark),
+            title: Text('Basic Information'),
             onTap: () {
               Navigator.pop(context);
               Navigator.of(context).push(new MaterialPageRoute(
                   builder: (BuildContext context) => BasicInfoPage()));
             },
           ),
-          _createDrawerItem(
-            icon: Icons.settings,
-            text: 'Backup Settings',
+          ListTile(
+            leading: Icon(Icons.settings),
+            title: Text('Backup Settings'),
             onTap: () {
               Navigator.pop(context);
               Navigator.of(context).push(new MaterialPageRoute(
                   builder: (BuildContext context) => BackupSettingsPage()));
             },
           ),
-          _createDrawerItem(
-            icon: Icons.settings,
-            text: 'Password Settings',
+          ListTile(
+            leading: Icon(Icons.settings),
+            title: Text('Password Settings'),
             onTap: () {
               Navigator.pop(context);
               Navigator.of(context).push(new MaterialPageRoute(
                   builder: (BuildContext context) => PasswordSettingsPage()));
             },
           ),
-          _createDrawerItem(
-            icon: Icons.settings,
-            text: 'Security Settings',
+          ListTile(
+            leading: Icon(Icons.settings),
+            title: Text('Security Settings'),
             onTap: () {
               Navigator.pop(context);
               Navigator.of(context).push(new MaterialPageRoute(
@@ -64,9 +80,9 @@ class AppDrawer extends StatelessWidget {
             },
           ),
           Divider(),
-          _createDrawerItem(
-            icon: Icons.copyright,
-            text: 'About',
+          ListTile(
+            leading: Icon(Icons.copyright),
+            title: Text('About'),
             onTap: () {
               Navigator.pop(context);
               Navigator.of(context).push(new MaterialPageRoute(
@@ -84,33 +100,27 @@ class AppDrawer extends StatelessWidget {
     );
   }
 
-  Widget _createDrawerItem(
-      {IconData icon, String text, GestureTapCallback onTap}) {
-    return ListTile(
-      title: Row(
-        children: <Widget>[
-          Icon(icon),
-          Padding(
-            padding: EdgeInsets.only(left: 8.0),
-            child: Text(text),
-          )
-        ],
-      ),
-      onTap: onTap,
-    );
-  }
-
   Widget _createHeader() {
     return DrawerHeader(
-      child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+      child: ListView(
+          //crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Text("Simple Password",
                 style: TextStyle(
                     color: Colors.white,
                     fontSize: 20.0,
                     fontWeight: FontWeight.w500)),
-            Text('\n\n'),
+            SwitchListTile(
+              title: const Text('Read only',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  )),
+              value: readOnly,
+              onChanged: (bool val) => setState(() => readOnly = val),
+              activeColor: Colors.white,
+              inactiveThumbColor: Colors.grey,
+            ),
             Text('Unsaved changes: ' + changes.toString(),
                 style: TextStyle(color: Colors.white)),
             UiUtil.accessTime(data.basicData.accessTime, color: Colors.white70),

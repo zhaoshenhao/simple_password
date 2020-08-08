@@ -71,6 +71,7 @@ class _PasswordSettingsWidgetState extends State<PasswordSettingsWidget> {
               (double newValue) =>
                   setState(() => _passwordPolicy.minSymbol = newValue.toInt())),
           TextFormField(
+            readOnly: readOnly,
             decoration: const InputDecoration(
               labelText: "Allowed symbols",
               hintText: 'Symbol letters',

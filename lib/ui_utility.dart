@@ -24,8 +24,8 @@ class UiUtil {
       padding: const EdgeInsets.symmetric(vertical: 16.0),
       child: new Center(
           child: new RaisedButton(
-        onPressed: () => _confirm(),
-        color: Colors.red,
+        onPressed: readOnly ? null : () => _confirm(),
+        color: readOnly ? Colors.grey : Colors.red,
         textColor: Colors.white,
         child: Text('Confirm'),
       )),

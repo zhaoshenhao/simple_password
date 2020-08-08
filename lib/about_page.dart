@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-import 'globals.dart';
 import 'ui_utility.dart';
+import 'terms.dart';
+import 'privacy.dart';
+import 'utility.dart';
 
 final String author = "Compusky Inc.";
 final String description = "";
 final String copyRight = "Copyright © 2002-2020 CompuSky Inc.";
-final String terms = "Simple Password term of use";
-final String privacy = "Privacy";
 
 class AboutPage extends StatelessWidget {
   @override

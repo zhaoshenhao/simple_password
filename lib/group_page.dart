@@ -79,6 +79,7 @@ class _GroupWidgetState extends State<GroupWidget> {
   List<Widget> _getGroupFields() {
     return <Widget>[
       TextFormField(
+        readOnly: readOnly,
         decoration: const InputDecoration(
           labelText: 'Notes',
         ),
@@ -97,6 +98,7 @@ class _GroupWidgetState extends State<GroupWidget> {
   List<Widget> _getList() {
     List<Widget> list = new List();
     list.add(TextFormField(
+      readOnly: readOnly,
       decoration: const InputDecoration(
         labelText: "Group name",
         hintText: 'Enter something',

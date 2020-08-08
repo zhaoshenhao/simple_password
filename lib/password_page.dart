@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:easy_dialog/easy_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -21,6 +22,8 @@ class OnePasswordPage extends StatelessWidget {
     Password p = group.passwords[pi];
     p.basicData.accessTime = DateTime.now();
     _password = p.clone();
+    String tmp = _password.password;
+    _password.password = Util.decryptPassword(tmp, data.key, _password.key);
   }
 
   @override
@@ -53,16 +56,24 @@ class _OnePasswordWidgetState extends State<OnePasswordWidget> {
   int _start = data.securityPolicy.autoHideInterval;
 
   @override
-  Widget build(BuildContext context) {
+  @protected
+  void initState() {
     pswd = TextEditingController(text: _password.password);
     username = TextEditingController(text: _password.username);
     url = TextEditingController(text: _password.url);
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Form(
       key: _formKey,
       child: new ListView(
         padding: const EdgeInsets.all(8.0),
         children: <Widget>[
           TextFormField(
+            readOnly: readOnly,
+            keyboardType: TextInputType.text,
             decoration: const InputDecoration(
               labelText: "Title",
               hintText: 'The item title',
@@ -73,12 +84,13 @@ class _OnePasswordWidgetState extends State<OnePasswordWidget> {
               }
               return null;
             },
-            onChanged: (val) => setState(() => _password.basicData.name = val),
+            onChanged: (val) => {_password.basicData.name = val},
             initialValue: _password.basicData.name,
           ),
           TextFormField(
+            readOnly: readOnly,
+            keyboardType: TextInputType.text,
             decoration: InputDecoration(
-              labelText: "Username",
               hintText: 'The username',
               suffixIcon: GestureDetector(
                   onTap: () {
@@ -91,10 +103,11 @@ class _OnePasswordWidgetState extends State<OnePasswordWidget> {
                     color: Colors.red,
                   )),
             ),
-            onChanged: (val) => setState(() => _password.username = val),
+            onChanged: (val) => {_password.username = val},
             controller: username,
           ),
           TextFormField(
+            readOnly: readOnly,
             keyboardType: TextInputType.text,
             decoration: InputDecoration(
               labelText: "Password",
@@ -119,12 +132,14 @@ class _OnePasswordWidgetState extends State<OnePasswordWidget> {
                     color: Colors.red,
                   )),
             ),
-            onChanged: (val) => setState(() => _password.password = val),
+            onChanged: (val) => {_password.password = val},
             controller: pswd,
             obscureText: !_showPassword,
           ),
           _getPasswordButtons(),
           TextFormField(
+            readOnly: readOnly,
+            keyboardType: TextInputType.text,
             decoration: InputDecoration(
               labelText: "URL",
               hintText: 'Any URL',
@@ -139,17 +154,18 @@ class _OnePasswordWidgetState extends State<OnePasswordWidget> {
                     color: Colors.red,
                   )),
             ),
-            onChanged: (val) => setState(() => _password.url = val),
+            onChanged: (val) => {_password.url = val},
             controller: url,
           ),
           TextFormField(
+            readOnly: readOnly,
             decoration: const InputDecoration(
               labelText: 'Notes',
             ),
-            onChanged: (val) => setState(() => _password.basicData.notes = val),
+            onChanged: (val) => {_password.basicData.notes = val},
             initialValue: _password.basicData.notes,
             keyboardType: TextInputType.multiline,
-            maxLines: 3,
+            maxLines: 6,
           ),
           Text(''),
           UiUtil.accessTime(_password.basicData.accessTime),
@@ -180,30 +196,25 @@ class _OnePasswordWidgetState extends State<OnePasswordWidget> {
       return;
     }
     _start = data.securityPolicy.autoHideInterval;
-    _timer = new Timer.periodic(
-      oneSec,
-      (Timer timer) => setState(
-        () {
-          if (_start < 1) {
-            timer.cancel();
-            _showPassword = false;
-          } else {
-            _start = _start - 1;
-          }
-        },
-      ),
-    );
-  }
-
-  void _checkPassword() {
-    // TODO
+    _timer = new Timer.periodic(oneSec, (Timer timer) {
+      if (_start < 1) {
+        timer.cancel();
+        //_showPassword = false;
+        _togglevisibility();
+      } else {
+        _start = _start - 1;
+      }
+    });
   }
 
   void _confirm() {
     if (_formKey.currentState.validate()) {
       _password.basicData.deltaTime = DateTime.now();
       _tgroup.basicData.deltaTime = DateTime.now();
-      _tgroup.passwords[pindex] = _password.clone();
+      Password tmp = _password.clone();
+      String tp = tmp.password;
+      tmp.password = Util.encryptPassword(tp, data.key, tmp.key);
+      _tgroup.passwords[pindex] = tmp;
       data.groups[pgindex] = _tgroup.clone();
       setState(() {});
       UiUtil.confirmAll(context);
@@ -211,7 +222,8 @@ class _OnePasswordWidgetState extends State<OnePasswordWidget> {
   }
 
   void _genPassword() {
-    pswd.text = Util.genPassword();
+    pswd.text = Util.genPassword(data.passwordPolicy);
+    _password.password = pswd.text;
   }
 
   Widget _getPasswordButtons() {
@@ -219,12 +231,16 @@ class _OnePasswordWidgetState extends State<OnePasswordWidget> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         new RaisedButton(
-          onPressed: () => _resetPassword(),
+          color: readOnly ? Colors.grey : Colors.white60,
+          onPressed: readOnly ? null : () => _resetPassword(),
           child: Text('Reset'),
         ),
         new RaisedButton(
-            onPressed: () => _genPassword(), child: Text('Generate')),
+            color: readOnly ? Colors.grey : Colors.white60,
+            onPressed: readOnly ? null : () => _genPassword(),
+            child: Text('Generate')),
         new RaisedButton(
+          color: Colors.white60,
           onPressed: () => _checkPassword(),
           child: Text('Check'),
         ),
@@ -233,7 +249,9 @@ class _OnePasswordWidgetState extends State<OnePasswordWidget> {
   }
 
   void _resetPassword() {
-    pswd.text = _tgroup.passwords[pindex].password;
+    pswd.text = Util.decryptPassword(
+        _tgroup.passwords[pindex].password, data.key, _password.key);
+    _password.password = pswd.text;
   }
 
   void _togglevisibility() {
@@ -245,5 +263,26 @@ class _OnePasswordWidgetState extends State<OnePasswordWidget> {
         cancelTimer();
       }
     });
+  }
+
+  void _checkPassword() {
+    List<String> list = Util.checkPassword(pswd.text, data.passwordPolicy);
+    _basicEasyDialog(list);
+  }
+
+  void _basicEasyDialog(List<String> list) {
+    String str = list.isEmpty ? "Password looks good." : list.join("\n");
+    EasyDialog(
+        height: 200,
+        title: Text(
+          "Password Check",
+          style: TextStyle(fontWeight: FontWeight.bold),
+          textScaleFactor: 1.2,
+        ),
+        description: Text(
+          str,
+          textScaleFactor: 1.1,
+          textAlign: TextAlign.left,
+        )).show(context);
   }
 }

@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 
-import 'ui_utility.dart';
-import 'terms.dart';
 import 'privacy.dart';
+import 'terms.dart';
+import 'ui_utility.dart';
 import 'utility.dart';
 
 final String author = "Compusky Inc.";
-final String description = "";
 final String copyRight = "Copyright © 2002-2020 CompuSky Inc.";
 
 class AboutPage extends StatelessWidget {
@@ -20,7 +19,7 @@ class AboutPage extends StatelessWidget {
       ),
       body: new Center(
         child: new ListView(
-          padding: const EdgeInsets.all(16.0),
+          padding: UiUtil.edgeInsets,
           children: <Widget>[
             UiUtil.headingRow("About"),
             Text(''),

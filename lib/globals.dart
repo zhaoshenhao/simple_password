@@ -3,7 +3,9 @@ library simple_password.globals;
 import 'data.dart';
 import 'utility.dart';
 
-Data data = Util.mockData();
 int changes = 0;
-String password;
+String currentFilename;
+Data data = Util.mockData();
+int randomIdx;
 bool readOnly = false;
+String secPassword;

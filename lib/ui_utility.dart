@@ -1,3 +1,4 @@
+import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:spinner_input/spinner_input.dart';
 
@@ -7,9 +8,21 @@ import 'utility.dart';
 class UiUtil {
   static final biggerFont = const TextStyle(fontSize: 18.0);
   static final smallerFont = const TextStyle(fontSize: 12.0);
+  static final edgeInsets = EdgeInsets.all(16.0);
+  static final edgeInsets2 = EdgeInsets.only(left: 8.0, right: 8.0);
 
   static Text accessTime(DateTime d, {color: Colors.black45}) {
     return readOnlyText("Last Access", d, color: color);
+  }
+
+  static Future<bool> confirm(
+      String title, String msg, BuildContext context) async {
+    final OkCancelResult result = await showOkCancelAlertDialog(
+        context: context, title: title, message: "\n" + msg);
+    if (result == OkCancelResult.ok) {
+      return true;
+    }
+    return false;
   }
 
   static bool confirmAll(var context) {
@@ -20,16 +33,15 @@ class UiUtil {
   }
 
   static Widget confirmButton(var _confirm) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 16.0),
-      child: new Center(
-          child: new RaisedButton(
+    return new Row(mainAxisAlignment: MainAxisAlignment.end, children: <Widget>[
+      new FloatingActionButton(
+        backgroundColor: readOnly ? Colors.grey : Colors.red,
+        tooltip: 'Confirm', // used by assistive technologies
+        child: new Icon(Icons.check_circle_outline),
         onPressed: readOnly ? null : () => _confirm(),
-        color: readOnly ? Colors.grey : Colors.red,
-        textColor: Colors.white,
-        child: Text('Confirm'),
-      )),
-    );
+        heroTag: null,
+      ),
+    ]);
   }
 
   static Text createTime(DateTime d, {color: Colors.black45}) {
@@ -59,6 +71,21 @@ class UiUtil {
         ),
       ],
     );
+  }
+
+  static bool isReadOnly(BuildContext context) {
+    String msg;
+    if (readOnly) {
+      msg = "Read only mode.";
+    }
+    if (changes == 0) {
+      msg = "No changes";
+    }
+    if (msg != null) {
+      Scaffold.of(context).showSnackBar(UiUtil.snackBar(msg));
+      return true;
+    }
+    return false;
   }
 
   static Text readOnlyText(String title, var value, {color: Colors.black45}) {

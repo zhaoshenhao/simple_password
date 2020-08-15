@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+
+import 'data.dart';
 import 'globals.dart';
 import 'ui_utility.dart';
-import 'data.dart';
 
 class BasicInfoPage extends StatelessWidget {
   @override
@@ -30,44 +31,45 @@ class _BasicInfoWidgetState extends State<BasicInfoWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-      key: _formKey,
-      child: new ListView(
-        padding: const EdgeInsets.all(8.0),
-        children: <Widget>[
-          TextFormField(
-            readOnly: readOnly,
-            decoration: const InputDecoration(
-              labelText: "Password collection name:",
-              hintText: 'Please enter something',
-            ),
-            validator: (value) {
-              if (value.isEmpty) {
-                return 'Please enter the name of the password collection.';
-              }
-              return null;
-            },
-            onChanged: (val) => setState(() => _basicData.name = val),
-            initialValue: _basicData.name,
+    return Scaffold(
+        body: Form(
+          key: _formKey,
+          child: new ListView(
+            padding: UiUtil.edgeInsets,
+            children: <Widget>[
+              TextFormField(
+                readOnly: readOnly,
+                decoration: const InputDecoration(
+                  labelText: "Password collection name:",
+                  hintText: 'Please enter something',
+                ),
+                validator: (value) {
+                  if (value.isEmpty) {
+                    return 'Please enter the name of the password collection.';
+                  }
+                  return null;
+                },
+                onChanged: (val) => setState(() => _basicData.name = val),
+                initialValue: _basicData.name,
+              ),
+              TextFormField(
+                readOnly: readOnly,
+                decoration: const InputDecoration(
+                  labelText: 'Notes',
+                ),
+                onChanged: (val) => setState(() => _basicData.notes = val),
+                initialValue: _basicData.notes,
+                keyboardType: TextInputType.multiline,
+                maxLines: 3,
+              ),
+              Text(''),
+              UiUtil.accessTime(_basicData.accessTime),
+              UiUtil.deltaTime(_basicData.deltaTime),
+              UiUtil.createTime(_basicData.createTime),
+            ],
           ),
-          TextFormField(
-            readOnly: readOnly,
-            decoration: const InputDecoration(
-              labelText: 'Notes',
-            ),
-            onChanged: (val) => setState(() => _basicData.notes = val),
-            initialValue: _basicData.notes,
-            keyboardType: TextInputType.multiline,
-            maxLines: 3,
-          ),
-          Text(''),
-          UiUtil.accessTime(_basicData.accessTime),
-          UiUtil.deltaTime(_basicData.deltaTime),
-          UiUtil.createTime(_basicData.createTime),
-          UiUtil.confirmButton(_confirm),
-        ],
-      ),
-    );
+        ),
+        floatingActionButton: UiUtil.confirmButton(_confirm));
   }
 
   void _confirm() {

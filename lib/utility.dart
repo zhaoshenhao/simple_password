@@ -1,9 +1,12 @@
-import 'dart:convert';
 import 'dart:developer' as dev;
+import 'dart:io';
 import 'dart:math';
 
 import 'package:encrypt/encrypt.dart';
 import 'package:intl/intl.dart';
+import 'package:jiffy/jiffy.dart';
+import 'package:path/path.dart' as p;
+import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'data.dart';
@@ -13,19 +16,23 @@ final String version = "0.0.1";
 
 class Log {
   static error(String message, {var error}) =>
-      dev.log("error: $message" + error == null ? '' : jsonEncode(error));
+      dev.log("error: $message " + (error == null ? '' : error.toString()));
   static fine(String message, {var error}) =>
-      dev.log("fine: $message" + error == null ? '' : jsonEncode(error));
+      dev.log("fine: $message " + (error == null ? '' : error.toString()));
   static severe(String message, {var error}) =>
-      dev.log("severe: $message" + error == null ? '' : jsonEncode(error));
+      dev.log("severe: $message " + (error == null ? '' : error.toString()));
   static warning(String message, {var error}) =>
-      dev.log("warning: $message" + error == null ? '' : jsonEncode(error));
+      dev.log("warning: $message " + (error == null ? '' : error.toString()));
 }
 
 class Util {
-  static DateFormat formatter = DateFormat('yyyy-MM-dd H:m:s');
+  static DateFormat formatter = DateFormat('yyyy-MM-dd HH:mm:ss');
+  static String ymdhms = "yyyyMMddHHmmss";
+  static String ext = ".sp";
   static SharedPreferences sp;
+  static Directory docDir;
   static final RegExp validCharacters = RegExp(r'^.*[a-zA-Z0-9\ ].*$');
+  static final validCharacters2 = RegExp(r'^[a-zA-Z0-9_-]+$');
   static final String symboles = "~!@#\$£%^&*()_+-=[]{}|:;<>?,./";
   static final String lowerCaseLetters = "abcdefghijklmnopqrstuvwxyz";
   static final String upperCaseLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -144,8 +151,93 @@ class Util {
         passwordPolicy.allowedSymbols);
   }
 
+  static String getBackupName(String bn) {
+    return bn + "-" + Jiffy(DateTime.now()).format(ymdhms) + ext;
+  }
+
+  static String getBasename(String f) {
+    return p.basenameWithoutExtension(f);
+  }
+
+  static List<String> getDeleteList(List<String> flist, BackupPolicy bp) {
+    List<String> list = List();
+    if (flist.length <= bp.totalBackups) {
+      return list;
+    }
+    int delTotal = flist.length - bp.totalBackups;
+    Jiffy now = Jiffy(DateTime.now());
+    Jiffy preMonth = Jiffy(now.subtract(months: 1));
+    Jiffy preWeek = Jiffy(now.subtract(days: 7));
+    Jiffy preDay = Jiffy(now.subtract(days: 1));
+    List<String> preMonthList = List();
+    List<String> preWeekList = List();
+    List<String> preDayList = List();
+    List<String> badList = List();
+    for (int i = 0; i < flist.length; i++) {
+      String f = flist[i];
+      String bn = p.basenameWithoutExtension(f);
+      String tmStr = bn.substring(bn.length - 14, bn.length);
+      String tmStr2 = tmStr.substring(0, 8) + "T" + tmStr.substring(8);
+      DateTime dt;
+      try {
+        dt = DateTime.parse(tmStr2);
+      } catch (e) {
+        badList.add(flist[i]);
+        continue;
+      }
+      Jiffy ft = Jiffy(dt);
+      if (ft.year == preMonth.year && ft.month == preMonth.month) {
+        preMonthList.add(f);
+      }
+      if (ft.year == preWeek.year && ft.week == preWeek.week) {
+        preWeekList.add(f);
+      }
+      if (ft.year == preDay.year &&
+          ft.month == preDay.month &&
+          ft.day == preDay.day) {
+        preDayList.add(f);
+      }
+    }
+    list.addAll(badList);
+    if (list.length >= delTotal) {
+      return list;
+    }
+    if (preMonthList.isNotEmpty) {
+      preMonthList.removeLast();
+    }
+    if (preWeekList.isNotEmpty) {
+      preWeekList.removeLast();
+    }
+    if (preDayList.isNotEmpty) {
+      preDayList.removeLast();
+    }
+    for (int i = 0; i < flist.length; i++) {
+      String f = flist[i];
+      if (list.length >= delTotal) {
+        break;
+      }
+      if (!bp.keepLastMonth || !preMonthList.contains(f)) {
+        list.add(f);
+        continue;
+      }
+      if (!bp.keepLastWeek || !preWeekList.contains(f)) {
+        list.add(f);
+        continue;
+      }
+      if (!bp.keepOneDay || !preDayList.contains(f)) {
+        list.add(f);
+        continue;
+      }
+    }
+    return list;
+  }
+
   static List<String> getHistoryFiles() {
-    return sp.getStringList(historyFilesKey);
+    List<String> hist = sp.getStringList(historyFilesKey);
+    if (hist != null) {
+      return hist.toSet().toList(growable: true);
+    }
+    return List();
   }
 
   static String getLanguage() {
@@ -156,16 +248,25 @@ class Util {
     return lang;
   }
 
+  static String getPath(String fn) {
+    return Util.docDir.path + "/" + fn + ext;
+  }
+
   static String getSecretKey(String keys, int idx) {
     return keys.substring(idx, idx + 32);
   }
 
   static Future init() async {
     sp = await SharedPreferences.getInstance();
+    docDir = await getApplicationDocumentsDirectory();
   }
 
   static bool isAlphaNum(String val) {
     return validCharacters.hasMatch(val);
+  }
+
+  static bool isValidFileName(String val) {
+    return validCharacters2.hasMatch(val);
   }
 
   static Data mockData() {
@@ -175,19 +276,19 @@ class Util {
     return d;
   }
 
-  static Group mockGroup(String keys) {
+  static Group mockGroup(String key) {
     Group g = new Group();
     g.basicData.name = "my password group";
-    g.passwords.add(mockPassword(keys));
+    g.passwords.add(mockPassword(key));
     return g;
   }
 
-  static Password mockPassword(String keys) {
+  static Password mockPassword(String key) {
     Password p = new Password();
     p.basicData.name = "my secret";
     String tmp = randomString(8);
     p.key = Util.randomKey();
-    p.password = encryptPassword(tmp, keys, p.key);
+    p.password = encryptPassword(tmp, key, p.key);
     return p;
   }
 

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_lock/flutter_app_lock.dart';
 import 'package:simple_password/about_page.dart';
-import 'package:simple_password/backup_page.dart';
 import 'package:simple_password/backup_settings_page.dart';
 import 'package:simple_password/basic_info_page.dart';
 import 'package:simple_password/globals.dart';
 import 'package:simple_password/password_settings_page.dart';
+import 'package:simple_password/save_page.dart';
 import 'package:simple_password/security_settings_page.dart';
 import 'package:simple_password/ui_utility.dart';
 import 'package:simple_password/utility.dart';
@@ -29,17 +30,16 @@ class _AppDrawerWidgetState extends State<AppDrawer> {
             title: Text('Lock the App'),
             onTap: () {
               Navigator.pop(context);
-              Navigator.of(context).push(new MaterialPageRoute(
-                  builder: (BuildContext context) => FilesAndBackupPage()));
+              AppLock.of(context).showLockScreen();
             },
           ),
           ListTile(
             leading: Icon(Icons.content_copy),
-            title: Text('Files & Backup'),
+            title: Text('Save & Backup & Share'),
             onTap: () {
               Navigator.pop(context);
               Navigator.of(context).push(new MaterialPageRoute(
-                  builder: (BuildContext context) => FilesAndBackupPage()));
+                  builder: (BuildContext context) => SaveAndBackupPage()));
             },
           ),
           Divider(),
@@ -110,19 +110,16 @@ class _AppDrawerWidgetState extends State<AppDrawer> {
                     color: Colors.white,
                     fontSize: 20.0,
                     fontWeight: FontWeight.w500)),
-            SwitchListTile(
-              title: const Text('Read only',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  )),
-              value: readOnly,
-              onChanged: (bool val) => setState(() => readOnly = val),
-              activeColor: Colors.white,
-              inactiveThumbColor: Colors.grey,
-            ),
+            Text(''),
+            Text("Read only: ${readOnly ? 'On' : 'Off'}",
+                style: TextStyle(
+                    color: Colors.white, fontWeight: FontWeight.bold)),
             Text('Unsaved changes: ' + changes.toString(),
                 style: TextStyle(color: Colors.white)),
+            Text(
+              "File: $currentFilename${Util.ext}",
+              style: TextStyle(fontSize: 12, color: Colors.white70),
+            ),
             UiUtil.accessTime(data.basicData.accessTime, color: Colors.white70),
             UiUtil.deltaTime(data.basicData.deltaTime, color: Colors.white70),
             UiUtil.createTime(data.basicData.createTime, color: Colors.white70),

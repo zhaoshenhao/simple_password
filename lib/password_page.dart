@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:easy_dialog/easy_dialog.dart';
+import 'package:adaptive_dialog/adaptive_dialog.dart' as dialog;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -56,125 +56,117 @@ class _OnePasswordWidgetState extends State<OnePasswordWidget> {
   int _start = data.securityPolicy.autoHideInterval;
 
   @override
-  @protected
-  void initState() {
-    pswd = TextEditingController(text: _password.password);
-    username = TextEditingController(text: _password.username);
-    url = TextEditingController(text: _password.url);
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return Form(
-      key: _formKey,
-      child: new ListView(
-        padding: const EdgeInsets.all(8.0),
-        children: <Widget>[
-          TextFormField(
-            readOnly: readOnly,
-            keyboardType: TextInputType.text,
-            decoration: const InputDecoration(
-              labelText: "Title",
-              hintText: 'The item title',
-            ),
-            validator: (value) {
-              if (value.isEmpty) {
-                return 'Please enter something';
-              }
-              return null;
-            },
-            onChanged: (val) => {_password.basicData.name = val},
-            initialValue: _password.basicData.name,
-          ),
-          TextFormField(
-            readOnly: readOnly,
-            keyboardType: TextInputType.text,
-            decoration: InputDecoration(
-              hintText: 'The username',
-              suffixIcon: GestureDetector(
-                  onTap: () {
-                    Clipboard.setData(ClipboardData(text: username.text));
-                    Scaffold.of(context)
-                        .showSnackBar(UiUtil.snackBar("Username copied"));
-                  },
-                  child: Icon(
-                    Icons.content_copy,
-                    color: Colors.red,
-                  )),
-            ),
-            onChanged: (val) => {_password.username = val},
-            controller: username,
-          ),
-          TextFormField(
-            readOnly: readOnly,
-            keyboardType: TextInputType.text,
-            decoration: InputDecoration(
-              labelText: "Password",
-              hintText: 'Enter your password',
-              prefixIcon: GestureDetector(
-                onTap: () {
-                  _togglevisibility();
-                },
-                child: Icon(
-                  _showPassword ? Icons.visibility : Icons.visibility_off,
-                  color: Colors.red,
+    return new Scaffold(
+        body: Form(
+          key: _formKey,
+          child: new ListView(
+            padding: UiUtil.edgeInsets,
+            children: <Widget>[
+              TextFormField(
+                readOnly: readOnly,
+                keyboardType: TextInputType.text,
+                decoration: const InputDecoration(
+                  labelText: "Title",
+                  hintText: 'The item title',
                 ),
+                validator: (value) {
+                  if (value.isEmpty) {
+                    return 'Please enter something';
+                  }
+                  return null;
+                },
+                onChanged: (val) => {_password.basicData.name = val},
+                initialValue: _password.basicData.name,
               ),
-              suffixIcon: GestureDetector(
-                  onTap: () {
-                    Clipboard.setData(ClipboardData(text: pswd.text));
-                    Scaffold.of(context)
-                        .showSnackBar(UiUtil.snackBar("Password copied"));
-                  },
-                  child: Icon(
-                    Icons.content_copy,
-                    color: Colors.red,
-                  )),
-            ),
-            onChanged: (val) => {_password.password = val},
-            controller: pswd,
-            obscureText: !_showPassword,
+              TextFormField(
+                readOnly: readOnly,
+                keyboardType: TextInputType.text,
+                decoration: InputDecoration(
+                  hintText: 'The username',
+                  prefixIcon: GestureDetector(
+                      onTap: () {
+                        Clipboard.setData(ClipboardData(text: username.text));
+                        Scaffold.of(context)
+                            .showSnackBar(UiUtil.snackBar("Username copied"));
+                      },
+                      child: Icon(
+                        Icons.content_copy,
+                        color: Colors.red,
+                      )),
+                ),
+                onChanged: (val) => {_password.username = val},
+                controller: username,
+              ),
+              TextFormField(
+                readOnly: readOnly,
+                keyboardType: TextInputType.text,
+                decoration: InputDecoration(
+                  labelText: "Password",
+                  hintText: 'Enter your password',
+                  suffixIcon: GestureDetector(
+                    onTap: () {
+                      _togglevisibility();
+                    },
+                    child: Icon(
+                      _showPassword ? Icons.visibility : Icons.visibility_off,
+                      color: Colors.red,
+                    ),
+                  ),
+                  prefixIcon: GestureDetector(
+                      onTap: () {
+                        Clipboard.setData(ClipboardData(text: pswd.text));
+                        Scaffold.of(context)
+                            .showSnackBar(UiUtil.snackBar("Password copied"));
+                      },
+                      child: Icon(
+                        Icons.content_copy,
+                        color: Colors.red,
+                      )),
+                ),
+                onChanged: (val) => {_password.password = val},
+                controller: pswd,
+                obscureText: !_showPassword,
+              ),
+              _getPasswordButtons(),
+              TextFormField(
+                readOnly: readOnly,
+                keyboardType: TextInputType.text,
+                decoration: InputDecoration(
+                  labelText: "URL",
+                  hintText: 'Any URL',
+                  prefixIcon: GestureDetector(
+                      onTap: () {
+                        Clipboard.setData(ClipboardData(text: url.text));
+                        Scaffold.of(context)
+                            .showSnackBar(UiUtil.snackBar("URL copied"));
+                      },
+                      child: Icon(
+                        Icons.content_copy,
+                        color: Colors.red,
+                      )),
+                ),
+                onChanged: (val) => {_password.url = val},
+                controller: url,
+              ),
+              TextFormField(
+                readOnly: readOnly,
+                decoration: const InputDecoration(
+                  labelText: 'Notes',
+                ),
+                onChanged: (val) => {_password.basicData.notes = val},
+                initialValue: _password.basicData.notes,
+                keyboardType: TextInputType.multiline,
+                maxLines: 6,
+              ),
+              Text(''),
+              UiUtil.accessTime(_password.basicData.accessTime),
+              UiUtil.deltaTime(_password.basicData.deltaTime),
+              UiUtil.createTime(_password.basicData.createTime),
+            ],
           ),
-          _getPasswordButtons(),
-          TextFormField(
-            readOnly: readOnly,
-            keyboardType: TextInputType.text,
-            decoration: InputDecoration(
-              labelText: "URL",
-              hintText: 'Any URL',
-              suffixIcon: GestureDetector(
-                  onTap: () {
-                    Clipboard.setData(ClipboardData(text: url.text));
-                    Scaffold.of(context)
-                        .showSnackBar(UiUtil.snackBar("URL copied"));
-                  },
-                  child: Icon(
-                    Icons.content_copy,
-                    color: Colors.red,
-                  )),
-            ),
-            onChanged: (val) => {_password.url = val},
-            controller: url,
-          ),
-          TextFormField(
-            readOnly: readOnly,
-            decoration: const InputDecoration(
-              labelText: 'Notes',
-            ),
-            onChanged: (val) => {_password.basicData.notes = val},
-            initialValue: _password.basicData.notes,
-            keyboardType: TextInputType.multiline,
-            maxLines: 6,
-          ),
-          Text(''),
-          UiUtil.accessTime(_password.basicData.accessTime),
-          UiUtil.deltaTime(_password.basicData.deltaTime),
-          UiUtil.createTime(_password.basicData.createTime),
-          UiUtil.confirmButton(_confirm),
-        ],
-      ),
-    );
+        ),
+        floatingActionButton: UiUtil.confirmButton(_confirm));
   }
 
   void cancelTimer() {
@@ -187,6 +179,15 @@ class _OnePasswordWidgetState extends State<OnePasswordWidget> {
   void dispose() {
     cancelTimer();
     super.dispose();
+  }
+
+  @override
+  @protected
+  void initState() {
+    pswd = TextEditingController(text: _password.password);
+    username = TextEditingController(text: _password.username);
+    url = TextEditingController(text: _password.url);
+    super.initState();
   }
 
   void startTimer() {
@@ -205,6 +206,11 @@ class _OnePasswordWidgetState extends State<OnePasswordWidget> {
         _start = _start - 1;
       }
     });
+  }
+
+  void _checkPassword() {
+    List<String> list = Util.checkPassword(pswd.text, data.passwordPolicy);
+    _showResult(list);
   }
 
   void _confirm() {
@@ -254,6 +260,13 @@ class _OnePasswordWidgetState extends State<OnePasswordWidget> {
     _password.password = pswd.text;
   }
 
+  void _showResult(List<String> list) {
+    String message =
+        list.isEmpty ? "Password looks good." : "\n" + list.join("\n");
+    dialog.showOkAlertDialog(
+        context: context, title: 'Password Check', message: message);
+  }
+
   void _togglevisibility() {
     setState(() {
       _showPassword = !_showPassword;
@@ -263,26 +276,5 @@ class _OnePasswordWidgetState extends State<OnePasswordWidget> {
         cancelTimer();
       }
     });
-  }
-
-  void _checkPassword() {
-    List<String> list = Util.checkPassword(pswd.text, data.passwordPolicy);
-    _basicEasyDialog(list);
-  }
-
-  void _basicEasyDialog(List<String> list) {
-    String str = list.isEmpty ? "Password looks good." : list.join("\n");
-    EasyDialog(
-        height: 200,
-        title: Text(
-          "Password Check",
-          style: TextStyle(fontWeight: FontWeight.bold),
-          textScaleFactor: 1.2,
-        ),
-        description: Text(
-          str,
-          textScaleFactor: 1.1,
-          textAlign: TextAlign.left,
-        )).show(context);
   }
 }

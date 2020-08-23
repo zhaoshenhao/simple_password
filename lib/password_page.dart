@@ -209,7 +209,7 @@ class _OnePasswordWidgetState extends State<OnePasswordWidget> {
   }
 
   void _checkPassword() {
-    List<String> list = Util.checkPassword(pswd.text, data.passwordPolicy);
+    List<String> list = _checkPasswordPolicy(pswd.text, data.passwordPolicy);
     _showResult(list);
   }
 
@@ -277,5 +277,52 @@ class _OnePasswordWidgetState extends State<OnePasswordWidget> {
         cancelTimer();
       }
     });
+  }
+
+  List<String> _checkPasswordPolicy(
+      String password, PasswordPolicy passwordPolicy) {
+    List<String> list = List();
+    if (password == null || password == '') {
+      list.add("Password is empty");
+      return list;
+    }
+    if (password.length < passwordPolicy.minLenght) {
+      list.add("Length < " + passwordPolicy.minLenght.toString());
+    }
+    int lower = 0;
+    int upper = 0;
+    int digit = 0;
+    int special = 0;
+    for (int i = 0; i < password.length; i++) {
+      int m = password.codeUnitAt(i);
+      if (48 <= m && m <= 57)
+        digit += 1;
+      else if (65 <= 65 && m <= 90)
+        upper += 1;
+      else if (97 <= m && m <= 112)
+        lower += 1;
+      else
+        special += 1;
+    }
+    if (lower < passwordPolicy.minLowerCase) {
+      list.add("Must contain " +
+          passwordPolicy.minLowerCase.toString() +
+          " lower case letters");
+    }
+    if (upper < passwordPolicy.minUpperCase) {
+      list.add("Must contain " +
+          passwordPolicy.minUpperCase.toString() +
+          " uppers case letters");
+    }
+    if (digit < passwordPolicy.minDigit) {
+      list.add(
+          "Must contain " + passwordPolicy.minDigit.toString() + " digits");
+    }
+    if (special < passwordPolicy.minSymbol) {
+      list.add("Must contain " +
+          passwordPolicy.minSymbol.toString() +
+          " special chars");
+    }
+    return list;
   }
 }

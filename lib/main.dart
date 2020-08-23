@@ -33,16 +33,15 @@ class SimplePassword extends StatelessWidget {
       ],
       supportedLocales: [
         const Locale('en', 'US'), // English
-        const Locale('fr', 'FR'),
-        const Locale('it', 'IT'),
-        const Locale('de', 'DE'),
-        const Locale('es', 'ES'),
-        const Locale('ru', 'RU'),
-        const Locale('pt', 'PT'),
         const Locale('zh', 'CN'),
-        const Locale('ja', 'JP'),
-        const Locale('ko', 'KR'),
-        // ... other locales the app supports
+        //const Locale('fr', 'FR'),
+        //const Locale('it', 'IT'),
+        //const Locale('de', 'DE'),
+        //const Locale('es', 'ES'),
+        //const Locale('ru', 'RU'),
+        //const Locale('pt', 'PT'),
+        //const Locale('ja', 'JP'),
+        //const Locale('ko', 'KR'),
       ],
     );
   }

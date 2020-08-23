@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app_lock/flutter_app_lock.dart';
 import 'package:simple_password/about_page.dart';
 import 'package:simple_password/backup_settings_page.dart';
 import 'package:simple_password/basic_info_page.dart';
@@ -26,11 +25,12 @@ class _AppDrawerWidgetState extends State<AppDrawer> {
         children: <Widget>[
           _createHeader(),
           ListTile(
-            leading: Icon(Icons.lock),
-            title: Text('Lock the App'),
+            leading: Icon(Icons.collections_bookmark),
+            title: Text('Basic Information'),
             onTap: () {
               Navigator.pop(context);
-              AppLock.of(context).showLockScreen();
+              Navigator.of(context).push(new MaterialPageRoute(
+                  builder: (BuildContext context) => BasicInfoPage()));
             },
           ),
           ListTile(
@@ -43,15 +43,6 @@ class _AppDrawerWidgetState extends State<AppDrawer> {
             },
           ),
           Divider(),
-          ListTile(
-            leading: Icon(Icons.collections_bookmark),
-            title: Text('Basic Information'),
-            onTap: () {
-              Navigator.pop(context);
-              Navigator.of(context).push(new MaterialPageRoute(
-                  builder: (BuildContext context) => BasicInfoPage()));
-            },
-          ),
           ListTile(
             leading: Icon(Icons.settings),
             title: Text('Backup Settings'),

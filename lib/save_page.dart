@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_share_plugin/flutter_share_plugin.dart';
+import 'package:flutter_share/flutter_share.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
+import 'dart:io';
 import 'file_utility.dart';
 import 'globals.dart';
 import 'save_utility.dart';
@@ -209,7 +210,28 @@ class _SaveAndBackupWidgetState extends State<SaveAndBackupWidget> {
 
   Future<void> _share() async {
     String p = Util.getPath(currentFilename);
-    FlutterShare.shareFile(filePath: p);
+    if (Platform.isAndroid) {
+      String p2 = Util.getTmpPath(currentFilename);
+      if (FileUtil.copyToTmp(p, p2)) {
+        p = p2;
+      } else {
+        Scaffold.of(context)
+            .showSnackBar(UiUtil.snackBar("Sharing file failed."));
+        return;
+      }
+    }
+    bool ret = await FlutterShare.shareFile(
+      title: 'Simple Password',
+      text: 'This is the simple password file.',
+      filePath: p,
+    );
+    String msg;
+    if (ret) {
+      msg = "Sharing completed";
+    } else {
+      msg = "Sharing failed";
+    }
+    Scaffold.of(context).showSnackBar(UiUtil.snackBar(msg));
     print("share");
   }
 }

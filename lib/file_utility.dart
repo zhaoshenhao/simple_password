@@ -192,4 +192,23 @@ class FileUtil {
     List<int> stringBytes = utf8.encode(text);
     return new GZipEncoder().encode(stringBytes);
   }
+
+  static bool copyToTmp(String p, String p2) {
+    File f = new File(p);
+    if (!f.existsSync()) {
+      Log.error("File $p not exists");
+      return false;
+    }
+    try {
+      File fp2 = f.copySync(p2);
+      if (fp2.existsSync()) {
+        return true;
+      }
+      Log.error("Copy failed. Target file $p2 not found.");
+      return false;
+    } catch (e) {
+      Log.error("Copy file to tmp dir failed.", error: e);
+      return false;
+    }
+  }
 }

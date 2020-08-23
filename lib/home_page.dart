@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_lock/flutter_app_lock.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
 import 'data.dart';
@@ -44,6 +45,15 @@ class PasswordsPageState extends State<PasswordsPage> {
         key: _scaffoldKey,
         appBar: AppBar(
           title: Text("Simple Password"),
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(
+                Icons.exit_to_app,
+                color: Colors.white,
+              ),
+              onPressed: () => _lockApp(),
+            )
+          ],
         ),
         drawer: AppDrawer(),
         body: new ListView(
@@ -143,6 +153,10 @@ class PasswordsPageState extends State<PasswordsPage> {
         .push(new MaterialPageRoute(
             builder: (BuildContext context) => GroupPage(i)))
         .then((value) => _getRequests());
+  }
+
+  void _lockApp() {
+    AppLock.of(context).showLockScreen();
   }
 
   Future<void> _save() async {

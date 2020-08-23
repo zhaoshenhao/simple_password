@@ -4,7 +4,7 @@ import 'utility.dart';
 
 part 'data.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class BackupPolicy {
   bool autoBackup = true;
   int totalBackups = 10;
@@ -29,7 +29,7 @@ class BackupPolicy {
   Map<String, dynamic> toJson() => _$BackupPolicyToJson(this);
 }
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class BasicData {
   String name = "item name";
   String notes = "";
@@ -54,7 +54,7 @@ class BasicData {
   Map<String, dynamic> toJson() => _$BasicDataToJson(this);
 }
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class Data {
   String key = Util.randomString(1032);
   BackupPolicy backupPolicy = new BackupPolicy();
@@ -82,7 +82,7 @@ class Data {
   Map<String, dynamic> toJson() => _$DataToJson(this);
 }
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class Group {
   BasicData basicData = new BasicData();
   List<Password> passwords = new List();
@@ -102,7 +102,7 @@ class Group {
   Map<String, dynamic> toJson() => _$GroupToJson(this);
 }
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class Password {
   BasicData basicData = new BasicData();
   int key = Util.randomKey();
@@ -129,7 +129,7 @@ class Password {
   Map<String, dynamic> toJson() => _$PasswordToJson(this);
 }
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class PasswordPolicy {
   int minLenght = 8;
   int minUpperCase = 1;
@@ -156,7 +156,7 @@ class PasswordPolicy {
   Map<String, dynamic> toJson() => _$PasswordPolicyToJson(this);
 }
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class SecurityPolicy {
   bool autoHide = true;
   bool autoSave = true;

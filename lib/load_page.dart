@@ -67,15 +67,15 @@ class _LoadPageWidgetState extends State<LoadPageWidget> {
               )),
           IconButton(
               icon: Icon(Icons.folder_open),
-              tooltip: 'Increase volume by 10',
+              tooltip: 'Open from other location',
               color: Colors.red,
               onPressed: () async => _openFile()),
         ]),
         TextFormField(
           keyboardType: TextInputType.text,
           decoration: InputDecoration(
-              labelText: "File Secret Key",
-              hintText: 'Enter your secret',
+              labelText: "Main Secret Key",
+              hintText: 'Enter your main secret key',
               suffixIcon: GestureDetector(
                 onTap: () => setState(() {
                   _showPassword = !_showPassword;
@@ -196,23 +196,32 @@ class _LoadPageWidgetState extends State<LoadPageWidget> {
     } catch (e) {
       Log.error("Open filed $short.sp failed.", error: e);
       _alert("Open Error",
-          "Open file $short.sp failed.\nMake sure the file is simple password database.\nAnd enter correct secrete key.");
+          "Open file $short.sp failed.\nCheck main secret key and file format.");
       return false;
     }
     return true;
   }
 
   void _loadAndUnlock() async {
-    bool extFile = choosed.endsWith(Util.ext);
-    if (extFile) {
+    if (!Util.isInCurrentDir(choosed)) {
+      Log.fine("Load new external file: $choosed");
       if (_load(choosed, secKey)) {
         choosed = FileUtil.makeCopy(choosed);
         _unlock();
       }
       return;
     }
+    if (currentFilename == choosed) {
+      Log.fine("Load current file: $choosed");
+      String password = Util.decryptPassword(secPassword, data.key, randomIdx);
+      if (password == secKey) {
+        _unlock(current: true);
+      }
+      return;
+    }
     String path = Util.getPath(choosed);
     if (_load(path, secKey)) {
+      Log.fine("Load new file: $choosed");
       _unlock();
     }
   }
@@ -234,7 +243,12 @@ class _LoadPageWidgetState extends State<LoadPageWidget> {
     setState(() {});
   }
 
-  void _unlock() {
+  void _unlock({bool current: false}) {
+    if (current) {
+      AppLock.of(context).didUnlock();
+      return;
+    }
+    if (currentFilename == choosed) {}
     currentFilename = choosed;
     randomIdx = Util.randomKey();
     secPassword = Util.encryptPassword(secKey, data.key, randomIdx);

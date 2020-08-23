@@ -215,8 +215,9 @@ class _OnePasswordWidgetState extends State<OnePasswordWidget> {
 
   void _confirm() {
     if (_formKey.currentState.validate()) {
-      _password.basicData.deltaTime = DateTime.now();
-      _tgroup.basicData.deltaTime = DateTime.now();
+      DateTime now = DateTime.now();
+      _password.basicData.deltaTime = now;
+      _tgroup.basicData.deltaTime = now;
       Password tmp = _password.clone();
       String tp = tmp.password;
       tmp.password = Util.encryptPassword(tp, data.key, tmp.key);

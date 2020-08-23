@@ -16,13 +16,17 @@ final String version = "0.0.1";
 
 class Log {
   static error(String message, {var error}) =>
-      dev.log("error: $message " + (error == null ? '' : error.toString()));
+      dev.log("error: $message " + (error == null ? '' : error.toString()),
+          name: "simple_password");
   static fine(String message, {var error}) =>
-      dev.log("fine: $message " + (error == null ? '' : error.toString()));
+      dev.log("fine: $message " + (error == null ? '' : error.toString()),
+          name: "simple_password");
   static severe(String message, {var error}) =>
-      dev.log("severe: $message " + (error == null ? '' : error.toString()));
+      dev.log("severe: $message " + (error == null ? '' : error.toString()),
+          name: "simple_password");
   static warning(String message, {var error}) =>
-      dev.log("warning: $message " + (error == null ? '' : error.toString()));
+      dev.log("warning: $message " + (error == null ? '' : error.toString()),
+          name: "simple_password");
 }
 
 class Util {
@@ -31,6 +35,7 @@ class Util {
   static String ext = ".sp";
   static SharedPreferences sp;
   static Directory docDir;
+  static Directory tmpDir;
   static final RegExp validCharacters = RegExp(r'^.*[a-zA-Z0-9\ ].*$');
   static final validCharacters2 = RegExp(r'^[a-zA-Z0-9_-]+$');
   static final String symboles = "~!@#\$£%^&*()_+-=[]{}|:;<>?,./";
@@ -159,6 +164,11 @@ class Util {
     return p.basenameWithoutExtension(f);
   }
 
+  static bool isInCurrentDir(String f) {
+    String path = p.dirname(f);
+    return (path == '.');
+  }
+
   static List<String> getDeleteList(List<String> flist, BackupPolicy bp) {
     List<String> list = List();
     if (flist.length <= bp.totalBackups) {
@@ -252,6 +262,10 @@ class Util {
     return Util.docDir.path + "/" + fn + ext;
   }
 
+  static String getTmpPath(String fn) {
+    return Util.tmpDir.path + "/" + fn + ext;
+  }
+
   static String getSecretKey(String keys, int idx) {
     return keys.substring(idx, idx + 32);
   }
@@ -259,6 +273,7 @@ class Util {
   static Future init() async {
     sp = await SharedPreferences.getInstance();
     docDir = await getApplicationDocumentsDirectory();
+    tmpDir = await getTemporaryDirectory();
   }
 
   static bool isAlphaNum(String val) {

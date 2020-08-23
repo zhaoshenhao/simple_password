@@ -79,6 +79,7 @@ class _GroupWidgetState extends State<GroupWidget> {
     _group.passwords.add(p);
     _passwordView(_group.passwords.length - 1);
     changes++;
+    _group.basicData.deltaTime = DateTime.now();
     Scaffold.of(context).showSnackBar(UiUtil.snackBar("New password created"));
   }
 

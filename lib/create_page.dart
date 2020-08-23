@@ -46,7 +46,7 @@ class _CreatePageWidgetState extends State<CreatePageWidget> {
             ),
             validator: (value) {
               if (value.isEmpty) {
-                return 'Please enter the name of the password collection.';
+                return 'Please enter the name of the password file.';
               }
               if (!Util.isValidFileName(value)) {
                 return 'Please use [a-zA-Z0-9_-] only';
@@ -59,8 +59,8 @@ class _CreatePageWidgetState extends State<CreatePageWidget> {
           TextFormField(
             keyboardType: TextInputType.text,
             decoration: InputDecoration(
-                labelText: "File Secret Key",
-                hintText: 'Enter your secret',
+                labelText: "Main Secret Key",
+                hintText: 'Enter your main secret key',
                 suffixIcon: GestureDetector(
                   onTap: () => setState(() {
                     _showPassword2 = !_showPassword2;
@@ -73,7 +73,7 @@ class _CreatePageWidgetState extends State<CreatePageWidget> {
             obscureText: !_showPassword2,
             validator: (value) {
               if (value.isEmpty) {
-                return 'Please enter your secret key.';
+                return 'Enter your main secret key.';
               }
               return null;
             },

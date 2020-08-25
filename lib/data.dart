@@ -1,6 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-
-import 'utility.dart';
+import 'package:simple_password/utility.dart';
 
 part 'data.g.dart';
 

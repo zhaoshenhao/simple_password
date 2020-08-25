@@ -1,0 +1,179 @@
+common:
+  about: About
+  actions: Actions
+  add: Add
+  app: Application
+  appName: Simple Password
+  appVer: 0.0.1
+  check: Check
+  chgConfirmed: Change confirmed
+  chgSaveFailed: Saving changes failed.
+  chgSaved: Changes saved
+  companyName: Syspole Inc.
+  confirm: Confirm
+  copyRight: Copyright © 2002-2020 CompuSky Inc.
+  create: Create
+  delete: Delete
+  deleteThisAsk: Delete this item?
+  developer: Developer
+  error: Error
+  file: File
+  gen: Generate
+  group: Group
+  groups: Groups
+  lastAccess: Last Access
+  lastCreate: Last Created
+  lastDelta: Last Modified
+  myGrpName: my password group
+  mySecret: my secret
+  no: No
+  noChange: No change
+  none: None
+  notEmpty: Please enter something
+  notes: Notes
+  off: Off
+  ok: OK
+  on: On
+  others: Others
+  password: Password
+  passwords: Passwords
+  privacy: Privacy
+  recent: Recent
+  reset: Reset
+  ro: Read-only
+  rw: Read-write
+  save: Save
+  saveAllAsk: Save all changes？
+  settings: Settings
+  terms: Term of Use
+  title: Title
+  unsaved: Unsaved changes
+  url: URL
+  version: Version
+  yes: Yes
+
+basic:
+  hint: Please enter the name of the password collection.
+  info: Basic Information
+  pswdName: Password collection name
+
+create:
+  createFile: Create Password File
+  fn: Password file name
+  inputFn: Please enter the name of the password file.
+
+file:
+  deleteFailed(String p): Delete file $p failed
+  fileExistErr(String name): File \"$name\" exist!\nPlease use different name.
+  fileExists: File exist
+  fileNotExists(String p): File $p not exists
+  fileNotFound: File not found
+  fileNotFoundErr(String name):  "File $name not found."
+  fnTips: Please use [a-zA-Z0-9_-] only
+  loadCurrent: Load current file
+  loadNew: Load new external file
+  openFailedErr(String name): "Open filed $name failed."
+  openErr: Open Error
+  saveErr(String name): Save file $name failed.
+  saveErrTitle: File save error
+  saveFailed: Save file failed
+  validFn: A valid file name
+
+pswd:
+  checkKey: Check main secret key and file format.
+  containUpper(int cnt): "Must contain $cnt upper case ${_plural(cnt, one:'letter', many:'letters')}."
+  containLower(int cnt): "Must contain $cnt lower case ${_plural(cnt, one:'letter', many:'letters')}."
+  containDigit(int cnt): "Must contain $cnt ${_plural(cnt, one:'digit', many:'digits')}."
+  containSpecial(int cnt): "Must contain $cnt special ${_plural(cnt, one:'character', many:'characters')}."
+  detail: Password Detail
+  msKey: Main Secret Key
+  pswdCheck: Password Check
+  pswdCopied: Password copied
+  pswdEmpty: Password is empty
+  pswdGood: Password looks good.
+  pswdHint: Please enter you main secret key
+  pswdHint2: Enter your password
+  pswdLen: Length less than
+  titleHint: The item title
+  unCopied: Username copied
+  unHint: 'The username'
+  urlCopied: URL copied
+  urlHint: Any URL
+
+home:
+  grpDeleted: Group deleted.
+  subTitle(String lastUpd, int pswdCnt): "Last Modified: $lastUpd. Passwords: $pswdCnt"
+
+load:
+  loadFile: Load File
+  loadPswdFile: Load Password File
+  newFile: New File
+  openInRo: Open in read-only mode
+  openOther: Open from other location
+
+sbs:
+  bkClean: Backup cleanup
+  bkCurrent: Backup Current File
+  bkDone(String name): New backup of $name.sp is done.
+  bkFailed(String name): Taking backup of $name.sp failed!
+  deleteAsk(String f): Delete $f.sp?
+  doPolicy(String name): Perform backup policy of\n$name.sp?\nSome old backups will be removed.
+  doPolicy1: Perform Backup Policy
+  donePolicy: Backup policy performed.
+  fileDeleted(String f): File $f.sp deleted
+  pswdFileStatus: Password file status
+  roMode: Read-only mode
+  sbp: Run backup policy before save
+  shareContent: This is the simple password file.
+  shareCurrent: Share Current File
+  shareDone: Sharing completed
+  shareFailed: Sharing file failed.
+  title: Save & Backup & Share
+  totalChanges: Total changes
+
+pp:
+  allowedSpecial: Allowed special characters
+  minDidit: Minimal digits
+  minLen: Minimal Length
+  minLower: Minimal lower case letters
+  minSpecial: Minimal special characters
+  minUpper: Minimal upper case letters
+  specialChar: Symbol characters
+  specialErr: Only speical characters
+  specialHint: Please enter speical characters
+  title: Password Policy
+
+group:
+  detail: Group Detail
+  hint: Please enter the group name.
+  name: Group name
+  pswdCreated: New password created
+  pswdDeleted: Password deleted.
+
+settings:
+  autoHide: Auto-hide password
+  autoHideInterval: Auto-hide interval(seconds)
+  autoSave: Auto-save changes
+  autoSaveInterval: Auto-save interval(seconds)
+  bk: Backup Settings
+  bkB4Save: Create backup before saving
+  keepLastDay: Keep backup for yesterday
+  keepLastMonth: Keep back for last month
+  keepLastWeek: Keep backup for last week
+  sec: Security Settings
+  totalBks: Total backups
+
+about:
+  terms: |+
+    Simple Password term of use
+    1. 
+    2. 
+    3.
+
+  privacy: |+
+    Simlple Password privacy
+    1.
+    2.
+    3.
+
+    

@@ -1,2 +1,0 @@
-final String privacy = '''Privacy
-''';

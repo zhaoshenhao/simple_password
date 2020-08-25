@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-
-import 'data.dart';
-import 'globals.dart';
-import 'ui_utility.dart';
+import 'package:simple_password/data.dart';
+import 'package:simple_password/globals.dart';
+import 'package:simple_password/i18n/i18n.dart';
+import 'package:simple_password/ui_utility.dart';
 
 class BasicInfoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: AppBar(
-        title: Text("Basic Information"),
+        title: Text(m.basic.info),
       ),
       body: new Center(
         child: new BasicInfoWidget(),
@@ -39,13 +39,13 @@ class _BasicInfoWidgetState extends State<BasicInfoWidget> {
             children: <Widget>[
               TextFormField(
                 readOnly: readOnly,
-                decoration: const InputDecoration(
-                  labelText: "Password collection name:",
-                  hintText: 'Please enter something',
+                decoration: InputDecoration(
+                  labelText: m.basic.pswdName,
+                  hintText: m.common.notEmpty,
                 ),
                 validator: (value) {
                   if (value.isEmpty) {
-                    return 'Please enter the name of the password collection.';
+                    return m.common.notEmpty;
                   }
                   return null;
                 },
@@ -54,8 +54,8 @@ class _BasicInfoWidgetState extends State<BasicInfoWidget> {
               ),
               TextFormField(
                 readOnly: readOnly,
-                decoration: const InputDecoration(
-                  labelText: 'Notes',
+                decoration: InputDecoration(
+                  labelText: m.common.notes,
                 ),
                 onChanged: (val) => setState(() => _basicData.notes = val),
                 initialValue: _basicData.notes,

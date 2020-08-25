@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-
-import 'globals.dart';
-import 'ui_utility.dart';
-import 'utility.dart';
+import 'package:simple_password/globals.dart';
+import 'package:simple_password/i18n/i18n.dart';
+import 'package:simple_password/ui_utility.dart';
+import 'package:simple_password/utility.dart';
 
 class PasswordSettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: AppBar(
-        title: Text("Password Settings"),
+        title: Text(m.pp.title),
       ),
       body: new Center(
         child: new PasswordSettingsWidget(),
@@ -38,7 +38,7 @@ class _PasswordSettingsWidgetState extends State<PasswordSettingsWidget> {
             padding: UiUtil.edgeInsets,
             children: <Widget>[
               UiUtil.spinRow(
-                  "Minimal length",
+                  m.pp.minLen,
                   0,
                   300,
                   _passwordPolicy.minLenght.toDouble(),
@@ -48,7 +48,7 @@ class _PasswordSettingsWidgetState extends State<PasswordSettingsWidget> {
                         }
                       })),
               UiUtil.spinRow(
-                  "Minimal digits",
+                  m.pp.minDidit,
                   0,
                   300,
                   _passwordPolicy.minDigit.toDouble(),
@@ -58,7 +58,7 @@ class _PasswordSettingsWidgetState extends State<PasswordSettingsWidget> {
                         }
                       })),
               UiUtil.spinRow(
-                  "Minimal lower case letters",
+                  m.pp.minLower,
                   0,
                   300,
                   _passwordPolicy.minLowerCase.toDouble(),
@@ -68,7 +68,7 @@ class _PasswordSettingsWidgetState extends State<PasswordSettingsWidget> {
                         }
                       })),
               UiUtil.spinRow(
-                  "Minimal upper case letters",
+                  m.pp.minUpper,
                   0,
                   300,
                   _passwordPolicy.minUpperCase.toDouble(),
@@ -78,7 +78,7 @@ class _PasswordSettingsWidgetState extends State<PasswordSettingsWidget> {
                         }
                       })),
               UiUtil.spinRow(
-                  "Minimal symboleletters",
+                  m.pp.minSpecial,
                   0,
                   300,
                   _passwordPolicy.minSymbol.toDouble(),
@@ -91,16 +91,16 @@ class _PasswordSettingsWidgetState extends State<PasswordSettingsWidget> {
                   padding: UiUtil.edgeInsets2,
                   child: TextFormField(
                     readOnly: readOnly,
-                    decoration: const InputDecoration(
-                      labelText: "Allowed symbols",
-                      hintText: 'Symbol letters',
+                    decoration: InputDecoration(
+                      labelText: m.pp.allowedSpecial,
+                      hintText: m.pp.specialChar,
                     ),
                     validator: (value) {
                       if (value.isEmpty) {
-                        return 'Please enter speical characters';
+                        return m.pp.specialHint;
                       }
                       if (Util.isAlphaNum(value)) {
-                        return 'Only speical characters';
+                        return m.pp.specialErr;
                       }
                       return null;
                     },

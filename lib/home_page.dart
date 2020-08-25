@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_lock/flutter_app_lock.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-
-import 'data.dart';
-import 'drawer.dart';
-import 'globals.dart';
-import 'group_page.dart';
-import 'save_utility.dart';
-import 'ui_utility.dart';
-import 'utility.dart';
+import 'package:simple_password/data.dart';
+import 'package:simple_password/drawer.dart';
+import 'package:simple_password/globals.dart';
+import 'package:simple_password/group_page.dart';
+import 'package:simple_password/i18n/i18n.dart';
+import 'package:simple_password/save_utility.dart';
+import 'package:simple_password/ui_utility.dart';
+import 'package:simple_password/utility.dart';
 
 class PasswordsPage extends StatefulWidget {
   @override
@@ -35,8 +35,6 @@ class PasswordsPageState extends State<PasswordsPage> {
     data.groups.add(g);
     changes++;
     _groupView(data.groups.length - 1);
-    Scaffold.of(_scaffoldKey.currentContext)
-        .showSnackBar(UiUtil.snackBar("New group created"));
   }
 
   Widget _buildGroups(BuildContext context) {
@@ -44,7 +42,7 @@ class PasswordsPageState extends State<PasswordsPage> {
     return new Scaffold(
         key: _scaffoldKey,
         appBar: AppBar(
-          title: Text("Simple Password"),
+          title: Text(m.common.appName),
           actions: <Widget>[
             IconButton(
               icon: Icon(
@@ -67,8 +65,8 @@ class PasswordsPageState extends State<PasswordsPage> {
               new FloatingActionButton(
                 backgroundColor: readOnly ? Colors.blue : Colors.red,
                 tooltip: readOnly
-                    ? 'ReadOnly'
-                    : "ReadWrite", // used by assistive technologies
+                    ? m.common.ro
+                    : m.common.rw, // used by assistive technologies
                 child: readOnly
                     ? new Icon(Icons.lock_outline)
                     : new Icon(Icons.lock_open),
@@ -77,14 +75,14 @@ class PasswordsPageState extends State<PasswordsPage> {
               ),
               new FloatingActionButton(
                 backgroundColor: readOnly ? Colors.grey : Colors.blue,
-                tooltip: 'Add', // used by assistive technologies
+                tooltip: m.common.add, // used by assistive technologies
                 child: new Icon(Icons.add),
                 onPressed: readOnly ? null : () => setState(() => _add()),
                 heroTag: null,
               ),
               new FloatingActionButton(
                 backgroundColor: readOnly ? Colors.grey : Colors.red,
-                tooltip: 'Save', // used by assistive technologies
+                tooltip: m.common.save, // used by assistive technologies
                 child: new Icon(Icons.save),
                 onPressed: readOnly ? null : () async => _save(),
                 heroTag: null,
@@ -95,7 +93,7 @@ class PasswordsPageState extends State<PasswordsPage> {
   List<Widget> _buildRows() {
     List<Widget> list = List();
     list.add(Container(
-        padding: UiUtil.edgeInsets, child: UiUtil.headingRow("Groups")));
+        padding: UiUtil.edgeInsets, child: UiUtil.headingRow(m.common.groups)));
     for (int i = 0; i < data.groups.length; i++) {
       list.add(_getItem(i));
     }
@@ -108,7 +106,7 @@ class PasswordsPageState extends State<PasswordsPage> {
     }
     if (await SaveUtil.delete(_scaffoldKey.currentContext, i, data.groups)) {
       Scaffold.of(_scaffoldKey.currentContext)
-          .showSnackBar(UiUtil.snackBar("Group deleted."));
+          .showSnackBar(UiUtil.snackBar(m.home.grpDeleted));
       setState(() {});
     }
   }
@@ -125,7 +123,9 @@ class PasswordsPageState extends State<PasswordsPage> {
               style: UiUtil.biggerFont,
             ),
             subtitle: Text(
-              "Last update: ${Util.dateTimeToString(data.groups[i].basicData.deltaTime)}. Passwords: ${data.groups[i].passwords.length}",
+              m.home.subTitle(
+                  Util.dateTimeToString(data.groups[i].basicData.deltaTime),
+                  data.groups[i].passwords.length),
               style: UiUtil.smallerFont,
             ),
             trailing: Icon(Icons.keyboard_arrow_right),
@@ -135,7 +135,7 @@ class PasswordsPageState extends State<PasswordsPage> {
       ),
       actions: <Widget>[
         IconSlideAction(
-          caption: 'Delete',
+          caption: m.common.delete,
           color: readOnly ? Colors.grey : Colors.red,
           icon: Icons.delete,
           onTap: readOnly ? null : () async => _delete(i),
@@ -166,11 +166,11 @@ class PasswordsPageState extends State<PasswordsPage> {
     }
     if (ret) {
       Scaffold.of(_scaffoldKey.currentContext)
-          .showSnackBar(UiUtil.snackBar("Changes saved"));
+          .showSnackBar(UiUtil.snackBar(m.common.chgSaved));
       _scaffoldKey.currentState.setState(() {});
     } else {
       Scaffold.of(_scaffoldKey.currentContext)
-          .showSnackBar(UiUtil.snackBar("Saving changes failed."));
+          .showSnackBar(UiUtil.snackBar(m.common.chgSaveFailed));
     }
   }
 }

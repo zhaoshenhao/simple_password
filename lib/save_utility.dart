@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-
-import 'file_utility.dart';
-import 'globals.dart';
-import 'ui_utility.dart';
-import 'utility.dart';
+import 'package:simple_password/file_utility.dart';
+import 'package:simple_password/globals.dart';
+import 'package:simple_password/i18n/i18n.dart';
+import 'package:simple_password/ui_utility.dart';
+import 'package:simple_password/utility.dart';
 
 class SaveUtil {
   static Future<bool> delete(BuildContext context, int i, List list) async {
-    bool yes = await UiUtil.confirm("Confirm", "Delete this item?", context);
+    bool yes =
+        await UiUtil.confirm(m.common.confirm, m.common.deleteThisAsk, context);
     if (yes) {
       list.removeAt(i);
       changes++;
@@ -21,7 +22,8 @@ class SaveUtil {
     if (UiUtil.isReadOnly(context)) {
       return null;
     }
-    bool yes = await UiUtil.confirm("Confirm", "Save all changes?", context);
+    bool yes =
+        await UiUtil.confirm(m.common.confirm, m.common.saveAllAsk, context);
     String password = Util.decryptPassword(secPassword, data.key, randomIdx);
     if (yes) {
       if (FileUtil.backupAndSave(data.backupPolicy, currentFilename, data,

@@ -3,10 +3,10 @@ import 'dart:io';
 
 import 'package:archive/archive.dart';
 import 'package:encrypt/encrypt.dart';
+import 'package:simple_password/data.dart';
 import 'package:simple_password/globals.dart';
-
-import 'data.dart';
-import 'utility.dart';
+import 'package:simple_password/i18n/i18n.dart';
+import 'package:simple_password/utility.dart';
 
 class FileUtil {
   static void applyBackupPolicy(BackupPolicy bp, String bn) {
@@ -46,6 +46,25 @@ class FileUtil {
     return true;
   }
 
+  static bool copyToTmp(String p, String p2) {
+    File f = new File(p);
+    if (!f.existsSync()) {
+      Log.error(m.file.fileNotExists(p));
+      return false;
+    }
+    try {
+      File fp2 = f.copySync(p2);
+      if (fp2.existsSync()) {
+        return true;
+      }
+      Log.error("Copy failed. Target file $p2 not found.");
+      return false;
+    } catch (e) {
+      Log.error("Copy file to tmp dir failed.", error: e);
+      return false;
+    }
+  }
+
   static List<int> decrypt(List<int> data, String password) {
     final key = Key.fromUtf8(Util.paddingPassword(password));
     final iv = IV.fromLength(16);
@@ -62,7 +81,7 @@ class FileUtil {
         f.deleteSync();
       }
     } catch (e) {
-      Log.error("Delete file ${f.path}failed", error: e);
+      Log.error(m.file.deleteFailed(f.path), error: e);
     }
   }
 
@@ -174,7 +193,7 @@ class FileUtil {
       file.writeAsBytesSync(lv, mode: FileMode.append, flush: true);
       return true;
     } catch (e) {
-      Log.error("Save file failed", error: e);
+      Log.error(m.file.saveFailed, error: e);
       return false;
     }
   }
@@ -191,24 +210,5 @@ class FileUtil {
   static List<int> zip(String text) {
     List<int> stringBytes = utf8.encode(text);
     return new GZipEncoder().encode(stringBytes);
-  }
-
-  static bool copyToTmp(String p, String p2) {
-    File f = new File(p);
-    if (!f.existsSync()) {
-      Log.error("File $p not exists");
-      return false;
-    }
-    try {
-      File fp2 = f.copySync(p2);
-      if (fp2.existsSync()) {
-        return true;
-      }
-      Log.error("Copy failed. Target file $p2 not found.");
-      return false;
-    } catch (e) {
-      Log.error("Copy file to tmp dir failed.", error: e);
-      return false;
-    }
   }
 }

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_lock/flutter_app_lock.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-
-import 'home_page.dart';
-import 'load_page.dart';
-import 'utility.dart';
+import 'package:simple_password/home_page.dart';
+import 'package:simple_password/i18n/i18n.dart';
+import 'package:simple_password/load_page.dart';
+import 'package:simple_password/utility.dart';
 
 //void main() => runApp(SimplePassword());
 void main() async {
@@ -17,32 +17,39 @@ void main() async {
   ));
 }
 
-class SimplePassword extends StatelessWidget {
+class SimplePassword extends StatefulWidget {
+  @override
+  createState() => new SimplePasswordState();
+}
+
+class SimplePasswordState extends State<SimplePassword> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Simple Password',
+      title: m.common.appName,
       theme: new ThemeData(
         primaryColor: Colors.red,
       ),
       home: new PasswordsPage(),
+      locale: Util.locale,
       localizationsDelegates: [
-        // ... app-specific localization delegate[s] here
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
       ],
       supportedLocales: [
-        const Locale('en', 'US'), // English
+        const Locale('en', 'US'),
         const Locale('zh', 'CN'),
-        //const Locale('fr', 'FR'),
-        //const Locale('it', 'IT'),
-        //const Locale('de', 'DE'),
-        //const Locale('es', 'ES'),
-        //const Locale('ru', 'RU'),
-        //const Locale('pt', 'PT'),
-        //const Locale('ja', 'JP'),
-        //const Locale('ko', 'KR'),
       ],
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    Util.localeChangeCallback = onLocaleChange;
+  }
+
+  onLocaleChange() {
+    setState(() {});
   }
 }

@@ -1,12 +1,6 @@
 import 'package:flutter/material.dart';
-
-import 'privacy.dart';
-import 'terms.dart';
-import 'ui_utility.dart';
-import 'utility.dart';
-
-final String author = "Compusky Inc.";
-final String copyRight = "Copyright © 2002-2020 CompuSky Inc.";
+import 'package:simple_password/i18n/i18n.dart';
+import 'package:simple_password/ui_utility.dart';
 
 class AboutPage extends StatelessWidget {
   @override
@@ -14,27 +8,27 @@ class AboutPage extends StatelessWidget {
     return new Scaffold(
       appBar: AppBar(
         title: Text(
-          "About",
+          m.common.about,
         ),
       ),
       body: new Center(
         child: new ListView(
           padding: UiUtil.edgeInsets,
           children: <Widget>[
-            UiUtil.headingRow("About"),
+            UiUtil.headingRow(m.common.about),
             Text(''),
-            Text(copyRight),
-            Text('Application: Simple Password'),
-            Text('Author: ' + author),
-            Text('Version: ' + version),
+            Text(m.common.copyRight),
+            Text(m.common.app + ": " + m.common.appName),
+            Text(m.common.developer + ": " + m.common.companyName),
+            Text(m.common.version + ": " + m.common.appVer),
             Text(''),
-            UiUtil.headingRow("Term of Use"),
+            UiUtil.headingRow(m.common.terms),
             Text(''),
-            Text(terms),
+            Text(m.about.terms),
             Text(''),
-            UiUtil.headingRow("Privacy Policy"),
+            UiUtil.headingRow(m.common.privacy),
             Text(''),
-            Text(privacy),
+            Text(m.about.privacy),
           ],
         ),
       ),

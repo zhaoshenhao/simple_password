@@ -1,17 +1,17 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart' as dialog;
 import 'package:flutter/material.dart';
-
-import 'data.dart';
-import 'file_utility.dart';
-import 'ui_utility.dart';
-import 'utility.dart';
+import 'package:simple_password/data.dart';
+import 'package:simple_password/file_utility.dart';
+import 'package:simple_password/i18n/i18n.dart';
+import 'package:simple_password/ui_utility.dart';
+import 'package:simple_password/utility.dart';
 
 class CreatePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: AppBar(
-        title: Text("Create Password File"),
+        title: Text(m.create.createFile),
       ),
       body: new Center(
         child: new CreatePageWidget(),
@@ -40,16 +40,16 @@ class _CreatePageWidgetState extends State<CreatePageWidget> {
         key: _formKey,
         child: new ListView(padding: UiUtil.edgeInsets, children: <Widget>[
           TextFormField(
-            decoration: const InputDecoration(
-              labelText: "Password file name:",
-              hintText: 'A valid file name',
+            decoration: InputDecoration(
+              labelText: m.create.fn,
+              hintText: m.file.validFn,
             ),
             validator: (value) {
               if (value.isEmpty) {
-                return 'Please enter the name of the password file.';
+                return m.create.inputFn;
               }
               if (!Util.isValidFileName(value)) {
-                return 'Please use [a-zA-Z0-9_-] only';
+                return m.file.fnTips;
               }
               return null;
             },
@@ -59,8 +59,8 @@ class _CreatePageWidgetState extends State<CreatePageWidget> {
           TextFormField(
             keyboardType: TextInputType.text,
             decoration: InputDecoration(
-                labelText: "Main Secret Key",
-                hintText: 'Enter your main secret key',
+                labelText: m.pswd.msKey,
+                hintText: m.pswd.pswdHint,
                 suffixIcon: GestureDetector(
                   onTap: () => setState(() {
                     _showPassword2 = !_showPassword2;
@@ -73,7 +73,7 @@ class _CreatePageWidgetState extends State<CreatePageWidget> {
             obscureText: !_showPassword2,
             validator: (value) {
               if (value.isEmpty) {
-                return 'Enter your main secret key.';
+                return m.pswd.pswdHint;
               }
               return null;
             },
@@ -86,7 +86,7 @@ class _CreatePageWidgetState extends State<CreatePageWidget> {
             onPressed: () => _create(),
             color: Colors.red,
             textColor: Colors.white,
-            label: Text('Create'),
+            label: Text(m.common.create),
           )),
         ]));
   }
@@ -100,12 +100,11 @@ class _CreatePageWidgetState extends State<CreatePageWidget> {
     if (_formKey.currentState.validate()) {
       String fn = Util.getPath(_data.basicData.name);
       if (FileUtil.fileExist(fn)) {
-        _alert("File exist",
-            'File \"${_data.basicData.name}\" exist!\nPlease use different name.');
+        _alert(m.file.fileExists, m.file.fileExistErr(_data.basicData.name));
         return;
       }
       if (!FileUtil.save(_data, fn, _secKey2)) {
-        _alert("File save error", "Save file ${_data.basicData.name} failed.");
+        _alert(m.file.saveErrTitle, m.file.saveErr(_data.basicData.name));
         return;
       }
       List<String> hist = Util.getHistoryFiles();

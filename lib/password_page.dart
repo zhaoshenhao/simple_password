@@ -3,11 +3,11 @@ import 'dart:async';
 import 'package:adaptive_dialog/adaptive_dialog.dart' as dialog;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
-import 'data.dart';
-import 'globals.dart';
-import 'ui_utility.dart';
-import 'utility.dart';
+import 'package:simple_password/data.dart';
+import 'package:simple_password/globals.dart';
+import 'package:simple_password/i18n/i18n.dart';
+import 'package:simple_password/ui_utility.dart';
+import 'package:simple_password/utility.dart';
 
 int pgindex;
 int pindex;
@@ -30,7 +30,7 @@ class OnePasswordPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: AppBar(
-        title: Text("Password Detail"),
+        title: Text(m.pswd.detail),
       ),
       body: new Center(
         child: new OnePasswordWidget(),
@@ -66,13 +66,13 @@ class _OnePasswordWidgetState extends State<OnePasswordWidget> {
               TextFormField(
                 readOnly: readOnly,
                 keyboardType: TextInputType.text,
-                decoration: const InputDecoration(
-                  labelText: "Title",
-                  hintText: 'The item title',
+                decoration: InputDecoration(
+                  labelText: m.common.title,
+                  hintText: m.pswd.titleHint,
                 ),
                 validator: (value) {
                   if (value.isEmpty) {
-                    return 'Please enter something';
+                    return m.common.notEmpty;
                   }
                   return null;
                 },
@@ -83,12 +83,12 @@ class _OnePasswordWidgetState extends State<OnePasswordWidget> {
                 readOnly: readOnly,
                 keyboardType: TextInputType.text,
                 decoration: InputDecoration(
-                  hintText: 'The username',
+                  hintText: m.pswd.unHint,
                   prefixIcon: GestureDetector(
                       onTap: () {
                         Clipboard.setData(ClipboardData(text: username.text));
                         Scaffold.of(context)
-                            .showSnackBar(UiUtil.snackBar("Username copied"));
+                            .showSnackBar(UiUtil.snackBar(m.pswd.unCopied));
                       },
                       child: Icon(
                         Icons.content_copy,
@@ -102,8 +102,8 @@ class _OnePasswordWidgetState extends State<OnePasswordWidget> {
                 readOnly: readOnly,
                 keyboardType: TextInputType.text,
                 decoration: InputDecoration(
-                  labelText: "Password",
-                  hintText: 'Enter your password',
+                  labelText: m.common.password,
+                  hintText: m.pswd.pswdHint2,
                   suffixIcon: GestureDetector(
                     onTap: () {
                       _togglevisibility();
@@ -117,7 +117,7 @@ class _OnePasswordWidgetState extends State<OnePasswordWidget> {
                       onTap: () {
                         Clipboard.setData(ClipboardData(text: pswd.text));
                         Scaffold.of(context)
-                            .showSnackBar(UiUtil.snackBar("Password copied"));
+                            .showSnackBar(UiUtil.snackBar(m.pswd.pswdCopied));
                       },
                       child: Icon(
                         Icons.content_copy,
@@ -133,13 +133,13 @@ class _OnePasswordWidgetState extends State<OnePasswordWidget> {
                 readOnly: readOnly,
                 keyboardType: TextInputType.text,
                 decoration: InputDecoration(
-                  labelText: "URL",
-                  hintText: 'Any URL',
+                  labelText: m.common.url,
+                  hintText: m.pswd.urlHint,
                   prefixIcon: GestureDetector(
                       onTap: () {
                         Clipboard.setData(ClipboardData(text: url.text));
                         Scaffold.of(context)
-                            .showSnackBar(UiUtil.snackBar("URL copied"));
+                            .showSnackBar(UiUtil.snackBar(m.pswd.urlCopied));
                       },
                       child: Icon(
                         Icons.content_copy,
@@ -151,8 +151,8 @@ class _OnePasswordWidgetState extends State<OnePasswordWidget> {
               ),
               TextFormField(
                 readOnly: readOnly,
-                decoration: const InputDecoration(
-                  labelText: 'Notes',
+                decoration: InputDecoration(
+                  labelText: m.common.notes,
                 ),
                 onChanged: (val) => {_password.basicData.notes = val},
                 initialValue: _password.basicData.notes,
@@ -213,6 +213,46 @@ class _OnePasswordWidgetState extends State<OnePasswordWidget> {
     _showResult(list);
   }
 
+  List<String> _checkPasswordPolicy(
+      String password, PasswordPolicy passwordPolicy) {
+    List<String> list = List();
+    if (password == null || password == '') {
+      list.add(m.pswd.pswdEmpty);
+      return list;
+    }
+    if (password.length < passwordPolicy.minLenght) {
+      list.add("${m.pswd.pswdLen} " + passwordPolicy.minLenght.toString());
+    }
+    int lower = 0;
+    int upper = 0;
+    int digit = 0;
+    int special = 0;
+    for (int i = 0; i < password.length; i++) {
+      int m = password.codeUnitAt(i);
+      if (48 <= m && m <= 57)
+        digit += 1;
+      else if (65 <= m && m <= 90)
+        upper += 1;
+      else if (97 <= m && m <= 122)
+        lower += 1;
+      else
+        special += 1;
+    }
+    if (lower < passwordPolicy.minLowerCase) {
+      list.add(m.pswd.containLower(passwordPolicy.minLowerCase));
+    }
+    if (upper < passwordPolicy.minUpperCase) {
+      list.add(m.pswd.containUpper(passwordPolicy.minUpperCase));
+    }
+    if (digit < passwordPolicy.minDigit) {
+      list.add(m.pswd.containDigit(passwordPolicy.minDigit));
+    }
+    if (special < passwordPolicy.minSymbol) {
+      list.add(m.pswd.containSpecial(passwordPolicy.minSymbol));
+    }
+    return list;
+  }
+
   void _confirm() {
     if (_formKey.currentState.validate()) {
       DateTime now = DateTime.now();
@@ -240,16 +280,16 @@ class _OnePasswordWidgetState extends State<OnePasswordWidget> {
         new RaisedButton(
           color: readOnly ? Colors.grey : Colors.white60,
           onPressed: readOnly ? null : () => _resetPassword(),
-          child: Text('Reset'),
+          child: Text(m.common.reset),
         ),
         new RaisedButton(
             color: readOnly ? Colors.grey : Colors.white60,
             onPressed: readOnly ? null : () => _genPassword(),
-            child: Text('Generate')),
+            child: Text(m.common.gen)),
         new RaisedButton(
           color: Colors.white60,
           onPressed: () => _checkPassword(),
-          child: Text('Check'),
+          child: Text(m.common.check),
         ),
       ],
     );
@@ -262,10 +302,9 @@ class _OnePasswordWidgetState extends State<OnePasswordWidget> {
   }
 
   void _showResult(List<String> list) {
-    String message =
-        list.isEmpty ? "Password looks good." : "\n" + list.join("\n");
+    String message = list.isEmpty ? m.pswd.pswdGood : "\n" + list.join("\n");
     dialog.showOkAlertDialog(
-        context: context, title: 'Password Check', message: message);
+        context: context, title: m.pswd.pswdCheck, message: message);
   }
 
   void _togglevisibility() {
@@ -277,52 +316,5 @@ class _OnePasswordWidgetState extends State<OnePasswordWidget> {
         cancelTimer();
       }
     });
-  }
-
-  List<String> _checkPasswordPolicy(
-      String password, PasswordPolicy passwordPolicy) {
-    List<String> list = List();
-    if (password == null || password == '') {
-      list.add("Password is empty");
-      return list;
-    }
-    if (password.length < passwordPolicy.minLenght) {
-      list.add("Length < " + passwordPolicy.minLenght.toString());
-    }
-    int lower = 0;
-    int upper = 0;
-    int digit = 0;
-    int special = 0;
-    for (int i = 0; i < password.length; i++) {
-      int m = password.codeUnitAt(i);
-      if (48 <= m && m <= 57)
-        digit += 1;
-      else if (65 <= 65 && m <= 90)
-        upper += 1;
-      else if (97 <= m && m <= 112)
-        lower += 1;
-      else
-        special += 1;
-    }
-    if (lower < passwordPolicy.minLowerCase) {
-      list.add("Must contain " +
-          passwordPolicy.minLowerCase.toString() +
-          " lower case letters");
-    }
-    if (upper < passwordPolicy.minUpperCase) {
-      list.add("Must contain " +
-          passwordPolicy.minUpperCase.toString() +
-          " uppers case letters");
-    }
-    if (digit < passwordPolicy.minDigit) {
-      list.add(
-          "Must contain " + passwordPolicy.minDigit.toString() + " digits");
-    }
-    if (special < passwordPolicy.minSymbol) {
-      list.add("Must contain " +
-          passwordPolicy.minSymbol.toString() +
-          " special chars");
-    }
-    return list;
   }
 }

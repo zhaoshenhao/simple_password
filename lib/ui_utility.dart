@@ -1,9 +1,9 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:simple_password/globals.dart';
+import 'package:simple_password/i18n/i18n.dart';
+import 'package:simple_password/utility.dart';
 import 'package:spinner_input/spinner_input.dart';
-
-import 'globals.dart';
-import 'utility.dart';
 
 class UiUtil {
   static final biggerFont = const TextStyle(fontSize: 18.0);
@@ -12,7 +12,7 @@ class UiUtil {
   static final edgeInsets2 = EdgeInsets.only(left: 8.0, right: 8.0);
 
   static Text accessTime(DateTime d, {color: Colors.black45}) {
-    return readOnlyText("Last Access", d, color: color);
+    return readOnlyText(m.common.lastAccess, d, color: color);
   }
 
   static Future<bool> confirm(
@@ -28,7 +28,7 @@ class UiUtil {
   static bool confirmAll(var context) {
     data.basicData.deltaTime = new DateTime.now();
     changes = changes + 1;
-    Scaffold.of(context).showSnackBar(snackBar("Change confirmed"));
+    Scaffold.of(context).showSnackBar(snackBar(m.common.chgConfirmed));
     return true;
   }
 
@@ -36,7 +36,7 @@ class UiUtil {
     return new Row(mainAxisAlignment: MainAxisAlignment.end, children: <Widget>[
       new FloatingActionButton(
         backgroundColor: readOnly ? Colors.grey : Colors.red,
-        tooltip: 'Confirm', // used by assistive technologies
+        tooltip: m.common.confirm,
         child: new Icon(Icons.check_circle_outline),
         onPressed: readOnly ? null : () => _confirm(),
         heroTag: null,
@@ -45,11 +45,11 @@ class UiUtil {
   }
 
   static Text createTime(DateTime d, {color: Colors.black45}) {
-    return readOnlyText("Create Time", d, color: color);
+    return readOnlyText(m.common.lastCreate, d, color: color);
   }
 
   static Text deltaTime(DateTime d, {color: Colors.black45}) {
-    return readOnlyText("Last Update", d, color: color);
+    return readOnlyText(m.common.lastDelta, d, color: color);
   }
 
   static Row headingRow(String text) {
@@ -76,10 +76,10 @@ class UiUtil {
   static bool isReadOnly(BuildContext context) {
     String msg;
     if (readOnly) {
-      msg = "Read only mode.";
+      msg = m.sbs.roMode;
     }
     if (changes == 0) {
-      msg = "No changes";
+      msg = m.common.noChange;
     }
     if (msg != null) {
       Scaffold.of(context).showSnackBar(UiUtil.snackBar(msg));

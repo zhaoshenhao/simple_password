@@ -4,25 +4,25 @@ import 'package:adaptive_dialog/adaptive_dialog.dart' as dialog;
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_lock/flutter_app_lock.dart';
+import 'package:simple_password/create_page.dart';
+import 'package:simple_password/file_utility.dart';
+import 'package:simple_password/globals.dart';
+import 'package:simple_password/i18n/i18n.dart';
+import 'package:simple_password/ui_utility.dart';
+import 'package:simple_password/utility.dart';
 import 'package:toggle_switch/toggle_switch.dart';
-
-import 'create_page.dart';
-import 'file_utility.dart';
-import 'globals.dart';
-import 'ui_utility.dart';
-import 'utility.dart';
 
 class LoadPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Simple Password',
+        title: m.common.appName,
         theme: new ThemeData(
           primaryColor: Colors.red,
         ),
         home: new Scaffold(
           appBar: AppBar(
-            title: Text("Simple Password"),
+            title: Text(m.common.appName),
           ),
           body: new Center(
             child: new LoadPageWidget(),
@@ -39,7 +39,7 @@ class LoadPageWidget extends StatefulWidget {
 }
 
 class _LoadPageWidgetState extends State<LoadPageWidget> {
-  static final String noneFile = "-- None --";
+  static final String noneFile = "-- ${m.common.none} --";
   bool _showPassword = false;
   bool hasHistory = true;
   String otherFile;
@@ -53,9 +53,9 @@ class _LoadPageWidgetState extends State<LoadPageWidget> {
     return new ListView(
       padding: UiUtil.edgeInsets,
       children: <Widget>[
-        UiUtil.headingRow("Load Password File"),
+        UiUtil.headingRow(m.load.loadPswdFile),
         Row(children: <Widget>[
-          Expanded(child: Text('Recent')),
+          Expanded(child: Text(m.common.recent)),
           IgnorePointer(
               ignoring: !hasHistory,
               child: DropdownButton<String>(
@@ -67,15 +67,15 @@ class _LoadPageWidgetState extends State<LoadPageWidget> {
               )),
           IconButton(
               icon: Icon(Icons.folder_open),
-              tooltip: 'Open from other location',
+              tooltip: m.load.openOther,
               color: Colors.red,
               onPressed: () async => _openFile()),
         ]),
         TextFormField(
           keyboardType: TextInputType.text,
           decoration: InputDecoration(
-              labelText: "Main Secret Key",
-              hintText: 'Enter your main secret key',
+              labelText: m.pswd.msKey,
+              hintText: m.pswd.pswdHint,
               suffixIcon: GestureDetector(
                 onTap: () => setState(() {
                   _showPassword = !_showPassword;
@@ -91,7 +91,7 @@ class _LoadPageWidgetState extends State<LoadPageWidget> {
         Text(''),
         Row(children: <Widget>[
           Expanded(
-              child: Text("Open in read-only mode",
+              child: Text(m.load.openInRo,
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14))),
           ToggleSwitch(
             initialLabelIndex: readOnly ? 0 : 1,
@@ -102,7 +102,7 @@ class _LoadPageWidgetState extends State<LoadPageWidget> {
             activeFgColor: Colors.white,
             inactiveBgColor: Colors.grey,
             inactiveFgColor: Colors.white,
-            labels: ['On', 'Off'],
+            labels: [m.common.on, m.common.off],
             icons: [Icons.lock, Icons.lock_open],
             onToggle: (index) {
               readOnly = (index == 0);
@@ -117,14 +117,14 @@ class _LoadPageWidgetState extends State<LoadPageWidget> {
             new RaisedButton.icon(
               icon: Icon(Icons.add_circle_outline),
               onPressed: () => _newFile(),
-              label: Text('New File'),
+              label: Text(m.load.newFile),
             ),
             RaisedButton.icon(
               icon: Icon(Icons.lock_open),
               onPressed: hasHistory ? () => _loadAndUnlock() : null,
               color: Colors.red,
               textColor: Colors.white,
-              label: Text('Load File'),
+              label: Text(m.load.loadFile),
             ),
           ],
         ),
@@ -188,15 +188,15 @@ class _LoadPageWidgetState extends State<LoadPageWidget> {
   bool _load(String path, String secKey) {
     String short = Util.getBasename(path);
     if (!FileUtil.fileExist(path)) {
-      _alert("File not found", "File $short.sp not found.");
+      _alert(m.file.fileNotFound, m.file.fileNotFoundErr("$short.sp"));
       return false;
     }
     try {
       data = FileUtil.load(path, secKey);
     } catch (e) {
-      Log.error("Open filed $short.sp failed.", error: e);
-      _alert("Open Error",
-          "Open file $short.sp failed.\nCheck main secret key and file format.");
+      Log.error(m.file.openFailedErr("$short.sp"), error: e);
+      _alert(m.file.openErr,
+          m.file.openFailedErr("$short.sp") + "\n${m.pswd.checkKey}");
       return false;
     }
     return true;
@@ -204,7 +204,7 @@ class _LoadPageWidgetState extends State<LoadPageWidget> {
 
   void _loadAndUnlock() async {
     if (!Util.isInCurrentDir(choosed)) {
-      Log.fine("Load new external file: $choosed");
+      Log.fine("${m.file.loadNew}: $choosed");
       if (_load(choosed, secKey)) {
         choosed = FileUtil.makeCopy(choosed);
         _unlock();
@@ -212,16 +212,18 @@ class _LoadPageWidgetState extends State<LoadPageWidget> {
       return;
     }
     if (currentFilename == choosed) {
-      Log.fine("Load current file: $choosed");
+      Log.fine("${m.file.loadCurrent}: $choosed");
       String password = Util.decryptPassword(secPassword, data.key, randomIdx);
       if (password == secKey) {
         _unlock(current: true);
+      } else {
+        _alert(m.common.error, m.pswd.pswdHint);
       }
       return;
     }
     String path = Util.getPath(choosed);
     if (_load(path, secKey)) {
-      Log.fine("Load new file: $choosed");
+      Log.fine("${m.file.loadNew}: $choosed");
       _unlock();
     }
   }

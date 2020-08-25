@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-
-import 'data.dart';
-import 'globals.dart';
-import 'password_page.dart';
-import 'save_utility.dart';
-import 'ui_utility.dart';
-import 'utility.dart';
+import 'package:simple_password/data.dart';
+import 'package:simple_password/globals.dart';
+import 'package:simple_password/i18n/i18n.dart';
+import 'package:simple_password/password_page.dart';
+import 'package:simple_password/save_utility.dart';
+import 'package:simple_password/ui_utility.dart';
+import 'package:simple_password/utility.dart';
 
 int gindex;
 Group _group;
@@ -23,7 +23,7 @@ class GroupPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: AppBar(
-        title: Text("Group Detail"),
+        title: Text(m.group.detail),
       ),
       body: new Center(
         child: new GroupWidget(),
@@ -56,14 +56,14 @@ class _GroupWidgetState extends State<GroupWidget> {
             children: <Widget>[
               new FloatingActionButton(
                 backgroundColor: readOnly ? Colors.grey : Colors.blue,
-                tooltip: 'Add', // used by assistive technologies
+                tooltip: m.common.add, // used by assistive technologies
                 child: new Icon(Icons.add),
                 onPressed: readOnly ? null : () => setState(() => _add()),
                 heroTag: null,
               ),
               new FloatingActionButton(
                 backgroundColor: readOnly ? Colors.grey : Colors.red,
-                tooltip: 'Confirm', // used by assistive technologies
+                tooltip: m.common.confirm, // used by assistive technologies
                 child: new Icon(Icons.check_circle_outline),
                 onPressed: readOnly ? null : () => _confirm(),
                 heroTag: null,
@@ -80,7 +80,7 @@ class _GroupWidgetState extends State<GroupWidget> {
     _passwordView(_group.passwords.length - 1);
     changes++;
     _group.basicData.deltaTime = DateTime.now();
-    Scaffold.of(context).showSnackBar(UiUtil.snackBar("New password created"));
+    Scaffold.of(context).showSnackBar(UiUtil.snackBar(m.group.pswdCreated));
   }
 
   Slidable _buildPasswordRow(int i) {
@@ -95,7 +95,7 @@ class _GroupWidgetState extends State<GroupWidget> {
               style: UiUtil.biggerFont,
             ),
             subtitle: Text(
-              'Last update: ${Util.dateTimeToString(_group.passwords[i].basicData.deltaTime)}',
+              '${m.common.lastDelta}: ${Util.dateTimeToString(_group.passwords[i].basicData.deltaTime)}',
               style: UiUtil.smallerFont,
             ),
             trailing: Icon(Icons.keyboard_arrow_right),
@@ -105,7 +105,7 @@ class _GroupWidgetState extends State<GroupWidget> {
       ),
       actions: <Widget>[
         IconSlideAction(
-          caption: 'Delete',
+          caption: m.common.delete,
           color: readOnly ? Colors.grey : Colors.red,
           icon: Icons.delete,
           onTap: readOnly ? null : () async => _delete(i),
@@ -127,7 +127,7 @@ class _GroupWidgetState extends State<GroupWidget> {
       return;
     }
     if (await SaveUtil.delete(context, i, _group.passwords)) {
-      Scaffold.of(context).showSnackBar(UiUtil.snackBar("Password deleted."));
+      Scaffold.of(context).showSnackBar(UiUtil.snackBar(m.group.pswdCreated));
       setState(() {});
     }
   }
@@ -138,8 +138,8 @@ class _GroupWidgetState extends State<GroupWidget> {
           padding: UiUtil.edgeInsets,
           child: TextFormField(
             readOnly: readOnly,
-            decoration: const InputDecoration(
-              labelText: 'Notes',
+            decoration: InputDecoration(
+              labelText: m.common.notes,
             ),
             onChanged: (val) => setState(() => _group.basicData.notes = val),
             initialValue: _group.basicData.notes,
@@ -165,13 +165,13 @@ class _GroupWidgetState extends State<GroupWidget> {
         padding: UiUtil.edgeInsets,
         child: TextFormField(
           readOnly: readOnly,
-          decoration: const InputDecoration(
-            labelText: "Group name",
-            hintText: 'Enter something',
+          decoration: InputDecoration(
+            labelText: m.group.name,
+            hintText: m.common.notEmpty,
           ),
           validator: (value) {
             if (value.isEmpty) {
-              return 'Please enter the group name.';
+              return m.group.hint;
             }
             return null;
           },
@@ -179,7 +179,8 @@ class _GroupWidgetState extends State<GroupWidget> {
           initialValue: _group.basicData.name,
         )));
     list.add(Container(
-        padding: UiUtil.edgeInsets2, child: UiUtil.headingRow("Passwords")));
+        padding: UiUtil.edgeInsets2,
+        child: UiUtil.headingRow(m.common.passwords)));
     _group.passwords
         .sort((a, b) => a.basicData.name.compareTo(b.basicData.name));
     for (int i = 0; i < _group.passwords.length; i++) {

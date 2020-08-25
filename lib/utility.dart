@@ -3,16 +3,18 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:encrypt/encrypt.dart';
+import 'package:flutter/material.dart' show Locale;
 import 'package:intl/intl.dart';
 import 'package:jiffy/jiffy.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import 'data.dart';
+import 'package:simple_password/data.dart';
+import 'package:simple_password/i18n/i18n.dart';
 
 final int fileVersion = 0;
-final String version = "0.0.1";
+
+typedef void LocaleChangeCallback();
 
 class Log {
   static error(String message, {var error}) =>
@@ -44,6 +46,8 @@ class Util {
   static final String digits = "0123456789";
   static final String historyFilesKey = "HISTORY_FILES";
   static final String languageKey = "LANGUAGE";
+  static Locale locale = Locale('en', '');
+  static LocaleChangeCallback localeChangeCallback;
 
   static String dateTimeToString(DateTime d) {
     return formatter.format(d);
@@ -67,7 +71,6 @@ class Util {
 
   static String generatePassword(int minUpperCase, int minLowerCase,
       int minDigit, int minSymbole, int length, String symChars) {
-    //Define the allowed chars to use in the password
     String _special = '';
     if (minSymbole > 0) {
       if (symChars == null || symChars == '') {
@@ -115,11 +118,6 @@ class Util {
 
   static String getBasename(String f) {
     return p.basenameWithoutExtension(f);
-  }
-
-  static bool isInCurrentDir(String f) {
-    String path = p.dirname(f);
-    return (path == '.');
   }
 
   static List<String> getDeleteList(List<String> flist, BackupPolicy bp) {
@@ -206,7 +204,7 @@ class Util {
   static String getLanguage() {
     String lang = sp.getString(languageKey);
     if (lang == null || lang == '') {
-      return 'en_US';
+      return 'en';
     }
     return lang;
   }
@@ -215,22 +213,34 @@ class Util {
     return Util.docDir.path + "/" + fn + ext;
   }
 
-  static String getTmpPath(String fn) {
-    return Util.tmpDir.path + "/" + fn + ext;
-  }
-
   static String getSecretKey(String keys, int idx) {
     return keys.substring(idx, idx + 32);
+  }
+
+  static String getTmpPath(String fn) {
+    return Util.tmpDir.path + "/" + fn + ext;
   }
 
   static Future init() async {
     sp = await SharedPreferences.getInstance();
     docDir = await getApplicationDocumentsDirectory();
     tmpDir = await getTemporaryDirectory();
+    String lang = getLanguage();
+    if (lang == null || lang == '') {
+      lang = 'en';
+      setLanguage(lang);
+    }
+    locale = Locale(lang, '');
+    loadMessage(locale.languageCode);
   }
 
   static bool isAlphaNum(String val) {
     return validCharacters.hasMatch(val);
+  }
+
+  static bool isInCurrentDir(String f) {
+    String path = p.dirname(f);
+    return (path == '.');
   }
 
   static bool isValidFileName(String val) {
@@ -246,14 +256,14 @@ class Util {
 
   static Group mockGroup(String key) {
     Group g = new Group();
-    g.basicData.name = "my password group";
+    g.basicData.name = m.common.myGrpName;
     g.passwords.add(mockPassword(key));
     return g;
   }
 
   static Password mockPassword(String key) {
     Password p = new Password();
-    p.basicData.name = "my secret";
+    p.basicData.name = m.common.mySecret;
     String tmp = randomString(8);
     p.key = Util.randomKey();
     p.password = encryptPassword(tmp, key, p.key);
@@ -286,6 +296,8 @@ class Util {
   }
 
   static Future<bool> setLanguage(String language) {
+    loadMessage(language);
+    localeChangeCallback();
     return sp.setString(languageKey, language);
   }
 }

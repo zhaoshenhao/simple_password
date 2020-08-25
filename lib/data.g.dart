@@ -6,6 +6,24 @@ part of 'data.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
+BackupPolicy _$BackupPolicyFromJson(Map<String, dynamic> json) {
+  return BackupPolicy()
+    ..autoBackup = json['autoBackup'] as bool
+    ..totalBackups = json['totalBackups'] as int
+    ..keepOneDay = json['keepOneDay'] as bool
+    ..keepLastWeek = json['keepLastWeek'] as bool
+    ..keepLastMonth = json['keepLastMonth'] as bool;
+}
+
+Map<String, dynamic> _$BackupPolicyToJson(BackupPolicy instance) =>
+    <String, dynamic>{
+      'autoBackup': instance.autoBackup,
+      'totalBackups': instance.totalBackups,
+      'keepOneDay': instance.keepOneDay,
+      'keepLastWeek': instance.keepLastWeek,
+      'keepLastMonth': instance.keepLastMonth,
+    };
+
 BasicData _$BasicDataFromJson(Map<String, dynamic> json) {
   return BasicData()
     ..name = json['name'] as String
@@ -54,29 +72,48 @@ Data _$DataFromJson(Map<String, dynamic> json) {
 
 Map<String, dynamic> _$DataToJson(Data instance) => <String, dynamic>{
       'key': instance.key,
-      'backupPolicy': instance.backupPolicy,
-      'passwordPolicy': instance.passwordPolicy,
-      'securityPolicy': instance.securityPolicy,
-      'basicData': instance.basicData,
-      'groups': instance.groups,
+      'backupPolicy': instance.backupPolicy?.toJson(),
+      'passwordPolicy': instance.passwordPolicy?.toJson(),
+      'securityPolicy': instance.securityPolicy?.toJson(),
+      'basicData': instance.basicData?.toJson(),
+      'groups': instance.groups?.map((e) => e?.toJson())?.toList(),
     };
 
-BackupPolicy _$BackupPolicyFromJson(Map<String, dynamic> json) {
-  return BackupPolicy()
-    ..autoBackup = json['autoBackup'] as bool
-    ..totalBackups = json['totalBackups'] as int
-    ..keepOneDay = json['keepOneDay'] as bool
-    ..keepLastWeek = json['keepLastWeek'] as bool
-    ..keepLastMonth = json['keepLastMonth'] as bool;
+Group _$GroupFromJson(Map<String, dynamic> json) {
+  return Group()
+    ..basicData = json['basicData'] == null
+        ? null
+        : BasicData.fromJson(json['basicData'] as Map<String, dynamic>)
+    ..passwords = (json['passwords'] as List)
+        ?.map((e) =>
+            e == null ? null : Password.fromJson(e as Map<String, dynamic>))
+        ?.toList();
 }
 
-Map<String, dynamic> _$BackupPolicyToJson(BackupPolicy instance) =>
-    <String, dynamic>{
-      'autoBackup': instance.autoBackup,
-      'totalBackups': instance.totalBackups,
-      'keepOneDay': instance.keepOneDay,
-      'keepLastWeek': instance.keepLastWeek,
-      'keepLastMonth': instance.keepLastMonth,
+Map<String, dynamic> _$GroupToJson(Group instance) => <String, dynamic>{
+      'basicData': instance.basicData?.toJson(),
+      'passwords': instance.passwords?.map((e) => e?.toJson())?.toList(),
+    };
+
+Password _$PasswordFromJson(Map<String, dynamic> json) {
+  return Password()
+    ..basicData = json['basicData'] == null
+        ? null
+        : BasicData.fromJson(json['basicData'] as Map<String, dynamic>)
+    ..key = json['key'] as int
+    ..username = json['username'] as String
+    ..password = json['password'] as String
+    ..notes = json['notes'] as String
+    ..url = json['url'] as String;
+}
+
+Map<String, dynamic> _$PasswordToJson(Password instance) => <String, dynamic>{
+      'basicData': instance.basicData?.toJson(),
+      'key': instance.key,
+      'username': instance.username,
+      'password': instance.password,
+      'notes': instance.notes,
+      'url': instance.url,
     };
 
 PasswordPolicy _$PasswordPolicyFromJson(Map<String, dynamic> json) {
@@ -113,41 +150,4 @@ Map<String, dynamic> _$SecurityPolicyToJson(SecurityPolicy instance) =>
       'autoSave': instance.autoSave,
       'autoHideInterval': instance.autoHideInterval,
       'autoSaveInterval': instance.autoSaveInterval,
-    };
-
-Group _$GroupFromJson(Map<String, dynamic> json) {
-  return Group()
-    ..basicData = json['basicData'] == null
-        ? null
-        : BasicData.fromJson(json['basicData'] as Map<String, dynamic>)
-    ..passwords = (json['passwords'] as List)
-        ?.map((e) =>
-            e == null ? null : Password.fromJson(e as Map<String, dynamic>))
-        ?.toList();
-}
-
-Map<String, dynamic> _$GroupToJson(Group instance) => <String, dynamic>{
-      'basicData': instance.basicData,
-      'passwords': instance.passwords,
-    };
-
-Password _$PasswordFromJson(Map<String, dynamic> json) {
-  return Password()
-    ..basicData = json['basicData'] == null
-        ? null
-        : BasicData.fromJson(json['basicData'] as Map<String, dynamic>)
-    ..key = json['key'] as int
-    ..username = json['username'] as String
-    ..password = json['password'] as String
-    ..notes = json['notes'] as String
-    ..url = json['url'] as String;
-}
-
-Map<String, dynamic> _$PasswordToJson(Password instance) => <String, dynamic>{
-      'basicData': instance.basicData,
-      'key': instance.key,
-      'username': instance.username,
-      'password': instance.password,
-      'notes': instance.notes,
-      'url': instance.url,
     };

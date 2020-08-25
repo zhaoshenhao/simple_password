@@ -1,0 +1,179 @@
+common:
+  about: 关于
+  actions: 操作
+  add: 添加
+  app: 应用名称
+  appName: 密宝
+  appVer: 0.0.1
+  check: 检查
+  chgConfirmed: 修改已确认
+  chgSaveFailed: 保存修改失败
+  chgSaved: 保存修改完成
+  companyName: Syspole Inc.
+  confirm: 确定
+  copyRight: Copyright © 2002-2020 CompuSky Inc.
+  create: 新建
+  delete: 删除
+  deleteThisAsk: 删除该项？
+  developer: 开发者
+  error: 错误
+  file: 文件
+  gen: 生成
+  group: 密码组
+  groups: 密码组
+  lastAccess: 最近访问
+  lastCreate: 创建时间
+  lastDelta: 最近修改
+  myGrpName: 我的密码组
+  mySecret: 我的密码
+  no: 否
+  none: 无
+  noChange: 没有修改
+  notEmpty: 不可为空
+  notes: 备注
+  off: 关
+  ok: 确认
+  on: 开
+  others: 其他
+  password: 密码
+  passwords: 密码
+  privacy: 隐私保护条款
+  recent: 最近
+  reset: 回复
+  ro: 只读
+  rw: 可读写
+  save: 保存
+  saveAllAsk: 保存全部修改？
+  settings: 配置
+  terms: 使用条款
+  title: 名称
+  unsaved: 未保存的修改
+  url: URL
+  version: 版本
+  yes: 是
+
+basic:
+  hint: 请为您的密码文件起个名称，作为标识.
+  info: 基本信息
+  pswdName: 密码文件的名称
+
+create:
+  createFile: 创建密宝文件
+  fn: 密宝文件名
+  inputFn: 请输入密宝文件名
+
+file:
+  deleteFailed(String p): 删除文件 $p 失败
+  fileExistErr(String name): 文件已经存在 $name。请使用其他名字。
+  fileExists: 文件存在
+  fileNotExists(String p): 文件 $p 未找到
+  fileNotFound: 文件未找到
+  fileNotFoundErr(String name):  "文件 $name 未找到."
+  fnTips: 请输入 [a-zA-Z0-9_-] 字符
+  loadCurrent: 载入当前文件
+  loadNew: 载入外部文件
+  openErr: 打开错误
+  openFailedErr(String name): "打开文件 $name 失败."
+  saveErr(String name): 保存文件 $name 失败
+  saveErrTitle: 保存文件出错
+  saveFailed: 保存文件失败
+  validFn: 合法的文件名
+
+pswd:
+  checkKey: 请检查主密钥和文件格式.
+  containUpper(int cnt): "必须包含 $cnt 个大写字母"
+  containLower(int cnt): "必须包含 $cnt 个小写字母"
+  containDigit(int cnt): "必须包含 $cnt 个数字"
+  containSpecial(int cnt): "必须包含 $cnt 特殊字符"
+  detail: 密码信息
+  msKey: 主密钥
+  pswdCheck: 密码检查
+  pswdCopied: 密码已复制
+  pswdEmpty: 空密码
+  pswdGood: 这个密码看起来不错
+  pswdHint: 输入您的主密钥
+  pswdHint2: 请输入密码
+  pswdLen: 长度小于
+  titleHint: 请输入
+  unCopied: 用户名已复制
+  unHint: '用户名'
+  urlCopied: URL 已复制
+  urlHint: 请输入URL
+
+home:
+  grpDeleted: 密码组已删除
+  subTitle(String lastUpd, int pswdCnt): "最近修改: $lastUpd. 密码数: $pswdCnt"
+
+load:
+  loadFile: 载入
+  loadPswdFile: 载入密宝文件
+  newFile: 新建
+  openInRo: 只读模式打开
+  openOther: 从其他目录打开
+
+sbs:
+  bkClean: 清理备份文件
+  bkCurrent: 备份当前文件
+  bkDone(String name): 备份 $name.sp 结束.
+  bkFailed(String name): 备份 $name.sp 失败!
+  deleteAsk(String f): 是否删除 $f.sp?
+  doPolicy(String name): 对如下文件自行备份策略\n$name.sp?\n一些旧的备份会被删除.
+  doPolicy1: 执行备份策略
+  donePolicy: 备份策略已执行.
+  fileDeleted(String f): 文件 $f.sp 已删除
+  pswdFileStatus: 密宝文件状态
+  roMode: 只读模式
+  sbp: 保存前按备份策略执行备份
+  shareContent: 这是您的密宝文件
+  shareCurrent: 分享当前文件
+  shareDone: 分享文件完成
+  shareFailed: 分享文件失败
+  title: 保存 & 备份 & 分享
+  totalChanges: 总修改次数
+
+pp:
+  allowedSpecial: 允许使用的特殊字符
+  minDidit: 最少数字
+  minLen: 最小长度
+  minLower: 最少小写字母
+  minSpecial: 最少特殊字符
+  minUpper: 最少大写字母
+  specialChar: 特殊字符
+  specialErr: 只允许特殊字符
+  specialHint: 请输入特殊字符
+  title: 密码策略
+
+group:
+  detail: 密码组
+  hint: 请输入密码组名称.
+  name: 密码组名称
+  pswdCreated: 创建新密码完成
+  pswdDeleted: 密码已经删除
+
+settings:
+  autoHide: 自动隐藏密码
+  autoHideInterval: 自动隐藏间隔(秒)
+  autoSave: 自动保存修改
+  autoSaveInterval: 自动保存间隔(秒)
+  bk: 备份设置
+  bkB4Save: 保存前创建备份
+  keepLastDay: 保留最新的昨天的备份
+  keepLastMonth: 保留最新的上周的备份
+  keepLastWeek: 保留最新的上个月的备份
+  sec: 安全设置
+  totalBks: 保留总备份数
+
+about:
+  terms: |+
+    密宝使用条款如下
+    1. 
+    2. 
+    3.
+
+  privacy: |+
+    密宝隐私条款如下
+    1.
+    2.
+    3.
+
+

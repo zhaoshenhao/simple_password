@@ -163,6 +163,18 @@ settings:
   sec: 安全设置
   totalBks: 保留总备份数
 
+iap:
+  benefits1: 免除广告
+  benefits2: 使用设备提供的认证方式来访问已经打开的密宝文件。
+  benefits:  购买后您可以获得：
+  buyConfirmMsg: 请确认是否继续?
+  buyTitle: 购买
+  failed: Purchase failed. Please try it again.
+  paid: 您正在使用已付款的高级版本
+  thankYou: 感谢您对我们的支持。
+  title: 购买密宝
+  verify: 我的年龄超过 13 岁。或者我的监护人同意购买。
+
 about:
   terms: |+
     密宝使用条款如下

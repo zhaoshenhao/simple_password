@@ -3,11 +3,13 @@ import 'package:simple_password/about_page.dart';
 import 'package:simple_password/basic_info_page.dart';
 import 'package:simple_password/globals.dart';
 import 'package:simple_password/i18n/i18n.dart';
+import 'package:simple_password/iap_page.dart';
 import 'package:simple_password/password_settings_page.dart';
 import 'package:simple_password/save_page.dart';
 import 'package:simple_password/settings_page.dart';
 import 'package:simple_password/ui_utility.dart';
 import 'package:simple_password/utility.dart';
+import 'package:simple_password/iap_utility.dart';
 
 class AppDrawer extends StatefulWidget {
   AppDrawer({Key key}) : super(key: key);
@@ -22,62 +24,7 @@ class _AppDrawerWidgetState extends State<AppDrawer> {
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
-        children: <Widget>[
-          _createHeader(),
-          ListTile(
-            leading: Icon(Icons.collections_bookmark),
-            title: Text(m.basic.info),
-            onTap: () {
-              Navigator.pop(context);
-              Navigator.of(context).push(new MaterialPageRoute(
-                  builder: (BuildContext context) => BasicInfoPage()));
-            },
-          ),
-          ListTile(
-            leading: Icon(Icons.content_copy),
-            title: Text(m.sbs.title),
-            onTap: () {
-              Navigator.pop(context);
-              Navigator.of(context).push(new MaterialPageRoute(
-                  builder: (BuildContext context) => SaveAndBackupPage()));
-            },
-          ),
-          Divider(),
-          ListTile(
-            leading: Icon(Icons.settings),
-            title: Text(m.common.settings),
-            onTap: () {
-              Navigator.pop(context);
-              Navigator.of(context).push(new MaterialPageRoute(
-                  builder: (BuildContext context) => BackupSettingsPage()));
-            },
-          ),
-          ListTile(
-            leading: Icon(Icons.settings),
-            title: Text(m.pp.title),
-            onTap: () {
-              Navigator.pop(context);
-              Navigator.of(context).push(new MaterialPageRoute(
-                  builder: (BuildContext context) => PasswordSettingsPage()));
-            },
-          ),
-          Divider(),
-          ListTile(
-            leading: Icon(Icons.copyright),
-            title: Text(m.common.about),
-            onTap: () {
-              Navigator.pop(context);
-              Navigator.of(context).push(new MaterialPageRoute(
-                  builder: (BuildContext context) => AboutPage()));
-            },
-          ),
-          ListTile(
-            title: Center(
-              child: Text(m.common.appVer),
-            ),
-            onTap: () {},
-          ),
-        ],
+        children: _buildList(),
       ),
     );
   }
@@ -108,5 +55,81 @@ class _AppDrawerWidgetState extends State<AppDrawer> {
         color: Colors.red,
       ),
     );
+  }
+
+  List<Widget> _buildList() {
+    List<Widget> list = List();
+    list.add(_createHeader());
+    list.addAll(<Widget>[
+      ListTile(
+        leading: Icon(Icons.collections_bookmark),
+        title: Text(m.basic.info),
+        onTap: () {
+          Navigator.pop(context);
+          Navigator.of(context).push(new MaterialPageRoute(
+              builder: (BuildContext context) => BasicInfoPage()));
+        },
+      ),
+      ListTile(
+        leading: Icon(Icons.content_copy),
+        title: Text(m.sbs.title),
+        onTap: () {
+          Navigator.pop(context);
+          Navigator.of(context).push(new MaterialPageRoute(
+              builder: (BuildContext context) => SaveAndBackupPage()));
+        },
+      ),
+      Divider(),
+      ListTile(
+        leading: Icon(Icons.settings),
+        title: Text(m.common.settings),
+        onTap: () {
+          Navigator.pop(context);
+          Navigator.of(context).push(new MaterialPageRoute(
+              builder: (BuildContext context) => BackupSettingsPage()));
+        },
+      ),
+      ListTile(
+        leading: Icon(Icons.playlist_add_check),
+        title: Text(m.pp.title),
+        onTap: () {
+          Navigator.pop(context);
+          Navigator.of(context).push(new MaterialPageRoute(
+              builder: (BuildContext context) => PasswordSettingsPage()));
+        },
+      )
+    ]);
+    if (!IapUtil.isPaid()) {
+      list.addAll(<Widget>[
+        Divider(),
+        ListTile(
+          leading: Icon(Icons.payment),
+          title: Text(m.iap.title),
+          onTap: () {
+            Navigator.pop(context);
+            Navigator.of(context).push(new MaterialPageRoute(
+                builder: (BuildContext context) => IapPage()));
+          },
+        ),
+      ]);
+    }
+    list.addAll(<Widget>[
+      Divider(),
+      ListTile(
+        leading: Icon(Icons.copyright),
+        title: Text(m.common.about),
+        onTap: () {
+          Navigator.pop(context);
+          Navigator.of(context).push(new MaterialPageRoute(
+              builder: (BuildContext context) => AboutPage()));
+        },
+      ),
+      ListTile(
+        title: Center(
+          child: Text(m.common.appVer),
+        ),
+      )
+    ]);
+    return list;
   }
 }

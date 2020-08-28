@@ -163,6 +163,18 @@ settings:
   sec: Security Settings
   totalBks: Total backups
 
+iap:
+  benefits1: Ads free
+  benefits2: Using device authentication for opened password files
+  benefits: "You will get:"
+  buyConfirmMsg: Are you sure to continue?
+  buyTitle: Buy
+  failed: Purchase failed. Please try it again.
+  paid: This is paid version.
+  thankYou: Thank you for supporting us.
+  title: Buy Simple Password
+  verify: I am 13 years old. Or my guardian agree to purchase.
+
 about:
   terms: |+
     Simple Password term of use

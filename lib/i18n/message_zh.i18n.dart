@@ -25,6 +25,7 @@ class Message_zh extends Message {
 	PpMessage_zh get pp => PpMessage_zh(this);
 	GroupMessage_zh get group => GroupMessage_zh(this);
 	SettingsMessage_zh get settings => SettingsMessage_zh(this);
+	IapMessage_zh get iap => IapMessage_zh(this);
 	AboutMessage_zh get about => AboutMessage_zh(this);
 }
 
@@ -224,6 +225,21 @@ class SettingsMessage_zh extends SettingsMessage {
 	String get keepLastWeek => """保留最新的上个月的备份""";
 	String get sec => """安全设置""";
 	String get totalBks => """保留总备份数""";
+}
+
+class IapMessage_zh extends IapMessage {
+	final Message_zh _parent;
+	const IapMessage_zh(this._parent):super(_parent);
+	String get benefits1 => """免除广告""";
+	String get benefits2 => """使用设备提供的认证方式来访问已经打开的密宝文件。""";
+	String get benefits => """购买后您可以获得：""";
+	String get buyConfirmMsg => """请确认是否继续?""";
+	String get buyTitle => """购买""";
+	String get failed => """Purchase failed. Please try it again.""";
+	String get paid => """您正在使用已付款的高级版本""";
+	String get thankYou => """感谢您对我们的支持。""";
+	String get title => """购买密宝""";
+	String get verify => """我的年龄超过 13 岁。或者我的监护人同意购买。""";
 }
 
 class AboutMessage_zh extends AboutMessage {

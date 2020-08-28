@@ -18,12 +18,13 @@ class SaveUtil {
   }
 
   static Future<bool> save(BuildContext context,
-      {bool useBackupPolicy = true}) async {
+      {bool useBackupPolicy = true, bool confirmed: false}) async {
     if (UiUtil.isReadOnly(context)) {
       return null;
     }
-    bool yes =
-        await UiUtil.confirm(m.common.confirm, m.common.saveAllAsk, context);
+    bool yes = confirmed
+        ? true
+        : await UiUtil.confirm(m.common.confirm, m.common.saveAllAsk, context);
     String password = Util.decryptPassword(secPassword, data.key, randomIdx);
     if (yes) {
       if (FileUtil.backupAndSave(data.backupPolicy, currentFilename, data,

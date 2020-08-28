@@ -6,6 +6,8 @@ import 'package:simple_password/utility.dart';
 import 'package:spinner_input/spinner_input.dart';
 
 class UiUtil {
+  static final Color priColor = Colors.red;
+  static final Color disColor = Colors.grey;
   static final biggerFont = const TextStyle(fontSize: 18.0);
   static final smallerFont = const TextStyle(fontSize: 12.0);
   static final edgeInsets = EdgeInsets.all(16.0);

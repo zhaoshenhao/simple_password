@@ -24,6 +24,7 @@ class Message {
 	PpMessage get pp => PpMessage(this);
 	GroupMessage get group => GroupMessage(this);
 	SettingsMessage get settings => SettingsMessage(this);
+	IapMessage get iap => IapMessage(this);
 	AboutMessage get about => AboutMessage(this);
 }
 
@@ -223,6 +224,21 @@ class SettingsMessage {
 	String get keepLastWeek => """Keep backup for last week""";
 	String get sec => """Security Settings""";
 	String get totalBks => """Total backups""";
+}
+
+class IapMessage {
+	final Message _parent;
+	const IapMessage(this._parent);
+	String get benefits1 => """Ads free""";
+	String get benefits2 => """Using device authentication for opened password files""";
+	String get benefits => """You will get:""";
+	String get buyConfirmMsg => """Are you sure to continue?""";
+	String get buyTitle => """Buy""";
+	String get failed => """Purchase failed. Please try it again.""";
+	String get paid => """This is paid version.""";
+	String get thankYou => """Thank you for supporting us.""";
+	String get title => """Buy Simple Password""";
+	String get verify => """I am 13 years old. Or my guardian agree to purchase.""";
 }
 
 class AboutMessage {

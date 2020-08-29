@@ -1,9 +1,8 @@
 import 'dart:async';
 import 'dart:io' show Platform;
 
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:local_auth/local_auth.dart';
+import 'package:simple_password/utility.dart';
 
 class LocalAuthUtil {
   static final LocalAuthentication auth = LocalAuthentication();
@@ -11,6 +10,7 @@ class LocalAuthUtil {
   static List<BiometricType> availableBiometrics;
   static bool allowFingerPrint = false;
   static bool allowFace = false;
+  static var error;
 
   static Future init() async {
     canCheckBiometrics = await auth.canCheckBiometrics;
@@ -25,6 +25,28 @@ class LocalAuthUtil {
     } else if (Platform.isAndroid) {
       allowFingerPrint =
           availableBiometrics.contains(BiometricType.fingerprint);
+    }
+  }
+
+  static Future<int> check(String mesg) async {
+    try {
+      bool ret = await auth.authenticateWithBiometrics(localizedReason: mesg);
+      return ret ? 0 : 1;
+    } catch (e) {
+      Log.error("Local auth failed.", error: e);
+      error = e;
+      cancel();
+      return -1;
+    }
+  }
+
+  static Future<bool> cancel() async {
+    try {
+      return await auth.stopAuthentication();
+    } catch (e) {
+      Log.error("Local auth failed.", error: e);
+      error = e;
+      return false;
     }
   }
 }

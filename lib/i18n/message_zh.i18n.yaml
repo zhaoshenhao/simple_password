@@ -4,7 +4,7 @@ common:
   add: 添加
   app: 应用名称
   appName: 密宝
-  appVer: 0.0.1
+  appVer: 1.0.0
   check: 检查
   chgConfirmed: 修改已确认
   chgSaveFailed: 保存修改失败
@@ -111,6 +111,8 @@ load:
   newFile: 新建
   openInRo: 只读模式打开
   openOther: 从其他目录打开
+  auth: 请进行认证来打开密宝
+  authErr: 设备认证出错。\n请检查您的系统认证设置，\n确认无误后重试.
 
 sbs:
   bkClean: 清理备份文件
@@ -121,6 +123,7 @@ sbs:
   doPolicy(String name): 对如下文件自行备份策略\n$name.sp?\n一些旧的备份会被删除.
   doPolicy1: 执行备份策略
   donePolicy: 备份策略已执行.
+  enableSync: 同步修改到本地共享或云端目录
   fileDeleted(String f): 文件 $f.sp 已删除
   pswdFileStatus: 密宝文件状态
   roMode: 只读模式
@@ -129,6 +132,7 @@ sbs:
   shareCurrent: 分享当前文件
   shareDone: 分享文件完成
   shareFailed: 分享文件失败
+  syncTo: 同步到
   title: 保存 & 备份 & 分享
   totalChanges: 总修改次数
 

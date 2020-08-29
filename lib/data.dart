@@ -56,6 +56,8 @@ class BasicData {
 @JsonSerializable(explicitToJson: true)
 class Data {
   String key = Util.randomString(1032);
+  String syncTo;
+  bool enableSync = false;
   BackupPolicy backupPolicy = new BackupPolicy();
   PasswordPolicy passwordPolicy = new PasswordPolicy();
   SecurityPolicy securityPolicy = new SecurityPolicy();
@@ -72,6 +74,9 @@ class Data {
     o.passwordPolicy = this.passwordPolicy.clone();
     o.securityPolicy = this.securityPolicy.clone();
     o.basicData = this.basicData.clone();
+    o.syncTo = this.syncTo;
+    o.enableSync = this.enableSync;
+
     for (Group g in this.groups) {
       o.groups.add(g.clone());
     }

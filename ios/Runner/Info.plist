@@ -45,5 +45,7 @@
 	<string>ca-app-pub-3940256099942544~1458002511</string>
 	<key>io.flutter.embedded_views_preview</key>
 	<true/>
+	<key>NSFaceIDUsageDescription</key>
+	<string>Using device authentication to access in-memory password file.</string>
 </dict>
 </plist>

@@ -4,7 +4,7 @@ common:
   add: Add
   app: Application
   appName: Simple Password
-  appVer: 0.0.1
+  appVer: 1.0.0
   check: Check
   chgConfirmed: Change confirmed
   chgSaveFailed: Saving changes failed.
@@ -111,6 +111,8 @@ load:
   newFile: New File
   openInRo: Open in read-only mode
   openOther: Open from other location
+  auth: Please authenticate to open Simple Password
+  authErr: Device authencation error.\nPlease check your system authencation.\nAnd try it later.
 
 sbs:
   bkClean: Backup cleanup
@@ -121,6 +123,7 @@ sbs:
   doPolicy(String name): Perform backup policy of\n$name.sp?\nSome old backups will be removed.
   doPolicy1: Perform Backup Policy
   donePolicy: Backup policy performed.
+  enableSync: Sync changes to a local or cloud folder
   fileDeleted(String f): File $f.sp deleted
   pswdFileStatus: Password file status
   roMode: Read-only mode
@@ -129,6 +132,7 @@ sbs:
   shareCurrent: Share Current File
   shareDone: Sharing completed
   shareFailed: Sharing file failed.
+  syncTo: Sync To
   title: Save & Backup & Share
   totalChanges: Total changes
 

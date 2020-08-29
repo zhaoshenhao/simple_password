@@ -6,6 +6,7 @@ import 'package:simple_password/admob_utility.dart';
 import 'package:simple_password/home_page.dart';
 import 'package:simple_password/i18n/i18n.dart';
 import 'package:simple_password/load_page.dart';
+import 'package:simple_password/local_auth_utility.dart';
 import 'package:simple_password/ui_utility.dart';
 import 'package:simple_password/utility.dart';
 
@@ -15,6 +16,7 @@ void main() async {
   await Util.init();
   await AdmobUtil.init();
   await UiUtil.initTheme();
+  await LocalAuthUtil.init();
   CatcherOptions debugOptions =
       CatcherOptions(DialogReportMode(), [ConsoleHandler()]);
   CatcherOptions releaseOptions = CatcherOptions(DialogReportMode(), [

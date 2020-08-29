@@ -8,6 +8,8 @@ import 'package:simple_password/create_page.dart';
 import 'package:simple_password/file_utility.dart';
 import 'package:simple_password/globals.dart';
 import 'package:simple_password/i18n/i18n.dart';
+import 'package:simple_password/iap_utility.dart';
+import 'package:simple_password/local_auth_utility.dart';
 import 'package:simple_password/ui_utility.dart';
 import 'package:simple_password/utility.dart';
 import 'package:toggle_switch/toggle_switch.dart';
@@ -113,35 +115,61 @@ class _LoadPageWidgetState extends State<LoadPageWidget> {
         Divider(),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            new RaisedButton.icon(
-              icon: Icon(Icons.add_circle_outline),
-              onPressed: () => _newFile(),
-              label: Text(m.load.newFile),
-            ),
-            RaisedButton.icon(
-              icon: Icon(Icons.lock_open),
-              onPressed: hasHistory ? () => _loadAndUnlock() : null,
-              color: UiUtil.priColor,
-              textColor: Colors.white,
-              label: Text(m.load.loadFile),
-            ),
-            RaisedButton.icon(
-              icon: Icon(Icons.fingerprint),
-              onPressed: _isCurrentFile() ? () => _localAuth() : null,
-              label: Text(m.load.loadFile),
-            ),
-          ],
+          children: _buttons(),
         ),
       ],
     );
   }
 
-  bool _isCurrentFile() {
-    return currentFilename == choosed;
+  List<Widget> _buttons() {
+    List<Widget> list = List();
+    list.add(RaisedButton.icon(
+      icon: Icon(Icons.add_circle_outline),
+      onPressed: () => _newFile(),
+      label: Text(m.load.newFile),
+    ));
+    list.add(RaisedButton.icon(
+      icon: Icon(Icons.lock_open),
+      onPressed: hasHistory ? () => _loadAndUnlock() : null,
+      color: UiUtil.priColor,
+      textColor: Colors.white,
+      label: Text(m.load.loadFile),
+    ));
+    if (currentFilename == null && IapUtil.isPaid()) {
+      return list;
+    }
+    Icon icon;
+    if (LocalAuthUtil.allowFace) {
+      icon = Icon(Icons.face);
+    } else if (LocalAuthUtil.allowFingerPrint) {
+      icon = Icon(Icons.fingerprint);
+    }
+    if (icon != null) {
+      list.add(RaisedButton.icon(
+          icon: icon,
+          onPressed: _canUseLocalAuth() ? () async => _localAuth() : null,
+          label: Text(m.load.loadFile)));
+    }
+    return list;
   }
 
-  void _localAuth() {}
+  bool _canUseLocalAuth() {
+    return currentFilename == choosed && IapUtil.isPaid();
+  }
+
+  void _localAuth() async {
+    int ret = await LocalAuthUtil.check(m.load.auth);
+    if (ret == 0) {
+      Log.fine("Open file with device auth");
+      _unlock(current: true);
+    } else if (ret == -1) {
+      _alert(
+          m.common.error,
+          m.load.authErr +
+              "\nSystem Error:\n" +
+              LocalAuthUtil.error.toString());
+    }
+  }
 
   void _alert(String title, String message) async {
     await dialog.showOkAlertDialog(
@@ -264,7 +292,6 @@ class _LoadPageWidgetState extends State<LoadPageWidget> {
       AppLock.of(context).didUnlock();
       return;
     }
-    if (currentFilename == choosed) {}
     currentFilename = choosed;
     randomIdx = Util.randomKey();
     secPassword = Util.encryptPassword(secKey, data.key, randomIdx);

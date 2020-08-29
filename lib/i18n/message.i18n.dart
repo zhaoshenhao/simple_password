@@ -36,7 +36,7 @@ class CommonMessage {
 	String get add => """Add""";
 	String get app => """Application""";
 	String get appName => """Simple Password""";
-	String get appVer => """0.0.1""";
+	String get appVer => """1.0.0""";
 	String get check => """Check""";
 	String get chgConfirmed => """Change confirmed""";
 	String get chgSaveFailed => """Saving changes failed.""";
@@ -161,6 +161,8 @@ class LoadMessage {
 	String get newFile => """New File""";
 	String get openInRo => """Open in read-only mode""";
 	String get openOther => """Open from other location""";
+	String get auth => """Please authenticate to open Simple Password""";
+	String get authErr => """Device authencation error.\nPlease check your system authencation.\nAnd try it later.""";
 }
 
 class SbsMessage {
@@ -174,6 +176,7 @@ class SbsMessage {
 	String doPolicy(String name) => """Perform backup policy of\n$name.sp?\nSome old backups will be removed.""";
 	String get doPolicy1 => """Perform Backup Policy""";
 	String get donePolicy => """Backup policy performed.""";
+	String get enableSync => """Sync changes to a local or cloud folder""";
 	String fileDeleted(String f) => """File $f.sp deleted""";
 	String get pswdFileStatus => """Password file status""";
 	String get roMode => """Read-only mode""";
@@ -182,6 +185,7 @@ class SbsMessage {
 	String get shareCurrent => """Share Current File""";
 	String get shareDone => """Sharing completed""";
 	String get shareFailed => """Sharing file failed.""";
+	String get syncTo => """Sync To""";
 	String get title => """Save & Backup & Share""";
 	String get totalChanges => """Total changes""";
 }

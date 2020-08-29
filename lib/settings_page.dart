@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:simple_password/globals.dart';
 import 'package:simple_password/i18n/i18n.dart';
 import 'package:simple_password/ui_utility.dart';
-import 'package:simple_password/utility.dart';
 
 class BackupSettingsPage extends StatelessWidget {
   @override
@@ -122,6 +121,9 @@ class _BackupSettingsWidgetState extends State<BackupSettingsWidget> {
                           _securityPolicy.autoSaveInterval = newValue.toInt();
                         }
                       })),
+              Text(''),
+              Text(''),
+              Text(''),
             ],
           ),
         ),

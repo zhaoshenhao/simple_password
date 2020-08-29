@@ -219,7 +219,7 @@ class _SaveAndBackupWidgetState extends State<SaveAndBackupWidget> {
       }
     }
     bool ret = await FlutterShare.shareFile(
-      title: m.common.appName,
+      title: currentFilename,
       text: m.sbs.shareContent,
       filePath: p,
     );

@@ -37,7 +37,7 @@ class CommonMessage_zh extends CommonMessage {
 	String get add => """添加""";
 	String get app => """应用名称""";
 	String get appName => """密宝""";
-	String get appVer => """0.0.1""";
+	String get appVer => """1.0.0""";
 	String get check => """检查""";
 	String get chgConfirmed => """修改已确认""";
 	String get chgSaveFailed => """保存修改失败""";
@@ -162,6 +162,8 @@ class LoadMessage_zh extends LoadMessage {
 	String get newFile => """新建""";
 	String get openInRo => """只读模式打开""";
 	String get openOther => """从其他目录打开""";
+	String get auth => """请进行认证来打开密宝""";
+	String get authErr => """设备认证出错。\n请检查您的系统认证设置，\n确认无误后重试.""";
 }
 
 class SbsMessage_zh extends SbsMessage {
@@ -175,6 +177,7 @@ class SbsMessage_zh extends SbsMessage {
 	String doPolicy(String name) => """对如下文件自行备份策略\n$name.sp?\n一些旧的备份会被删除.""";
 	String get doPolicy1 => """执行备份策略""";
 	String get donePolicy => """备份策略已执行.""";
+	String get enableSync => """同步修改到本地共享或云端目录""";
 	String fileDeleted(String f) => """文件 $f.sp 已删除""";
 	String get pswdFileStatus => """密宝文件状态""";
 	String get roMode => """只读模式""";
@@ -183,6 +186,7 @@ class SbsMessage_zh extends SbsMessage {
 	String get shareCurrent => """分享当前文件""";
 	String get shareDone => """分享文件完成""";
 	String get shareFailed => """分享文件失败""";
+	String get syncTo => """同步到""";
 	String get title => """保存 & 备份 & 分享""";
 	String get totalChanges => """总修改次数""";
 }

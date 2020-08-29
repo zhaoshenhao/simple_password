@@ -4,7 +4,7 @@ import 'package:simple_password/iap_utility.dart';
 import 'package:simple_password/ui_utility.dart';
 
 class AboutPage extends StatelessWidget {
-  String copytype = IapUtil.isPaid() ? m.iap.paid : m.iap.unpaid;
+  final String copytype = IapUtil.isPaid() ? m.iap.paid : m.iap.unpaid;
   @override
   Widget build(BuildContext context) {
     return new Scaffold(

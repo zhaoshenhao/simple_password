@@ -50,6 +50,8 @@ Map<String, dynamic> _$BasicDataToJson(BasicData instance) => <String, dynamic>{
 Data _$DataFromJson(Map<String, dynamic> json) {
   return Data()
     ..key = json['key'] as String
+    ..syncTo = json['syncTo'] as String
+    ..enableSync = json['enableSync'] as bool
     ..backupPolicy = json['backupPolicy'] == null
         ? null
         : BackupPolicy.fromJson(json['backupPolicy'] as Map<String, dynamic>)
@@ -72,6 +74,8 @@ Data _$DataFromJson(Map<String, dynamic> json) {
 
 Map<String, dynamic> _$DataToJson(Data instance) => <String, dynamic>{
       'key': instance.key,
+      'syncTo': instance.syncTo,
+      'enableSync': instance.enableSync,
       'backupPolicy': instance.backupPolicy?.toJson(),
       'passwordPolicy': instance.passwordPolicy?.toJson(),
       'securityPolicy': instance.securityPolicy?.toJson(),

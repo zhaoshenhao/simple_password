@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:adaptive_dialog/adaptive_dialog.dart' as dialog;
-import 'package:flutter_progress_hud/flutter_progress_hud.dart';
+import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:simple_password/i18n/i18n.dart';
 import 'package:simple_password/iap_utility.dart';
 import 'package:simple_password/ui_utility.dart';
@@ -28,15 +28,20 @@ class IapWidget extends StatefulWidget {
 }
 
 class _IapWidgetState extends State<IapWidget> {
-  TextStyle header = TextStyle(fontWeight: FontWeight.bold, fontSize: 20);
+  final TextStyle header = TextStyle(fontWeight: FontWeight.bold, fontSize: 20);
   bool verified = false;
+  bool _buying = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: new ListView(
-      padding: const EdgeInsets.only(bottom: 24),
-      children: _buildRows(),
-    ));
+        body: ModalProgressHUD(
+            inAsyncCall: _buying,
+            opacity: 0.6,
+            child: new ListView(
+              padding: const EdgeInsets.only(bottom: 24),
+              children: _buildRows(),
+            )));
   }
 
   List<Widget> _buildRows() {
@@ -55,6 +60,7 @@ class _IapWidgetState extends State<IapWidget> {
         title: Text(m.iap.verify),
         value: verified,
         onChanged: (bool val) => setState(() {
+          print("call verified");
           verified = val;
         }),
       ),
@@ -62,8 +68,11 @@ class _IapWidgetState extends State<IapWidget> {
       Center(
         child: RaisedButton.icon(
             icon: Icon(Icons.payment),
-            onPressed: () => verified ? _buy() : null,
-            color: verified ? Colors.blue : Colors.grey,
+            onPressed: () {
+              print("press");
+              _buy();
+            },
+            color: verified ? UiUtil.priColor : UiUtil.disColor,
             textColor: Colors.white,
             label: Text(m.iap.buyTitle)),
       ),
@@ -86,19 +95,34 @@ class _IapWidgetState extends State<IapWidget> {
   }
 
   Future _buy() async {
-    if (await UiUtil.confirm(m.iap.buyTitle, m.iap.buyConfirmMsg, context)) {
-      final progress = ProgressHUD.of(context);
-      progress.show();
-      bool ret = await IapUtil.buy();
-      Future.delayed(Duration(seconds: 2), () {
-        progress.dismiss();
+    print("buy");
+    bool ret =
+        await UiUtil.confirm(m.iap.buyTitle, m.iap.buyConfirmMsg, context);
+    if (ret) {
+      setState(() {
+        _buying = true;
+      });
+      await Future.delayed(Duration(seconds: 5), () {
+        print("done");
+      });
+      ret = await IapUtil.buy();
+      setState(() {
+        _buying = false;
       });
       if (ret) {
+        dialog.showAlertDialog(
+            context: context,
+            title: m.iap.thankYouTitle,
+            message: m.iap.succ,
+            style: dialog.AdaptiveStyle.material);
         Util.localeChangeCallback();
         Navigator.pop(context);
       } else {
         dialog.showAlertDialog(
-            context: context, title: m.common.error, message: m.iap.failed);
+            context: context,
+            title: m.common.error,
+            message: m.iap.failed,
+            style: dialog.AdaptiveStyle.material);
       }
     }
   }

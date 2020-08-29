@@ -100,7 +100,7 @@ class _SaveAndBackupWidgetState extends State<SaveAndBackupWidget> {
       actions: <Widget>[
         IconSlideAction(
           caption: m.common.delete,
-          color: Colors.red,
+          color: UiUtil.priColor,
           icon: Icons.delete,
           onTap: () async => _delete(f),
         ),
@@ -136,9 +136,9 @@ class _SaveAndBackupWidgetState extends State<SaveAndBackupWidget> {
             minWidth: 80.0,
             cornerRadius: 10.0,
             minHeight: 25,
-            activeBgColor: Colors.red,
+            activeBgColor: UiUtil.priColor,
             activeFgColor: Colors.white,
-            inactiveBgColor: Colors.grey,
+            inactiveBgColor: UiUtil.disColor,
             inactiveFgColor: Colors.white,
             labels: [m.common.yes, m.common.no],
             icons: [Icons.lock, Icons.lock_open],
@@ -152,7 +152,7 @@ class _SaveAndBackupWidgetState extends State<SaveAndBackupWidget> {
         child: RaisedButton.icon(
       icon: Icon(Icons.save),
       onPressed: readOnly || changes == 0 ? null : () async => _save(),
-      color: Colors.red,
+      color: UiUtil.priColor,
       textColor: Colors.white,
       label: Text(m.common.save),
     )));
@@ -165,7 +165,7 @@ class _SaveAndBackupWidgetState extends State<SaveAndBackupWidget> {
             child: RaisedButton.icon(
                 icon: Icon(Icons.share),
                 onPressed: () async => _share(),
-                color: Colors.red,
+                color: UiUtil.priColor,
                 textColor: Colors.white,
                 label: Text(m.sbs.shareCurrent)))));
     list.add(Center(
@@ -174,7 +174,7 @@ class _SaveAndBackupWidgetState extends State<SaveAndBackupWidget> {
             child: RaisedButton.icon(
                 icon: Icon(Icons.content_copy),
                 onPressed: () async => _backup(),
-                color: Colors.red,
+                color: UiUtil.priColor,
                 textColor: Colors.white,
                 label: Text(m.sbs.bkCurrent)))));
     list.add(Center(
@@ -183,7 +183,7 @@ class _SaveAndBackupWidgetState extends State<SaveAndBackupWidget> {
             child: RaisedButton.icon(
               icon: Icon(Icons.delete_sweep),
               onPressed: () async => _cleanBackup(),
-              color: Colors.red,
+              color: UiUtil.priColor,
               textColor: Colors.white,
               label: Text(m.sbs.doPolicy1),
             ))));

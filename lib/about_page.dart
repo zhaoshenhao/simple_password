@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:simple_password/i18n/i18n.dart';
+import 'package:simple_password/iap_utility.dart';
 import 'package:simple_password/ui_utility.dart';
 
 class AboutPage extends StatelessWidget {
+  String copytype = IapUtil.isPaid() ? m.iap.paid : m.iap.unpaid;
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -18,6 +20,7 @@ class AboutPage extends StatelessWidget {
             UiUtil.headingRow(m.common.about),
             Text(''),
             Text(m.common.copyRight),
+            Text(copytype),
             Text(m.common.app + ": " + m.common.appName),
             Text(m.common.developer + ": " + m.common.companyName),
             Text(m.common.version + ": " + m.common.appVer),

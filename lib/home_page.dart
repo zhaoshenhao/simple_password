@@ -105,7 +105,7 @@ class PasswordsPageState extends State<PasswordsPage> {
             mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
               new FloatingActionButton(
-                backgroundColor: readOnly ? Colors.blue : Colors.red,
+                backgroundColor: UiUtil.priColor,
                 tooltip: readOnly
                     ? m.common.ro
                     : m.common.rw, // used by assistive technologies
@@ -116,14 +116,14 @@ class PasswordsPageState extends State<PasswordsPage> {
                 heroTag: null,
               ),
               new FloatingActionButton(
-                backgroundColor: readOnly ? Colors.grey : Colors.blue,
+                backgroundColor: readOnly ? UiUtil.disColor : UiUtil.priColor,
                 tooltip: m.common.add, // used by assistive technologies
                 child: new Icon(Icons.add),
                 onPressed: readOnly ? null : () => setState(() => _add()),
                 heroTag: null,
               ),
               new FloatingActionButton(
-                backgroundColor: readOnly ? Colors.grey : Colors.red,
+                backgroundColor: readOnly ? UiUtil.disColor : UiUtil.priColor,
                 tooltip: m.common.save, // used by assistive technologies
                 child: new Icon(Icons.save),
                 onPressed: readOnly ? null : () async => _save(),
@@ -183,7 +183,7 @@ class PasswordsPageState extends State<PasswordsPage> {
       actions: <Widget>[
         IconSlideAction(
           caption: m.common.delete,
-          color: readOnly ? Colors.grey : Colors.red,
+          color: readOnly ? UiUtil.disColor : UiUtil.priColor,
           icon: Icons.delete,
           onTap: readOnly ? null : () async => _delete(i),
         ),

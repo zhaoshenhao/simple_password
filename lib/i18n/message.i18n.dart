@@ -56,6 +56,7 @@ class CommonMessage {
 	String get lastAccess => """Last Access""";
 	String get lastCreate => """Last Created""";
 	String get lastDelta => """Last Modified""";
+	String get lookFeel => """Look & Feel""";
 	String get myGrpName => """my password group""";
 	String get mySecret => """my secret""";
 	String get no => """No""";
@@ -222,6 +223,8 @@ class SettingsMessage {
 	String get keepLastDay => """Keep backup for yesterday""";
 	String get keepLastMonth => """Keep back for last month""";
 	String get keepLastWeek => """Keep backup for last week""";
+	String get lang => """Language""";
+	String get theme => """Theme""";
 	String get sec => """Security Settings""";
 	String get totalBks => """Total backups""";
 }
@@ -238,7 +241,10 @@ class IapMessage {
 	String get paid => """This is paid version.""";
 	String get thankYou => """Thank you for supporting us.""";
 	String get title => """Buy Simple Password""";
+	String get unpaid => """This is free version.""";
 	String get verify => """I am 13 years old. Or my guardian agree to purchase.""";
+	String get thankYouTitle => """Thank You""";
+	String get succ => """The purchase is completed. \nThanks you for your supporting.""";
 }
 
 class AboutMessage {

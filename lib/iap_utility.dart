@@ -1,9 +1,12 @@
 class IapUtil {
+  static bool paid = false;
   static bool isPaid() {
-    return false;
+    return paid;
   }
 
   static Future<bool> buy() async {
-    return false;
+    paid = true;
+    print(paid);
+    return paid;
   }
 }

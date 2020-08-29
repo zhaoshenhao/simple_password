@@ -24,6 +24,7 @@ common:
   lastAccess: Last Access
   lastCreate: Last Created
   lastDelta: Last Modified
+  lookFeel: Look & Feel
   myGrpName: my password group
   mySecret: my secret
   no: No
@@ -160,6 +161,8 @@ settings:
   keepLastDay: Keep backup for yesterday
   keepLastMonth: Keep back for last month
   keepLastWeek: Keep backup for last week
+  lang: Language
+  theme: Theme
   sec: Security Settings
   totalBks: Total backups
 
@@ -173,7 +176,10 @@ iap:
   paid: This is paid version.
   thankYou: Thank you for supporting us.
   title: Buy Simple Password
+  unpaid: This is free version.
   verify: I am 13 years old. Or my guardian agree to purchase.
+  thankYouTitle: Thank You
+  succ: The purchase is completed. \nThanks you for your supporting.
 
 about:
   terms: |+

@@ -67,7 +67,7 @@ class _CreatePageWidgetState extends State<CreatePageWidget> {
                   }),
                   child: Icon(
                     _showPassword2 ? Icons.visibility : Icons.visibility_off,
-                    color: Colors.red,
+                    color: UiUtil.priColor,
                   ),
                 )),
             obscureText: !_showPassword2,
@@ -84,7 +84,7 @@ class _CreatePageWidgetState extends State<CreatePageWidget> {
               child: RaisedButton.icon(
             icon: Icon(Icons.add_circle_outline),
             onPressed: () => _create(),
-            color: Colors.red,
+            color: UiUtil.priColor,
             textColor: Colors.white,
             label: Text(m.common.create),
           )),
@@ -93,7 +93,10 @@ class _CreatePageWidgetState extends State<CreatePageWidget> {
 
   void _alert(String title, String message) async {
     await dialog.showOkAlertDialog(
-        context: context, title: title, message: "\n" + message);
+        context: context,
+        title: title,
+        message: "\n" + message,
+        alertStyle: dialog.AdaptiveStyle.material);
   }
 
   void _create() {

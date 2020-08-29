@@ -29,7 +29,6 @@ class _BackupSettingsWidgetState extends State<BackupSettingsWidget> {
   final _formKey = GlobalKey<FormState>();
   final _backupPolicy = data.backupPolicy.clone();
   final _securityPolicy = data.securityPolicy.clone();
-  String lang = Util.locale.languageCode;
 
   @override
   Widget build(BuildContext context) {
@@ -123,27 +122,6 @@ class _BackupSettingsWidgetState extends State<BackupSettingsWidget> {
                           _securityPolicy.autoSaveInterval = newValue.toInt();
                         }
                       })),
-              UiUtil.headingRow(m.common.others),
-              Container(
-                padding:
-                    EdgeInsets.only(top: 0, left: 16, right: 16, bottom: 16),
-                child: DropdownButton<String>(
-                    value: lang,
-                    icon: Icon(Icons.arrow_downward),
-                    iconSize: 20,
-                    elevation: 16,
-                    style: TextStyle(color: Colors.deepPurple),
-                    underline: Container(
-                      height: 2,
-                      color: Colors.deepPurpleAccent,
-                    ),
-                    onChanged: (String newValue) {
-                      setState(() {
-                        lang = newValue;
-                      });
-                    },
-                    items: _dropdownList()),
-              ),
             ],
           ),
         ),
@@ -155,18 +133,6 @@ class _BackupSettingsWidgetState extends State<BackupSettingsWidget> {
       data.backupPolicy = _backupPolicy.clone();
       data.securityPolicy = _securityPolicy.clone();
       UiUtil.confirmAll(context);
-      String lang2 = Util.locale.languageCode;
-      if (lang != lang2) {
-        Util.locale = Locale(lang, '');
-        Util.setLanguage(lang);
-      }
     }
-  }
-
-  List<DropdownMenuItem<String>> _dropdownList() {
-    List<DropdownMenuItem<String>> list = List();
-    list.add(DropdownMenuItem<String>(value: 'en', child: Text('English')));
-    list.add(DropdownMenuItem<String>(value: 'zh', child: Text('中文')));
-    return list;
   }
 }

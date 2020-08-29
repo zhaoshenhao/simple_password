@@ -55,14 +55,14 @@ class _GroupWidgetState extends State<GroupWidget> {
             mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
               new FloatingActionButton(
-                backgroundColor: readOnly ? Colors.grey : Colors.blue,
+                backgroundColor: readOnly ? UiUtil.disColor : UiUtil.priColor,
                 tooltip: m.common.add, // used by assistive technologies
                 child: new Icon(Icons.add),
                 onPressed: readOnly ? null : () => setState(() => _add()),
                 heroTag: null,
               ),
               new FloatingActionButton(
-                backgroundColor: readOnly ? Colors.grey : Colors.red,
+                backgroundColor: readOnly ? UiUtil.disColor : UiUtil.priColor,
                 tooltip: m.common.confirm, // used by assistive technologies
                 child: new Icon(Icons.check_circle_outline),
                 onPressed: readOnly ? null : () => _confirm(),
@@ -106,7 +106,7 @@ class _GroupWidgetState extends State<GroupWidget> {
       actions: <Widget>[
         IconSlideAction(
           caption: m.common.delete,
-          color: readOnly ? Colors.grey : Colors.red,
+          color: readOnly ? UiUtil.disColor : UiUtil.priColor,
           icon: Icons.delete,
           onTap: readOnly ? null : () async => _delete(i),
         ),

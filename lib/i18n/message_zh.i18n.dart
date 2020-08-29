@@ -57,6 +57,7 @@ class CommonMessage_zh extends CommonMessage {
 	String get lastAccess => """最近访问""";
 	String get lastCreate => """创建时间""";
 	String get lastDelta => """最近修改""";
+	String get lookFeel => """界面和语言""";
 	String get myGrpName => """我的密码组""";
 	String get mySecret => """我的密码""";
 	String get no => """否""";
@@ -223,6 +224,8 @@ class SettingsMessage_zh extends SettingsMessage {
 	String get keepLastDay => """保留最新的昨天的备份""";
 	String get keepLastMonth => """保留最新的上周的备份""";
 	String get keepLastWeek => """保留最新的上个月的备份""";
+	String get lang => """界面语言""";
+	String get theme => """界面主题""";
 	String get sec => """安全设置""";
 	String get totalBks => """保留总备份数""";
 }
@@ -235,11 +238,14 @@ class IapMessage_zh extends IapMessage {
 	String get benefits => """购买后您可以获得：""";
 	String get buyConfirmMsg => """请确认是否继续?""";
 	String get buyTitle => """购买""";
-	String get failed => """Purchase failed. Please try it again.""";
-	String get paid => """您正在使用已付款的高级版本""";
+	String get failed => """购买失败，请稍后重试。""";
+	String get paid => """您正在使用付费版本""";
 	String get thankYou => """感谢您对我们的支持。""";
 	String get title => """购买密宝""";
+	String get unpaid => """您正在使用免费版本。""";
 	String get verify => """我的年龄超过 13 岁。或者我的监护人同意购买。""";
+	String get thankYouTitle => """感谢购买""";
+	String get succ => """购买成功。\n感谢您对我们的支持。""";
 }
 
 class AboutMessage_zh extends AboutMessage {

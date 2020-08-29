@@ -92,7 +92,7 @@ class _OnePasswordWidgetState extends State<OnePasswordWidget> {
                       },
                       child: Icon(
                         Icons.content_copy,
-                        color: Colors.red,
+                        color: UiUtil.priColor,
                       )),
                 ),
                 onChanged: (val) => {_password.username = val},
@@ -110,7 +110,7 @@ class _OnePasswordWidgetState extends State<OnePasswordWidget> {
                     },
                     child: Icon(
                       _showPassword ? Icons.visibility : Icons.visibility_off,
-                      color: Colors.red,
+                      color: UiUtil.priColor,
                     ),
                   ),
                   prefixIcon: GestureDetector(
@@ -121,7 +121,7 @@ class _OnePasswordWidgetState extends State<OnePasswordWidget> {
                       },
                       child: Icon(
                         Icons.content_copy,
-                        color: Colors.red,
+                        color: UiUtil.priColor,
                       )),
                 ),
                 onChanged: (val) => {_password.password = val},
@@ -143,7 +143,7 @@ class _OnePasswordWidgetState extends State<OnePasswordWidget> {
                       },
                       child: Icon(
                         Icons.content_copy,
-                        color: Colors.red,
+                        color: UiUtil.priColor,
                       )),
                 ),
                 onChanged: (val) => {_password.url = val},
@@ -278,12 +278,12 @@ class _OnePasswordWidgetState extends State<OnePasswordWidget> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         new RaisedButton(
-          color: readOnly ? Colors.grey : Colors.white60,
+          color: readOnly ? UiUtil.disColor : Colors.white60,
           onPressed: readOnly ? null : () => _resetPassword(),
           child: Text(m.common.reset),
         ),
         new RaisedButton(
-            color: readOnly ? Colors.grey : Colors.white60,
+            color: readOnly ? UiUtil.disColor : Colors.white60,
             onPressed: readOnly ? null : () => _genPassword(),
             child: Text(m.common.gen)),
         new RaisedButton(
@@ -304,7 +304,10 @@ class _OnePasswordWidgetState extends State<OnePasswordWidget> {
   void _showResult(List<String> list) {
     String message = list.isEmpty ? m.pswd.pswdGood : "\n" + list.join("\n");
     dialog.showOkAlertDialog(
-        context: context, title: m.pswd.pswdCheck, message: message);
+        context: context,
+        title: m.pswd.pswdCheck,
+        message: message,
+        alertStyle: dialog.AdaptiveStyle.material);
   }
 
   void _togglevisibility() {

@@ -24,6 +24,7 @@ common:
   lastAccess: 最近访问
   lastCreate: 创建时间
   lastDelta: 最近修改
+  lookFeel: 界面和语言
   myGrpName: 我的密码组
   mySecret: 我的密码
   no: 否
@@ -160,6 +161,8 @@ settings:
   keepLastDay: 保留最新的昨天的备份
   keepLastMonth: 保留最新的上周的备份
   keepLastWeek: 保留最新的上个月的备份
+  lang: 界面语言
+  theme: 界面主题
   sec: 安全设置
   totalBks: 保留总备份数
 
@@ -169,11 +172,14 @@ iap:
   benefits:  购买后您可以获得：
   buyConfirmMsg: 请确认是否继续?
   buyTitle: 购买
-  failed: Purchase failed. Please try it again.
-  paid: 您正在使用已付款的高级版本
+  failed: 购买失败，请稍后重试。
+  paid: 您正在使用付费版本
   thankYou: 感谢您对我们的支持。
   title: 购买密宝
+  unpaid: 您正在使用免费版本。
   verify: 我的年龄超过 13 岁。或者我的监护人同意购买。
+  thankYouTitle: 感谢购买
+  succ: 购买成功。\n感谢您对我们的支持。
 
 about:
   terms: |+

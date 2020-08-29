@@ -4,6 +4,7 @@ import 'package:simple_password/basic_info_page.dart';
 import 'package:simple_password/globals.dart';
 import 'package:simple_password/i18n/i18n.dart';
 import 'package:simple_password/iap_page.dart';
+import 'package:simple_password/look_feel_page.dart';
 import 'package:simple_password/password_settings_page.dart';
 import 'package:simple_password/save_page.dart';
 import 'package:simple_password/settings_page.dart';
@@ -52,7 +53,7 @@ class _AppDrawerWidgetState extends State<AppDrawer> {
             UiUtil.createTime(data.basicData.createTime, color: Colors.white70),
           ]),
       decoration: BoxDecoration(
-        color: Colors.red,
+        color: UiUtil.priColor,
       ),
     );
   }
@@ -97,7 +98,16 @@ class _AppDrawerWidgetState extends State<AppDrawer> {
           Navigator.of(context).push(new MaterialPageRoute(
               builder: (BuildContext context) => PasswordSettingsPage()));
         },
-      )
+      ),
+      ListTile(
+        leading: Icon(Icons.settings),
+        title: Text(m.common.lookFeel),
+        onTap: () {
+          Navigator.pop(context);
+          Navigator.of(context).push(new MaterialPageRoute(
+              builder: (BuildContext context) => LookFeelPage()));
+        },
+      ),
     ]);
     if (!IapUtil.isPaid()) {
       list.addAll(<Widget>[

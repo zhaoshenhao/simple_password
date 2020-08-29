@@ -6,8 +6,9 @@ import 'package:simple_password/utility.dart';
 import 'package:spinner_input/spinner_input.dart';
 
 class UiUtil {
-  static final Color priColor = Colors.red;
-  static final Color disColor = Colors.grey;
+  static Color priColor = Colors.blue;
+  static Color disColor = Colors.grey;
+  static String currentTheme;
   static final biggerFont = const TextStyle(fontSize: 18.0);
   static final smallerFont = const TextStyle(fontSize: 12.0);
   static final edgeInsets = EdgeInsets.all(16.0);
@@ -20,7 +21,10 @@ class UiUtil {
   static Future<bool> confirm(
       String title, String msg, BuildContext context) async {
     final OkCancelResult result = await showOkCancelAlertDialog(
-        context: context, title: title, message: "\n" + msg);
+        context: context,
+        title: title,
+        message: "\n" + msg,
+        alertStyle: AdaptiveStyle.material);
     if (result == OkCancelResult.ok) {
       return true;
     }
@@ -37,7 +41,7 @@ class UiUtil {
   static Widget confirmButton(var _confirm) {
     return new Row(mainAxisAlignment: MainAxisAlignment.end, children: <Widget>[
       new FloatingActionButton(
-        backgroundColor: readOnly ? Colors.grey : Colors.red,
+        backgroundColor: readOnly ? UiUtil.disColor : UiUtil.priColor,
         tooltip: m.common.confirm,
         child: new Icon(Icons.check_circle_outline),
         onPressed: readOnly ? null : () => _confirm(),
@@ -101,6 +105,34 @@ class UiUtil {
     return new SnackBar(
       content: Text(text),
     );
+  }
+
+  static void _setTheme(theme) {
+    currentTheme = theme;
+    switch (theme) {
+      case 'red':
+        priColor = Colors.red;
+        break;
+      case 'black':
+        priColor = Colors.black;
+        break;
+      case 'blue':
+      default:
+        priColor = Colors.blue;
+    }
+  }
+
+  static Future initTheme() async {
+    currentTheme = Util.getTheme();
+    _setTheme(currentTheme);
+  }
+
+  static void setTheme(String theme) {
+    if (theme == null || theme == '') {
+      theme = Util.defaultTheme;
+    }
+    _setTheme(theme);
+    Util.setTheme(theme);
   }
 
   static Row spinRow(

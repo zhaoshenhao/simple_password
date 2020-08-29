@@ -18,7 +18,7 @@ class LoadPage extends StatelessWidget {
     return MaterialApp(
         title: m.common.appName,
         theme: new ThemeData(
-          primaryColor: Colors.red,
+          primaryColor: UiUtil.priColor,
         ),
         home: new Scaffold(
           appBar: AppBar(
@@ -68,7 +68,7 @@ class _LoadPageWidgetState extends State<LoadPageWidget> {
           IconButton(
               icon: Icon(Icons.folder_open),
               tooltip: m.load.openOther,
-              color: Colors.red,
+              color: UiUtil.priColor,
               onPressed: () async => _openFile()),
         ]),
         TextFormField(
@@ -82,7 +82,7 @@ class _LoadPageWidgetState extends State<LoadPageWidget> {
                 }),
                 child: Icon(
                   _showPassword ? Icons.visibility : Icons.visibility_off,
-                  color: Colors.red,
+                  color: UiUtil.priColor,
                 ),
               )),
           obscureText: !_showPassword,
@@ -98,9 +98,9 @@ class _LoadPageWidgetState extends State<LoadPageWidget> {
             minWidth: 80.0,
             cornerRadius: 10.0,
             minHeight: 25,
-            activeBgColor: Colors.red,
+            activeBgColor: UiUtil.priColor,
             activeFgColor: Colors.white,
-            inactiveBgColor: Colors.grey,
+            inactiveBgColor: UiUtil.disColor,
             inactiveFgColor: Colors.white,
             labels: [m.common.on, m.common.off],
             icons: [Icons.lock, Icons.lock_open],
@@ -122,8 +122,13 @@ class _LoadPageWidgetState extends State<LoadPageWidget> {
             RaisedButton.icon(
               icon: Icon(Icons.lock_open),
               onPressed: hasHistory ? () => _loadAndUnlock() : null,
-              color: Colors.red,
+              color: UiUtil.priColor,
               textColor: Colors.white,
+              label: Text(m.load.loadFile),
+            ),
+            RaisedButton.icon(
+              icon: Icon(Icons.fingerprint),
+              onPressed: _isCurrentFile() ? () => _localAuth() : null,
               label: Text(m.load.loadFile),
             ),
           ],
@@ -132,9 +137,18 @@ class _LoadPageWidgetState extends State<LoadPageWidget> {
     );
   }
 
+  bool _isCurrentFile() {
+    return currentFilename == choosed;
+  }
+
+  void _localAuth() {}
+
   void _alert(String title, String message) async {
     await dialog.showOkAlertDialog(
-        context: context, title: title, message: "\n" + message);
+        context: context,
+        title: title,
+        message: "\n" + message,
+        alertStyle: dialog.AdaptiveStyle.material);
   }
 
   List<DropdownMenuItem<String>> _getHistory() {

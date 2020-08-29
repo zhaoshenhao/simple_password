@@ -51,7 +51,7 @@ class AdmobUtil {
   }
 
   static Widget getBanner() {
-    if (unitId == null) {
+    if (unitId == null || IapUtil.isPaid()) {
       return null;
     }
     return Container(

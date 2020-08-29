@@ -46,8 +46,10 @@ class Util {
   static final String digits = "0123456789";
   static final String historyFilesKey = "HISTORY_FILES";
   static final String languageKey = "LANGUAGE";
+  static final String themeKey = 'THEME';
   static Locale locale = Locale('en', '');
   static LocaleChangeCallback localeChangeCallback;
+  static final String defaultTheme = 'blue';
 
   static String dateTimeToString(DateTime d) {
     return formatter.format(d);
@@ -217,6 +219,14 @@ class Util {
     return keys.substring(idx, idx + 32);
   }
 
+  static String getTheme() {
+    String theme = sp.getString(themeKey);
+    if (theme == null || theme == '') {
+      return defaultTheme;
+    }
+    return theme;
+  }
+
   static String getTmpPath(String fn) {
     return Util.tmpDir.path + "/" + fn + ext;
   }
@@ -297,7 +307,10 @@ class Util {
 
   static Future<bool> setLanguage(String language) {
     loadMessage(language);
-    localeChangeCallback();
     return sp.setString(languageKey, language);
+  }
+
+  static Future<bool> setTheme(String theme) {
+    return sp.setString(themeKey, theme);
   }
 }

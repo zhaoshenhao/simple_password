@@ -1,8 +1,9 @@
 // GENERATED FILE, do not edit!
 import 'package:i18n/i18n.dart' as i18n;
+import 'message.i18n.dart';
 
-String get _languageCode => 'en';
-String get _localeName => 'en';
+String get _languageCode => 'fr';
+String get _localeName => 'fr';
 
 String _plural(int count, {String zero, String one, String two, String few, String many, String other}) =>
 	i18n.plural(count, _languageCode, zero:zero, one:one, two:two, few:few, many:many, other:other);
@@ -11,26 +12,26 @@ String _ordinal(int count, {String zero, String one, String two, String few, Str
 String _cardinal(int count, {String zero, String one, String two, String few, String many, String other}) =>
 	i18n.cardinal(count, _languageCode, zero:zero, one:one, two:two, few:few, many:many, other:other);
 
-class Message {
-	const Message();
-	CommonMessage get common => CommonMessage(this);
-	BasicMessage get basic => BasicMessage(this);
-	CreateMessage get create => CreateMessage(this);
-	FileMessage get file => FileMessage(this);
-	PswdMessage get pswd => PswdMessage(this);
-	HomeMessage get home => HomeMessage(this);
-	LoadMessage get load => LoadMessage(this);
-	SbsMessage get sbs => SbsMessage(this);
-	PpMessage get pp => PpMessage(this);
-	GroupMessage get group => GroupMessage(this);
-	SettingsMessage get settings => SettingsMessage(this);
-	IapMessage get iap => IapMessage(this);
-	AboutMessage get about => AboutMessage(this);
+class Message_fr extends Message {
+	const Message_fr();
+	CommonMessage_fr get common => CommonMessage_fr(this);
+	BasicMessage_fr get basic => BasicMessage_fr(this);
+	CreateMessage_fr get create => CreateMessage_fr(this);
+	FileMessage_fr get file => FileMessage_fr(this);
+	PswdMessage_fr get pswd => PswdMessage_fr(this);
+	HomeMessage_fr get home => HomeMessage_fr(this);
+	LoadMessage_fr get load => LoadMessage_fr(this);
+	SbsMessage_fr get sbs => SbsMessage_fr(this);
+	PpMessage_fr get pp => PpMessage_fr(this);
+	GroupMessage_fr get group => GroupMessage_fr(this);
+	SettingsMessage_fr get settings => SettingsMessage_fr(this);
+	IapMessage_fr get iap => IapMessage_fr(this);
+	AboutMessage_fr get about => AboutMessage_fr(this);
 }
 
-class CommonMessage {
-	final Message _parent;
-	const CommonMessage(this._parent);
+class CommonMessage_fr extends CommonMessage {
+	final Message_fr _parent;
+	const CommonMessage_fr(this._parent):super(_parent);
 	String get about => """About""";
 	String get actions => """Actions""";
 	String get add => """Add""";
@@ -86,25 +87,25 @@ class CommonMessage {
 	String get yes => """Yes""";
 }
 
-class BasicMessage {
-	final Message _parent;
-	const BasicMessage(this._parent);
+class BasicMessage_fr extends BasicMessage {
+	final Message_fr _parent;
+	const BasicMessage_fr(this._parent):super(_parent);
 	String get hint => """Please enter the name of the password collection.""";
 	String get info => """Basic Information""";
 	String get pswdName => """Password collection name""";
 }
 
-class CreateMessage {
-	final Message _parent;
-	const CreateMessage(this._parent);
+class CreateMessage_fr extends CreateMessage {
+	final Message_fr _parent;
+	const CreateMessage_fr(this._parent):super(_parent);
 	String get createFile => """Create Password File""";
 	String get fn => """Password file name""";
 	String get inputFn => """Please enter the name of the password file.""";
 }
 
-class FileMessage {
-	final Message _parent;
-	const FileMessage(this._parent);
+class FileMessage_fr extends FileMessage {
+	final Message_fr _parent;
+	const FileMessage_fr(this._parent):super(_parent);
 	String deleteFailed(String p) => """Delete file $p failed""";
 	String fileExistErr(String name) => """File \"$name\" exist!\nPlease use different name.""";
 	String get fileExists => """File exist""";
@@ -122,9 +123,9 @@ class FileMessage {
 	String get validFn => """A valid file name""";
 }
 
-class PswdMessage {
-	final Message _parent;
-	const PswdMessage(this._parent);
+class PswdMessage_fr extends PswdMessage {
+	final Message_fr _parent;
+	const PswdMessage_fr(this._parent):super(_parent);
 	String get checkKey => """Check main secret key and file format.""";
 	String containUpper(int cnt) => """Must contain $cnt upper case ${_plural(cnt, one:'letter', many:'letters')}.""";
 	String containLower(int cnt) => """Must contain $cnt lower case ${_plural(cnt, one:'letter', many:'letters')}.""";
@@ -146,16 +147,16 @@ class PswdMessage {
 	String get urlHint => """Any URL""";
 }
 
-class HomeMessage {
-	final Message _parent;
-	const HomeMessage(this._parent);
+class HomeMessage_fr extends HomeMessage {
+	final Message_fr _parent;
+	const HomeMessage_fr(this._parent):super(_parent);
 	String get grpDeleted => """Group deleted.""";
 	String subTitle(String lastUpd, int pswdCnt) => """Last Modified: $lastUpd. Passwords: $pswdCnt""";
 }
 
-class LoadMessage {
-	final Message _parent;
-	const LoadMessage(this._parent);
+class LoadMessage_fr extends LoadMessage {
+	final Message_fr _parent;
+	const LoadMessage_fr(this._parent):super(_parent);
 	String get loadFile => """Load File""";
 	String get loadPswdFile => """Load Password File""";
 	String get newFile => """New File""";
@@ -165,9 +166,9 @@ class LoadMessage {
 	String get authErr => """Device authencation error.\nPlease check your system authencation.\nAnd try it later.""";
 }
 
-class SbsMessage {
-	final Message _parent;
-	const SbsMessage(this._parent);
+class SbsMessage_fr extends SbsMessage {
+	final Message_fr _parent;
+	const SbsMessage_fr(this._parent):super(_parent);
 	String get bkClean => """Backup cleanup""";
 	String get bkCurrent => """Backup Current File""";
 	String bkDone(String name) => """New backup of $name.sp is done.""";
@@ -190,9 +191,9 @@ class SbsMessage {
 	String get totalChanges => """Total changes""";
 }
 
-class PpMessage {
-	final Message _parent;
-	const PpMessage(this._parent);
+class PpMessage_fr extends PpMessage {
+	final Message_fr _parent;
+	const PpMessage_fr(this._parent):super(_parent);
 	String get allowedSpecial => """Allowed special characters""";
 	String get minDidit => """Minimal digits""";
 	String get minLen => """Minimal Length""";
@@ -205,9 +206,9 @@ class PpMessage {
 	String get title => """Password Policy""";
 }
 
-class GroupMessage {
-	final Message _parent;
-	const GroupMessage(this._parent);
+class GroupMessage_fr extends GroupMessage {
+	final Message_fr _parent;
+	const GroupMessage_fr(this._parent):super(_parent);
 	String get detail => """Group Detail""";
 	String get hint => """Please enter the group name.""";
 	String get name => """Group name""";
@@ -215,9 +216,9 @@ class GroupMessage {
 	String get pswdDeleted => """Password deleted.""";
 }
 
-class SettingsMessage {
-	final Message _parent;
-	const SettingsMessage(this._parent);
+class SettingsMessage_fr extends SettingsMessage {
+	final Message_fr _parent;
+	const SettingsMessage_fr(this._parent):super(_parent);
 	String get autoHide => """Auto-hide password""";
 	String get autoHideInterval => """Auto-hide interval(seconds)""";
 	String get autoSave => """Auto-save changes""";
@@ -233,9 +234,9 @@ class SettingsMessage {
 	String get totalBks => """Total backups""";
 }
 
-class IapMessage {
-	final Message _parent;
-	const IapMessage(this._parent);
+class IapMessage_fr extends IapMessage {
+	final Message_fr _parent;
+	const IapMessage_fr(this._parent):super(_parent);
 	String get benefits1 => """Unlimited password groups and passwords in each group""";
 	String get benefits2 => """Using device authentication for opened password files""";
 	String get benefits => """You will get:""";
@@ -259,9 +260,9 @@ class IapMessage {
 	String get warn5 => """After transfering all old password files, you can choose to keep or delete Free version.""";
 }
 
-class AboutMessage {
-	final Message _parent;
-	const AboutMessage(this._parent);
+class AboutMessage_fr extends AboutMessage {
+	final Message_fr _parent;
+	const AboutMessage_fr(this._parent):super(_parent);
 	String get terms => """Simple Password term of use
 1. 
 2. 

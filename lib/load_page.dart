@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:adaptive_dialog/adaptive_dialog.dart' as dialog;
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_lock/flutter_app_lock.dart';
@@ -8,8 +7,8 @@ import 'package:simple_password/create_page.dart';
 import 'package:simple_password/file_utility.dart';
 import 'package:simple_password/globals.dart';
 import 'package:simple_password/i18n/i18n.dart';
-import 'package:simple_password/iap_utility.dart';
 import 'package:simple_password/local_auth_utility.dart';
+import 'package:simple_password/pro_utility.dart';
 import 'package:simple_password/ui_utility.dart';
 import 'package:simple_password/utility.dart';
 import 'package:toggle_switch/toggle_switch.dart';
@@ -18,13 +17,13 @@ class LoadPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: m.common.appName,
+        title: m.common.appName(ProUtil.isPaid()),
         theme: new ThemeData(
           primaryColor: UiUtil.priColor,
         ),
         home: new Scaffold(
           appBar: AppBar(
-            title: Text(m.common.appName),
+            title: Text(m.common.appName(ProUtil.isPaid())),
           ),
           body: new Center(
             child: new LoadPageWidget(),
@@ -135,7 +134,7 @@ class _LoadPageWidgetState extends State<LoadPageWidget> {
       textColor: Colors.white,
       label: Text(m.load.loadFile),
     ));
-    if (currentFilename == null && IapUtil.isPaid()) {
+    if (currentFilename == null || !ProUtil.isPaid()) {
       return list;
     }
     Icon icon;
@@ -154,7 +153,7 @@ class _LoadPageWidgetState extends State<LoadPageWidget> {
   }
 
   bool _canUseLocalAuth() {
-    return currentFilename == choosed && IapUtil.isPaid();
+    return currentFilename == choosed && ProUtil.isPaid();
   }
 
   void _localAuth() async {
@@ -163,20 +162,11 @@ class _LoadPageWidgetState extends State<LoadPageWidget> {
       Log.fine("Open file with device auth");
       _unlock(current: true);
     } else if (ret == -1) {
-      _alert(
+      UiUtil.alert(
           m.common.error,
-          m.load.authErr +
-              "\nSystem Error:\n" +
-              LocalAuthUtil.error.toString());
+          m.load.authErr + "\nSystem Error:\n" + LocalAuthUtil.error.toString(),
+          context);
     }
-  }
-
-  void _alert(String title, String message) async {
-    await dialog.showOkAlertDialog(
-        context: context,
-        title: title,
-        message: "\n" + message,
-        alertStyle: dialog.AdaptiveStyle.material);
   }
 
   List<DropdownMenuItem<String>> _getHistory() {
@@ -230,15 +220,16 @@ class _LoadPageWidgetState extends State<LoadPageWidget> {
   bool _load(String path, String secKey) {
     String short = Util.getBasename(path);
     if (!FileUtil.fileExist(path)) {
-      _alert(m.file.fileNotFound, m.file.fileNotFoundErr("$short.sp"));
+      UiUtil.alert(
+          m.file.fileNotFound, m.file.fileNotFoundErr("$short.sp"), context);
       return false;
     }
     try {
       data = FileUtil.load(path, secKey);
     } catch (e) {
       Log.error(m.file.openFailedErr("$short.sp"), error: e);
-      _alert(m.file.openErr,
-          m.file.openFailedErr("$short.sp") + "\n${m.pswd.checkKey}");
+      UiUtil.alert(m.file.openErr,
+          m.file.openFailedErr("$short.sp") + "\n${m.pswd.checkKey}", context);
       return false;
     }
     return true;
@@ -259,7 +250,7 @@ class _LoadPageWidgetState extends State<LoadPageWidget> {
       if (password == secKey) {
         _unlock(current: true);
       } else {
-        _alert(m.common.error, m.pswd.pswdHint);
+        UiUtil.alert(m.common.error, m.pswd.pswdHint, context);
       }
       return;
     }

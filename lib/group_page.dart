@@ -5,6 +5,7 @@ import 'package:simple_password/globals.dart';
 import 'package:simple_password/i18n/i18n.dart';
 import 'package:simple_password/password_page.dart';
 import 'package:simple_password/save_utility.dart';
+import 'package:simple_password/pro_utility.dart';
 import 'package:simple_password/ui_utility.dart';
 import 'package:simple_password/utility.dart';
 
@@ -75,12 +76,18 @@ class _GroupWidgetState extends State<GroupWidget> {
     if (readOnly) {
       return;
     }
-    Password p = Util.mockPassword(data.key);
-    _group.passwords.add(p);
-    _passwordView(_group.passwords.length - 1);
-    changes++;
-    _group.basicData.deltaTime = DateTime.now();
-    Scaffold.of(context).showSnackBar(UiUtil.snackBar(m.group.pswdCreated));
+    int limit = ProUtil.groupLimit();
+    if (limit > 0 && _group.passwords.length >= limit) {
+      UiUtil.alert(
+          m.iap.freeVer, "${m.iap.unpaid}\n${m.iap.freeLimit}", context);
+    } else {
+      Password p = Util.mockPassword(data.key);
+      _group.passwords.add(p);
+      _passwordView(_group.passwords.length - 1);
+      changes++;
+      _group.basicData.deltaTime = DateTime.now();
+      Scaffold.of(context).showSnackBar(UiUtil.snackBar(m.group.pswdCreated));
+    }
   }
 
   Slidable _buildPasswordRow(int i) {

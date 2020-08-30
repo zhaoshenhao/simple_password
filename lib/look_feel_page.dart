@@ -113,6 +113,7 @@ class _LookFeelWidgetState extends State<LookFeelWidget> {
   List<DropdownMenuItem<String>> _dropdownList() {
     List<DropdownMenuItem<String>> list = List();
     list.add(DropdownMenuItem<String>(value: 'en', child: Text('English')));
+    list.add(DropdownMenuItem<String>(value: 'fr', child: Text('français')));
     list.add(DropdownMenuItem<String>(value: 'zh', child: Text('中文')));
     return list;
   }

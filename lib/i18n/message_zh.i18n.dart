@@ -36,7 +36,7 @@ class CommonMessage_zh extends CommonMessage {
 	String get actions => """操作""";
 	String get add => """添加""";
 	String get app => """应用名称""";
-	String get appName => """密宝""";
+	String appName(bool p) => """密宝 ${p?'Pro':'Free'}""";
 	String get appVer => """1.0.0""";
 	String get check => """检查""";
 	String get chgConfirmed => """修改已确认""";
@@ -237,19 +237,27 @@ class SettingsMessage_zh extends SettingsMessage {
 class IapMessage_zh extends IapMessage {
 	final Message_zh _parent;
 	const IapMessage_zh(this._parent):super(_parent);
-	String get benefits1 => """免除广告""";
+	String get benefits1 => """无限制的密码组和密码""";
 	String get benefits2 => """使用设备提供的认证方式来访问已经打开的密宝文件。""";
 	String get benefits => """购买后您可以获得：""";
 	String get buyConfirmMsg => """请确认是否继续?""";
 	String get buyTitle => """购买""";
 	String get failed => """购买失败，请稍后重试。""";
+	String get freeVer => """免费版本限制""";
+	String get freeLimit => """您可以最多创建 5 个密码组，每个密码组最多包含 5 个密码。升级到 Pro 版本，可以创建任意多的密码组和密码。""";
 	String get paid => """您正在使用付费版本""";
 	String get thankYou => """感谢您对我们的支持。""";
-	String get title => """购买密宝""";
+	String get title => """购买密宝 Pro""";
 	String get unpaid => """您正在使用免费版本。""";
 	String get verify => """我的年龄超过 13 岁。或者我的监护人同意购买。""";
 	String get thankYouTitle => """感谢购买""";
 	String get succ => """购买成功。\n感谢您对我们的支持。""";
+	String get warn => """升级注意事项""";
+	String get warn1 => """请按如下步骤升级到 Pro 版本""";
+	String get warn2 => """在购买应用商店购买并安装密宝 Pro""";
+	String get warn3 => """请将 Free 版的密码文件保存到共享目录""";
+	String get warn4 => """从 Pro 版本中打开共享目录下的密宝文件，并确认""";
+	String get warn5 => """完成全部密码文件的传递后，您可以选择保留或删除 Free 版本""";
 }
 
 class AboutMessage_zh extends AboutMessage {

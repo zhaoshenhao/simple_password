@@ -8,10 +8,10 @@ import 'package:simple_password/drawer.dart';
 import 'package:simple_password/globals.dart';
 import 'package:simple_password/group_page.dart';
 import 'package:simple_password/i18n/i18n.dart';
+import 'package:simple_password/pro_utility.dart';
 import 'package:simple_password/save_utility.dart';
 import 'package:simple_password/ui_utility.dart';
 import 'package:simple_password/utility.dart';
-import 'package:simple_password/admob_utility.dart';
 
 class PasswordsPage extends StatefulWidget {
   @override
@@ -73,10 +73,16 @@ class PasswordsPageState extends State<PasswordsPage> {
     if (readOnly) {
       return;
     }
-    Group g = Util.mockGroup(data.key);
-    data.groups.add(g);
-    changes++;
-    _groupView(data.groups.length - 1);
+    int limit = ProUtil.groupLimit();
+    if (limit > 0 && data.groups.length >= limit) {
+      UiUtil.alert(
+          m.iap.freeVer, "${m.iap.unpaid}\n${m.iap.freeLimit}", context);
+    } else {
+      Group g = Util.mockGroup(data.key);
+      data.groups.add(g);
+      changes++;
+      _groupView(data.groups.length - 1);
+    }
   }
 
   Widget _buildGroups(BuildContext context) {
@@ -84,7 +90,7 @@ class PasswordsPageState extends State<PasswordsPage> {
     return new Scaffold(
         key: _scaffoldKey,
         appBar: AppBar(
-          title: Text(m.common.appName),
+          title: Text(m.common.appName(ProUtil.isPaid())),
           actions: <Widget>[
             IconButton(
               icon: Icon(
@@ -134,10 +140,6 @@ class PasswordsPageState extends State<PasswordsPage> {
 
   List<Widget> _buildRows() {
     List<Widget> list = List();
-    Widget banner = AdmobUtil.getBanner();
-    if (banner != null) {
-      list.add(banner);
-    }
     list.add(Container(
         padding: UiUtil.edgeInsets, child: UiUtil.headingRow(m.common.groups)));
     for (int i = 0; i < data.groups.length; i++) {

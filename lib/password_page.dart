@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:adaptive_dialog/adaptive_dialog.dart' as dialog;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:simple_password/data.dart';
@@ -303,11 +302,7 @@ class _OnePasswordWidgetState extends State<OnePasswordWidget> {
 
   void _showResult(List<String> list) {
     String message = list.isEmpty ? m.pswd.pswdGood : "\n" + list.join("\n");
-    dialog.showOkAlertDialog(
-        context: context,
-        title: m.pswd.pswdCheck,
-        message: message,
-        alertStyle: dialog.AdaptiveStyle.material);
+    UiUtil.alert(m.pswd.pswdCheck, message, context);
   }
 
   void _togglevisibility() {

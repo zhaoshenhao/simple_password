@@ -3,14 +3,14 @@ import 'package:simple_password/about_page.dart';
 import 'package:simple_password/basic_info_page.dart';
 import 'package:simple_password/globals.dart';
 import 'package:simple_password/i18n/i18n.dart';
-import 'package:simple_password/iap_page.dart';
+import 'package:simple_password/buy_page.dart';
 import 'package:simple_password/look_feel_page.dart';
 import 'package:simple_password/password_settings_page.dart';
 import 'package:simple_password/save_page.dart';
 import 'package:simple_password/settings_page.dart';
 import 'package:simple_password/ui_utility.dart';
 import 'package:simple_password/utility.dart';
-import 'package:simple_password/iap_utility.dart';
+import 'package:simple_password/pro_utility.dart';
 
 class AppDrawer extends StatefulWidget {
   AppDrawer({Key key}) : super(key: key);
@@ -35,7 +35,7 @@ class _AppDrawerWidgetState extends State<AppDrawer> {
       child: ListView(
           //crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text(m.common.appName,
+            Text(m.common.appName(ProUtil.isPaid()),
                 style: TextStyle(
                     color: Colors.white,
                     fontSize: 18.0,
@@ -109,7 +109,7 @@ class _AppDrawerWidgetState extends State<AppDrawer> {
         },
       ),
     ]);
-    if (!IapUtil.isPaid()) {
+    if (!ProUtil.isPaid()) {
       list.addAll(<Widget>[
         Divider(),
         ListTile(

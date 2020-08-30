@@ -1,4 +1,3 @@
-import 'package:adaptive_dialog/adaptive_dialog.dart' as dialog;
 import 'package:flutter/material.dart';
 import 'package:simple_password/data.dart';
 import 'package:simple_password/file_utility.dart';
@@ -91,23 +90,17 @@ class _CreatePageWidgetState extends State<CreatePageWidget> {
         ]));
   }
 
-  void _alert(String title, String message) async {
-    await dialog.showOkAlertDialog(
-        context: context,
-        title: title,
-        message: "\n" + message,
-        alertStyle: dialog.AdaptiveStyle.material);
-  }
-
   void _create() {
     if (_formKey.currentState.validate()) {
       String fn = Util.getPath(_data.basicData.name);
       if (FileUtil.fileExist(fn)) {
-        _alert(m.file.fileExists, m.file.fileExistErr(_data.basicData.name));
+        UiUtil.alert(m.file.fileExists,
+            m.file.fileExistErr(_data.basicData.name), context);
         return;
       }
       if (!FileUtil.save(_data, fn, _secKey2)) {
-        _alert(m.file.saveErrTitle, m.file.saveErr(_data.basicData.name));
+        UiUtil.alert(
+            m.file.saveErrTitle, m.file.saveErr(_data.basicData.name), context);
         return;
       }
       List<String> hist = Util.getHistoryFiles();

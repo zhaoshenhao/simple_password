@@ -18,6 +18,14 @@ class UiUtil {
     return readOnlyText(m.common.lastAccess, d, color: color);
   }
 
+  static void alert(String title, String message, BuildContext context) async {
+    await showOkAlertDialog(
+        context: context,
+        title: title,
+        message: "\n" + message,
+        alertStyle: AdaptiveStyle.material);
+  }
+
   static Future<bool> confirm(
       String title, String msg, BuildContext context) async {
     final OkCancelResult result = await showOkCancelAlertDialog(

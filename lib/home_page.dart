@@ -95,7 +95,6 @@ class PasswordsPageState extends State<PasswordsPage> {
             IconButton(
               icon: Icon(
                 Icons.exit_to_app,
-                color: Colors.white,
               ),
               onPressed: () => _lockApp(),
             )
@@ -111,7 +110,6 @@ class PasswordsPageState extends State<PasswordsPage> {
             mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
               new FloatingActionButton(
-                backgroundColor: UiUtil.priColor,
                 tooltip: readOnly
                     ? m.common.ro
                     : m.common.rw, // used by assistive technologies
@@ -122,14 +120,16 @@ class PasswordsPageState extends State<PasswordsPage> {
                 heroTag: null,
               ),
               new FloatingActionButton(
-                backgroundColor: readOnly ? UiUtil.disColor : UiUtil.priColor,
+                backgroundColor:
+                    readOnly ? UiUtil.currentTheme.disabledColor : null,
                 tooltip: m.common.add, // used by assistive technologies
                 child: new Icon(Icons.add),
                 onPressed: readOnly ? null : () => setState(() => _add()),
                 heroTag: null,
               ),
               new FloatingActionButton(
-                backgroundColor: readOnly ? UiUtil.disColor : UiUtil.priColor,
+                backgroundColor:
+                    readOnly ? UiUtil.currentTheme.disabledColor : null,
                 tooltip: m.common.save, // used by assistive technologies
                 child: new Icon(Icons.save),
                 onPressed: readOnly ? null : () async => _save(),
@@ -165,7 +165,6 @@ class PasswordsPageState extends State<PasswordsPage> {
       actionPane: SlidableDrawerActionPane(),
       actionExtentRatio: 0.25,
       child: Container(
-        color: Colors.white,
         child: ListTile(
             title: new Text(
               data.groups[i].basicData.name,
@@ -185,7 +184,7 @@ class PasswordsPageState extends State<PasswordsPage> {
       actions: <Widget>[
         IconSlideAction(
           caption: m.common.delete,
-          color: readOnly ? UiUtil.disColor : UiUtil.priColor,
+          color: readOnly ? UiUtil.currentTheme.disabledColor : null,
           icon: Icons.delete,
           onTap: readOnly ? null : () async => _delete(i),
         ),

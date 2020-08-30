@@ -27,7 +27,7 @@ class LookFeelWidget extends StatefulWidget {
 class _LookFeelWidgetState extends State<LookFeelWidget> {
   final _formKey = GlobalKey<FormState>();
   String lang = Util.locale.languageCode;
-  String theme = UiUtil.currentTheme;
+  String theme = UiUtil.currentThemeName;
 
   @override
   Widget build(BuildContext context) {
@@ -49,10 +49,8 @@ class _LookFeelWidgetState extends State<LookFeelWidget> {
                         icon: Icon(Icons.arrow_downward),
                         iconSize: 20,
                         elevation: 16,
-                        style: TextStyle(color: UiUtil.priColor),
                         underline: Container(
                           height: 2,
-                          color: UiUtil.priColor,
                         ),
                         onChanged: (String newValue) {
                           setState(() {
@@ -72,10 +70,8 @@ class _LookFeelWidgetState extends State<LookFeelWidget> {
                         icon: Icon(Icons.arrow_downward),
                         iconSize: 20,
                         elevation: 16,
-                        style: TextStyle(color: UiUtil.priColor),
                         underline: Container(
                           height: 2,
-                          color: UiUtil.priColor,
                         ),
                         onChanged: (String newValue) {
                           setState(() {
@@ -93,7 +89,7 @@ class _LookFeelWidgetState extends State<LookFeelWidget> {
   void _confirm() {
     if (_formKey.currentState.validate()) {
       String lang2 = Util.locale.languageCode;
-      String theme2 = UiUtil.currentTheme;
+      String theme2 = UiUtil.currentThemeName;
       bool hasChange = false;
       if (lang != lang2) {
         Util.locale = Locale(lang, '');
@@ -130,6 +126,24 @@ class _LookFeelWidgetState extends State<LookFeelWidget> {
               fontWeight: FontWeight.bold),
         )));
     list.add(DropdownMenuItem<String>(
+        value: 'teal',
+        child: Text(
+          ' Teal ',
+          style: TextStyle(
+              backgroundColor: Colors.teal,
+              color: Colors.white,
+              fontWeight: FontWeight.bold),
+        )));
+    list.add(DropdownMenuItem<String>(
+        value: 'indigo',
+        child: Text(
+          ' Indigo ',
+          style: TextStyle(
+              backgroundColor: Colors.indigo,
+              color: Colors.white,
+              fontWeight: FontWeight.bold),
+        )));
+    list.add(DropdownMenuItem<String>(
         value: 'red',
         child: Text(
           ' Red ',
@@ -139,9 +153,9 @@ class _LookFeelWidgetState extends State<LookFeelWidget> {
               fontWeight: FontWeight.bold),
         )));
     list.add(DropdownMenuItem<String>(
-        value: 'black',
+        value: 'dark',
         child: Text(
-          ' Black ',
+          ' Dark ',
           style: TextStyle(
               backgroundColor: Colors.black,
               color: Colors.white,

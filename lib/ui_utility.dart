@@ -3,18 +3,22 @@ import 'package:flutter/material.dart';
 import 'package:simple_password/globals.dart';
 import 'package:simple_password/i18n/i18n.dart';
 import 'package:simple_password/utility.dart';
+import 'package:simple_password/theme/blue.dart';
+import 'package:simple_password/theme/red.dart';
+import 'package:simple_password/theme/dark.dart';
+import 'package:simple_password/theme/teal.dart';
+import 'package:simple_password/theme/indigo.dart';
 import 'package:spinner_input/spinner_input.dart';
 
 class UiUtil {
-  static Color priColor = Colors.blue;
-  static Color disColor = Colors.grey;
-  static String currentTheme;
+  static ThemeData currentTheme = blue;
+  static String currentThemeName;
   static final biggerFont = const TextStyle(fontSize: 18.0);
   static final smallerFont = const TextStyle(fontSize: 12.0);
   static final edgeInsets = EdgeInsets.all(16.0);
   static final edgeInsets2 = EdgeInsets.only(left: 8.0, right: 8.0);
 
-  static Text accessTime(DateTime d, {color: Colors.black45}) {
+  static Text accessTime(DateTime d, {Color color}) {
     return readOnlyText(m.common.lastAccess, d, color: color);
   }
 
@@ -49,7 +53,7 @@ class UiUtil {
   static Widget confirmButton(var _confirm) {
     return new Row(mainAxisAlignment: MainAxisAlignment.end, children: <Widget>[
       new FloatingActionButton(
-        backgroundColor: readOnly ? UiUtil.disColor : UiUtil.priColor,
+        backgroundColor: readOnly ? currentTheme.disabledColor : null,
         tooltip: m.common.confirm,
         child: new Icon(Icons.check_circle_outline),
         onPressed: readOnly ? null : () => _confirm(),
@@ -58,11 +62,11 @@ class UiUtil {
     ]);
   }
 
-  static Text createTime(DateTime d, {color: Colors.black45}) {
+  static Text createTime(DateTime d, {Color color}) {
     return readOnlyText(m.common.lastCreate, d, color: color);
   }
 
-  static Text deltaTime(DateTime d, {color: Colors.black45}) {
+  static Text deltaTime(DateTime d, {Color color}) {
     return readOnlyText(m.common.lastDelta, d, color: color);
   }
 
@@ -80,7 +84,7 @@ class UiUtil {
           child: Container(
             height: 1.0,
             width: 130.0,
-            color: Colors.black12,
+            color: currentTheme.disabledColor,
           ),
         ),
       ],
@@ -103,6 +107,9 @@ class UiUtil {
   }
 
   static Text readOnlyText(String title, var value, {color: Colors.black45}) {
+    if (color == null) {
+      color = currentTheme.accentColor;
+    }
     return Text(
       title + ': ${Util.formatter.format(value)}',
       style: TextStyle(fontSize: 12, color: color),
@@ -116,23 +123,29 @@ class UiUtil {
   }
 
   static void _setTheme(theme) {
-    currentTheme = theme;
+    currentThemeName = theme;
     switch (theme) {
       case 'red':
-        priColor = Colors.red;
+        currentTheme = red;
         break;
-      case 'black':
-        priColor = Colors.black;
+      case 'dark':
+        currentTheme = dark;
+        break;
+      case 'teal':
+        currentTheme = teal;
+        break;
+      case 'indigo':
+        currentTheme = indigo;
         break;
       case 'blue':
       default:
-        priColor = Colors.blue;
+        currentTheme = blue;
     }
   }
 
   static Future initTheme() async {
-    currentTheme = Util.getTheme();
-    _setTheme(currentTheme);
+    currentThemeName = Util.getTheme();
+    _setTheme(currentThemeName);
   }
 
   static void setTheme(String theme) {
@@ -141,6 +154,29 @@ class UiUtil {
     }
     _setTheme(theme);
     Util.setTheme(theme);
+  }
+
+  static SpinnerButtonStyle _getPlusStyle(int type) {
+    IconData icon = Icons.check;
+    Color color = currentTheme.primaryColor;
+    if (type == -1) {
+      icon = Icons.remove;
+    } else if (type == 1) {
+      icon = Icons.add;
+    } else if (type == 0) {
+      color = currentTheme.cursorColor;
+    }
+    SpinnerButtonStyle _style = SpinnerButtonStyle();
+    _style.child ??= Icon(icon, size: 16);
+    _style.color ??= color;
+    _style.textColor ??= currentTheme.buttonColor;
+    _style.borderRadius ??= BorderRadius.circular(50);
+    _style.width ??= 30;
+    _style.height ??= 30;
+    _style.elevation ??= null;
+    _style.highlightColor ??= null;
+    _style.highlightElevation ??= null;
+    return _style;
   }
 
   static Row spinRow(
@@ -156,6 +192,9 @@ class UiUtil {
           spinnerValue: initValue,
           minValue: min,
           maxValue: max,
+          plusButton: _getPlusStyle(1),
+          minusButton: _getPlusStyle(-1),
+          popupButton: _getPlusStyle(0),
           onChange: (newValue) {
             setState(newValue);
           },

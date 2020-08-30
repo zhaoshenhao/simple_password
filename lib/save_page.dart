@@ -90,17 +90,15 @@ class _SaveAndBackupWidgetState extends State<SaveAndBackupWidget> {
       actionPane: SlidableDrawerActionPane(),
       actionExtentRatio: 0.25,
       child: Container(
-          color: Colors.white,
           child: ListTile(
-            title: new Text(
-              "$f.sp",
-              style: UiUtil.biggerFont,
-            ),
-          )),
+        title: new Text(
+          "$f.sp",
+          style: UiUtil.biggerFont,
+        ),
+      )),
       actions: <Widget>[
         IconSlideAction(
           caption: m.common.delete,
-          color: UiUtil.priColor,
           icon: Icons.delete,
           onTap: () async => _delete(f),
         ),
@@ -136,12 +134,10 @@ class _SaveAndBackupWidgetState extends State<SaveAndBackupWidget> {
             minWidth: 80.0,
             cornerRadius: 10.0,
             minHeight: 25,
-            activeBgColor: UiUtil.priColor,
-            activeFgColor: Colors.white,
-            inactiveBgColor: UiUtil.disColor,
-            inactiveFgColor: Colors.white,
             labels: [m.common.yes, m.common.no],
             icons: [Icons.lock, Icons.lock_open],
+            inactiveFgColor: UiUtil.currentTheme.disabledColor,
+            activeBgColor: UiUtil.currentTheme.accentColor,
             onToggle: (index) {
               _useBackupPolicy = (index == 0);
             },
@@ -151,9 +147,9 @@ class _SaveAndBackupWidgetState extends State<SaveAndBackupWidget> {
     list.add(Center(
         child: RaisedButton.icon(
       icon: Icon(Icons.save),
+      color: UiUtil.currentTheme.primaryColor,
+      textColor: UiUtil.currentTheme.buttonColor,
       onPressed: readOnly || changes == 0 ? null : () async => _save(),
-      color: UiUtil.priColor,
-      textColor: Colors.white,
       label: Text(m.common.save),
     )));
     list.add(Container(
@@ -163,28 +159,28 @@ class _SaveAndBackupWidgetState extends State<SaveAndBackupWidget> {
         child: Container(
             width: 220.0,
             child: RaisedButton.icon(
+                color: UiUtil.currentTheme.primaryColor,
+                textColor: UiUtil.currentTheme.buttonColor,
                 icon: Icon(Icons.share),
                 onPressed: () async => _share(),
-                color: UiUtil.priColor,
-                textColor: Colors.white,
                 label: Text(m.sbs.shareCurrent)))));
     list.add(Center(
         child: Container(
             width: 220.0,
             child: RaisedButton.icon(
+                color: UiUtil.currentTheme.primaryColor,
+                textColor: UiUtil.currentTheme.buttonColor,
                 icon: Icon(Icons.content_copy),
                 onPressed: () async => _backup(),
-                color: UiUtil.priColor,
-                textColor: Colors.white,
                 label: Text(m.sbs.bkCurrent)))));
     list.add(Center(
         child: Container(
             width: 220.0,
             child: RaisedButton.icon(
+              color: UiUtil.currentTheme.primaryColor,
+              textColor: UiUtil.currentTheme.buttonColor,
               icon: Icon(Icons.delete_sweep),
               onPressed: () async => _cleanBackup(),
-              color: UiUtil.priColor,
-              textColor: Colors.white,
               label: Text(m.sbs.doPolicy1),
             ))));
     list.add(Container(

@@ -43,9 +43,7 @@ class SimplePasswordState extends State<SimplePassword> {
       debugShowCheckedModeBanner: false,
       navigatorKey: Catcher.navigatorKey,
       title: m.common.appName(ProUtil.isPaid()),
-      theme: new ThemeData(
-        primaryColor: UiUtil.priColor,
-      ),
+      theme: UiUtil.currentTheme,
       home: new PasswordsPage(),
       locale: Util.locale,
       localizationsDelegates: [

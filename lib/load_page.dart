@@ -18,9 +18,7 @@ class LoadPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         title: m.common.appName(ProUtil.isPaid()),
-        theme: new ThemeData(
-          primaryColor: UiUtil.priColor,
-        ),
+        theme: UiUtil.currentTheme,
         home: new Scaffold(
           appBar: AppBar(
             title: Text(m.common.appName(ProUtil.isPaid())),
@@ -69,10 +67,11 @@ class _LoadPageWidgetState extends State<LoadPageWidget> {
           IconButton(
               icon: Icon(Icons.folder_open),
               tooltip: m.load.openOther,
-              color: UiUtil.priColor,
+              color: UiUtil.currentTheme.accentColor,
               onPressed: () async => _openFile()),
         ]),
         TextFormField(
+          cursorColor: UiUtil.currentTheme.accentColor,
           keyboardType: TextInputType.text,
           decoration: InputDecoration(
               labelText: m.pswd.msKey,
@@ -83,7 +82,7 @@ class _LoadPageWidgetState extends State<LoadPageWidget> {
                 }),
                 child: Icon(
                   _showPassword ? Icons.visibility : Icons.visibility_off,
-                  color: UiUtil.priColor,
+                  color: UiUtil.currentTheme.accentColor,
                 ),
               )),
           obscureText: !_showPassword,
@@ -99,12 +98,10 @@ class _LoadPageWidgetState extends State<LoadPageWidget> {
             minWidth: 80.0,
             cornerRadius: 10.0,
             minHeight: 25,
-            activeBgColor: UiUtil.priColor,
-            activeFgColor: Colors.white,
-            inactiveBgColor: UiUtil.disColor,
-            inactiveFgColor: Colors.white,
             labels: [m.common.on, m.common.off],
             icons: [Icons.lock, Icons.lock_open],
+            inactiveFgColor: UiUtil.currentTheme.disabledColor,
+            activeBgColor: UiUtil.currentTheme.accentColor,
             onToggle: (index) {
               readOnly = (index == 0);
             },
@@ -126,13 +123,15 @@ class _LoadPageWidgetState extends State<LoadPageWidget> {
       icon: Icon(Icons.add_circle_outline),
       onPressed: () => _newFile(),
       label: Text(m.load.newFile),
+      color: UiUtil.currentTheme.primaryColor,
+      textColor: UiUtil.currentTheme.buttonColor,
     ));
     list.add(RaisedButton.icon(
       icon: Icon(Icons.lock_open),
       onPressed: hasHistory ? () => _loadAndUnlock() : null,
-      color: UiUtil.priColor,
-      textColor: Colors.white,
       label: Text(m.load.loadFile),
+      color: UiUtil.currentTheme.primaryColor,
+      textColor: UiUtil.currentTheme.buttonColor,
     ));
     if (currentFilename == null || !ProUtil.isPaid()) {
       return list;
@@ -146,6 +145,8 @@ class _LoadPageWidgetState extends State<LoadPageWidget> {
     if (icon != null) {
       list.add(RaisedButton.icon(
           icon: icon,
+          color: UiUtil.currentTheme.primaryColor,
+          textColor: UiUtil.currentTheme.buttonColor,
           onPressed: _canUseLocalAuth() ? () async => _localAuth() : null,
           label: Text(m.load.loadFile)));
     }

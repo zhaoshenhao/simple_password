@@ -56,6 +56,9 @@ class Util {
   }
 
   static String decryptPassword(String data, String keys, int idx) {
+    if (data == null || data == '') {
+      return data;
+    }
     final key = Key.fromUtf8(getSecretKey(keys, idx));
     final iv = IV.fromLength(16);
     final encrypter = Encrypter(AES(key));
@@ -64,6 +67,9 @@ class Util {
   }
 
   static String encryptPassword(final String text, String keys, int idx) {
+    if (text == null || text == '') {
+      return text;
+    }
     final key = Key.fromUtf8(getSecretKey(keys, idx));
     final iv = IV.fromLength(16);
     final encrypter = Encrypter(AES(key));

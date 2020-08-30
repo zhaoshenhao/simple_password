@@ -52,8 +52,6 @@ class _IapWidgetState extends State<IapWidget> {
             onPressed: () {
               _buy();
             },
-            color: UiUtil.priColor,
-            textColor: Colors.white,
             label: Text(m.iap.buyTitle)),
       ),
       Divider(),

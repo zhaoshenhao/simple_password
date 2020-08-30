@@ -38,6 +38,7 @@ class _BasicInfoWidgetState extends State<BasicInfoWidget> {
             padding: UiUtil.edgeInsets,
             children: <Widget>[
               TextFormField(
+                cursorColor: UiUtil.currentTheme.accentColor,
                 readOnly: readOnly,
                 decoration: InputDecoration(
                   labelText: m.basic.pswdName,
@@ -53,6 +54,7 @@ class _BasicInfoWidgetState extends State<BasicInfoWidget> {
                 initialValue: _basicData.name,
               ),
               TextFormField(
+                cursorColor: UiUtil.currentTheme.accentColor,
                 readOnly: readOnly,
                 decoration: InputDecoration(
                   labelText: m.common.notes,

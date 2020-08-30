@@ -63,6 +63,7 @@ class _OnePasswordWidgetState extends State<OnePasswordWidget> {
             padding: UiUtil.edgeInsets,
             children: <Widget>[
               TextFormField(
+                cursorColor: UiUtil.currentTheme.accentColor,
                 readOnly: readOnly,
                 keyboardType: TextInputType.text,
                 decoration: InputDecoration(
@@ -79,6 +80,7 @@ class _OnePasswordWidgetState extends State<OnePasswordWidget> {
                 initialValue: _password.basicData.name,
               ),
               TextFormField(
+                cursorColor: UiUtil.currentTheme.accentColor,
                 readOnly: readOnly,
                 keyboardType: TextInputType.text,
                 decoration: InputDecoration(
@@ -91,7 +93,7 @@ class _OnePasswordWidgetState extends State<OnePasswordWidget> {
                       },
                       child: Icon(
                         Icons.content_copy,
-                        color: UiUtil.priColor,
+                        color: UiUtil.currentTheme.accentColor,
                       )),
                 ),
                 onChanged: (val) => {_password.username = val},
@@ -99,6 +101,7 @@ class _OnePasswordWidgetState extends State<OnePasswordWidget> {
               ),
               TextFormField(
                 readOnly: readOnly,
+                cursorColor: UiUtil.currentTheme.accentColor,
                 keyboardType: TextInputType.text,
                 decoration: InputDecoration(
                   labelText: m.common.password,
@@ -109,7 +112,7 @@ class _OnePasswordWidgetState extends State<OnePasswordWidget> {
                     },
                     child: Icon(
                       _showPassword ? Icons.visibility : Icons.visibility_off,
-                      color: UiUtil.priColor,
+                      color: UiUtil.currentTheme.accentColor,
                     ),
                   ),
                   prefixIcon: GestureDetector(
@@ -120,7 +123,7 @@ class _OnePasswordWidgetState extends State<OnePasswordWidget> {
                       },
                       child: Icon(
                         Icons.content_copy,
-                        color: UiUtil.priColor,
+                        color: UiUtil.currentTheme.accentColor,
                       )),
                 ),
                 onChanged: (val) => {_password.password = val},
@@ -129,6 +132,7 @@ class _OnePasswordWidgetState extends State<OnePasswordWidget> {
               ),
               _getPasswordButtons(),
               TextFormField(
+                cursorColor: UiUtil.currentTheme.accentColor,
                 readOnly: readOnly,
                 keyboardType: TextInputType.text,
                 decoration: InputDecoration(
@@ -142,13 +146,14 @@ class _OnePasswordWidgetState extends State<OnePasswordWidget> {
                       },
                       child: Icon(
                         Icons.content_copy,
-                        color: UiUtil.priColor,
+                        color: UiUtil.currentTheme.accentColor,
                       )),
                 ),
                 onChanged: (val) => {_password.url = val},
                 controller: url,
               ),
               TextFormField(
+                cursorColor: UiUtil.currentTheme.accentColor,
                 readOnly: readOnly,
                 decoration: InputDecoration(
                   labelText: m.common.notes,
@@ -277,17 +282,24 @@ class _OnePasswordWidgetState extends State<OnePasswordWidget> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         new RaisedButton(
-          color: readOnly ? UiUtil.disColor : Colors.white60,
+          color: readOnly
+              ? UiUtil.currentTheme.disabledColor
+              : UiUtil.currentTheme.primaryColor,
+          textColor: UiUtil.currentTheme.buttonColor,
           onPressed: readOnly ? null : () => _resetPassword(),
           child: Text(m.common.reset),
         ),
         new RaisedButton(
-            color: readOnly ? UiUtil.disColor : Colors.white60,
+            color: readOnly
+                ? UiUtil.currentTheme.disabledColor
+                : UiUtil.currentTheme.primaryColor,
+            textColor: UiUtil.currentTheme.buttonColor,
             onPressed: readOnly ? null : () => _genPassword(),
             child: Text(m.common.gen)),
         new RaisedButton(
-          color: Colors.white60,
           onPressed: () => _checkPassword(),
+          color: UiUtil.currentTheme.primaryColor,
+          textColor: UiUtil.currentTheme.buttonColor,
           child: Text(m.common.check),
         ),
       ],

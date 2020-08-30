@@ -39,6 +39,7 @@ class _CreatePageWidgetState extends State<CreatePageWidget> {
         key: _formKey,
         child: new ListView(padding: UiUtil.edgeInsets, children: <Widget>[
           TextFormField(
+            cursorColor: UiUtil.currentTheme.accentColor,
             decoration: InputDecoration(
               labelText: m.create.fn,
               hintText: m.file.validFn,
@@ -56,6 +57,7 @@ class _CreatePageWidgetState extends State<CreatePageWidget> {
             initialValue: _basicData.name,
           ),
           TextFormField(
+            cursorColor: UiUtil.currentTheme.accentColor,
             keyboardType: TextInputType.text,
             decoration: InputDecoration(
                 labelText: m.pswd.msKey,
@@ -66,7 +68,7 @@ class _CreatePageWidgetState extends State<CreatePageWidget> {
                   }),
                   child: Icon(
                     _showPassword2 ? Icons.visibility : Icons.visibility_off,
-                    color: UiUtil.priColor,
+                    color: UiUtil.currentTheme.primaryColor,
                   ),
                 )),
             obscureText: !_showPassword2,
@@ -83,9 +85,9 @@ class _CreatePageWidgetState extends State<CreatePageWidget> {
               child: RaisedButton.icon(
             icon: Icon(Icons.add_circle_outline),
             onPressed: () => _create(),
-            color: UiUtil.priColor,
-            textColor: Colors.white,
             label: Text(m.common.create),
+            color: UiUtil.currentTheme.primaryColor,
+            textColor: UiUtil.currentTheme.buttonColor,
           )),
         ]));
   }

@@ -90,6 +90,7 @@ class _PasswordSettingsWidgetState extends State<PasswordSettingsWidget> {
               Container(
                   padding: UiUtil.edgeInsets2,
                   child: TextFormField(
+                    cursorColor: UiUtil.currentTheme.accentColor,
                     readOnly: readOnly,
                     decoration: InputDecoration(
                       labelText: m.pp.allowedSpecial,

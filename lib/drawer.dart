@@ -37,24 +37,27 @@ class _AppDrawerWidgetState extends State<AppDrawer> {
           children: <Widget>[
             Text(m.common.appName(ProUtil.isPaid()),
                 style: TextStyle(
-                    color: Colors.white,
+                    color: UiUtil.currentTheme.buttonColor,
                     fontSize: 18.0,
                     fontWeight: FontWeight.w500)),
             //Text(''),
-            Divider(color: Colors.white),
+            Divider(color: UiUtil.currentTheme.buttonColor),
             Text(
               "${m.common.file}: $currentFilename${Util.ext}   (${m.common.ro}: ${readOnly ? m.common.on : m.common.off})",
-              style: TextStyle(fontSize: 14, color: Colors.white),
+              style: TextStyle(
+                  fontSize: 14, color: UiUtil.currentTheme.buttonColor),
             ),
             Text('${m.common.unsaved}: ' + changes.toString(),
-                style: TextStyle(color: Colors.white, fontSize: 14)),
-            UiUtil.accessTime(data.basicData.accessTime, color: Colors.white70),
-            UiUtil.deltaTime(data.basicData.deltaTime, color: Colors.white70),
-            UiUtil.createTime(data.basicData.createTime, color: Colors.white70),
+                style: TextStyle(
+                    color: UiUtil.currentTheme.buttonColor, fontSize: 14)),
+            UiUtil.accessTime(data.basicData.accessTime,
+                color: UiUtil.currentTheme.buttonColor),
+            UiUtil.deltaTime(data.basicData.deltaTime,
+                color: UiUtil.currentTheme.buttonColor),
+            UiUtil.createTime(data.basicData.createTime,
+                color: UiUtil.currentTheme.buttonColor),
           ]),
-      decoration: BoxDecoration(
-        color: UiUtil.priColor,
-      ),
+      decoration: BoxDecoration(color: UiUtil.currentTheme.primaryColor),
     );
   }
 
@@ -100,7 +103,7 @@ class _AppDrawerWidgetState extends State<AppDrawer> {
         },
       ),
       ListTile(
-        leading: Icon(Icons.settings),
+        leading: Icon(Icons.translate),
         title: Text(m.common.lookFeel),
         onTap: () {
           Navigator.pop(context);

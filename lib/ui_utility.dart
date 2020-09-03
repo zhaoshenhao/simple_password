@@ -183,11 +183,11 @@ class UiUtil {
       String lable, double min, double max, double initValue, var setState) {
     return Row(
       children: <Widget>[
-        Padding(
+        Expanded(
+            child: Padding(
           padding: EdgeInsets.all(16.0),
           child: Text(lable),
-        ),
-        Expanded(child: Container(color: Colors.amber)),
+        )),
         SpinnerInput(
           spinnerValue: initValue,
           minValue: min,

@@ -7,7 +7,7 @@ common:
   appVer: 1.0.0
   check: Check
   chgConfirmed: Change confirmed
-  chgSaveFailed: Saving changes failed.
+  chgSaveFailed: Changes failed to save
   chgSaved: Changes saved
   companyName: Syspole Inc.
   confirm: Confirm
@@ -21,10 +21,10 @@ common:
   gen: Generate
   group: Group
   groups: Groups
-  lastAccess: Last Access
+  lastAccess: Last Accessed
   lastCreate: Last Created
   lastDelta: Last Modified
-  lookFeel: Look & Feel
+  lookFeel: Look and Feel
   myGrpName: my password group
   mySecret: my secret
   no: No
@@ -65,57 +65,57 @@ create:
 
 file:
   deleteFailed(String p): Delete file $p failed
-  fileExistErr(String name): File \"$name\" exist!\nPlease use different name.
-  fileExists: File exist
-  fileNotExists(String p): File $p not exists
+  fileExistErr(String name): File \"$name\" exists!\nPlease use different name.
+  fileExists: File exists
+  fileNotExists(String p): File $p does not exist
   fileNotFound: File not found
-  fileNotFoundErr(String name):  "File $name not found."
+  fileNotFoundErr(String name):  "File $name not found"
   fnTips: Please use [a-zA-Z0-9_-] only
   loadCurrent: Load current file
   loadNew: Load new external file
-  openFailedErr(String name): "Open filed $name failed."
+  openFailedErr(String name): "File $name failed to open"
   openErr: Open Error
-  saveErr(String name): Save file $name failed.
+  saveErr(String name): File $name failed to save
   saveErrTitle: File save error
-  saveFailed: Save file failed
-  validFn: A valid file name
+  saveFailed: File failed to save
+  validFn: Valid file name
 
 pswd:
-  checkKey: Check main secret key and file format.
-  containUpper(int cnt): "Must contain $cnt upper case ${_plural(cnt, one:'letter', many:'letters')}."
-  containLower(int cnt): "Must contain $cnt lower case ${_plural(cnt, one:'letter', many:'letters')}."
-  containDigit(int cnt): "Must contain $cnt ${_plural(cnt, one:'digit', many:'digits')}."
-  containSpecial(int cnt): "Must contain $cnt special ${_plural(cnt, one:'character', many:'characters')}."
+  checkKey: Check main secret key and file format
+  containUpper(int cnt): "Must contain $cnt upper case ${_plural(cnt, one:'letter', many:'letters')}"
+  containLower(int cnt): "Must contain $cnt lower case ${_plural(cnt, one:'letter', many:'letters')}"
+  containDigit(int cnt): "Must contain $cnt ${_plural(cnt, one:'digit', many:'digits')}"
+  containSpecial(int cnt): "Must contain $cnt special ${_plural(cnt, one:'character', many:'characters')}"
   detail: Password Detail
   msKey: Main Secret Key
   pswdCheck: Password Check
   pswdCopied: Password copied
   pswdEmpty: Password is empty
-  pswdGood: Password looks good.
-  pswdHint: Please enter you main secret key
+  pswdGood: Password looks good
+  pswdHint: Please enter your main secret key
   pswdHint2: Enter your password
   pswdLen: Length less than
   titleHint: The item title
   unCopied: Username copied
-  unHint: 'The username'
+  unHint: The Username
   urlCopied: URL copied
   urlHint: Any URL
 
 home:
-  grpDeleted: Group deleted.
+  grpDeleted: Group deleted
   subTitle(String lastUpd, int pswdCnt): "Last Modified: $lastUpd. Passwords: $pswdCnt"
 
 load:
-  loadFile: Load File
+  loadFile: Open File
   loadPswdFile: Load Password File
   newFile: New File
   openInRo: Open in read-only mode
   openOther: Open from other location
-  auth: Please authenticate to open Simple Password
-  authErr: Device authencation error.\nPlease check your system authencation.\nAnd try it later.
+  auth: Please authenticate yourself to open this app
+  authErr: Device authencation error.\nPlease check your system authencation.\nAnd try again later.
 
 sbs:
-  bkClean: Backup cleanup
+  bkClean: Backup Cleanup
   bkCurrent: Backup Current File
   bkDone(String name): New backup of $name.sp is done.
   bkFailed(String name): Taking backup of $name.sp failed!
@@ -128,32 +128,32 @@ sbs:
   pswdFileStatus: Password file status
   roMode: Read-only mode
   sbp: Run backup policy before save
-  shareContent: This is the simple password file.
+  shareContent: This is the Simple Password file.
   shareCurrent: Share Current File
   shareDone: Sharing completed
-  shareFailed: Sharing file failed.
+  shareFailed: Sharing file failed
   syncTo: Sync To
   title: Save & Backup & Share
   totalChanges: Total changes
 
 pp:
-  allowedSpecial: Allowed special characters
+  allowedSpecial: Allow special characters
   minDidit: Minimal digits
   minLen: Minimal Length
   minLower: Minimal lower case letters
   minSpecial: Minimal special characters
   minUpper: Minimal upper case letters
   specialChar: Symbol characters
-  specialErr: Only speical characters
-  specialHint: Please enter speical characters
+  specialErr: Only special characters
+  specialHint: Please enter special characters
   title: Password Policy
 
 group:
   detail: Group Detail
-  hint: Please enter the group name.
+  hint: Please enter the group name
   name: Group name
   pswdCreated: New password created
-  pswdDeleted: Password deleted.
+  pswdDeleted: Password deleted
 
 settings:
   autoHide: Auto-hide password
@@ -163,27 +163,27 @@ settings:
   bk: Backup Settings
   bkB4Save: Create backup before saving
   keepLastDay: Keep backup for yesterday
-  keepLastMonth: Keep back for last month
-  keepLastWeek: Keep backup for last week
+  keepLastMonth: Keep backup for the last month
+  keepLastWeek: Keep backup for the last week
   lang: Language
   theme: Theme
   sec: Security Settings
   totalBks: Total backups
 
 iap:
-  benefits1: Unlimited password groups and passwords in each group
-  benefits2: Using device authentication for opened password files
-  benefits: "You will get:"
-  buyConfirmMsg: Are you sure to continue?
+  benefits1: Unlimited password groups and passwords
+  benefits2: Allow device authentication for opened password files
+  benefits: "Benefits include:"
+  buyConfirmMsg: Are you sure you want to continue?
   buyTitle: Buy
-  failed: Purchase failed. Please try it again.
+  failed: Purchase failed. Please try again.
   freeVer: Free Version
-  freeLimit: You can have up to 5 password groups and 5 passwords in each group. Upgrade to Pro version to have unlimited groups and password.
-  paid: This is paid version.
+  freeLimit: You can have up to 5 password groups and 5 passwords in each group. Upgrade to Pro version to have unlimited groups and passwords.
+  paid: This is the paid version.
   thankYou: Thank you for supporting us.
   title: Buy Simple Password Pro
-  unpaid: This is free version.
-  verify: I am 13 years old. Or my guardian agree to purchase.
+  unpaid: This is the free version.
+  verify: I am 13+ years old, or legal parent/guardian consents to this purchase.
   thankYouTitle: Thank You
   succ: The purchase is completed. \nThanks you for your supporting.
   warn: Important Upgrade Notes
@@ -195,15 +195,36 @@ iap:
 
 about:
   terms: |+
-    Simple Password term of use
-    1. 
-    2. 
-    3.
+    Simple Password Free/Pro Term of Use
+    
+    "The application" means Simple Password Free or Simple Password Pro.
+    "Our terms of Use" means this term of use.
+
+    1. By using the application, you acknowledge and consent to our Terms of Use.
+    2. We grant to you a non-exclusive, non-transferable, non-sharable, revocable, limited license to use the application solely for personal, non-commercial use in accordance with the terms of use.
+    3. You must not modify, hack, recreate, copy or exploit any part of the application.
+    4. You must not upload or inject any malware, illegal or obscene content.
+    5. You must not reuse, modify, download or copy the application icon or the name “Simple Password” for any commercial use.
+    6. You must be 13+ years old to use and make any purchases pertaining to the app, or have granted consent from a legal parent/guardian.
+    7. The application is provided "as is".
+    8. We do not provide any kind of warranty.
+    9. Users are using the application at their own risk.
+    10. We do not guarantee that the application is free from mistakes, malware, errors or other issues that could potentially damage a user.
+    11. We will not be held liable for any damages that arise from the use of this application, such as data loss, conduct of third parties, inability to access the app, copyright infringement of others and any other damages that may occur.
+    12. We may modify the Terms of Use at any given time, so please review these terms periodically. We will notify any changes made through the application.
+    13. If you have any questions or concerns about our Terms of Use, please contact us at simple_password@syspole.com.
 
   privacy: |+
-    Simlple Password privacy
-    1.
-    2.
-    3.
+    Simple Password Free/Pro Privacy Policy
+
+    "The application" means Simple Password Free or Simple Password Pro.
+    "Our Privacy Policy" means this Privacy Policy.
+
+    1. The application strives to protect your privacy. These policies disclose how the application handles and secures your personal information and data. By using this application, you give consent to abide by our Privacy Policy.
+    2. All information and data are stored on your electronic device, thus, the application does not collect or have access to any personal information or personal data.
+    3. The application does not share personal information and data with separate entities or third party companies. However, if you choose to export or share personal information and data with entities separate to the application, such as cloud services (Ex. Dropbox), we are not responsible, nor have control with what these services and/or related third parties do with your personal information and data.
+    4. We reserve the right to update and/or change our Privacy Policy at any given time. Your continued use of the application will constitute your acknowledgement of modifications and consent to abide by our Privacy Policy. Changes made to our Privacy Policy will be notified through the application prior to them becoming effective.
+    5. If you have any questions or concerns about our Privacy Policy, please contact us at simple_password@syspole.com.
+
 
     

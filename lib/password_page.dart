@@ -51,8 +51,6 @@ class _OnePasswordWidgetState extends State<OnePasswordWidget> {
   TextEditingController username;
   TextEditingController url;
   bool _showPassword = false;
-  Timer _timer;
-  int _start = data.securityPolicy.autoHideInterval;
 
   @override
   Widget build(BuildContext context) {
@@ -107,8 +105,13 @@ class _OnePasswordWidgetState extends State<OnePasswordWidget> {
                   labelText: m.common.password,
                   hintText: m.pswd.pswdHint2,
                   suffixIcon: GestureDetector(
-                    onTap: () {
-                      _togglevisibility();
+                    onLongPressStart: (details) {
+                      _showPassword = true;
+                      setState(() {});
+                    },
+                    onLongPressEnd: (details) {
+                      _showPassword = false;
+                      setState(() {});
                     },
                     child: Icon(
                       _showPassword ? Icons.visibility : Icons.visibility_off,
@@ -173,18 +176,6 @@ class _OnePasswordWidgetState extends State<OnePasswordWidget> {
         floatingActionButton: UiUtil.confirmButton(_confirm));
   }
 
-  void cancelTimer() {
-    if (_timer != null && _timer.isActive) {
-      _timer.cancel();
-    }
-  }
-
-  @override
-  void dispose() {
-    cancelTimer();
-    super.dispose();
-  }
-
   @override
   @protected
   void initState() {
@@ -192,24 +183,6 @@ class _OnePasswordWidgetState extends State<OnePasswordWidget> {
     username = TextEditingController(text: _password.username);
     url = TextEditingController(text: _password.url);
     super.initState();
-  }
-
-  void startTimer() {
-    const oneSec = const Duration(seconds: 1);
-    if (!data.securityPolicy.autoHide ||
-        data.securityPolicy.autoHideInterval <= 0) {
-      return;
-    }
-    _start = data.securityPolicy.autoHideInterval;
-    _timer = new Timer.periodic(oneSec, (Timer timer) {
-      if (_start < 1) {
-        timer.cancel();
-        //_showPassword = false;
-        _togglevisibility();
-      } else {
-        _start = _start - 1;
-      }
-    });
   }
 
   void _checkPassword() {
@@ -315,16 +288,5 @@ class _OnePasswordWidgetState extends State<OnePasswordWidget> {
   void _showResult(List<String> list) {
     String message = list.isEmpty ? m.pswd.pswdGood : "\n" + list.join("\n");
     UiUtil.alert(m.pswd.pswdCheck, message, context);
-  }
-
-  void _togglevisibility() {
-    setState(() {
-      _showPassword = !_showPassword;
-      if (_showPassword) {
-        startTimer();
-      } else {
-        cancelTimer();
-      }
-    });
   }
 }

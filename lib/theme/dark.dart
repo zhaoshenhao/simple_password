@@ -18,7 +18,7 @@ final ThemeData dark = ThemeData(
   primaryColorBrightness: Brightness.dark,
   primaryColorLight: Color(0xff9e9e9e),
   primaryColorDark: Color(0xff000000),
-  accentColor: Color(0xff64ffda),
+  accentColor: Color(0xff009688),
   accentColorBrightness: Brightness.light,
   canvasColor: Color(0xff303030),
   scaffoldBackgroundColor: Color(0xff303030),
@@ -31,14 +31,14 @@ final ThemeData dark = ThemeData(
   unselectedWidgetColor: Color(0xb3ffffff),
   disabledColor: Color(0x62ffffff),
   buttonColor: Color(0xffffffff),
-  toggleableActiveColor: Color(0xff64ffda),
+  toggleableActiveColor: Color(0xff009688),
   secondaryHeaderColor: Color(0xff616161),
-  textSelectionColor: Color(0xff64ffda),
+  textSelectionColor: Color(0xff009688),
   cursorColor: Color(0xff4285f4),
   textSelectionHandleColor: Color(0xff1de9b6),
   backgroundColor: Color(0xff616161),
   dialogBackgroundColor: Color(0xff424242),
-  indicatorColor: Color(0xff64ffda),
+  indicatorColor: Color(0xff009688),
   hintColor: Color(0x80ffffff),
   errorColor: Color(0xffd32f2f),
   buttonTheme: ButtonThemeData(
@@ -64,7 +64,7 @@ final ThemeData dark = ThemeData(
     colorScheme: ColorScheme(
       primary: Color(0xff000000),
       primaryVariant: Color(0xff000000),
-      secondary: Color(0xff64ffda),
+      secondary: Color(0xff009688),
       secondaryVariant: Color(0xff00bfa5),
       surface: Color(0xff424242),
       background: Color(0xff616161),
@@ -426,10 +426,13 @@ final ThemeData dark = ThemeData(
     opacity: 1,
     size: 24,
   ),
-  accentIconTheme: IconThemeData(
-    color: Color(0xff000000),
-    opacity: 1,
-    size: 24,
+//  accentIconTheme: IconThemeData(
+//    color: Color(0xff000000),
+//    opacity: 1,
+//    size: 24,
+//  ),
+  floatingActionButtonTheme: FloatingActionButtonThemeData(
+    foregroundColor: Color(0xffffffff),
   ),
   sliderTheme: SliderThemeData(
     activeTrackColor: null,

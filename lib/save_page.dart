@@ -100,6 +100,7 @@ class _SaveAndBackupWidgetState extends State<SaveAndBackupWidget> {
         IconSlideAction(
           caption: m.common.delete,
           icon: Icons.delete,
+          color: UiUtil.currentTheme.accentColor,
           onTap: () async => _delete(f),
         ),
       ],
@@ -157,31 +158,31 @@ class _SaveAndBackupWidgetState extends State<SaveAndBackupWidget> {
         child: UiUtil.headingRow(m.common.actions)));
     list.add(Center(
         child: Container(
-            width: 220.0,
+            width: 250.0,
             child: RaisedButton.icon(
                 color: UiUtil.currentTheme.primaryColor,
                 textColor: UiUtil.currentTheme.buttonColor,
                 icon: Icon(Icons.share),
                 onPressed: () async => _share(),
-                label: Text(m.sbs.shareCurrent)))));
+                label: Expanded(child: Text(m.sbs.shareCurrent))))));
     list.add(Center(
         child: Container(
-            width: 220.0,
+            width: 250.0,
             child: RaisedButton.icon(
                 color: UiUtil.currentTheme.primaryColor,
                 textColor: UiUtil.currentTheme.buttonColor,
                 icon: Icon(Icons.content_copy),
                 onPressed: () async => _backup(),
-                label: Text(m.sbs.bkCurrent)))));
+                label: Expanded(child: Text(m.sbs.bkCurrent))))));
     list.add(Center(
         child: Container(
-            width: 220.0,
+            width: 250.0,
             child: RaisedButton.icon(
               color: UiUtil.currentTheme.primaryColor,
               textColor: UiUtil.currentTheme.buttonColor,
               icon: Icon(Icons.delete_sweep),
               onPressed: () async => _cleanBackup(),
-              label: Text(m.sbs.doPolicy1),
+              label: Expanded(child: Text(m.sbs.doPolicy1)),
             ))));
     list.add(Container(
         padding: UiUtil.edgeInsets, child: UiUtil.headingRow(m.sbs.bkClean)));
@@ -215,7 +216,7 @@ class _SaveAndBackupWidgetState extends State<SaveAndBackupWidget> {
       }
     }
     bool ret = await FlutterShare.shareFile(
-      title: currentFilename,
+      title: currentFilename + Util.ext,
       text: m.sbs.shareContent,
       filePath: p,
     );

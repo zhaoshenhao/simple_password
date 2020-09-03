@@ -1,209 +1,227 @@
 common:
-  about: About
+  about: À propos
   actions: Actions
-  add: Add
-  app: Application
+  add: Ajouter
+  app: L'application
   appName(bool p): "Simple Password ${p?'Pro':'Free'}"
   appVer: 1.0.0
-  check: Check
-  chgConfirmed: Change confirmed
-  chgSaveFailed: Saving changes failed.
-  chgSaved: Changes saved
+  check: Vérifier
+  chgConfirmed: Changement confirmé
+  chgSaveFailed: Les modifications n'ont pas pu être enregistrées
+  chgSaved: Changements sauvegardés
   companyName: Syspole Inc.
-  confirm: Confirm
+  confirm: Confirmer
   copyRight: Copyright © 2002-2020 CompuSky Inc.
-  create: Create
-  delete: Delete
-  deleteThisAsk: Delete this item?
-  developer: Developer
-  error: Error
-  file: File
-  gen: Generate
-  group: Group
-  groups: Groups
-  lastAccess: Last Access
-  lastCreate: Last Created
-  lastDelta: Last Modified
-  lookFeel: Look & Feel
-  myGrpName: my password group
-  mySecret: my secret
-  no: No
-  noChange: No change
-  none: None
-  notEmpty: Please enter something
-  notes: Notes
+  create: Créer
+  delete: Supprimer
+  deleteThisAsk: Supprimer cet élément?
+  developer: Développeur
+  error: Erreur
+  file: Fichier
+  gen: Produire
+  group: Groupe
+  groups: Groupes
+  lastAccess: Dernier accès
+  lastCreate: Dernière création
+  lastDelta: Dernière modification
+  lookFeel: Regarde et ressent
+  myGrpName: mon groupe de mots de passe
+  mySecret: mon secret
+  no: Non
+  noChange: Pas de changement
+  none: Aucun
+  notEmpty: Veuillez saisir quelque chose
+  notes: Remarques
   off: Off
-  ok: OK
+  ok: D'accord
   on: On
-  others: Others
-  password: Password
-  passwords: Passwords
-  privacy: Privacy
-  recent: Recent
-  reset: Reset
-  ro: Read-only
-  rw: Read-write
-  save: Save
-  saveAllAsk: Save all changes？
-  settings: Settings
-  terms: Term of Use
-  title: Title
-  unsaved: Unsaved changes
+  others: Autres
+  password: Mot de passe
+  passwords: Mots de passe
+  privacy: Confidentialité
+  recent: Récent
+  reset: Réinitialiser
+  ro: Lecture seulement
+  rw: Lire écrire
+  save: Sauver
+  saveAllAsk: Enregistrer toutes les modifications?
+  settings: Paramètres
+  terms: Conditions d'utilisation
+  title: Titre
+  unsaved: Modifications non enregistrées
   url: URL
   version: Version
-  yes: Yes
+  yes: Oui
 
 basic:
-  hint: Please enter the name of the password collection.
-  info: Basic Information
-  pswdName: Password collection name
+  hint: Veuillez saisir le nom de la collection de mots de passe.
+  info: Informations de Base
+  pswdName: Nom de la collection de mots de passe
 
 create:
-  createFile: Create Password File
-  fn: Password file name
-  inputFn: Please enter the name of the password file.
+  createFile: Créer un Fichier de Mot de Passe
+  fn: Nom du fichier de mot de passe
+  inputFn: Veuillez saisir le nom du fichier de mot de passe.
 
 file:
-  deleteFailed(String p): Delete file $p failed
-  fileExistErr(String name): File \"$name\" exist!\nPlease use different name.
-  fileExists: File exist
-  fileNotExists(String p): File $p not exists
-  fileNotFound: File not found
-  fileNotFoundErr(String name):  "File $name not found."
-  fnTips: Please use [a-zA-Z0-9_-] only
-  loadCurrent: Load current file
-  loadNew: Load new external file
-  openFailedErr(String name): "Open filed $name failed."
-  openErr: Open Error
-  saveErr(String name): Save file $name failed.
-  saveErrTitle: File save error
-  saveFailed: Save file failed
-  validFn: A valid file name
+  deleteFailed(String p): Échec de la suppression du fichier $p
+  fileExistErr(String name): Le fichier \"$name\" existe!\nVeuillez utiliser un autre nom
+  fileExists: Le fichier existe
+  fileNotExists(String p): Le fichier $p n'existe pas
+  fileNotFound: Fichier non trouvé
+  fileNotFoundErr(String name):  "Le fichier $name introuvable"
+  fnTips: Veuillez utiliser [a-zA-Z0-9_-] uniquement
+  loadCurrent: Charger le fichier actuel
+  loadNew: Charger un nouveau fichier externe
+  openFailedErr(String name): "Le fichier $name n'a pas pu s'ouvrir"
+  openErr: Erreur Ouverte
+  saveErr(String name): Le fichier $name n'a pas pu être enregistré
+  saveErrTitle: Erreur d'enregistrement de fichier
+  saveFailed: Le fichier n'a pas pu être enregistré
+  validFn: Nom de fichier valide
 
 pswd:
-  checkKey: Check main secret key and file format.
-  containUpper(int cnt): "Must contain $cnt upper case ${_plural(cnt, one:'letter', many:'letters')}."
-  containLower(int cnt): "Must contain $cnt lower case ${_plural(cnt, one:'letter', many:'letters')}."
-  containDigit(int cnt): "Must contain $cnt ${_plural(cnt, one:'digit', many:'digits')}."
-  containSpecial(int cnt): "Must contain $cnt special ${_plural(cnt, one:'character', many:'characters')}."
-  detail: Password Detail
-  msKey: Main Secret Key
-  pswdCheck: Password Check
-  pswdCopied: Password copied
-  pswdEmpty: Password is empty
-  pswdGood: Password looks good.
-  pswdHint: Please enter you main secret key
-  pswdHint2: Enter your password
-  pswdLen: Length less than
-  titleHint: The item title
-  unCopied: Username copied
-  unHint: 'The username'
-  urlCopied: URL copied
-  urlHint: Any URL
+  checkKey: Check main secret key and file format
+  containUpper(int cnt): "Doit contenir $cnt majuscule ${_plural(cnt, one:'lettre', many:'lettres')}"
+  containLower(int cnt): "Doit contenir $cnt minuscule ${_plural(cnt, one:'lettre', many:'lettres')}"
+  containDigit(int cnt): "Doit contenir $cnt ${_plural(cnt, one:'chiffre', many:'chiffres')}."
+  containSpecial(int cnt): "Doit contenir $cnt special ${_plural(cnt, one:'lettre', many:'lettres')}"
+  detail: Détail du Mot de Passe
+  msKey: Clé Secrète Principale
+  pswdCheck: Vérification de Mot de Passe
+  pswdCopied: Mot de passe copié
+  pswdEmpty: Le mot de passe est vide
+  pswdGood: Le mot de passe est valide
+  pswdHint: Veuillez saisir votre clé secrète principale
+  pswdHint2: Tapez votre mot de passe
+  pswdLen: Longueur inférieure à
+  titleHint: Le titre de l'article
+  unCopied: L'identifiant copié
+  unHint: "L'identifiant"
+  urlCopied: URL copiée
+  urlHint: Toute URL
 
 home:
-  grpDeleted: Group deleted.
-  subTitle(String lastUpd, int pswdCnt): "Last Modified: $lastUpd. Passwords: $pswdCnt"
+  grpDeleted: Groupe supprime
+  subTitle(String lastUpd, int pswdCnt): "Dernière modification: $lastUpd. Articles: $pswdCnt"
 
 load:
-  loadFile: Load File
-  loadPswdFile: Load Password File
-  newFile: New File
-  openInRo: Open in read-only mode
-  openOther: Open from other location
-  auth: Please authenticate to open Simple Password
-  authErr: Device authencation error.\nPlease check your system authencation.\nAnd try it later.
+  loadFile: Fichier ouvert
+  loadPswdFile: Charger le Fichier de Mot de Passe
+  newFile: Nouveau Fichier
+  openInRo: Ouvrir en mode lecture seule
+  openOther: Ouvert depuis un autre endroit
+  auth: Veuillez vous authentifier pour ouvrir cette application
+  authErr: Erreur d'authentification de l'appareil.\nVeuillez vérifier l'authentification de votre système.\nEt réessayer plus tard.
 
 sbs:
-  bkClean: Backup cleanup
-  bkCurrent: Backup Current File
-  bkDone(String name): New backup of $name.sp is done.
-  bkFailed(String name): Taking backup of $name.sp failed!
-  deleteAsk(String f): Delete $f.sp?
-  doPolicy(String name): Perform backup policy of\n$name.sp?\nSome old backups will be removed.
-  doPolicy1: Perform Backup Policy
-  donePolicy: Backup policy performed.
-  enableSync: Sync changes to a local or cloud folder
-  fileDeleted(String f): File $f.sp deleted
-  pswdFileStatus: Password file status
-  roMode: Read-only mode
-  sbp: Run backup policy before save
-  shareContent: This is the simple password file.
-  shareCurrent: Share Current File
-  shareDone: Sharing completed
-  shareFailed: Sharing file failed.
-  syncTo: Sync To
-  title: Save & Backup & Share
-  totalChanges: Total changes
+  bkClean: Nettoyage de Sauvegarde
+  bkCurrent: Sauvegarder le Fichier Actuel
+  bkDone(String name): Une nouvelle sauvegarde de $name.sp est effectuée.
+  bkFailed(String name): La sauvegarde de $name.sp a échoué!
+  deleteAsk(String f): Supprimer $f.sp?
+  doPolicy(String name): Exécutez la politique de sauvegarde de\n $name.sp?\nCertaines anciennes sauvegardes seront supprimées.
+  doPolicy1: Exécuter la politique de sauvegarde
+  donePolicy: Politique de sauvegarde effectuée
+  enableSync: Synchroniser les modifications dans un dossier local ou cloud
+  fileDeleted(String f): Fichier $f.sp supprimé
+  pswdFileStatus: État du fichier de mot de passe
+  roMode: Mode lecture seule
+  sbp: Exécutez la politique de sauvegarde avant d'enregistrer
+  shareContent: Il s'agit du fichier Simple Password.
+  shareCurrent: Partager le Fichier Actuel
+  shareDone: Partage terminé
+  shareFailed: Le partage du fichier a échoué
+  syncTo: Synchroniser avec
+  title: Enregistrer et Sauvegarder et Partager
+  totalChanges: Total des changements
 
 pp:
-  allowedSpecial: Allowed special characters
-  minDidit: Minimal digits
-  minLen: Minimal Length
-  minLower: Minimal lower case letters
-  minSpecial: Minimal special characters
-  minUpper: Minimal upper case letters
-  specialChar: Symbol characters
-  specialErr: Only speical characters
-  specialHint: Please enter speical characters
-  title: Password Policy
+  allowedSpecial: Autoriser les caractères spéciaux
+  minDidit: Chiffres minimaux
+  minLen: Longueur minimale
+  minLower: Minuscules minimale
+  minSpecial: Lettres spéciaux minimes
+  minUpper: Majuscules minimale
+  specialChar: Lettres de symbole
+  specialErr: Seuls les lettres spéciaux
+  specialHint: Veuillez saisir des lettres spéciaux
+  title: Politique de Mot de Passe
 
 group:
-  detail: Group Detail
-  hint: Please enter the group name.
-  name: Group name
-  pswdCreated: New password created
-  pswdDeleted: Password deleted.
+  detail: Détail du Groupe
+  hint: Veuillez saisir le nom du groupe.
+  name: Nom du groupe
+  pswdCreated: Nouveau mot de passe créé
+  pswdDeleted: Mot de passe supprimé
 
 settings:
-  autoHide: Auto-hide password
-  autoHideInterval: Auto-hide interval(seconds)
-  autoSave: Auto-save changes
-  autoSaveInterval: Auto-save interval(seconds)
-  bk: Backup Settings
-  bkB4Save: Create backup before saving
-  keepLastDay: Keep backup for yesterday
-  keepLastMonth: Keep back for last month
-  keepLastWeek: Keep backup for last week
-  lang: Language
-  theme: Theme
-  sec: Security Settings
-  totalBks: Total backups
+  autoHide: Masquer automatiquement le mot de passe
+  autoHideInterval: Masquer automatiquement interval(seconds)
+  autoSave: Sauvegarde automatique des modifications
+  autoSaveInterval: Sauvegarde automatique interval(seconds)
+  bk: Paramètres de sauvegarde
+  bkB4Save: Créer une sauvegarde avant d'enregistrer
+  keepLastDay: Gardez une sauvegarde pour hier
+  keepLastMonth: Gardez une sauvegarde pour le mois dernier
+  keepLastWeek: Gardez une sauvegarde pour la semaine dernière
+  lang: Langue
+  theme: Thème
+  sec: Les Paramètres de Sécurité
+  totalBks: Total des Sauvegardes
 
 iap:
-  benefits1: Unlimited password groups and passwords in each group
-  benefits2: Using device authentication for opened password files
-  benefits: "You will get:"
-  buyConfirmMsg: Are you sure to continue?
-  buyTitle: Buy
-  failed: Purchase failed. Please try it again.
+  benefits1: Groupes de mots de passe et mots de passe illimités
+  benefits2: Autoriser l'authentification de l'appareil pour les fichiers de mots de passe ouverts
+  benefits: "Les avantages comprennent:"
+  buyConfirmMsg: Es-tu sur de vouloir continuer?
+  buyTitle: Acheter
+  failed: Achat raté. Veuillez réessayer.
   freeVer: Free Version
-  freeLimit: You can have up to 5 password groups and 5 passwords in each group. Upgrade to Pro version to have unlimited groups and password.
-  paid: This is paid version.
-  thankYou: Thank you for supporting us.
-  title: Buy Simple Password Pro
-  unpaid: This is free version.
-  verify: I am 13 years old. Or my guardian agree to purchase.
-  thankYouTitle: Thank You
-  succ: The purchase is completed. \nThanks you for your supporting.
-  warn: Important Upgrade Notes
-  warn1: Please follow steps to upgrade to Pro Version.
-  warn2: Buy and install Pro version from App Store.
-  warn3: Save old password files from Free version to shared folder.
-  warn4: Open and confirm ALL old password files.
-  warn5: After transfering all old password files, you can choose to keep or delete Free version.
+  freeLimit: Vous pouvez avoir jusqu'à 5 groupes de mots de passe et 5 mots de passe dans chaque groupe. Passez à la version Pro pour avoir des groupes et des mots de passe illimités.
+  paid: Ceci est la version payante.
+  thankYou: Merci de nous soutenir.
+  title: Acheter Simple Password Pro
+  unpaid: Ceci est la version gratuite.
+  verify: J'ai 13 ans et plus, ou mon parent/tuteur légal consent à cet achat.
+  thankYouTitle: Merci
+  succ: L'achat est terminé.\nMerci de votre soutien.
+  warn: Notes de mise à niveau importantes
+  warn1: Veuillez suivre les étapes pour passer à la version Pro.
+  warn2: Achetez et installez la version Pro depuis l'App Store.
+  warn3: Enregistrez les anciens fichiers de mots de passe de la version gratuite dans un dossier partagé.
+  warn4: Ouvrez et confirmez TOUS les anciens fichiers de mots de passe.
+  warn5: Après avoir transféré tous les anciens fichiers de mots de passe, vous pouvez choisir de conserver ou de supprimer la version gratuite.
 
 about:
   terms: |+
-    Simple Password term of use
-    1. 
-    2. 
-    3.
+    Simple Password Free/Pro Term of Use
+    
+    "The application" means Simple Password Free or Simple Password Pro.
+    "Our terms of Use" means this term of use.
+
+    1. By using the application, you acknowledge and consent to our Terms of Use.
+    2. We grant to you a non-exclusive, non-transferable, non-sharable, revocable, limited license to use the application solely for personal, non-commercial use in accordance with the terms of use.
+    3. You must not modify, hack, recreate, copy or exploit any part of the application.
+    4. You must not upload or inject any malware, illegal or obscene content.
+    5. You must not reuse, modify, download or copy the application icon or the name “Simple Password” for any commercial use.
+    6. You must be 13+ years old to use and make any purchases pertaining to the app, or have granted consent from a legal parent/guardian.
+    7. The application is provided "as is".
+    8. We do not provide any kind of warranty.
+    9. Users are using the application at their own risk.
+    10. We do not guarantee that the application is free from mistakes, malware, errors or other issues that could potentially damage a user.
+    11. We will not be held liable for any damages that arise from the use of this application, such as data loss, conduct of third parties, inability to access the app, copyright infringement of others and any other damages that may occur.
+    12. We may modify the Terms of Use at any given time, so please review these terms periodically. We will notify any changes made through the application.
+    13. If you have any questions or concerns about our Terms of Use, please contact us.
 
   privacy: |+
-    Simlple Password privacy
-    1.
-    2.
-    3.
+    Simple Password Free/Pro Privacy Policy
 
-    
+    "The application" means Simple Password Free or Simple Password Pro.
+    "Our Privacy Policy" means this Privacy Policy.
+
+    1. The application strives to protect your privacy. These policies disclose how the application handles and secures your personal information and data. By using this application, you give consent to abide by our Privacy Policy.
+    2. All information and data are stored on your electronic device, thus, the application does not collect or have access to any personal information or personal data.
+    3. The application does not share personal information and data with separate entities or third party companies. However, if you choose to export or share personal information and data with entities separate to the application, such as cloud services (Ex. Dropbox), we are not responsible, nor have control with what these services and/or related third parties do with your personal information and data.
+    4. We reserve the right to update and/or change our Privacy Policy at any given time. Your continued use of the application will constitute your acknowledgement of modifications and consent to abide by our Privacy Policy. Changes made to our Privacy Policy will be notified through the application prior to them becoming effective.
+    5. If you have any questions or concerns about our Privacy Policy, please contact us at simple_password@syspole.com.

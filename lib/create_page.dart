@@ -63,12 +63,17 @@ class _CreatePageWidgetState extends State<CreatePageWidget> {
                 labelText: m.pswd.msKey,
                 hintText: m.pswd.pswdHint,
                 suffixIcon: GestureDetector(
-                  onTap: () => setState(() {
-                    _showPassword2 = !_showPassword2;
-                  }),
+                  onLongPressStart: (details) {
+                    _showPassword2 = true;
+                    setState(() {});
+                  },
+                  onLongPressEnd: (details) {
+                    _showPassword2 = false;
+                    setState(() {});
+                  },
                   child: Icon(
                     _showPassword2 ? Icons.visibility : Icons.visibility_off,
-                    color: UiUtil.currentTheme.primaryColor,
+                    color: UiUtil.currentTheme.accentColor,
                   ),
                 )),
             obscureText: !_showPassword2,

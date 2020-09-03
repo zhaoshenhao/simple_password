@@ -115,7 +115,9 @@ class _GroupWidgetState extends State<GroupWidget> {
       actions: <Widget>[
         IconSlideAction(
           caption: m.common.delete,
-          color: readOnly ? UiUtil.currentTheme.disabledColor : null,
+          color: readOnly
+              ? UiUtil.currentTheme.disabledColor
+              : UiUtil.currentTheme.accentColor,
           icon: Icons.delete,
           onTap: readOnly ? null : () async => _delete(i),
         ),

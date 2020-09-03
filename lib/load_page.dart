@@ -77,9 +77,14 @@ class _LoadPageWidgetState extends State<LoadPageWidget> {
               labelText: m.pswd.msKey,
               hintText: m.pswd.pswdHint,
               suffixIcon: GestureDetector(
-                onTap: () => setState(() {
-                  _showPassword = !_showPassword;
-                }),
+                onLongPressStart: (details) {
+                  _showPassword = true;
+                  setState(() {});
+                },
+                onLongPressEnd: (details) {
+                  _showPassword = false;
+                  setState(() {});
+                },
                 child: Icon(
                   _showPassword ? Icons.visibility : Icons.visibility_off,
                   color: UiUtil.currentTheme.accentColor,
@@ -109,7 +114,7 @@ class _LoadPageWidgetState extends State<LoadPageWidget> {
         ]),
         Text(''),
         Divider(),
-        Row(
+        Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: _buttons(),
         ),
@@ -117,24 +122,9 @@ class _LoadPageWidgetState extends State<LoadPageWidget> {
     );
   }
 
-  List<Widget> _buttons() {
-    List<Widget> list = List();
-    list.add(RaisedButton.icon(
-      icon: Icon(Icons.add_circle_outline),
-      onPressed: () => _newFile(),
-      label: Text(m.load.newFile),
-      color: UiUtil.currentTheme.primaryColor,
-      textColor: UiUtil.currentTheme.buttonColor,
-    ));
-    list.add(RaisedButton.icon(
-      icon: Icon(Icons.lock_open),
-      onPressed: hasHistory ? () => _loadAndUnlock() : null,
-      label: Text(m.load.loadFile),
-      color: UiUtil.currentTheme.primaryColor,
-      textColor: UiUtil.currentTheme.buttonColor,
-    ));
+  Widget _getBioButton() {
     if (currentFilename == null || !ProUtil.isPaid()) {
-      return list;
+      return null;
     }
     Icon icon;
     if (LocalAuthUtil.allowFace) {
@@ -143,13 +133,42 @@ class _LoadPageWidgetState extends State<LoadPageWidget> {
       icon = Icon(Icons.fingerprint);
     }
     if (icon != null) {
-      list.add(RaisedButton.icon(
-          icon: icon,
-          color: UiUtil.currentTheme.primaryColor,
-          textColor: UiUtil.currentTheme.buttonColor,
-          onPressed: _canUseLocalAuth() ? () async => _localAuth() : null,
-          label: Text(m.load.loadFile)));
+      return (IconButton(
+        icon: icon,
+        color: UiUtil.currentTheme.accentColor,
+        onPressed: _canUseLocalAuth() ? () async => _localAuth() : null,
+      ));
     }
+    return null;
+  }
+
+  List<Widget> _buttons() {
+    List<Widget> list = List();
+    Widget bioButton = _getBioButton();
+    if (bioButton != null) {
+      list.add(bioButton);
+    }
+    list.add(
+        Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
+      Container(
+          width: 120,
+          child: RaisedButton.icon(
+            icon: Icon(Icons.lock_open),
+            onPressed: hasHistory ? () => _loadAndUnlock() : null,
+            label: Expanded(child: Text(m.load.loadFile)),
+            color: UiUtil.currentTheme.primaryColor,
+            textColor: UiUtil.currentTheme.buttonColor,
+          )),
+      Container(
+          width: 120,
+          child: RaisedButton.icon(
+            icon: Icon(Icons.add_circle_outline),
+            onPressed: () => _newFile(),
+            label: Expanded(child: Text(m.load.newFile)),
+            color: UiUtil.currentTheme.primaryColor,
+            textColor: UiUtil.currentTheme.buttonColor,
+          ))
+    ]));
     return list;
   }
 

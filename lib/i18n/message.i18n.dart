@@ -39,7 +39,7 @@ class CommonMessage {
 	String get appVer => """1.0.0""";
 	String get check => """Check""";
 	String get chgConfirmed => """Change confirmed""";
-	String get chgSaveFailed => """Saving changes failed.""";
+	String get chgSaveFailed => """Changes failed to save""";
 	String get chgSaved => """Changes saved""";
 	String get companyName => """Syspole Inc.""";
 	String get confirm => """Confirm""";
@@ -53,10 +53,10 @@ class CommonMessage {
 	String get gen => """Generate""";
 	String get group => """Group""";
 	String get groups => """Groups""";
-	String get lastAccess => """Last Access""";
+	String get lastAccess => """Last Accessed""";
 	String get lastCreate => """Last Created""";
 	String get lastDelta => """Last Modified""";
-	String get lookFeel => """Look & Feel""";
+	String get lookFeel => """Look and Feel""";
 	String get myGrpName => """my password group""";
 	String get mySecret => """my secret""";
 	String get no => """No""";
@@ -106,42 +106,42 @@ class FileMessage {
 	final Message _parent;
 	const FileMessage(this._parent);
 	String deleteFailed(String p) => """Delete file $p failed""";
-	String fileExistErr(String name) => """File \"$name\" exist!\nPlease use different name.""";
-	String get fileExists => """File exist""";
-	String fileNotExists(String p) => """File $p not exists""";
+	String fileExistErr(String name) => """File \"$name\" exists!\nPlease use different name.""";
+	String get fileExists => """File exists""";
+	String fileNotExists(String p) => """File $p does not exist""";
 	String get fileNotFound => """File not found""";
-	String fileNotFoundErr(String name) => """File $name not found.""";
+	String fileNotFoundErr(String name) => """File $name not found""";
 	String get fnTips => """Please use [a-zA-Z0-9_-] only""";
 	String get loadCurrent => """Load current file""";
 	String get loadNew => """Load new external file""";
-	String openFailedErr(String name) => """Open filed $name failed.""";
+	String openFailedErr(String name) => """File $name failed to open""";
 	String get openErr => """Open Error""";
-	String saveErr(String name) => """Save file $name failed.""";
+	String saveErr(String name) => """File $name failed to save""";
 	String get saveErrTitle => """File save error""";
-	String get saveFailed => """Save file failed""";
-	String get validFn => """A valid file name""";
+	String get saveFailed => """File failed to save""";
+	String get validFn => """Valid file name""";
 }
 
 class PswdMessage {
 	final Message _parent;
 	const PswdMessage(this._parent);
-	String get checkKey => """Check main secret key and file format.""";
-	String containUpper(int cnt) => """Must contain $cnt upper case ${_plural(cnt, one:'letter', many:'letters')}.""";
-	String containLower(int cnt) => """Must contain $cnt lower case ${_plural(cnt, one:'letter', many:'letters')}.""";
-	String containDigit(int cnt) => """Must contain $cnt ${_plural(cnt, one:'digit', many:'digits')}.""";
-	String containSpecial(int cnt) => """Must contain $cnt special ${_plural(cnt, one:'character', many:'characters')}.""";
+	String get checkKey => """Check main secret key and file format""";
+	String containUpper(int cnt) => """Must contain $cnt upper case ${_plural(cnt, one:'letter', many:'letters')}""";
+	String containLower(int cnt) => """Must contain $cnt lower case ${_plural(cnt, one:'letter', many:'letters')}""";
+	String containDigit(int cnt) => """Must contain $cnt ${_plural(cnt, one:'digit', many:'digits')}""";
+	String containSpecial(int cnt) => """Must contain $cnt special ${_plural(cnt, one:'character', many:'characters')}""";
 	String get detail => """Password Detail""";
 	String get msKey => """Main Secret Key""";
 	String get pswdCheck => """Password Check""";
 	String get pswdCopied => """Password copied""";
 	String get pswdEmpty => """Password is empty""";
-	String get pswdGood => """Password looks good.""";
-	String get pswdHint => """Please enter you main secret key""";
+	String get pswdGood => """Password looks good""";
+	String get pswdHint => """Please enter your main secret key""";
 	String get pswdHint2 => """Enter your password""";
 	String get pswdLen => """Length less than""";
 	String get titleHint => """The item title""";
 	String get unCopied => """Username copied""";
-	String get unHint => """The username""";
+	String get unHint => """The Username""";
 	String get urlCopied => """URL copied""";
 	String get urlHint => """Any URL""";
 }
@@ -149,26 +149,26 @@ class PswdMessage {
 class HomeMessage {
 	final Message _parent;
 	const HomeMessage(this._parent);
-	String get grpDeleted => """Group deleted.""";
+	String get grpDeleted => """Group deleted""";
 	String subTitle(String lastUpd, int pswdCnt) => """Last Modified: $lastUpd. Passwords: $pswdCnt""";
 }
 
 class LoadMessage {
 	final Message _parent;
 	const LoadMessage(this._parent);
-	String get loadFile => """Load File""";
+	String get loadFile => """Open File""";
 	String get loadPswdFile => """Load Password File""";
 	String get newFile => """New File""";
 	String get openInRo => """Open in read-only mode""";
 	String get openOther => """Open from other location""";
-	String get auth => """Please authenticate to open Simple Password""";
-	String get authErr => """Device authencation error.\nPlease check your system authencation.\nAnd try it later.""";
+	String get auth => """Please authenticate yourself to open this app""";
+	String get authErr => """Device authencation error.\nPlease check your system authencation.\nAnd try again later.""";
 }
 
 class SbsMessage {
 	final Message _parent;
 	const SbsMessage(this._parent);
-	String get bkClean => """Backup cleanup""";
+	String get bkClean => """Backup Cleanup""";
 	String get bkCurrent => """Backup Current File""";
 	String bkDone(String name) => """New backup of $name.sp is done.""";
 	String bkFailed(String name) => """Taking backup of $name.sp failed!""";
@@ -181,10 +181,10 @@ class SbsMessage {
 	String get pswdFileStatus => """Password file status""";
 	String get roMode => """Read-only mode""";
 	String get sbp => """Run backup policy before save""";
-	String get shareContent => """This is the simple password file.""";
+	String get shareContent => """This is the Simple Password file.""";
 	String get shareCurrent => """Share Current File""";
 	String get shareDone => """Sharing completed""";
-	String get shareFailed => """Sharing file failed.""";
+	String get shareFailed => """Sharing file failed""";
 	String get syncTo => """Sync To""";
 	String get title => """Save & Backup & Share""";
 	String get totalChanges => """Total changes""";
@@ -193,15 +193,15 @@ class SbsMessage {
 class PpMessage {
 	final Message _parent;
 	const PpMessage(this._parent);
-	String get allowedSpecial => """Allowed special characters""";
+	String get allowedSpecial => """Allow special characters""";
 	String get minDidit => """Minimal digits""";
 	String get minLen => """Minimal Length""";
 	String get minLower => """Minimal lower case letters""";
 	String get minSpecial => """Minimal special characters""";
 	String get minUpper => """Minimal upper case letters""";
 	String get specialChar => """Symbol characters""";
-	String get specialErr => """Only speical characters""";
-	String get specialHint => """Please enter speical characters""";
+	String get specialErr => """Only special characters""";
+	String get specialHint => """Please enter special characters""";
 	String get title => """Password Policy""";
 }
 
@@ -209,10 +209,10 @@ class GroupMessage {
 	final Message _parent;
 	const GroupMessage(this._parent);
 	String get detail => """Group Detail""";
-	String get hint => """Please enter the group name.""";
+	String get hint => """Please enter the group name""";
 	String get name => """Group name""";
 	String get pswdCreated => """New password created""";
-	String get pswdDeleted => """Password deleted.""";
+	String get pswdDeleted => """Password deleted""";
 }
 
 class SettingsMessage {
@@ -225,8 +225,8 @@ class SettingsMessage {
 	String get bk => """Backup Settings""";
 	String get bkB4Save => """Create backup before saving""";
 	String get keepLastDay => """Keep backup for yesterday""";
-	String get keepLastMonth => """Keep back for last month""";
-	String get keepLastWeek => """Keep backup for last week""";
+	String get keepLastMonth => """Keep backup for the last month""";
+	String get keepLastWeek => """Keep backup for the last week""";
 	String get lang => """Language""";
 	String get theme => """Theme""";
 	String get sec => """Security Settings""";
@@ -236,19 +236,19 @@ class SettingsMessage {
 class IapMessage {
 	final Message _parent;
 	const IapMessage(this._parent);
-	String get benefits1 => """Unlimited password groups and passwords in each group""";
-	String get benefits2 => """Using device authentication for opened password files""";
-	String get benefits => """You will get:""";
-	String get buyConfirmMsg => """Are you sure to continue?""";
+	String get benefits1 => """Unlimited password groups and passwords""";
+	String get benefits2 => """Allow device authentication for opened password files""";
+	String get benefits => """Benefits include:""";
+	String get buyConfirmMsg => """Are you sure you want to continue?""";
 	String get buyTitle => """Buy""";
-	String get failed => """Purchase failed. Please try it again.""";
+	String get failed => """Purchase failed. Please try again.""";
 	String get freeVer => """Free Version""";
-	String get freeLimit => """You can have up to 5 password groups and 5 passwords in each group. Upgrade to Pro version to have unlimited groups and password.""";
-	String get paid => """This is paid version.""";
+	String get freeLimit => """You can have up to 5 password groups and 5 passwords in each group. Upgrade to Pro version to have unlimited groups and passwords.""";
+	String get paid => """This is the paid version.""";
 	String get thankYou => """Thank you for supporting us.""";
 	String get title => """Buy Simple Password Pro""";
-	String get unpaid => """This is free version.""";
-	String get verify => """I am 13 years old. Or my guardian agree to purchase.""";
+	String get unpaid => """This is the free version.""";
+	String get verify => """I am 13+ years old, or legal parent/guardian consents to this purchase.""";
 	String get thankYouTitle => """Thank You""";
 	String get succ => """The purchase is completed. \nThanks you for your supporting.""";
 	String get warn => """Important Upgrade Notes""";
@@ -262,16 +262,37 @@ class IapMessage {
 class AboutMessage {
 	final Message _parent;
 	const AboutMessage(this._parent);
-	String get terms => """Simple Password term of use
-1. 
-2. 
-3.
+	String get terms => """Simple Password Free/Pro Term of Use
+
+"The application" means Simple Password Free or Simple Password Pro.
+"Our terms of Use" means this term of use.
+
+1. By using the application, you acknowledge and consent to our Terms of Use.
+2. We grant to you a non-exclusive, non-transferable, non-sharable, revocable, limited license to use the application solely for personal, non-commercial use in accordance with the terms of use.
+3. You must not modify, hack, recreate, copy or exploit any part of the application.
+4. You must not upload or inject any malware, illegal or obscene content.
+5. You must not reuse, modify, download or copy the application icon or the name “Simple Password” for any commercial use.
+6. You must be 13+ years old to use and make any purchases pertaining to the app, or have granted consent from a legal parent/guardian.
+7. The application is provided "as is".
+8. We do not provide any kind of warranty.
+9. Users are using the application at their own risk.
+10. We do not guarantee that the application is free from mistakes, malware, errors or other issues that could potentially damage a user.
+11. We will not be held liable for any damages that arise from the use of this application, such as data loss, conduct of third parties, inability to access the app, copyright infringement of others and any other damages that may occur.
+12. We may modify the Terms of Use at any given time, so please review these terms periodically. We will notify any changes made through the application.
+13. If you have any questions or concerns about our Terms of Use, please contact us at simple_password@syspole.com.
 
 """;
-	String get privacy => """Simlple Password privacy
-1.
-2.
-3.
+	String get privacy => """Simple Password Free/Pro Privacy Policy
+
+"The application" means Simple Password Free or Simple Password Pro.
+"Our Privacy Policy" means this Privacy Policy.
+
+1. The application strives to protect your privacy. These policies disclose how the application handles and secures your personal information and data. By using this application, you give consent to abide by our Privacy Policy.
+2. All information and data are stored on your electronic device, thus, the application does not collect or have access to any personal information or personal data.
+3. The application does not share personal information and data with separate entities or third party companies. However, if you choose to export or share personal information and data with entities separate to the application, such as cloud services (Ex. Dropbox), we are not responsible, nor have control with what these services and/or related third parties do with your personal information and data.
+4. We reserve the right to update and/or change our Privacy Policy at any given time. Your continued use of the application will constitute your acknowledgement of modifications and consent to abide by our Privacy Policy. Changes made to our Privacy Policy will be notified through the application prior to them becoming effective.
+5. If you have any questions or concerns about our Privacy Policy, please contact us at simple_password@syspole.com.
+
 
 
 """;

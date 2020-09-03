@@ -5,276 +5,342 @@ import 'message.i18n.dart';
 String get _languageCode => 'fr';
 String get _localeName => 'fr';
 
-String _plural(int count, {String zero, String one, String two, String few, String many, String other}) =>
-	i18n.plural(count, _languageCode, zero:zero, one:one, two:two, few:few, many:many, other:other);
-String _ordinal(int count, {String zero, String one, String two, String few, String many, String other}) =>
-	i18n.ordinal(count, _languageCode, zero:zero, one:one, two:two, few:few, many:many, other:other);
-String _cardinal(int count, {String zero, String one, String two, String few, String many, String other}) =>
-	i18n.cardinal(count, _languageCode, zero:zero, one:one, two:two, few:few, many:many, other:other);
+String _plural(int count,
+        {String zero,
+        String one,
+        String two,
+        String few,
+        String many,
+        String other}) =>
+    i18n.plural(count, _languageCode,
+        zero: zero, one: one, two: two, few: few, many: many, other: other);
+String _ordinal(int count,
+        {String zero,
+        String one,
+        String two,
+        String few,
+        String many,
+        String other}) =>
+    i18n.ordinal(count, _languageCode,
+        zero: zero, one: one, two: two, few: few, many: many, other: other);
+String _cardinal(int count,
+        {String zero,
+        String one,
+        String two,
+        String few,
+        String many,
+        String other}) =>
+    i18n.cardinal(count, _languageCode,
+        zero: zero, one: one, two: two, few: few, many: many, other: other);
 
 class Message_fr extends Message {
-	const Message_fr();
-	CommonMessage_fr get common => CommonMessage_fr(this);
-	BasicMessage_fr get basic => BasicMessage_fr(this);
-	CreateMessage_fr get create => CreateMessage_fr(this);
-	FileMessage_fr get file => FileMessage_fr(this);
-	PswdMessage_fr get pswd => PswdMessage_fr(this);
-	HomeMessage_fr get home => HomeMessage_fr(this);
-	LoadMessage_fr get load => LoadMessage_fr(this);
-	SbsMessage_fr get sbs => SbsMessage_fr(this);
-	PpMessage_fr get pp => PpMessage_fr(this);
-	GroupMessage_fr get group => GroupMessage_fr(this);
-	SettingsMessage_fr get settings => SettingsMessage_fr(this);
-	IapMessage_fr get iap => IapMessage_fr(this);
-	AboutMessage_fr get about => AboutMessage_fr(this);
+  const Message_fr();
+  CommonMessage_fr get common => CommonMessage_fr(this);
+  BasicMessage_fr get basic => BasicMessage_fr(this);
+  CreateMessage_fr get create => CreateMessage_fr(this);
+  FileMessage_fr get file => FileMessage_fr(this);
+  PswdMessage_fr get pswd => PswdMessage_fr(this);
+  HomeMessage_fr get home => HomeMessage_fr(this);
+  LoadMessage_fr get load => LoadMessage_fr(this);
+  SbsMessage_fr get sbs => SbsMessage_fr(this);
+  PpMessage_fr get pp => PpMessage_fr(this);
+  GroupMessage_fr get group => GroupMessage_fr(this);
+  SettingsMessage_fr get settings => SettingsMessage_fr(this);
+  IapMessage_fr get iap => IapMessage_fr(this);
+  AboutMessage_fr get about => AboutMessage_fr(this);
 }
 
 class CommonMessage_fr extends CommonMessage {
-	final Message_fr _parent;
-	const CommonMessage_fr(this._parent):super(_parent);
-	String get about => """About""";
-	String get actions => """Actions""";
-	String get add => """Add""";
-	String get app => """Application""";
-	String appName(bool p) => """Simple Password ${p?'Pro':'Free'}""";
-	String get appVer => """1.0.0""";
-	String get check => """Check""";
-	String get chgConfirmed => """Change confirmed""";
-	String get chgSaveFailed => """Saving changes failed.""";
-	String get chgSaved => """Changes saved""";
-	String get companyName => """Syspole Inc.""";
-	String get confirm => """Confirm""";
-	String get copyRight => """Copyright © 2002-2020 CompuSky Inc.""";
-	String get create => """Create""";
-	String get delete => """Delete""";
-	String get deleteThisAsk => """Delete this item?""";
-	String get developer => """Developer""";
-	String get error => """Error""";
-	String get file => """File""";
-	String get gen => """Generate""";
-	String get group => """Group""";
-	String get groups => """Groups""";
-	String get lastAccess => """Last Access""";
-	String get lastCreate => """Last Created""";
-	String get lastDelta => """Last Modified""";
-	String get lookFeel => """Look & Feel""";
-	String get myGrpName => """my password group""";
-	String get mySecret => """my secret""";
-	String get no => """No""";
-	String get noChange => """No change""";
-	String get none => """None""";
-	String get notEmpty => """Please enter something""";
-	String get notes => """Notes""";
-	String get off => """Off""";
-	String get ok => """OK""";
-	String get on => """On""";
-	String get others => """Others""";
-	String get password => """Password""";
-	String get passwords => """Passwords""";
-	String get privacy => """Privacy""";
-	String get recent => """Recent""";
-	String get reset => """Reset""";
-	String get ro => """Read-only""";
-	String get rw => """Read-write""";
-	String get save => """Save""";
-	String get saveAllAsk => """Save all changes？""";
-	String get settings => """Settings""";
-	String get terms => """Term of Use""";
-	String get title => """Title""";
-	String get unsaved => """Unsaved changes""";
-	String get url => """URL""";
-	String get version => """Version""";
-	String get yes => """Yes""";
+  final Message_fr _parent;
+  const CommonMessage_fr(this._parent) : super(_parent);
+  String get about => """À propos""";
+  String get actions => """Actions""";
+  String get add => """Ajouter""";
+  String get app => """L'application""";
+  String appName(bool p) => """Simple Password ${p ? 'Pro' : 'Free'}""";
+  String get appVer => """1.0.0""";
+  String get check => """Vérifier""";
+  String get chgConfirmed => """Changement confirmé""";
+  String get chgSaveFailed =>
+      """Les modifications n'ont pas pu être enregistrées""";
+  String get chgSaved => """Changements sauvegardés""";
+  String get companyName => """Syspole Inc.""";
+  String get confirm => """Confirmer""";
+  String get copyRight => """Copyright © 2002-2020 CompuSky Inc.""";
+  String get create => """Créer""";
+  String get delete => """Supprimer""";
+  String get deleteThisAsk => """Supprimer cet élément?""";
+  String get developer => """Développeur""";
+  String get error => """Erreur""";
+  String get file => """Fichier""";
+  String get gen => """Produire""";
+  String get group => """Groupe""";
+  String get groups => """Groupes""";
+  String get lastAccess => """Dernier accès""";
+  String get lastCreate => """Dernière création""";
+  String get lastDelta => """Dernière modification""";
+  String get lookFeel => """Regarde et ressent""";
+  String get myGrpName => """mon groupe de mots de passe""";
+  String get mySecret => """mon secret""";
+  String get no => """Non""";
+  String get noChange => """Pas de changement""";
+  String get none => """Aucun""";
+  String get notEmpty => """Veuillez saisir quelque chose""";
+  String get notes => """Remarques""";
+  String get off => """Off""";
+  String get ok => """D'accord""";
+  String get on => """On""";
+  String get others => """Autres""";
+  String get password => """Mot de passe""";
+  String get passwords => """Mots de passe""";
+  String get privacy => """Confidentialité""";
+  String get recent => """Récent""";
+  String get reset => """Réinitialiser""";
+  String get ro => """Lecture seulement""";
+  String get rw => """Lire écrire""";
+  String get save => """Sauver""";
+  String get saveAllAsk => """Enregistrer toutes les modifications?""";
+  String get settings => """Paramètres""";
+  String get terms => """Conditions d'utilisation""";
+  String get title => """Titre""";
+  String get unsaved => """Modifications non enregistrées""";
+  String get url => """URL""";
+  String get version => """Version""";
+  String get yes => """Oui""";
 }
 
 class BasicMessage_fr extends BasicMessage {
-	final Message_fr _parent;
-	const BasicMessage_fr(this._parent):super(_parent);
-	String get hint => """Please enter the name of the password collection.""";
-	String get info => """Basic Information""";
-	String get pswdName => """Password collection name""";
+  final Message_fr _parent;
+  const BasicMessage_fr(this._parent) : super(_parent);
+  String get hint =>
+      """Veuillez saisir le nom de la collection de mots de passe.""";
+  String get info => """Informations de Base""";
+  String get pswdName => """Nom de la collection de mots de passe""";
 }
 
 class CreateMessage_fr extends CreateMessage {
-	final Message_fr _parent;
-	const CreateMessage_fr(this._parent):super(_parent);
-	String get createFile => """Create Password File""";
-	String get fn => """Password file name""";
-	String get inputFn => """Please enter the name of the password file.""";
+  final Message_fr _parent;
+  const CreateMessage_fr(this._parent) : super(_parent);
+  String get createFile => """Créer un Fichier de Mot de Passe""";
+  String get fn => """Nom du fichier de mot de passe""";
+  String get inputFn =>
+      """Veuillez saisir le nom du fichier de mot de passe.""";
 }
 
 class FileMessage_fr extends FileMessage {
-	final Message_fr _parent;
-	const FileMessage_fr(this._parent):super(_parent);
-	String deleteFailed(String p) => """Delete file $p failed""";
-	String fileExistErr(String name) => """File \"$name\" exist!\nPlease use different name.""";
-	String get fileExists => """File exist""";
-	String fileNotExists(String p) => """File $p not exists""";
-	String get fileNotFound => """File not found""";
-	String fileNotFoundErr(String name) => """File $name not found.""";
-	String get fnTips => """Please use [a-zA-Z0-9_-] only""";
-	String get loadCurrent => """Load current file""";
-	String get loadNew => """Load new external file""";
-	String openFailedErr(String name) => """Open filed $name failed.""";
-	String get openErr => """Open Error""";
-	String saveErr(String name) => """Save file $name failed.""";
-	String get saveErrTitle => """File save error""";
-	String get saveFailed => """Save file failed""";
-	String get validFn => """A valid file name""";
+  final Message_fr _parent;
+  const FileMessage_fr(this._parent) : super(_parent);
+  String deleteFailed(String p) => """Échec de la suppression du fichier $p""";
+  String fileExistErr(String name) =>
+      """Le fichier \"$name\" existe!\nVeuillez utiliser un autre nom""";
+  String get fileExists => """Le fichier existe""";
+  String fileNotExists(String p) => """Le fichier $p n'existe pas""";
+  String get fileNotFound => """Fichier non trouvé""";
+  String fileNotFoundErr(String name) => """Le fichier $name introuvable""";
+  String get fnTips => """Veuillez utiliser [a-zA-Z0-9_-] uniquement""";
+  String get loadCurrent => """Charger le fichier actuel""";
+  String get loadNew => """Charger un nouveau fichier externe""";
+  String openFailedErr(String name) =>
+      """Le fichier $name n'a pas pu s'ouvrir""";
+  String get openErr => """Erreur Ouverte""";
+  String saveErr(String name) =>
+      """Le fichier $name n'a pas pu être enregistré""";
+  String get saveErrTitle => """Erreur d'enregistrement de fichier""";
+  String get saveFailed => """Le fichier n'a pas pu être enregistré""";
+  String get validFn => """Nom de fichier valide""";
 }
 
 class PswdMessage_fr extends PswdMessage {
-	final Message_fr _parent;
-	const PswdMessage_fr(this._parent):super(_parent);
-	String get checkKey => """Check main secret key and file format.""";
-	String containUpper(int cnt) => """Must contain $cnt upper case ${_plural(cnt, one:'letter', many:'letters')}.""";
-	String containLower(int cnt) => """Must contain $cnt lower case ${_plural(cnt, one:'letter', many:'letters')}.""";
-	String containDigit(int cnt) => """Must contain $cnt ${_plural(cnt, one:'digit', many:'digits')}.""";
-	String containSpecial(int cnt) => """Must contain $cnt special ${_plural(cnt, one:'character', many:'characters')}.""";
-	String get detail => """Password Detail""";
-	String get msKey => """Main Secret Key""";
-	String get pswdCheck => """Password Check""";
-	String get pswdCopied => """Password copied""";
-	String get pswdEmpty => """Password is empty""";
-	String get pswdGood => """Password looks good.""";
-	String get pswdHint => """Please enter you main secret key""";
-	String get pswdHint2 => """Enter your password""";
-	String get pswdLen => """Length less than""";
-	String get titleHint => """The item title""";
-	String get unCopied => """Username copied""";
-	String get unHint => """The username""";
-	String get urlCopied => """URL copied""";
-	String get urlHint => """Any URL""";
+  final Message_fr _parent;
+  const PswdMessage_fr(this._parent) : super(_parent);
+  String get checkKey => """Check main secret key and file format""";
+  String containUpper(int cnt) =>
+      """Doit contenir $cnt majuscule ${_plural(cnt, one: 'lettre', many: 'lettres')}""";
+  String containLower(int cnt) =>
+      """Doit contenir $cnt minuscule ${_plural(cnt, one: 'lettre', many: 'lettres')}""";
+  String containDigit(int cnt) =>
+      """Doit contenir $cnt ${_plural(cnt, one: 'chiffre', many: 'chiffres')}.""";
+  String containSpecial(int cnt) =>
+      """Doit contenir $cnt special ${_plural(cnt, one: 'lettre', many: 'lettres')}""";
+  String get detail => """Détail du Mot de Passe""";
+  String get msKey => """Clé Secrète Principale""";
+  String get pswdCheck => """Vérification de Mot de Passe""";
+  String get pswdCopied => """Mot de passe copié""";
+  String get pswdEmpty => """Le mot de passe est vide""";
+  String get pswdGood => """Le mot de passe est valide""";
+  String get pswdHint => """Veuillez saisir votre clé secrète principale""";
+  String get pswdHint2 => """Tapez votre mot de passe""";
+  String get pswdLen => """Longueur inférieure à""";
+  String get titleHint => """Le titre de l'article""";
+  String get unCopied => """L'identifiant copié""";
+  String get unHint => """L'identifiant""";
+  String get urlCopied => """URL copiée""";
+  String get urlHint => """Toute URL""";
 }
 
 class HomeMessage_fr extends HomeMessage {
-	final Message_fr _parent;
-	const HomeMessage_fr(this._parent):super(_parent);
-	String get grpDeleted => """Group deleted.""";
-	String subTitle(String lastUpd, int pswdCnt) => """Last Modified: $lastUpd. Passwords: $pswdCnt""";
+  final Message_fr _parent;
+  const HomeMessage_fr(this._parent) : super(_parent);
+  String get grpDeleted => """Groupe supprime""";
+  String subTitle(String lastUpd, int pswdCnt) =>
+      """Dernière modification: $lastUpd. Articles: $pswdCnt""";
 }
 
 class LoadMessage_fr extends LoadMessage {
-	final Message_fr _parent;
-	const LoadMessage_fr(this._parent):super(_parent);
-	String get loadFile => """Load File""";
-	String get loadPswdFile => """Load Password File""";
-	String get newFile => """New File""";
-	String get openInRo => """Open in read-only mode""";
-	String get openOther => """Open from other location""";
-	String get auth => """Please authenticate to open Simple Password""";
-	String get authErr => """Device authencation error.\nPlease check your system authencation.\nAnd try it later.""";
+  final Message_fr _parent;
+  const LoadMessage_fr(this._parent) : super(_parent);
+  String get loadFile => """Fichier ouvert""";
+  String get loadPswdFile => """Charger le Fichier de Mot de Passe""";
+  String get newFile => """Nouveau Fichier""";
+  String get openInRo => """Ouvrir en mode lecture seule""";
+  String get openOther => """Ouvert depuis un autre endroit""";
+  String get auth =>
+      """Veuillez vous authentifier pour ouvrir cette application""";
+  String get authErr =>
+      """Erreur d'authentification de l'appareil.\nVeuillez vérifier l'authentification de votre système.\nEt réessayer plus tard.""";
 }
 
 class SbsMessage_fr extends SbsMessage {
-	final Message_fr _parent;
-	const SbsMessage_fr(this._parent):super(_parent);
-	String get bkClean => """Backup cleanup""";
-	String get bkCurrent => """Backup Current File""";
-	String bkDone(String name) => """New backup of $name.sp is done.""";
-	String bkFailed(String name) => """Taking backup of $name.sp failed!""";
-	String deleteAsk(String f) => """Delete $f.sp?""";
-	String doPolicy(String name) => """Perform backup policy of\n$name.sp?\nSome old backups will be removed.""";
-	String get doPolicy1 => """Perform Backup Policy""";
-	String get donePolicy => """Backup policy performed.""";
-	String get enableSync => """Sync changes to a local or cloud folder""";
-	String fileDeleted(String f) => """File $f.sp deleted""";
-	String get pswdFileStatus => """Password file status""";
-	String get roMode => """Read-only mode""";
-	String get sbp => """Run backup policy before save""";
-	String get shareContent => """This is the simple password file.""";
-	String get shareCurrent => """Share Current File""";
-	String get shareDone => """Sharing completed""";
-	String get shareFailed => """Sharing file failed.""";
-	String get syncTo => """Sync To""";
-	String get title => """Save & Backup & Share""";
-	String get totalChanges => """Total changes""";
+  final Message_fr _parent;
+  const SbsMessage_fr(this._parent) : super(_parent);
+  String get bkClean => """Nettoyage de Sauvegarde""";
+  String get bkCurrent => """Sauvegarder le Fichier Actuel""";
+  String bkDone(String name) =>
+      """Une nouvelle sauvegarde de $name.sp est effectuée.""";
+  String bkFailed(String name) => """La sauvegarde de $name.sp a échoué!""";
+  String deleteAsk(String f) => """Supprimer $f.sp?""";
+  String doPolicy(String name) =>
+      """Exécutez la politique de sauvegarde de\n $name.sp?\nCertaines anciennes sauvegardes seront supprimées.""";
+  String get doPolicy1 => """Exécuter la politique de sauvegarde""";
+  String get donePolicy => """Politique de sauvegarde effectuée""";
+  String get enableSync =>
+      """Synchroniser les modifications dans un dossier local ou cloud""";
+  String fileDeleted(String f) => """Fichier $f.sp supprimé""";
+  String get pswdFileStatus => """État du fichier de mot de passe""";
+  String get roMode => """Mode lecture seule""";
+  String get sbp =>
+      """Exécutez la politique de sauvegarde avant d'enregistrer""";
+  String get shareContent => """Il s'agit du fichier Simple Password.""";
+  String get shareCurrent => """Partager le Fichier Actuel""";
+  String get shareDone => """Partage terminé""";
+  String get shareFailed => """Le partage du fichier a échoué""";
+  String get syncTo => """Synchroniser avec""";
+  String get title => """Enregistrer et Sauvegarder et Partager""";
+  String get totalChanges => """Total des changements""";
 }
 
 class PpMessage_fr extends PpMessage {
-	final Message_fr _parent;
-	const PpMessage_fr(this._parent):super(_parent);
-	String get allowedSpecial => """Allowed special characters""";
-	String get minDidit => """Minimal digits""";
-	String get minLen => """Minimal Length""";
-	String get minLower => """Minimal lower case letters""";
-	String get minSpecial => """Minimal special characters""";
-	String get minUpper => """Minimal upper case letters""";
-	String get specialChar => """Symbol characters""";
-	String get specialErr => """Only speical characters""";
-	String get specialHint => """Please enter speical characters""";
-	String get title => """Password Policy""";
+  final Message_fr _parent;
+  const PpMessage_fr(this._parent) : super(_parent);
+  String get allowedSpecial => """Autoriser les caractères spéciaux""";
+  String get minDidit => """Chiffres minimaux""";
+  String get minLen => """Longueur minimale""";
+  String get minLower => """Minuscules minimale""";
+  String get minSpecial => """Lettres spéciaux minimes""";
+  String get minUpper => """Majuscules minimale""";
+  String get specialChar => """Lettres de symbole""";
+  String get specialErr => """Seuls les lettres spéciaux""";
+  String get specialHint => """Veuillez saisir des lettres spéciaux""";
+  String get title => """Politique de Mot de Passe""";
 }
 
 class GroupMessage_fr extends GroupMessage {
-	final Message_fr _parent;
-	const GroupMessage_fr(this._parent):super(_parent);
-	String get detail => """Group Detail""";
-	String get hint => """Please enter the group name.""";
-	String get name => """Group name""";
-	String get pswdCreated => """New password created""";
-	String get pswdDeleted => """Password deleted.""";
+  final Message_fr _parent;
+  const GroupMessage_fr(this._parent) : super(_parent);
+  String get detail => """Détail du Groupe""";
+  String get hint => """Veuillez saisir le nom du groupe.""";
+  String get name => """Nom du groupe""";
+  String get pswdCreated => """Nouveau mot de passe créé""";
+  String get pswdDeleted => """Mot de passe supprimé""";
 }
 
 class SettingsMessage_fr extends SettingsMessage {
-	final Message_fr _parent;
-	const SettingsMessage_fr(this._parent):super(_parent);
-	String get autoHide => """Auto-hide password""";
-	String get autoHideInterval => """Auto-hide interval(seconds)""";
-	String get autoSave => """Auto-save changes""";
-	String get autoSaveInterval => """Auto-save interval(seconds)""";
-	String get bk => """Backup Settings""";
-	String get bkB4Save => """Create backup before saving""";
-	String get keepLastDay => """Keep backup for yesterday""";
-	String get keepLastMonth => """Keep back for last month""";
-	String get keepLastWeek => """Keep backup for last week""";
-	String get lang => """Language""";
-	String get theme => """Theme""";
-	String get sec => """Security Settings""";
-	String get totalBks => """Total backups""";
+  final Message_fr _parent;
+  const SettingsMessage_fr(this._parent) : super(_parent);
+  String get autoHide => """Masquer automatiquement le mot de passe""";
+  String get autoHideInterval =>
+      """Masquer automatiquement interval(seconds)""";
+  String get autoSave => """Sauvegarde automatique des modifications""";
+  String get autoSaveInterval => """Sauvegarde automatique interval(seconds)""";
+  String get bk => """Paramètres de sauvegarde""";
+  String get bkB4Save => """Créer une sauvegarde avant d'enregistrer""";
+  String get keepLastDay => """Gardez une sauvegarde pour hier""";
+  String get keepLastMonth => """Gardez une sauvegarde pour le mois dernier""";
+  String get keepLastWeek =>
+      """Gardez une sauvegarde pour la semaine dernière""";
+  String get lang => """Langue""";
+  String get theme => """Thème""";
+  String get sec => """Les Paramètres de Sécurité""";
+  String get totalBks => """Total des Sauvegardes""";
 }
 
 class IapMessage_fr extends IapMessage {
-	final Message_fr _parent;
-	const IapMessage_fr(this._parent):super(_parent);
-	String get benefits1 => """Unlimited password groups and passwords in each group""";
-	String get benefits2 => """Using device authentication for opened password files""";
-	String get benefits => """You will get:""";
-	String get buyConfirmMsg => """Are you sure to continue?""";
-	String get buyTitle => """Buy""";
-	String get failed => """Purchase failed. Please try it again.""";
-	String get freeVer => """Free Version""";
-	String get freeLimit => """You can have up to 5 password groups and 5 passwords in each group. Upgrade to Pro version to have unlimited groups and password.""";
-	String get paid => """This is paid version.""";
-	String get thankYou => """Thank you for supporting us.""";
-	String get title => """Buy Simple Password Pro""";
-	String get unpaid => """This is free version.""";
-	String get verify => """I am 13 years old. Or my guardian agree to purchase.""";
-	String get thankYouTitle => """Thank You""";
-	String get succ => """The purchase is completed. \nThanks you for your supporting.""";
-	String get warn => """Important Upgrade Notes""";
-	String get warn1 => """Please follow steps to upgrade to Pro Version.""";
-	String get warn2 => """Buy and install Pro version from App Store.""";
-	String get warn3 => """Save old password files from Free version to shared folder.""";
-	String get warn4 => """Open and confirm ALL old password files.""";
-	String get warn5 => """After transfering all old password files, you can choose to keep or delete Free version.""";
+  final Message_fr _parent;
+  const IapMessage_fr(this._parent) : super(_parent);
+  String get benefits1 =>
+      """Groupes de mots de passe et mots de passe illimités""";
+  String get benefits2 =>
+      """Autoriser l'authentification de l'appareil pour les fichiers de mots de passe ouverts""";
+  String get benefits => """Les avantages comprennent:""";
+  String get buyConfirmMsg => """Es-tu sur de vouloir continuer?""";
+  String get buyTitle => """Acheter""";
+  String get failed => """Achat raté. Veuillez réessayer.""";
+  String get freeVer => """Free Version""";
+  String get freeLimit =>
+      """Vous pouvez avoir jusqu'à 5 groupes de mots de passe et 5 mots de passe dans chaque groupe. Passez à la version Pro pour avoir des groupes et des mots de passe illimités.""";
+  String get paid => """Ceci est la version payante.""";
+  String get thankYou => """Merci de nous soutenir.""";
+  String get title => """Acheter Simple Password Pro""";
+  String get unpaid => """Ceci est la version gratuite.""";
+  String get verify =>
+      """J'ai 13 ans et plus, ou mon parent/tuteur légal consent à cet achat.""";
+  String get thankYouTitle => """Merci""";
+  String get succ => """L'achat est terminé.\nMerci de votre soutien.""";
+  String get warn => """Notes de mise à niveau importantes""";
+  String get warn1 =>
+      """Veuillez suivre les étapes pour passer à la version Pro.""";
+  String get warn2 =>
+      """Achetez et installez la version Pro depuis l'App Store.""";
+  String get warn3 =>
+      """Enregistrez les anciens fichiers de mots de passe de la version gratuite dans un dossier partagé.""";
+  String get warn4 =>
+      """Ouvrez et confirmez TOUS les anciens fichiers de mots de passe.""";
+  String get warn5 =>
+      """Après avoir transféré tous les anciens fichiers de mots de passe, vous pouvez choisir de conserver ou de supprimer la version gratuite.""";
 }
 
 class AboutMessage_fr extends AboutMessage {
-	final Message_fr _parent;
-	const AboutMessage_fr(this._parent):super(_parent);
-	String get terms => """Simple Password term of use
-1. 
-2. 
-3.
+  final Message_fr _parent;
+  const AboutMessage_fr(this._parent) : super(_parent);
+  String get terms => """Simple Password Free/Pro Term of Use
+
+"The application" means Simple Password Free or Simple Password Pro.
+"Our terms of Use" means this term of use.
+
+1. By using the application, you acknowledge and consent to our Terms of Use.
+2. We grant to you a non-exclusive, non-transferable, non-sharable, revocable, limited license to use the application solely for personal, non-commercial use in accordance with the terms of use.
+3. You must not modify, hack, recreate, copy or exploit any part of the application.
+4. You must not upload or inject any malware, illegal or obscene content.
+5. You must not reuse, modify, download or copy the application icon or the name “Simple Password” for any commercial use.
+6. You must be 13+ years old to use and make any purchases pertaining to the app, or have granted consent from a legal parent/guardian.
+7. The application is provided "as is".
+8. We do not provide any kind of warranty.
+9. Users are using the application at their own risk.
+10. We do not guarantee that the application is free from mistakes, malware, errors or other issues that could potentially damage a user.
+11. We will not be held liable for any damages that arise from the use of this application, such as data loss, conduct of third parties, inability to access the app, copyright infringement of others and any other damages that may occur.
+12. We may modify the Terms of Use at any given time, so please review these terms periodically. We will notify any changes made through the application.
+13. If you have any questions or concerns about our Terms of Use, please contact us.
 
 """;
-	String get privacy => """Simlple Password privacy
-1.
-2.
-3.
+  String get privacy => """Simple Password Free/Pro Privacy Policy
 
+"The application" means Simple Password Free or Simple Password Pro.
+"Our Privacy Policy" means this Privacy Policy.
 
+1. The application strives to protect your privacy. These policies disclose how the application handles and secures your personal information and data. By using this application, you give consent to abide by our Privacy Policy.
+2. All information and data are stored on your electronic device, thus, the application does not collect or have access to any personal information or personal data.
+3. The application does not share personal information and data with separate entities or third party companies. However, if you choose to export or share personal information and data with entities separate to the application, such as cloud services (Ex. Dropbox), we are not responsible, nor have control with what these services and/or related third parties do with your personal information and data.
+4. We reserve the right to update and/or change our Privacy Policy at any given time. Your continued use of the application will constitute your acknowledgement of modifications and consent to abide by our Privacy Policy. Changes made to our Privacy Policy will be notified through the application prior to them becoming effective.
+5. If you have any questions or concerns about our Privacy Policy, please contact us at simple_password@syspole.com.
 """;
 }
-

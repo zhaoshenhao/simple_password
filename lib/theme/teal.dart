@@ -415,10 +415,13 @@ final ThemeData teal = ThemeData(
     opacity: 1,
     size: 24,
   ),
-  accentIconTheme: IconThemeData(
-    color: Color(0xffffffff),
-    opacity: 1,
-    size: 24,
+//  accentIconTheme: IconThemeData(
+//    color: Color(0xffffffff),
+//    opacity: 1,
+//    size: 24,
+//  ),
+  floatingActionButtonTheme: FloatingActionButtonThemeData(
+    foregroundColor: Color(0xffffffff),
   ),
   sliderTheme: SliderThemeData(
     activeTrackColor: null,

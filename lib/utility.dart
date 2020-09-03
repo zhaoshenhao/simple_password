@@ -241,6 +241,8 @@ class Util {
     sp = await SharedPreferences.getInstance();
     docDir = await getApplicationDocumentsDirectory();
     tmpDir = await getTemporaryDirectory();
+    _createDir(docDir);
+    _createDir(tmpDir);
     String lang = getLanguage();
     if (lang == null || lang == '') {
       lang = 'en';
@@ -248,6 +250,16 @@ class Util {
     }
     locale = Locale(lang, '');
     loadMessage(locale.languageCode);
+  }
+
+  static void _createDir(Directory dir) {
+    try {
+      if (dir != null && !dir.existsSync()) {
+        dir.createSync(recursive: true);
+      }
+    } catch (e) {
+      Log.error("Create dir $dir failed.", error: e);
+    }
   }
 
   static bool isAlphaNum(String val) {

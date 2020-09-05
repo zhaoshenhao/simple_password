@@ -9,15 +9,14 @@ import 'package:simple_password/pro_utility.dart';
 import 'package:simple_password/ui_utility.dart';
 import 'package:simple_password/utility.dart';
 
-int gindex;
 Group _group;
+Group _og;
 
 class GroupPage extends StatelessWidget {
-  GroupPage(int i) {
-    gindex = i;
-    Group g = data.groups[i];
-    g.basicData.accessTime = DateTime.now();
-    _group = g.clone();
+  GroupPage(Group og) {
+    _og = og;
+    _group = og.clone();
+    _group.basicData.accessTime = DateTime.now();
   }
 
   @override
@@ -85,7 +84,7 @@ class _GroupWidgetState extends State<GroupWidget> {
     } else {
       Password p = Util.mockPassword(data.key);
       _group.passwords.add(p);
-      _passwordView(_group.passwords.length - 1);
+      _passwordView(p);
       changes++;
       _group.basicData.deltaTime = DateTime.now();
       Scaffold.of(context).showSnackBar(UiUtil.snackBar(m.group.pswdCreated));
@@ -109,7 +108,7 @@ class _GroupWidgetState extends State<GroupWidget> {
             ),
             trailing: Icon(Icons.keyboard_arrow_right),
             onTap: () {
-              _passwordView(i);
+              _passwordView(_group.passwords[i]);
             }),
       ),
       actions: <Widget>[
@@ -128,7 +127,7 @@ class _GroupWidgetState extends State<GroupWidget> {
   void _confirm() {
     if (_formKey.currentState.validate()) {
       _group.basicData.deltaTime = DateTime.now();
-      data.groups[gindex] = _group.clone();
+      _og.copyFrom(_group);
       UiUtil.confirmAll(context);
     }
   }
@@ -193,7 +192,8 @@ class _GroupWidgetState extends State<GroupWidget> {
         )));
     list.add(Container(
         padding: UiUtil.edgeInsets2,
-        child: UiUtil.headingRow(m.common.passwords)));
+        child: UiUtil.headingRow(
+            "${m.common.passwords} (${m.common.total}: ${_group.passwords.length})")));
     _group.passwords
         .sort((a, b) => a.basicData.name.compareTo(b.basicData.name));
     for (int i = 0; i < _group.passwords.length; i++) {
@@ -207,11 +207,10 @@ class _GroupWidgetState extends State<GroupWidget> {
     setState(() {});
   }
 
-  void _passwordView(int i) {
+  void _passwordView(Password p) {
     Navigator.of(context)
         .push(new MaterialPageRoute(
-            builder: (BuildContext context) =>
-                OnePasswordPage(i, gindex, _group)))
+            builder: (BuildContext context) => OnePasswordPage(p, _group, _og)))
         .then((value) => _getRequests());
   }
 }

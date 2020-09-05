@@ -49,7 +49,7 @@ class _LoadPageWidgetState extends State<LoadPageWidget> {
 
   @override
   Widget build(BuildContext context) {
-    double _twidth = MediaQuery.of(context).size.width - 110;
+    _twidth = MediaQuery.of(context).size.width - 170;
 
     List<DropdownMenuItem<String>> hist = _getHistory();
     return new ListView(

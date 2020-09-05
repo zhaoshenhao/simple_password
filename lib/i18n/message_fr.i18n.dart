@@ -85,6 +85,7 @@ class CommonMessage_fr extends CommonMessage {
 	String get url => """URL""";
 	String get version => """Version""";
 	String get yes => """Oui""";
+	String get total => """Totale""";
 }
 
 class BasicMessage_fr extends BasicMessage {

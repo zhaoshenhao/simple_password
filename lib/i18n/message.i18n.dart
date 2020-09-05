@@ -84,6 +84,7 @@ class CommonMessage {
 	String get url => """URL""";
 	String get version => """Version""";
 	String get yes => """Yes""";
+	String get total => """Total""";
 }
 
 class BasicMessage {

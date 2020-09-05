@@ -45,30 +45,38 @@ class _LoadPageWidgetState extends State<LoadPageWidget> {
   List<String> historyFiles;
   String choosed = noneFile;
   String secKey;
+  double _twidth = 200;
 
   @override
   Widget build(BuildContext context) {
+    double _twidth = MediaQuery.of(context).size.width - 110;
+
     List<DropdownMenuItem<String>> hist = _getHistory();
     return new ListView(
       padding: UiUtil.edgeInsets,
       children: <Widget>[
         UiUtil.headingRow(m.load.loadPswdFile),
         Row(children: <Widget>[
-          Expanded(child: Text(m.common.recent)),
-          IgnorePointer(
-              ignoring: !hasHistory,
-              child: DropdownButton<String>(
-                value: choosed,
-                items: hist,
-                onChanged: (value) => setState(() {
-                  choosed = value;
-                }),
-              )),
-          IconButton(
-              icon: Icon(Icons.folder_open),
-              tooltip: m.load.openOther,
-              color: UiUtil.currentTheme.accentColor,
-              onPressed: () async => _openFile()),
+          Container(
+              constraints: BoxConstraints(minWidth: 65, maxWidth: 65),
+              child: Text(m.common.recent)),
+          Expanded(
+              child: IgnorePointer(
+                  ignoring: !hasHistory,
+                  child: DropdownButton<String>(
+                    value: choosed,
+                    items: hist,
+                    onChanged: (value) => setState(() {
+                      choosed = value;
+                    }),
+                  ))),
+          Container(
+              constraints: BoxConstraints(minWidth: 30, maxWidth: 45),
+              child: IconButton(
+                  icon: Icon(Icons.folder_open),
+                  tooltip: m.load.openOther,
+                  color: UiUtil.currentTheme.accentColor,
+                  onPressed: () async => _openFile())),
         ]),
         TextFormField(
           cursorColor: UiUtil.currentTheme.accentColor,
@@ -151,7 +159,7 @@ class _LoadPageWidgetState extends State<LoadPageWidget> {
     list.add(
         Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
       Container(
-          width: 120,
+          width: 125,
           child: RaisedButton.icon(
             icon: Icon(Icons.lock_open),
             onPressed: hasHistory ? () => _loadAndUnlock() : null,
@@ -160,7 +168,7 @@ class _LoadPageWidgetState extends State<LoadPageWidget> {
             textColor: UiUtil.currentTheme.buttonColor,
           )),
       Container(
-          width: 120,
+          width: 125,
           child: RaisedButton.icon(
             icon: Icon(Icons.add_circle_outline),
             onPressed: () => _newFile(),
@@ -224,17 +232,21 @@ class _LoadPageWidgetState extends State<LoadPageWidget> {
         }
         return new DropdownMenuItem<String>(
           value: value,
-          child: new Text(str),
+          child: _getText(str),
         );
       }).toList();
     } else {
       x = List();
       x.add(new DropdownMenuItem<String>(
         value: choosed,
-        child: new Text(choosed),
+        child: _getText(choosed),
       ));
     }
     return x;
+  }
+
+  Widget _getText(String text) {
+    return new Container(width: _twidth, child: Text(text));
   }
 
   bool _load(String path, String secKey) {

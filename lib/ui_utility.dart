@@ -73,13 +73,15 @@ class UiUtil {
   static Row headingRow(String text) {
     return Row(
       children: <Widget>[
-        Text(
-          text,
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 20,
-          ),
-        ),
+        Container(
+            constraints: BoxConstraints(minWidth: 10, maxWidth: 280),
+            child: Text(
+              text,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+              ),
+            )),
         Expanded(
           child: Container(
             height: 1.0,

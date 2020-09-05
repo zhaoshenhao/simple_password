@@ -52,6 +52,7 @@ common:
   url: URL
   version: Version
   yes: Oui
+  total: Totale
 
 basic:
   hint: Veuillez saisir le nom de la collection de mots de passe.

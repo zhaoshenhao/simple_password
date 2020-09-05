@@ -52,6 +52,7 @@ common:
   url: URL
   version: 版本
   yes: 是
+  total: 总计
 
 basic:
   hint: 请为您的密码文件起个名称，作为标识.

@@ -81,7 +81,7 @@ class PasswordsPageState extends State<PasswordsPage> {
       Group g = Util.mockGroup(data.key);
       data.groups.add(g);
       changes++;
-      _groupView(data.groups.length - 1);
+      _groupView(g);
     }
   }
 
@@ -141,7 +141,9 @@ class PasswordsPageState extends State<PasswordsPage> {
   List<Widget> _buildRows() {
     List<Widget> list = List();
     list.add(Container(
-        padding: UiUtil.edgeInsets, child: UiUtil.headingRow(m.common.groups)));
+        padding: UiUtil.edgeInsets,
+        child: UiUtil.headingRow(
+            "${m.common.groups} (${m.common.total}: ${data.groups.length})")));
     for (int i = 0; i < data.groups.length; i++) {
       list.add(_getItem(i));
     }
@@ -178,7 +180,7 @@ class PasswordsPageState extends State<PasswordsPage> {
             ),
             trailing: Icon(Icons.keyboard_arrow_right),
             onTap: () {
-              _groupView(i);
+              _groupView(data.groups[i]);
             }),
       ),
       actions: <Widget>[
@@ -198,15 +200,16 @@ class PasswordsPageState extends State<PasswordsPage> {
     setState(() {});
   }
 
-  void _groupView(int i) {
+  void _groupView(Group g) {
     Navigator.of(context)
         .push(new MaterialPageRoute(
-            builder: (BuildContext context) => GroupPage(i)))
+            builder: (BuildContext context) => GroupPage(g)))
         .then((value) => _getRequests());
   }
 
-  void _lockApp() {
-    AppLock.of(context).showLockScreen();
+  void _lockApp() async {
+    await AppLock.of(context).showLockScreen();
+    setState(() {});
   }
 
   Future<void> _save({bool confirmed: false}) async {

@@ -51,6 +51,13 @@ class BasicData {
   }
 
   Map<String, dynamic> toJson() => _$BasicDataToJson(this);
+  void copyFrom(BasicData d) {
+    this.accessTime = d.accessTime;
+    this.createTime = d.createTime;
+    this.deltaTime = d.deltaTime;
+    this.name = d.name;
+    this.notes = d.notes;
+  }
 }
 
 @JsonSerializable(explicitToJson: true)
@@ -104,6 +111,13 @@ class Group {
   }
 
   Map<String, dynamic> toJson() => _$GroupToJson(this);
+  void copyFrom(Group g) {
+    this.basicData.copyFrom(g.basicData);
+    this.passwords = List();
+    for (Password p in g.passwords) {
+      this.passwords.add(p.clone());
+    }
+  }
 }
 
 @JsonSerializable(explicitToJson: true)
@@ -131,6 +145,14 @@ class Password {
   }
 
   Map<String, dynamic> toJson() => _$PasswordToJson(this);
+  void copyFrom(Password p) {
+    this.basicData.copyFrom(p.basicData);
+    this.key = p.key;
+    this.notes = p.notes;
+    this.password = p.password;
+    this.url = this.url;
+    this.username = this.username;
+  }
 }
 
 @JsonSerializable(explicitToJson: true)

@@ -52,6 +52,7 @@ common:
   url: URL
   version: Version
   yes: Yes
+  total: Total
 
 basic:
   hint: Please enter the name of the password collection.

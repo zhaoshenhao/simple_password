@@ -8,19 +8,18 @@ import 'package:simple_password/i18n/i18n.dart';
 import 'package:simple_password/ui_utility.dart';
 import 'package:simple_password/utility.dart';
 
-int pgindex;
-int pindex;
 Password _password;
 Group _tgroup;
+Group _og;
+Password _op;
 
 class OnePasswordPage extends StatelessWidget {
-  OnePasswordPage(int pi, int pgi, Group group) {
-    pindex = pi;
-    pgindex = pgi;
+  OnePasswordPage(Password password, Group group, Group og) {
     _tgroup = group;
-    Password p = group.passwords[pi];
-    p.basicData.accessTime = DateTime.now();
-    _password = p.clone();
+    _og = og;
+    _op = password;
+    _password = _op.clone();
+    _password.basicData.accessTime = DateTime.now();
     String tmp = _password.password;
     _password.password = Util.decryptPassword(tmp, data.key, _password.key);
   }
@@ -238,8 +237,8 @@ class _OnePasswordWidgetState extends State<OnePasswordWidget> {
       Password tmp = _password.clone();
       String tp = tmp.password;
       tmp.password = Util.encryptPassword(tp, data.key, tmp.key);
-      _tgroup.passwords[pindex] = tmp;
-      data.groups[pgindex] = _tgroup.clone();
+      _op.copyFrom(tmp);
+      _og.copyFrom(_tgroup);
       setState(() {});
       UiUtil.confirmAll(context);
     }
@@ -280,8 +279,7 @@ class _OnePasswordWidgetState extends State<OnePasswordWidget> {
   }
 
   void _resetPassword() {
-    pswd.text = Util.decryptPassword(
-        _tgroup.passwords[pindex].password, data.key, _password.key);
+    pswd.text = Util.decryptPassword(_op.password, data.key, _password.key);
     _password.password = pswd.text;
   }
 

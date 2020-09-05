@@ -85,6 +85,7 @@ class CommonMessage_zh extends CommonMessage {
 	String get url => """URL""";
 	String get version => """版本""";
 	String get yes => """是""";
+	String get total => """总计""";
 }
 
 class BasicMessage_zh extends BasicMessage {

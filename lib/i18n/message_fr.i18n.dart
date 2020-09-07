@@ -127,13 +127,18 @@ class FileMessage_fr extends FileMessage {
 class PswdMessage_fr extends PswdMessage {
 	final Message_fr _parent;
 	const PswdMessage_fr(this._parent):super(_parent);
-	String get checkKey => """Check main secret key and file format""";
+	String get checkKey => """Vérifier la clé secrète principale et le format de fichier""";
+	String get change => """Changer la clé secrète principale""";
 	String containUpper(int cnt) => """Doit contenir $cnt majuscule ${_plural(cnt, one:'lettre', many:'lettres')}""";
 	String containLower(int cnt) => """Doit contenir $cnt minuscule ${_plural(cnt, one:'lettre', many:'lettres')}""";
 	String containDigit(int cnt) => """Doit contenir $cnt ${_plural(cnt, one:'chiffre', many:'chiffres')}.""";
 	String containSpecial(int cnt) => """Doit contenir $cnt special ${_plural(cnt, one:'lettre', many:'lettres')}""";
 	String get detail => """Détail du Mot de Passe""";
+	String get error => """La confirmation du mot de passe ne correspond pas""";
 	String get msKey => """Clé Secrète Principale""";
+	String get msKeyCur => """Clé secrète principale actuelle""";
+	String get msKeyNew => """Nouvelle clé secrète principale""";
+	String get oldMismatch => """L'ancienne clé secrète principale est incorrecte""";
 	String get pswdCheck => """Vérification de Mot de Passe""";
 	String get pswdCopied => """Mot de passe copié""";
 	String get pswdEmpty => """Le mot de passe est vide""";
@@ -142,6 +147,7 @@ class PswdMessage_fr extends PswdMessage {
 	String get pswdHint2 => """Tapez votre mot de passe""";
 	String get pswdLen => """Longueur inférieure à""";
 	String get titleHint => """Le titre de l'article""";
+	String get pswdSame => """La nouvelle clé secrète principale est la même que celle actuelle""";
 	String get unCopied => """L'identifiant copié""";
 	String get unHint => """L'identifiant""";
 	String get urlCopied => """URL copiée""";
@@ -243,6 +249,13 @@ class IapMessage_fr extends IapMessage {
 	String get benefits => """Les avantages comprennent:""";
 	String get buyConfirmMsg => """Es-tu sur de vouloir continuer?""";
 	String get buyTitle => """Acheter""";
+	String get buyError1 => """Erreur d'achat. Veuillez revoir cette page pour vérifier le résultat final.""";
+	String get buyError2 => """Achat invalide. Veuillez revoir cette page pour vérifier le résultat final.""";
+	String get buyError3 => """Achat interrompu. Veuillez revoir cette page pour vérifier le résultat final.""";
+	String get buyRefund => """Si un remboursement est requis, veuillez nous contacter sur https://www.syspole.com""";
+	String get error1 => """L'obtention des détails de production a échoué.""";
+	String get error2 => """Produit non trouvé.""";
+	String get error3 => """La fonction d'achat n'est pas disponible.""";
 	String get failed => """Achat raté. Veuillez réessayer.""";
 	String get freeVer => """Free Version""";
 	String get freeLimit => """Vous pouvez avoir jusqu'à 5 groupes de mots de passe et 5 mots de passe dans chaque groupe. Passez à la version Pro pour avoir des groupes et des mots de passe illimités.""";
@@ -253,6 +266,7 @@ class IapMessage_fr extends IapMessage {
 	String get verify => """J'ai 13 ans et plus, ou mon parent/tuteur légal consent à cet achat.""";
 	String get thankYouTitle => """Merci""";
 	String get succ => """L'achat est terminé.\nMerci de votre soutien.""";
+	String get unvail => """La fonction de paiement n'est pas disponible pour le moment. Merci d'essayer plus tard.""";
 	String get warn => """Notes de mise à niveau importantes""";
 	String get warn1 => """Veuillez suivre les étapes pour passer à la version Pro.""";
 	String get warn2 => """Achetez et installez la version Pro depuis l'App Store.""";

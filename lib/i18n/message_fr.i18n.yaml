@@ -82,13 +82,18 @@ file:
   validFn: Nom de fichier valide
 
 pswd:
-  checkKey: Check main secret key and file format
+  checkKey: Vérifier la clé secrète principale et le format de fichier
+  change: Changer la clé secrète principale
   containUpper(int cnt): "Doit contenir $cnt majuscule ${_plural(cnt, one:'lettre', many:'lettres')}"
   containLower(int cnt): "Doit contenir $cnt minuscule ${_plural(cnt, one:'lettre', many:'lettres')}"
   containDigit(int cnt): "Doit contenir $cnt ${_plural(cnt, one:'chiffre', many:'chiffres')}."
   containSpecial(int cnt): "Doit contenir $cnt special ${_plural(cnt, one:'lettre', many:'lettres')}"
   detail: Détail du Mot de Passe
+  error: La confirmation du mot de passe ne correspond pas
   msKey: Clé Secrète Principale
+  msKeyCur: Clé secrète principale actuelle
+  msKeyNew: Nouvelle clé secrète principale
+  oldMismatch: L'ancienne clé secrète principale est incorrecte
   pswdCheck: Vérification de Mot de Passe
   pswdCopied: Mot de passe copié
   pswdEmpty: Le mot de passe est vide
@@ -97,6 +102,7 @@ pswd:
   pswdHint2: Tapez votre mot de passe
   pswdLen: Longueur inférieure à
   titleHint: Le titre de l'article
+  pswdSame: La nouvelle clé secrète principale est la même que celle actuelle
   unCopied: L'identifiant copié
   unHint: "L'identifiant"
   urlCopied: URL copiée
@@ -177,6 +183,13 @@ iap:
   benefits: "Les avantages comprennent:"
   buyConfirmMsg: Es-tu sur de vouloir continuer?
   buyTitle: Acheter
+  buyError1: Erreur d'achat. Veuillez revoir cette page pour vérifier le résultat final.
+  buyError2: Achat invalide. Veuillez revoir cette page pour vérifier le résultat final.
+  buyError3: Achat interrompu. Veuillez revoir cette page pour vérifier le résultat final.
+  buyRefund: "Si un remboursement est requis, veuillez nous contacter sur https://www.syspole.com"
+  error1: L'obtention des détails de production a échoué.
+  error2: Produit non trouvé.
+  error3: La fonction d'achat n'est pas disponible.
   failed: Achat raté. Veuillez réessayer.
   freeVer: Free Version
   freeLimit: Vous pouvez avoir jusqu'à 5 groupes de mots de passe et 5 mots de passe dans chaque groupe. Passez à la version Pro pour avoir des groupes et des mots de passe illimités.
@@ -187,6 +200,7 @@ iap:
   verify: J'ai 13 ans et plus, ou mon parent/tuteur légal consent à cet achat.
   thankYouTitle: Merci
   succ: L'achat est terminé.\nMerci de votre soutien.
+  unvail: La fonction de paiement n'est pas disponible pour le moment. Merci d'essayer plus tard.
   warn: Notes de mise à niveau importantes
   warn1: Veuillez suivre les étapes pour passer à la version Pro.
   warn2: Achetez et installez la version Pro depuis l'App Store.

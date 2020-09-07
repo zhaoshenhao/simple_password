@@ -29,7 +29,9 @@ class CreatePageWidget extends StatefulWidget {
 class _CreatePageWidgetState extends State<CreatePageWidget> {
   final _formKey = GlobalKey<FormState>();
   Data _data;
+  String _secKey1;
   String _secKey2;
+  bool _showPassword1 = false;
   bool _showPassword2 = false;
   @override
   Widget build(BuildContext context) {
@@ -64,6 +66,35 @@ class _CreatePageWidgetState extends State<CreatePageWidget> {
                 hintText: m.pswd.pswdHint,
                 suffixIcon: GestureDetector(
                   onLongPressStart: (details) {
+                    _showPassword1 = true;
+                    setState(() {});
+                  },
+                  onLongPressEnd: (details) {
+                    _showPassword1 = false;
+                    setState(() {});
+                  },
+                  child: Icon(
+                    _showPassword1 ? Icons.visibility : Icons.visibility_off,
+                    color: UiUtil.currentTheme.accentColor,
+                  ),
+                )),
+            obscureText: !_showPassword1,
+            validator: (value) {
+              if (value.isEmpty) {
+                return m.pswd.pswdHint;
+              }
+              return null;
+            },
+            onChanged: (val) => {_secKey1 = val},
+          ),
+          TextFormField(
+            cursorColor: UiUtil.currentTheme.accentColor,
+            keyboardType: TextInputType.text,
+            decoration: InputDecoration(
+                labelText: m.common.confirm,
+                hintText: m.pswd.pswdHint,
+                suffixIcon: GestureDetector(
+                  onLongPressStart: (details) {
                     _showPassword2 = true;
                     setState(() {});
                   },
@@ -80,6 +111,9 @@ class _CreatePageWidgetState extends State<CreatePageWidget> {
             validator: (value) {
               if (value.isEmpty) {
                 return m.pswd.pswdHint;
+              }
+              if (value != _secKey1) {
+                return m.pswd.error;
               }
               return null;
             },

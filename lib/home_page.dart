@@ -90,7 +90,7 @@ class PasswordsPageState extends State<PasswordsPage> {
     return new Scaffold(
         key: _scaffoldKey,
         appBar: AppBar(
-          title: Text(m.common.appName(ProUtil.isPaid())),
+          title: Text(m.common.appName(ProUtil.isPaid)),
           actions: <Widget>[
             IconButton(
               icon: Icon(

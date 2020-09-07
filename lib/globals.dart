@@ -9,3 +9,4 @@ Data data = Util.mockData();
 int randomIdx;
 bool readOnly = false;
 String secPassword;
+String newSecPassword;

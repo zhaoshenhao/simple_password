@@ -127,12 +127,17 @@ class PswdMessage {
 	final Message _parent;
 	const PswdMessage(this._parent);
 	String get checkKey => """Check main secret key and file format""";
+	String get change => """Change master secret key""";
 	String containUpper(int cnt) => """Must contain $cnt upper case ${_plural(cnt, one:'letter', many:'letters')}""";
 	String containLower(int cnt) => """Must contain $cnt lower case ${_plural(cnt, one:'letter', many:'letters')}""";
 	String containDigit(int cnt) => """Must contain $cnt ${_plural(cnt, one:'digit', many:'digits')}""";
 	String containSpecial(int cnt) => """Must contain $cnt special ${_plural(cnt, one:'character', many:'characters')}""";
 	String get detail => """Password Detail""";
+	String get error => """Password confirmation not match""";
 	String get msKey => """Main Secret Key""";
+	String get msKeyCur => """Current main secret key""";
+	String get msKeyNew => """New main secret key""";
+	String get oldMismatch => """Old main secret key is incorrect""";
 	String get pswdCheck => """Password Check""";
 	String get pswdCopied => """Password copied""";
 	String get pswdEmpty => """Password is empty""";
@@ -140,6 +145,7 @@ class PswdMessage {
 	String get pswdHint => """Please enter your main secret key""";
 	String get pswdHint2 => """Enter your password""";
 	String get pswdLen => """Length less than""";
+	String get pswdSame => """New master secret key is same as current one""";
 	String get titleHint => """The item title""";
 	String get unCopied => """Username copied""";
 	String get unHint => """The Username""";
@@ -241,7 +247,14 @@ class IapMessage {
 	String get benefits2 => """Allow device authentication for opened password files""";
 	String get benefits => """Benefits include:""";
 	String get buyConfirmMsg => """Are you sure you want to continue?""";
+	String get buyError1 => """Purchase error. Please revisit this page.""";
+	String get buyError2 => """Purchase invalid. Please revisit this page.""";
+	String get buyError3 => """Purchase interrupted. Please revisit this page.""";
+	String get buyRefund => """If refund is required, please contact us at https://www.syspole.com""";
 	String get buyTitle => """Buy""";
+	String get error1 => """Getting production detail is failed.""";
+	String get error2 => """Product not found.""";
+	String get error3 => """Purcahse function is not available.""";
 	String get failed => """Purchase failed. Please try again.""";
 	String get freeVer => """Free Version""";
 	String get freeLimit => """You can have up to 5 password groups and 5 passwords in each group. Upgrade to Pro version to have unlimited groups and passwords.""";
@@ -252,6 +265,7 @@ class IapMessage {
 	String get verify => """I am 13+ years old, or legal parent/guardian consents to this purchase.""";
 	String get thankYouTitle => """Thank You""";
 	String get succ => """The purchase is completed. \nThanks you for your supporting.""";
+	String get unvail => """Payment function is unavailable now. Please try later.""";
 	String get warn => """Important Upgrade Notes""";
 	String get warn1 => """Please follow steps to upgrade to Pro Version.""";
 	String get warn2 => """Buy and install Pro version from App Store.""";

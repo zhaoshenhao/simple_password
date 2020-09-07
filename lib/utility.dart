@@ -46,6 +46,7 @@ class Util {
   static final String digits = "0123456789";
   static final String historyFilesKey = "HISTORY_FILES";
   static final String languageKey = "LANGUAGE";
+  static final String paymentKey = "PAYMENT";
   static final String themeKey = 'THEME';
   static Locale locale = Locale('en', '');
   static LocaleChangeCallback localeChangeCallback;
@@ -217,6 +218,10 @@ class Util {
     return lang;
   }
 
+  static String getPayment() {
+    return sp.getString(paymentKey);
+  }
+
   static String getPath(String fn) {
     return Util.docDir.path + "/" + fn + ext;
   }
@@ -314,6 +319,10 @@ class Util {
   static Future<bool> setLanguage(String language) {
     loadMessage(language);
     return sp.setString(languageKey, language);
+  }
+
+  static Future<bool> setPayment(String payment) {
+    return sp.setString(paymentKey, payment);
   }
 
   static Future<bool> setTheme(String theme) {

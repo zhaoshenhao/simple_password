@@ -17,11 +17,11 @@ class LoadPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: m.common.appName(ProUtil.isPaid()),
+        title: m.common.appName(ProUtil.isPaid),
         theme: UiUtil.currentTheme,
         home: new Scaffold(
           appBar: AppBar(
-            title: Text(m.common.appName(ProUtil.isPaid())),
+            title: Text(m.common.appName(ProUtil.isPaid)),
           ),
           body: new Center(
             child: new LoadPageWidget(),
@@ -131,7 +131,7 @@ class _LoadPageWidgetState extends State<LoadPageWidget> {
   }
 
   Widget _getBioButton() {
-    if (currentFilename == null || !ProUtil.isPaid()) {
+    if (currentFilename == null || !ProUtil.isPaid) {
       return null;
     }
     Icon icon;
@@ -181,7 +181,7 @@ class _LoadPageWidgetState extends State<LoadPageWidget> {
   }
 
   bool _canUseLocalAuth() {
-    return currentFilename == choosed && ProUtil.isPaid();
+    return currentFilename == choosed && ProUtil.isPaid;
   }
 
   void _localAuth() async {

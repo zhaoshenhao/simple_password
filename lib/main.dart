@@ -16,6 +16,7 @@ void main() async {
   await Util.init();
   await UiUtil.initTheme();
   await LocalAuthUtil.init();
+  await ProUtil.init();
   CatcherOptions debugOptions =
       CatcherOptions(DialogReportMode(), [ConsoleHandler()]);
   CatcherOptions releaseOptions = CatcherOptions(DialogReportMode(), [
@@ -42,7 +43,7 @@ class SimplePasswordState extends State<SimplePassword> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       navigatorKey: Catcher.navigatorKey,
-      title: m.common.appName(ProUtil.isPaid()),
+      title: m.common.appName(ProUtil.isPaid),
       theme: UiUtil.currentTheme,
       home: new PasswordsPage(),
       locale: Util.locale,

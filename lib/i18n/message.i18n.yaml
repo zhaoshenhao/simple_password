@@ -83,12 +83,17 @@ file:
 
 pswd:
   checkKey: Check main secret key and file format
+  change: Change master secret key
   containUpper(int cnt): "Must contain $cnt upper case ${_plural(cnt, one:'letter', many:'letters')}"
   containLower(int cnt): "Must contain $cnt lower case ${_plural(cnt, one:'letter', many:'letters')}"
   containDigit(int cnt): "Must contain $cnt ${_plural(cnt, one:'digit', many:'digits')}"
   containSpecial(int cnt): "Must contain $cnt special ${_plural(cnt, one:'character', many:'characters')}"
   detail: Password Detail
+  error: Password confirmation not match
   msKey: Main Secret Key
+  msKeyCur: Current main secret key
+  msKeyNew: New main secret key
+  oldMismatch: Old main secret key is incorrect
   pswdCheck: Password Check
   pswdCopied: Password copied
   pswdEmpty: Password is empty
@@ -96,6 +101,7 @@ pswd:
   pswdHint: Please enter your main secret key
   pswdHint2: Enter your password
   pswdLen: Length less than
+  pswdSame: New master secret key is same as current one
   titleHint: The item title
   unCopied: Username copied
   unHint: The Username
@@ -176,7 +182,14 @@ iap:
   benefits2: Allow device authentication for opened password files
   benefits: "Benefits include:"
   buyConfirmMsg: Are you sure you want to continue?
+  buyError1: Purchase error. Please revisit this page.
+  buyError2: Purchase invalid. Please revisit this page.
+  buyError3: Purchase interrupted. Please revisit this page.
+  buyRefund: "If refund is required, please contact us at https://www.syspole.com"
   buyTitle: Buy
+  error1: Getting production detail is failed.
+  error2: Product not found.
+  error3: Purcahse function is not available.
   failed: Purchase failed. Please try again.
   freeVer: Free Version
   freeLimit: You can have up to 5 password groups and 5 passwords in each group. Upgrade to Pro version to have unlimited groups and passwords.
@@ -187,6 +200,7 @@ iap:
   verify: I am 13+ years old, or legal parent/guardian consents to this purchase.
   thankYouTitle: Thank You
   succ: The purchase is completed. \nThanks you for your supporting.
+  unvail: Payment function is unavailable now. Please try later.
   warn: Important Upgrade Notes
   warn1: Please follow steps to upgrade to Pro Version.
   warn2: Buy and install Pro version from App Store.

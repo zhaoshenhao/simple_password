@@ -25,10 +25,15 @@ class SaveUtil {
     bool yes = confirmed
         ? true
         : await UiUtil.confirm(m.common.confirm, m.common.saveAllAsk, context);
-    String password = Util.decryptPassword(secPassword, data.key, randomIdx);
     if (yes) {
+      String password = Util.decryptPassword(secPassword, data.key, randomIdx);
+      String passwordNew;
+      if (newSecPassword != null && newSecPassword != secPassword) {
+        passwordNew = Util.decryptPassword(newSecPassword, data.key, randomIdx);
+        secPassword = newSecPassword;
+      }
       if (FileUtil.backupAndSave(data.backupPolicy, currentFilename, data,
-          password, useBackupPolicy)) {
+          password, useBackupPolicy, passwordNew)) {
         changes = 0;
         return true;
       } else {

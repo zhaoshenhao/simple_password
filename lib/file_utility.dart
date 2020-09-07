@@ -27,7 +27,7 @@ class FileUtil {
   }
 
   static bool backupAndSave(BackupPolicy bp, String bn, Data data,
-      String password, bool useBackupPolicy) {
+      String password, bool useBackupPolicy, String passwordNew) {
     bool ret;
     if (bp.autoBackup && useBackupPolicy) {
       ret = backup(currentFilename, data, password);
@@ -36,7 +36,7 @@ class FileUtil {
       }
     }
     String path = Util.docDir.path + "/" + currentFilename + Util.ext;
-    ret = save(data, path, password);
+    ret = save(data, path, passwordNew != null ? passwordNew : password);
     if (!ret) {
       return ret;
     }

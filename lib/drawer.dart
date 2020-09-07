@@ -3,7 +3,7 @@ import 'package:simple_password/about_page.dart';
 import 'package:simple_password/basic_info_page.dart';
 import 'package:simple_password/globals.dart';
 import 'package:simple_password/i18n/i18n.dart';
-import 'package:simple_password/buy_page.dart';
+import 'package:simple_password/iap_page.dart';
 import 'package:simple_password/look_feel_page.dart';
 import 'package:simple_password/password_settings_page.dart';
 import 'package:simple_password/save_page.dart';
@@ -35,7 +35,7 @@ class _AppDrawerWidgetState extends State<AppDrawer> {
       child: ListView(
           //crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text(m.common.appName(ProUtil.isPaid()),
+            Text(m.common.appName(ProUtil.isPaid),
                 style: TextStyle(
                     color: UiUtil.currentTheme.buttonColor,
                     fontSize: 18.0,
@@ -112,7 +112,7 @@ class _AppDrawerWidgetState extends State<AppDrawer> {
         },
       ),
     ]);
-    if (!ProUtil.isPaid()) {
+    if (!ProUtil.isPaid) {
       list.addAll(<Widget>[
         Divider(),
         ListTile(

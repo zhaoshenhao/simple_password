@@ -4,7 +4,7 @@ import 'package:simple_password/pro_utility.dart';
 import 'package:simple_password/ui_utility.dart';
 
 class AboutPage extends StatelessWidget {
-  final String copytype = ProUtil.isPaid() ? m.iap.paid : m.iap.unpaid;
+  final String copytype = ProUtil.isPaid ? m.iap.paid : m.iap.unpaid;
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -21,7 +21,7 @@ class AboutPage extends StatelessWidget {
             Text(''),
             Text(m.common.copyRight),
             Text(copytype),
-            Text(m.common.app + ": " + m.common.appName(ProUtil.isPaid())),
+            Text(m.common.app + ": " + m.common.appName(ProUtil.isPaid)),
             Text(m.common.developer + ": " + m.common.companyName),
             Text(m.common.version + ": " + m.common.appVer),
             Text(''),

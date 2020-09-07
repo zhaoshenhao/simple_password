@@ -128,12 +128,17 @@ class PswdMessage_zh extends PswdMessage {
 	final Message_zh _parent;
 	const PswdMessage_zh(this._parent):super(_parent);
 	String get checkKey => """请检查主密钥和文件格式.""";
+	String get change => """修改主密钥""";
 	String containUpper(int cnt) => """必须包含 $cnt 个大写字母""";
 	String containLower(int cnt) => """必须包含 $cnt 个小写字母""";
 	String containDigit(int cnt) => """必须包含 $cnt 个数字""";
 	String containSpecial(int cnt) => """必须包含 $cnt 特殊字符""";
 	String get detail => """密码信息""";
+	String get error => """两次输入密码不匹配""";
 	String get msKey => """主密钥""";
+	String get msKeyCur => """当前主密钥""";
+	String get msKeyNew => """新的主密钥""";
+	String get oldMismatch => """请输入正确的旧主密钥""";
 	String get pswdCheck => """密码检查""";
 	String get pswdCopied => """密码已复制""";
 	String get pswdEmpty => """空密码""";
@@ -141,6 +146,7 @@ class PswdMessage_zh extends PswdMessage {
 	String get pswdHint => """输入您的主密钥""";
 	String get pswdHint2 => """请输入密码""";
 	String get pswdLen => """长度小于""";
+	String get pswdSame => """请输入不同的主密钥""";
 	String get titleHint => """请输入""";
 	String get unCopied => """用户名已复制""";
 	String get unHint => """用户名""";
@@ -243,6 +249,13 @@ class IapMessage_zh extends IapMessage {
 	String get benefits => """购买后您可以获得：""";
 	String get buyConfirmMsg => """请确认是否继续?""";
 	String get buyTitle => """购买""";
+	String get buyError1 => """购买出错. 请再次进入本页面检查最终结果.""";
+	String get buyError2 => """购买验证失败. 请再次进入本页面检查最终结果.""";
+	String get buyError3 => """购买被中断. 请再次进入本页面检查最终结果.""";
+	String get buyRefund => """如需退款，请联系我们: https://www.syspole.com""";
+	String get error1 => """获取产品信息失败.""";
+	String get error2 => """产品信息未找到.""";
+	String get error3 => """购买功能不可用.""";
 	String get failed => """购买失败，请稍后重试。""";
 	String get freeVer => """免费版本限制""";
 	String get freeLimit => """您可以最多创建 5 个密码组，每个密码组最多包含 5 个密码。升级到 Pro 版本，可以创建任意多的密码组和密码。""";
@@ -253,6 +266,7 @@ class IapMessage_zh extends IapMessage {
 	String get verify => """我的年龄超过 13 岁。或者我的监护人同意购买。""";
 	String get thankYouTitle => """感谢购买""";
 	String get succ => """购买成功。\n感谢您对我们的支持。""";
+	String get unvail => """付款功能现在无法使用。请稍后再试。""";
 	String get warn => """升级注意事项""";
 	String get warn1 => """请按如下步骤升级到 Pro 版本""";
 	String get warn2 => """在购买应用商店购买并安装密宝 Pro""";

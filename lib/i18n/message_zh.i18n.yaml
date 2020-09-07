@@ -83,12 +83,17 @@ file:
 
 pswd:
   checkKey: 请检查主密钥和文件格式.
+  change: 修改主密钥
   containUpper(int cnt): "必须包含 $cnt 个大写字母"
   containLower(int cnt): "必须包含 $cnt 个小写字母"
   containDigit(int cnt): "必须包含 $cnt 个数字"
   containSpecial(int cnt): "必须包含 $cnt 特殊字符"
   detail: 密码信息
+  error: 两次输入密码不匹配
   msKey: 主密钥
+  msKeyCur: 当前主密钥
+  msKeyNew: 新的主密钥
+  oldMismatch: 请输入正确的旧主密钥
   pswdCheck: 密码检查
   pswdCopied: 密码已复制
   pswdEmpty: 空密码
@@ -96,6 +101,7 @@ pswd:
   pswdHint: 输入您的主密钥
   pswdHint2: 请输入密码
   pswdLen: 长度小于
+  pswdSame: 请输入不同的主密钥
   titleHint: 请输入
   unCopied: 用户名已复制
   unHint: '用户名'
@@ -177,6 +183,13 @@ iap:
   benefits:  购买后您可以获得：
   buyConfirmMsg: 请确认是否继续?
   buyTitle: 购买
+  buyError1: 购买出错. 请再次进入本页面检查最终结果.
+  buyError2: 购买验证失败. 请再次进入本页面检查最终结果.
+  buyError3: 购买被中断. 请再次进入本页面检查最终结果.
+  buyRefund: "如需退款，请联系我们: https://www.syspole.com"
+  error1: 获取产品信息失败.
+  error2: 产品信息未找到.
+  error3: 购买功能不可用.
   failed: 购买失败，请稍后重试。
   freeVer: 免费版本限制
   freeLimit: 您可以最多创建 5 个密码组，每个密码组最多包含 5 个密码。升级到 Pro 版本，可以创建任意多的密码组和密码。
@@ -187,6 +200,7 @@ iap:
   verify: 我的年龄超过 13 岁。或者我的监护人同意购买。
   thankYouTitle: 感谢购买
   succ: 购买成功。\n感谢您对我们的支持。
+  unvail: 付款功能现在无法使用。请稍后再试。
   warn: 升级注意事项
   warn1: 请按如下步骤升级到 Pro 版本
   warn2: 在购买应用商店购买并安装密宝 Pro

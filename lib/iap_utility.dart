@@ -10,8 +10,8 @@ import 'i18n/i18n.dart';
 class IapUtil {
   static final int minGroup = 5;
   static final int minPassword = 10;
-  //static final _productId = "com.syspole.simplepasswordpro";
-  static final _productId = "com.syspole.simplepassword";
+  static final _productId = "com.syspole.simplepasswordpro";
+  //static final _productId = "com.syspole.simplepassword";
   static final List<String> _products = <String>[_productId];
   static final int _checkInterval = 60 * 60 * 24 * 30 * 1000;
   static InAppPurchaseConnection _connection;

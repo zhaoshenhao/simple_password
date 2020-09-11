@@ -256,7 +256,7 @@ class IapMessage_fr extends IapMessage {
 	String get error1 => """L'obtention des détails de production a échoué.""";
 	String get error2 => """Produit non trouvé.""";
 	String get error3 => """La fonction d'achat n'est pas disponible.""";
-	String get failed => """Achat raté. Veuillez réessayer.""";
+	String get failed => """Veuillez réessayer.""";
 	String get freeVer => """Free Version""";
 	String get freeLimit => """Vous pouvez avoir jusqu'à 5 groupes de mots de passe et 5 mots de passe dans chaque groupe. Passez à la version Pro pour avoir des groupes et des mots de passe illimités.""";
 	String get paid => """Ceci est la version payante.""";

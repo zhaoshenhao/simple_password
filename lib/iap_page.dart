@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:simple_password/i18n/i18n.dart';
-import 'package:simple_password/pro_utility.dart';
+import 'package:simple_password/iap_utility.dart';
 import 'package:simple_password/ui_utility.dart';
 import 'package:simple_password/utility.dart';
 
@@ -32,8 +32,14 @@ class _IapWidgetState extends State<IapWidget> {
       TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Colors.red);
   bool verified = false;
   bool _buying = false;
+  bool _prodOk = true;
+  bool _connOk = true;
 
   void buyListener(int code) {
+    setState(() {
+      _buying = false;
+    });
+
     if (code == 0) {
       UiUtil.alert(m.iap.thankYouTitle, m.iap.succ, context);
       Util.localeChangeCallback();
@@ -51,17 +57,18 @@ class _IapWidgetState extends State<IapWidget> {
     }
   }
 
-  @override
-  @protected
-  void initState() {
-    checkPastPurcahse();
-    super.initState();
-  }
-
-  void checkPastPurcahse() {
-    if (!ProUtil.isPaid) {
-      ProUtil.checkPastPurchase();
+  void _checkPastPurcahse(bool val) async {
+    verified = val;
+    if (!verified) {
+      setState(() {});
+      return;
     }
+    IapUtil.checkPastPurchase().then((value) => {});
+    if (!IapUtil.isPaid) {
+      IapUtil.iapIsAvailable().then((value) => _connOk = value);
+      _prodOk = IapUtil.isProductAvailable();
+    }
+    setState(() {});
   }
 
   @override
@@ -79,7 +86,7 @@ class _IapWidgetState extends State<IapWidget> {
   List<Widget> _buildRows() {
     List<Widget> list = List();
     list.add(ListTile(title: Text(m.iap.thankYou, style: header)));
-    if (ProUtil.isPaid) {
+    if (IapUtil.isPaid) {
       list.add(ListTile(title: Text(m.iap.paid)));
       return list;
     }
@@ -91,23 +98,35 @@ class _IapWidgetState extends State<IapWidget> {
       SwitchListTile(
         title: Text(m.iap.verify),
         value: verified,
-        onChanged: (bool val) => setState(() {
-          verified = val;
-        }),
+        onChanged: (bool val) async => _checkPastPurcahse(val),
       ),
       Divider(),
       Center(
         child: RaisedButton.icon(
             icon: Icon(Icons.payment),
-            onPressed: () {
-              _buy();
-            },
+            onPressed: (verified && _prodOk && _connOk)
+                ? () {
+                    _buy();
+                  }
+                : null,
             color: verified
                 ? UiUtil.currentTheme.primaryColor
                 : UiUtil.currentTheme.disabledColor,
             label: Text(m.iap.buyTitle)),
       ),
     ]);
+    if (_prodOk && _connOk) {
+      return list;
+    }
+    list.add(Divider());
+    list.add(ListTile(title: Text(m.common.error, style: header)));
+    if (!_connOk) {
+      list.add(_addBulletin(m.iap.error3));
+    }
+    if (!_prodOk) {
+      list.add(_addBulletin(m.iap.error2));
+    }
+    list.add(_addBulletin(m.iap.failed));
     return list;
   }
 
@@ -128,35 +147,16 @@ class _IapWidgetState extends State<IapWidget> {
   Future _buy() async {
     bool ret =
         await UiUtil.confirm(m.iap.buyTitle, m.iap.buyConfirmMsg, context);
+    if (!ret) {
+      return;
+    }
+    ret = await IapUtil.buy(buyListener);
     if (ret) {
       setState(() {
         _buying = true;
       });
-      ret = await ProUtil.buy(buyListener);
-      if (ret) {
-        setState(() {
-          _buying = false;
-        });
-      } else {
-        UiUtil.alert(m.common.error, m.iap.error3, context);
-      }
+    } else {
+      UiUtil.alert(m.common.error, m.iap.error3, context);
     }
-  }
-
-  Widget _addBulletin2(String text, int i) {
-    return Container(
-        padding:
-            EdgeInsets.only(left: 16.0, right: 16.0, top: 4.0, bottom: 4.0),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            CircleAvatar(
-              child: Text("$i"),
-              radius: 12,
-            ),
-            Text(' '),
-            Expanded(child: Text(text, style: TextStyle(fontSize: 18)))
-          ],
-        ));
   }
 }

@@ -5,7 +5,7 @@ import 'package:simple_password/globals.dart';
 import 'package:simple_password/i18n/i18n.dart';
 import 'package:simple_password/password_page.dart';
 import 'package:simple_password/save_utility.dart';
-import 'package:simple_password/pro_utility.dart';
+import 'package:simple_password/iap_utility.dart';
 import 'package:simple_password/ui_utility.dart';
 import 'package:simple_password/utility.dart';
 
@@ -77,7 +77,7 @@ class _GroupWidgetState extends State<GroupWidget> {
     if (readOnly) {
       return;
     }
-    int limit = ProUtil.groupLimit();
+    int limit = IapUtil.passwordLimit();
     if (limit > 0 && _group.passwords.length >= limit) {
       UiUtil.alert(
           m.iap.freeVer, "${m.iap.unpaid}\n${m.iap.freeLimit}", context);

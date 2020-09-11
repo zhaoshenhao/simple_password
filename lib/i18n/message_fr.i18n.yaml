@@ -190,7 +190,7 @@ iap:
   error1: L'obtention des détails de production a échoué.
   error2: Produit non trouvé.
   error3: La fonction d'achat n'est pas disponible.
-  failed: Achat raté. Veuillez réessayer.
+  failed: Veuillez réessayer.
   freeVer: Free Version
   freeLimit: Vous pouvez avoir jusqu'à 5 groupes de mots de passe et 5 mots de passe dans chaque groupe. Passez à la version Pro pour avoir des groupes et des mots de passe illimités.
   paid: Ceci est la version payante.

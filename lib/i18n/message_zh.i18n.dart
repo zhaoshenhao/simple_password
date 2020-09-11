@@ -256,7 +256,7 @@ class IapMessage_zh extends IapMessage {
 	String get error1 => """获取产品信息失败.""";
 	String get error2 => """产品信息未找到.""";
 	String get error3 => """购买功能不可用.""";
-	String get failed => """购买失败，请稍后重试。""";
+	String get failed => """请稍后重试.""";
 	String get freeVer => """免费版本限制""";
 	String get freeLimit => """您可以最多创建 5 个密码组，每个密码组最多包含 5 个密码。升级到 Pro 版本，可以创建任意多的密码组和密码。""";
 	String get paid => """您正在使用付费版本""";

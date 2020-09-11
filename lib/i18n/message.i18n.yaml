@@ -190,7 +190,7 @@ iap:
   error1: Getting production detail is failed.
   error2: Product not found.
   error3: Purcahse function is not available.
-  failed: Purchase failed. Please try again.
+  failed: Please try again.
   freeVer: Free Version
   freeLimit: You can have up to 5 password groups and 5 passwords in each group. Upgrade to Pro version to have unlimited groups and passwords.
   paid: This is the paid version.

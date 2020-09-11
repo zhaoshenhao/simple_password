@@ -10,7 +10,7 @@ import 'package:simple_password/save_page.dart';
 import 'package:simple_password/settings_page.dart';
 import 'package:simple_password/ui_utility.dart';
 import 'package:simple_password/utility.dart';
-import 'package:simple_password/pro_utility.dart';
+import 'package:simple_password/iap_utility.dart';
 
 class AppDrawer extends StatefulWidget {
   AppDrawer({Key key}) : super(key: key);
@@ -35,7 +35,7 @@ class _AppDrawerWidgetState extends State<AppDrawer> {
       child: ListView(
           //crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text(m.common.appName(ProUtil.isPaid),
+            Text(m.common.appName(IapUtil.isPaid),
                 style: TextStyle(
                     color: UiUtil.currentTheme.buttonColor,
                     fontSize: 18.0,
@@ -112,7 +112,7 @@ class _AppDrawerWidgetState extends State<AppDrawer> {
         },
       ),
     ]);
-    if (!ProUtil.isPaid) {
+    if (!IapUtil.isPaid) {
       list.addAll(<Widget>[
         Divider(),
         ListTile(

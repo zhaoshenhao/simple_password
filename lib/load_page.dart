@@ -8,7 +8,7 @@ import 'package:simple_password/file_utility.dart';
 import 'package:simple_password/globals.dart';
 import 'package:simple_password/i18n/i18n.dart';
 import 'package:simple_password/local_auth_utility.dart';
-import 'package:simple_password/pro_utility.dart';
+import 'package:simple_password/iap_utility.dart';
 import 'package:simple_password/ui_utility.dart';
 import 'package:simple_password/utility.dart';
 import 'package:toggle_switch/toggle_switch.dart';
@@ -17,11 +17,11 @@ class LoadPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: m.common.appName(ProUtil.isPaid),
+        title: m.common.appName(IapUtil.isPaid),
         theme: UiUtil.currentTheme,
         home: new Scaffold(
           appBar: AppBar(
-            title: Text(m.common.appName(ProUtil.isPaid)),
+            title: Text(m.common.appName(IapUtil.isPaid)),
           ),
           body: new Center(
             child: new LoadPageWidget(),
@@ -131,7 +131,7 @@ class _LoadPageWidgetState extends State<LoadPageWidget> {
   }
 
   Widget _getBioButton() {
-    if (currentFilename == null || !ProUtil.isPaid) {
+    if (currentFilename == null || !IapUtil.isPaid) {
       return null;
     }
     Icon icon;
@@ -181,7 +181,7 @@ class _LoadPageWidgetState extends State<LoadPageWidget> {
   }
 
   bool _canUseLocalAuth() {
-    return currentFilename == choosed && ProUtil.isPaid;
+    return currentFilename == choosed && IapUtil.isPaid;
   }
 
   void _localAuth() async {

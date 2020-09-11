@@ -3,8 +3,7 @@ common:
   actions: Actions
   add: Ajouter
   app: L'application
-  appName(bool p): "Simple Password ${p?'Pro':'Free'}"
-  appVer: 1.0.0
+  appName(bool p): "Simple Password Pro"
   check: Vérifier
   chgConfirmed: Changement confirmé
   chgSaveFailed: Les modifications n'ont pas pu être enregistrées
@@ -180,7 +179,8 @@ settings:
 iap:
   benefits1: Groupes de mots de passe et mots de passe illimités
   benefits2: Autoriser l'authentification de l'appareil pour les fichiers de mots de passe ouverts
-  benefits: "Les avantages comprennent:"
+  benefits3: Plus de thèmes
+  benefits: "Achetez pour obtenir toutes les fonctionnalités"
   buyConfirmMsg: Es-tu sur de vouloir continuer?
   buyTitle: Acheter
   buyError1: Erreur d'achat. Veuillez revoir cette page pour vérifier le résultat final.

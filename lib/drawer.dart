@@ -139,7 +139,7 @@ class _AppDrawerWidgetState extends State<AppDrawer> {
       ),
       ListTile(
         title: Center(
-          child: Text(m.common.appVer),
+          child: Text(Util.version),
         ),
       )
     ]);

@@ -11,6 +11,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:simple_password/data.dart';
 import 'package:simple_password/i18n/i18n.dart';
+import 'package:package_info/package_info.dart';
 
 final int fileVersion = 0;
 
@@ -51,6 +52,7 @@ class Util {
   static Locale locale = Locale('en', '');
   static LocaleChangeCallback localeChangeCallback;
   static final String defaultTheme = 'blue';
+  static String version = "1.0.1+0";
 
   static String dateTimeToString(DateTime d) {
     return formatter.format(d);
@@ -253,6 +255,10 @@ class Util {
     }
     locale = Locale(lang, '');
     loadMessage(locale.languageCode);
+    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    if (packageInfo != null) {
+      version = packageInfo.version + "+" + packageInfo.buildNumber;
+    }
   }
 
   static bool isAlphaNum(String val) {

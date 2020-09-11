@@ -36,8 +36,7 @@ class CommonMessage_zh extends CommonMessage {
 	String get actions => """操作""";
 	String get add => """添加""";
 	String get app => """应用名称""";
-	String appName(bool p) => """密宝 ${p?'Pro':'Free'}""";
-	String get appVer => """1.0.0""";
+	String appName(bool p) => """密宝 Pro""";
 	String get check => """检查""";
 	String get chgConfirmed => """修改已确认""";
 	String get chgSaveFailed => """保存修改失败""";
@@ -246,7 +245,8 @@ class IapMessage_zh extends IapMessage {
 	const IapMessage_zh(this._parent):super(_parent);
 	String get benefits1 => """无限制的密码组和密码""";
 	String get benefits2 => """使用设备提供的认证方式来访问已经打开的密宝文件。""";
-	String get benefits => """购买后您可以获得：""";
+	String get benefits3 => """更多主题风格""";
+	String get benefits => """购买后您可以获取全部功能：""";
 	String get buyConfirmMsg => """请确认是否继续?""";
 	String get buyTitle => """购买""";
 	String get buyError1 => """购买出错. 请再次进入本页面检查最终结果.""";

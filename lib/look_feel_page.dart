@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:simple_password/i18n/i18n.dart';
+import 'package:simple_password/iap_utility.dart';
 import 'package:simple_password/ui_utility.dart';
 import 'package:simple_password/utility.dart';
 
@@ -126,6 +127,16 @@ class _LookFeelWidgetState extends State<LookFeelWidget> {
               fontWeight: FontWeight.bold),
         )));
     list.add(DropdownMenuItem<String>(
+        value: 'red',
+        child: Text(
+          ' Red ',
+          style: TextStyle(
+              backgroundColor: Colors.red,
+              color: Colors.white,
+              fontWeight: FontWeight.bold),
+        )));
+    if (IapUtil.isPaid) {
+    list.add(DropdownMenuItem<String>(
         value: 'teal',
         child: Text(
           ' Teal ',
@@ -144,15 +155,6 @@ class _LookFeelWidgetState extends State<LookFeelWidget> {
               fontWeight: FontWeight.bold),
         )));
     list.add(DropdownMenuItem<String>(
-        value: 'red',
-        child: Text(
-          ' Red ',
-          style: TextStyle(
-              backgroundColor: Colors.red,
-              color: Colors.white,
-              fontWeight: FontWeight.bold),
-        )));
-    list.add(DropdownMenuItem<String>(
         value: 'dark',
         child: Text(
           ' Dark ',
@@ -161,6 +163,7 @@ class _LookFeelWidgetState extends State<LookFeelWidget> {
               color: Colors.white,
               fontWeight: FontWeight.bold),
         )));
+    }
     return list;
   }
 }

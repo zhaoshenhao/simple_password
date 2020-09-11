@@ -36,8 +36,7 @@ class CommonMessage_fr extends CommonMessage {
 	String get actions => """Actions""";
 	String get add => """Ajouter""";
 	String get app => """L'application""";
-	String appName(bool p) => """Simple Password ${p?'Pro':'Free'}""";
-	String get appVer => """1.0.0""";
+	String appName(bool p) => """Simple Password Pro""";
 	String get check => """Vérifier""";
 	String get chgConfirmed => """Changement confirmé""";
 	String get chgSaveFailed => """Les modifications n'ont pas pu être enregistrées""";
@@ -246,7 +245,8 @@ class IapMessage_fr extends IapMessage {
 	const IapMessage_fr(this._parent):super(_parent);
 	String get benefits1 => """Groupes de mots de passe et mots de passe illimités""";
 	String get benefits2 => """Autoriser l'authentification de l'appareil pour les fichiers de mots de passe ouverts""";
-	String get benefits => """Les avantages comprennent:""";
+	String get benefits3 => """Plus de thèmes""";
+	String get benefits => """Achetez pour obtenir toutes les fonctionnalités""";
 	String get buyConfirmMsg => """Es-tu sur de vouloir continuer?""";
 	String get buyTitle => """Acheter""";
 	String get buyError1 => """Erreur d'achat. Veuillez revoir cette page pour vérifier le résultat final.""";

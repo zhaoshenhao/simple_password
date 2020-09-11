@@ -94,6 +94,7 @@ class _IapWidgetState extends State<IapWidget> {
       ListTile(title: Text(m.iap.benefits, style: header)),
       _addBulletin(m.iap.benefits1),
       _addBulletin(m.iap.benefits2),
+      _addBulletin(m.iap.benefits3),
       Divider(),
       SwitchListTile(
         title: Text(m.iap.verify),

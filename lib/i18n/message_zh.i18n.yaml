@@ -3,8 +3,7 @@ common:
   actions: 操作
   add: 添加
   app: 应用名称
-  appName(bool p): "密宝 ${p?'Pro':'Free'}"
-  appVer: 1.0.0
+  appName(bool p): "密宝 Pro"
   check: 检查
   chgConfirmed: 修改已确认
   chgSaveFailed: 保存修改失败
@@ -180,7 +179,8 @@ settings:
 iap:
   benefits1: 无限制的密码组和密码
   benefits2: 使用设备提供的认证方式来访问已经打开的密宝文件。
-  benefits:  购买后您可以获得：
+  benefits3: 更多主题风格
+  benefits:  购买后您可以获取全部功能：
   buyConfirmMsg: 请确认是否继续?
   buyTitle: 购买
   buyError1: 购买出错. 请再次进入本页面检查最终结果.

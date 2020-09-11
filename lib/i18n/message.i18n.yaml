@@ -3,8 +3,7 @@ common:
   actions: Actions
   add: Add
   app: Application
-  appName(bool p): "Simple Password ${p?'Pro':'Free'}"
-  appVer: 1.0.0
+  appName(bool p): "Simple Password Pro"
   check: Check
   chgConfirmed: Change confirmed
   chgSaveFailed: Changes failed to save
@@ -180,7 +179,8 @@ settings:
 iap:
   benefits1: Unlimited password groups and passwords
   benefits2: Allow device authentication for opened password files
-  benefits: "Benefits include:"
+  benefits3: More themes
+  benefits: "Buy to get all features:"
   buyConfirmMsg: Are you sure you want to continue?
   buyError1: Purchase error. Please revisit this page.
   buyError2: Purchase invalid. Please revisit this page.

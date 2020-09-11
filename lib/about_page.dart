@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:simple_password/i18n/i18n.dart';
 import 'package:simple_password/iap_utility.dart';
 import 'package:simple_password/ui_utility.dart';
+import 'package:simple_password/utility.dart';
 
 class AboutPage extends StatelessWidget {
   final String copytype = IapUtil.isPaid ? m.iap.paid : m.iap.unpaid;
@@ -23,7 +24,7 @@ class AboutPage extends StatelessWidget {
             Text(copytype),
             Text(m.common.app + ": " + m.common.appName(IapUtil.isPaid)),
             Text(m.common.developer + ": " + m.common.companyName),
-            Text(m.common.version + ": " + m.common.appVer),
+            Text(m.common.version + ": " + Util.version),
             Text(''),
             UiUtil.headingRow(m.common.terms),
             Text(''),

@@ -43,7 +43,7 @@ class _IapWidgetState extends State<IapWidget> {
     if (code == 0) {
       UiUtil.alert(m.iap.thankYouTitle, m.iap.succ, context);
       Util.localeChangeCallback();
-      Navigator.pop(context);
+      //Navigator.pop(context);
     } else {
       String msg;
       if (code == 1) {

@@ -146,13 +146,22 @@ class _SaveAndBackupWidgetState extends State<SaveAndBackupWidget> {
         ])));
     list.add(Text(''));
     list.add(Center(
-        child: RaisedButton.icon(
-      icon: Icon(Icons.save),
-      color: UiUtil.currentTheme.primaryColor,
-      textColor: UiUtil.currentTheme.buttonColor,
-      onPressed: readOnly || changes == 0 ? null : () async => _save(),
-      label: Text(m.common.save),
-    )));
+        child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+      RaisedButton.icon(
+        icon: Icon(Icons.save),
+        color: UiUtil.currentTheme.primaryColor,
+        textColor: UiUtil.currentTheme.buttonColor,
+        onPressed: readOnly || changes == 0 ? null : () async => _save(),
+        label: Text(m.common.save),
+      ),
+      RaisedButton.icon(
+        icon: Icon(Icons.clear),
+        color: UiUtil.currentTheme.primaryColor,
+        textColor: UiUtil.currentTheme.buttonColor,
+        onPressed: readOnly || changes == 0 ? null : () async => _discard(),
+        label: Text(m.common.discard),
+      ),
+    ])));
     list.add(Container(
         padding: UiUtil.edgeInsets,
         child: UiUtil.headingRow(m.common.actions)));
@@ -188,6 +197,13 @@ class _SaveAndBackupWidgetState extends State<SaveAndBackupWidget> {
         padding: UiUtil.edgeInsets, child: UiUtil.headingRow(m.sbs.bkClean)));
     list.addAll(_getFiles());
     return list;
+  }
+
+  Future<void> _discard() async {
+    if (await SaveUtil.discard(context)) {
+      Util.localeChangeCallback();
+      Scaffold.of(context).showSnackBar(UiUtil.snackBar(m.common.discardDone));
+    }
   }
 
   Future<void> _save() async {

@@ -4,6 +4,7 @@ common:
   add: Add
   app: Application
   appName(bool p): "Simple Password Pro"
+  cancel: Cancel
   check: Check
   chgConfirmed: Change confirmed
   chgSaveFailed: Changes failed to save
@@ -15,6 +16,9 @@ common:
   delete: Delete
   deleteThisAsk: Delete this item?
   developer: Developer
+  discard: Discard
+  discardMsg: All changes will be lost.\nData will be restored to last saving point.
+  discardDone: Changes discarded.
   error: Error
   file: File
   gen: Generate
@@ -24,6 +28,7 @@ common:
   lastCreate: Last Created
   lastDelta: Last Modified
   lookFeel: Look and Feel
+  move: Move
   myGrpName: my password group
   mySecret: my secret
   no: No
@@ -47,6 +52,7 @@ common:
   settings: Settings
   terms: Term of Use
   title: Title
+  un: Username
   unsaved: Unsaved changes
   url: URL
   version: Version
@@ -89,6 +95,7 @@ pswd:
   containSpecial(int cnt): "Must contain $cnt special ${_plural(cnt, one:'character', many:'characters')}"
   detail: Password Detail
   error: Password confirmation not match
+  movePswd: Move password to other group.
   msKey: Main Secret Key
   msKeyCur: Current main secret key
   msKeyNew: New main secret key

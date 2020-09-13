@@ -240,7 +240,7 @@ class _OnePasswordWidgetState extends State<OnePasswordWidget> {
       _op.copyFrom(tmp);
       _og.copyFrom(_tgroup);
       setState(() {});
-      UiUtil.confirmAll(context);
+      UiUtil.makeChange(context);
     }
   }
 

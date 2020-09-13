@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:catcher/catcher.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_lock/flutter_app_lock.dart';
@@ -9,24 +11,68 @@ import 'package:simple_password/local_auth_utility.dart';
 import 'package:simple_password/iap_utility.dart';
 import 'package:simple_password/ui_utility.dart';
 import 'package:simple_password/utility.dart';
+import 'package:loading/loading.dart';
+import 'package:loading/indicator/ball_pulse_indicator.dart';
 
 //void main() => runApp(SimplePassword());
+class SplashScreen extends StatefulWidget {
+  @override
+  _SplashScreenState createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+  Timer _timer;
+
+  void _start() {
+    const oneSec = const Duration(seconds: 1);
+    _timer = new Timer.periodic(oneSec, (Timer timer) {
+      IapUtil.init().then((value) => null);
+      _timer.cancel();
+      Navigator.of(context).pushReplacement(MaterialPageRoute(
+          builder: (BuildContext context) => new AppLock(
+                builder: (args) => SimplePassword(),
+                lockScreen: LoadPage(),
+                enabled: true,
+              )));
+    });
+  }
+
+  @override
+  void initState() {
+    _start();
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: Center(
+          child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Image.asset('assets/512x512-66-rounded.png', width: 80, height: 80),
+          Loading(
+              indicator: BallPulseIndicator(), size: 50.0, color: Colors.blue),
+        ],
+      )),
+    );
+  }
+}
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Util.init();
   await UiUtil.initTheme();
   await LocalAuthUtil.init();
-  await IapUtil.init();
   CatcherOptions debugOptions =
       CatcherOptions(DialogReportMode(), [ConsoleHandler()]);
   CatcherOptions releaseOptions = CatcherOptions(DialogReportMode(), [
     EmailManualHandler(["syspole1@gmail.com"])
   ]);
   Catcher(
-      new AppLock(
-        builder: (args) => SimplePassword(),
-        lockScreen: LoadPage(),
-        enabled: true,
+      new MaterialApp(
+        home: SplashScreen(),
       ),
       debugConfig: debugOptions,
       releaseConfig: releaseOptions);

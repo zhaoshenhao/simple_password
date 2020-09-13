@@ -4,6 +4,7 @@ common:
   add: 添加
   app: 应用名称
   appName(bool p): "密宝 Pro"
+  cancel: 取消
   check: 检查
   chgConfirmed: 修改已确认
   chgSaveFailed: 保存修改失败
@@ -15,6 +16,9 @@ common:
   delete: 删除
   deleteThisAsk: 删除该项？
   developer: 开发者
+  discard: 放弃修改
+  discardMsg: 所有的修改会被丢弃\n数据恢复到最后一次保存的状态.
+  discardDone: 修改被丢弃，重新载入数据.
   error: 错误
   file: 文件
   gen: 生成
@@ -24,6 +28,7 @@ common:
   lastCreate: 创建时间
   lastDelta: 最近修改
   lookFeel: 界面和语言
+  move: 移动
   myGrpName: 我的密码组
   mySecret: 我的密码
   no: 否
@@ -48,6 +53,7 @@ common:
   terms: 使用条款
   title: 名称
   unsaved: 未保存的修改
+  un: 用户名
   url: URL
   version: 版本
   yes: 是
@@ -89,6 +95,7 @@ pswd:
   containSpecial(int cnt): "必须包含 $cnt 特殊字符"
   detail: 密码信息
   error: 两次输入密码不匹配
+  movePswd: 移动密码到其他组
   msKey: 主密钥
   msKeyCur: 当前主密钥
   msKeyNew: 新的主密钥

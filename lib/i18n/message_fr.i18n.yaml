@@ -4,6 +4,7 @@ common:
   add: Ajouter
   app: L'application
   appName(bool p): "Simple Password Pro"
+  cancel: Annuler
   check: Vérifier
   chgConfirmed: Changement confirmé
   chgSaveFailed: Les modifications n'ont pas pu être enregistrées
@@ -15,6 +16,9 @@ common:
   delete: Supprimer
   deleteThisAsk: Supprimer cet élément?
   developer: Développeur
+  discard: Jeter
+  discardMsg: Toutes les modifications seront perdues.\nLes données seront restaurées au dernier point d'enregistrement.
+  discardDone: Modifications supprimées.
   error: Erreur
   file: Fichier
   gen: Produire
@@ -24,6 +28,7 @@ common:
   lastCreate: Dernière création
   lastDelta: Dernière modification
   lookFeel: Regarde et ressent
+  move: Bouge toi
   myGrpName: mon groupe de mots de passe
   mySecret: mon secret
   no: Non
@@ -48,6 +53,7 @@ common:
   terms: Conditions d'utilisation
   title: Titre
   unsaved: Modifications non enregistrées
+  un: Nom
   url: URL
   version: Version
   yes: Oui
@@ -89,6 +95,7 @@ pswd:
   containSpecial(int cnt): "Doit contenir $cnt special ${_plural(cnt, one:'lettre', many:'lettres')}"
   detail: Détail du Mot de Passe
   error: La confirmation du mot de passe ne correspond pas
+  movePswd: Déplacer le mot de passe vers un autre groupe.
   msKey: Clé Secrète Principale
   msKeyCur: Clé secrète principale actuelle
   msKeyNew: Nouvelle clé secrète principale

@@ -43,7 +43,7 @@ class UiUtil {
     return false;
   }
 
-  static bool confirmAll(var context) {
+  static bool makeChange(var context) {
     data.basicData.deltaTime = new DateTime.now();
     changes = changes + 1;
     Scaffold.of(context).showSnackBar(snackBar(m.common.chgConfirmed));

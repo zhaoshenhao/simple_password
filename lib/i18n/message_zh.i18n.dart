@@ -37,6 +37,7 @@ class CommonMessage_zh extends CommonMessage {
 	String get add => """添加""";
 	String get app => """应用名称""";
 	String appName(bool p) => """密宝 Pro""";
+	String get cancel => """取消""";
 	String get check => """检查""";
 	String get chgConfirmed => """修改已确认""";
 	String get chgSaveFailed => """保存修改失败""";
@@ -48,6 +49,9 @@ class CommonMessage_zh extends CommonMessage {
 	String get delete => """删除""";
 	String get deleteThisAsk => """删除该项？""";
 	String get developer => """开发者""";
+	String get discard => """放弃修改""";
+	String get discardMsg => """所有的修改会被丢弃\n数据恢复到最后一次保存的状态.""";
+	String get discardDone => """修改被丢弃，重新载入数据.""";
 	String get error => """错误""";
 	String get file => """文件""";
 	String get gen => """生成""";
@@ -57,6 +61,7 @@ class CommonMessage_zh extends CommonMessage {
 	String get lastCreate => """创建时间""";
 	String get lastDelta => """最近修改""";
 	String get lookFeel => """界面和语言""";
+	String get move => """移动""";
 	String get myGrpName => """我的密码组""";
 	String get mySecret => """我的密码""";
 	String get no => """否""";
@@ -81,6 +86,7 @@ class CommonMessage_zh extends CommonMessage {
 	String get terms => """使用条款""";
 	String get title => """名称""";
 	String get unsaved => """未保存的修改""";
+	String get un => """用户名""";
 	String get url => """URL""";
 	String get version => """版本""";
 	String get yes => """是""";
@@ -134,6 +140,7 @@ class PswdMessage_zh extends PswdMessage {
 	String containSpecial(int cnt) => """必须包含 $cnt 特殊字符""";
 	String get detail => """密码信息""";
 	String get error => """两次输入密码不匹配""";
+	String get movePswd => """移动密码到其他组""";
 	String get msKey => """主密钥""";
 	String get msKeyCur => """当前主密钥""";
 	String get msKeyNew => """新的主密钥""";

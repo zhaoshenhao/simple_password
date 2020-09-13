@@ -35,6 +35,13 @@ class _IapWidgetState extends State<IapWidget> {
   bool _prodOk = true;
   bool _connOk = true;
 
+  @protected
+  @mustCallSuper
+  void initState() {
+    IapUtil.checkPastPurchase().then((value) => null);
+    super.initState();
+  }
+
   void buyListener(int code) {
     setState(() {
       _buying = false;
@@ -43,7 +50,6 @@ class _IapWidgetState extends State<IapWidget> {
     if (code == 0) {
       UiUtil.alert(m.iap.thankYouTitle, m.iap.succ, context);
       Util.localeChangeCallback();
-      //Navigator.pop(context);
     } else {
       String msg;
       if (code == 1) {

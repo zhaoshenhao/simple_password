@@ -17,6 +17,44 @@ class SaveUtil {
     return false;
   }
 
+  static bool load(String path, String secKey, BuildContext context) {
+    String short = Util.getBasename(path);
+    if (!FileUtil.fileExist(path)) {
+      UiUtil.alert(
+          m.file.fileNotFound, m.file.fileNotFoundErr("$short.sp"), context);
+      return false;
+    }
+    try {
+      data = FileUtil.load(path, secKey);
+    } catch (e) {
+      Log.error(m.file.openFailedErr("$short.sp"), error: e);
+      UiUtil.alert(m.file.openErr,
+          m.file.openFailedErr("$short.sp") + "\n${m.pswd.checkKey}", context);
+      return false;
+    }
+    return true;
+  }
+
+  static Future<bool> discard(BuildContext context) async {
+    if (UiUtil.isReadOnly(context)) {
+      return null;
+    }
+    bool yes =
+        await UiUtil.confirm(m.common.discard, m.common.discardMsg, context);
+    if (yes) {
+      String path = Util.getPath(currentFilename);
+      String password = Util.decryptPassword(secPassword, data.key, randomIdx);
+      if (load(path, password, context)) {
+        changes = 0;
+        Log.fine("Load file: $path, done");
+        return true;
+      } else {
+        Log.warning("Load file $path, failed!");
+      }
+    }
+    return false;
+  }
+
   static Future<bool> save(BuildContext context,
       {bool useBackupPolicy = true, bool confirmed: false}) async {
     if (UiUtil.isReadOnly(context)) {

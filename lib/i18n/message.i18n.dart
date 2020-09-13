@@ -36,6 +36,7 @@ class CommonMessage {
 	String get add => """Add""";
 	String get app => """Application""";
 	String appName(bool p) => """Simple Password Pro""";
+	String get cancel => """Cancel""";
 	String get check => """Check""";
 	String get chgConfirmed => """Change confirmed""";
 	String get chgSaveFailed => """Changes failed to save""";
@@ -47,6 +48,9 @@ class CommonMessage {
 	String get delete => """Delete""";
 	String get deleteThisAsk => """Delete this item?""";
 	String get developer => """Developer""";
+	String get discard => """Discard""";
+	String get discardMsg => """All changes will be lost.\nData will be restored to last saving point.""";
+	String get discardDone => """Changes discarded.""";
 	String get error => """Error""";
 	String get file => """File""";
 	String get gen => """Generate""";
@@ -56,6 +60,7 @@ class CommonMessage {
 	String get lastCreate => """Last Created""";
 	String get lastDelta => """Last Modified""";
 	String get lookFeel => """Look and Feel""";
+	String get move => """Move""";
 	String get myGrpName => """my password group""";
 	String get mySecret => """my secret""";
 	String get no => """No""";
@@ -79,6 +84,7 @@ class CommonMessage {
 	String get settings => """Settings""";
 	String get terms => """Term of Use""";
 	String get title => """Title""";
+	String get un => """Username""";
 	String get unsaved => """Unsaved changes""";
 	String get url => """URL""";
 	String get version => """Version""";
@@ -133,6 +139,7 @@ class PswdMessage {
 	String containSpecial(int cnt) => """Must contain $cnt special ${_plural(cnt, one:'character', many:'characters')}""";
 	String get detail => """Password Detail""";
 	String get error => """Password confirmation not match""";
+	String get movePswd => """Move password to other group.""";
 	String get msKey => """Main Secret Key""";
 	String get msKeyCur => """Current main secret key""";
 	String get msKeyNew => """New main secret key""";

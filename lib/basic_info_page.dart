@@ -207,7 +207,7 @@ class _BasicInfoWidgetState extends State<BasicInfoWidget> {
         newSecPassword = Util.encryptPassword(_secKey1, data.key, randomIdx);
       }
       data.basicData = _basicData.clone();
-      UiUtil.confirmAll(context);
+      UiUtil.makeChange(context);
     }
   }
 }

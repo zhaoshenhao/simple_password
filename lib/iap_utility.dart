@@ -30,7 +30,7 @@ class IapUtil {
     return _productDetails != null && _productDetails.id != null;
   }
 
-  static void init() async {
+  static Future init() async {
     InAppPurchaseConnection.enablePendingPurchases();
     _connection = InAppPurchaseConnection.instance;
     _purchaseUpdated = InAppPurchaseConnection.instance.purchaseUpdatedStream;

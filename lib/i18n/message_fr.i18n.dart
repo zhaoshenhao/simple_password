@@ -37,6 +37,7 @@ class CommonMessage_fr extends CommonMessage {
 	String get add => """Ajouter""";
 	String get app => """L'application""";
 	String appName(bool p) => """Simple Password Pro""";
+	String get cancel => """Annuler""";
 	String get check => """Vérifier""";
 	String get chgConfirmed => """Changement confirmé""";
 	String get chgSaveFailed => """Les modifications n'ont pas pu être enregistrées""";
@@ -48,6 +49,9 @@ class CommonMessage_fr extends CommonMessage {
 	String get delete => """Supprimer""";
 	String get deleteThisAsk => """Supprimer cet élément?""";
 	String get developer => """Développeur""";
+	String get discard => """Jeter""";
+	String get discardMsg => """Toutes les modifications seront perdues.\nLes données seront restaurées au dernier point d'enregistrement.""";
+	String get discardDone => """Modifications supprimées.""";
 	String get error => """Erreur""";
 	String get file => """Fichier""";
 	String get gen => """Produire""";
@@ -57,6 +61,7 @@ class CommonMessage_fr extends CommonMessage {
 	String get lastCreate => """Dernière création""";
 	String get lastDelta => """Dernière modification""";
 	String get lookFeel => """Regarde et ressent""";
+	String get move => """Bouge toi""";
 	String get myGrpName => """mon groupe de mots de passe""";
 	String get mySecret => """mon secret""";
 	String get no => """Non""";
@@ -81,6 +86,7 @@ class CommonMessage_fr extends CommonMessage {
 	String get terms => """Conditions d'utilisation""";
 	String get title => """Titre""";
 	String get unsaved => """Modifications non enregistrées""";
+	String get un => """Nom""";
 	String get url => """URL""";
 	String get version => """Version""";
 	String get yes => """Oui""";
@@ -134,6 +140,7 @@ class PswdMessage_fr extends PswdMessage {
 	String containSpecial(int cnt) => """Doit contenir $cnt special ${_plural(cnt, one:'lettre', many:'lettres')}""";
 	String get detail => """Détail du Mot de Passe""";
 	String get error => """La confirmation du mot de passe ne correspond pas""";
+	String get movePswd => """Déplacer le mot de passe vers un autre groupe.""";
 	String get msKey => """Clé Secrète Principale""";
 	String get msKeyCur => """Clé secrète principale actuelle""";
 	String get msKeyNew => """Nouvelle clé secrète principale""";

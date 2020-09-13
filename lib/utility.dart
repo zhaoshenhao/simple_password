@@ -246,6 +246,8 @@ class Util {
 
   static Future init() async {
     sp = await SharedPreferences.getInstance();
+    //TODO
+    sp.clear();
     docDir = await getApplicationDocumentsDirectory();
     tmpDir = await getTemporaryDirectory();
     String lang = getLanguage();

@@ -116,7 +116,7 @@ class _BackupSettingsWidgetState extends State<BackupSettingsWidget> {
     if (_formKey.currentState.validate()) {
       data.backupPolicy = _backupPolicy.clone();
       data.securityPolicy = _securityPolicy.clone();
-      UiUtil.confirmAll(context);
+      UiUtil.makeChange(context);
     }
   }
 }

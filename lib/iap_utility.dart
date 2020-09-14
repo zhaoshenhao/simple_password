@@ -6,6 +6,7 @@ import 'dart:async';
 
 import 'utility.dart';
 import 'i18n/i18n.dart';
+import 'security_utility.dart';
 
 class IapUtil {
   static final int minGroup = 5;
@@ -31,17 +32,21 @@ class IapUtil {
   }
 
   static Future init() async {
-    InAppPurchaseConnection.enablePendingPurchases();
-    _connection = InAppPurchaseConnection.instance;
-    _purchaseUpdated = InAppPurchaseConnection.instance.purchaseUpdatedStream;
-    _productDetails = await _getProductDetails();
     bool localCheck = checkLocal();
     _localValid = _isValid();
     // if local check is valid, return
+    if (SecUtil.isValidSignature) {
+      _paid = true;
+      return;
+    }
     if (localCheck && _localValid) {
       _paid = true;
       return;
     }
+    InAppPurchaseConnection.enablePendingPurchases();
+    _connection = InAppPurchaseConnection.instance;
+    _purchaseUpdated = InAppPurchaseConnection.instance.purchaseUpdatedStream;
+    _productDetails = await _getProductDetails();
     _paid = await checkPayment();
   }
 

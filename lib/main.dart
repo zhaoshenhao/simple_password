@@ -1,5 +1,5 @@
 import 'dart:async';
-
+import 'dart:io';
 import 'package:catcher/catcher.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_lock/flutter_app_lock.dart';
@@ -9,6 +9,7 @@ import 'package:simple_password/i18n/i18n.dart';
 import 'package:simple_password/load_page.dart';
 import 'package:simple_password/local_auth_utility.dart';
 import 'package:simple_password/iap_utility.dart';
+import 'package:simple_password/security_utility.dart';
 import 'package:simple_password/ui_utility.dart';
 import 'package:simple_password/utility.dart';
 import 'package:loading/loading.dart';
@@ -23,24 +24,30 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   Timer _timer;
 
+  void _complete() {
+    Navigator.of(context).pushReplacement(MaterialPageRoute(
+        builder: (BuildContext context) => new AppLock(
+              builder: (args) => SimplePassword(),
+              lockScreen: LoadPage(),
+              enabled: true,
+            )));
+  }
+
   void _start() {
     const oneSec = const Duration(seconds: 1);
     _timer = new Timer.periodic(oneSec, (Timer timer) {
-      IapUtil.init().then((value) => null);
+      LocalAuthUtil.init()
+          .then((value) => SecUtil.init())
+          .then((value) => IapUtil.init())
+          .whenComplete(() => _complete());
       _timer.cancel();
-      Navigator.of(context).pushReplacement(MaterialPageRoute(
-          builder: (BuildContext context) => new AppLock(
-                builder: (args) => SimplePassword(),
-                lockScreen: LoadPage(),
-                enabled: true,
-              )));
     });
   }
 
   @override
   void initState() {
-    _start();
     super.initState();
+    _start();
   }
 
   @override
@@ -64,7 +71,6 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Util.init();
   await UiUtil.initTheme();
-  await LocalAuthUtil.init();
   CatcherOptions debugOptions =
       CatcherOptions(DialogReportMode(), [ConsoleHandler()]);
   CatcherOptions releaseOptions = CatcherOptions(DialogReportMode(), [

@@ -3,6 +3,7 @@ import 'package:simple_password/i18n/i18n.dart';
 import 'package:simple_password/iap_utility.dart';
 import 'package:simple_password/ui_utility.dart';
 import 'package:simple_password/utility.dart';
+import 'package:simple_password/security_utility.dart';
 
 class AboutPage extends StatelessWidget {
   final String copytype = IapUtil.isPaid ? m.iap.paid : m.iap.unpaid;
@@ -33,6 +34,8 @@ class AboutPage extends StatelessWidget {
             UiUtil.headingRow(m.common.privacy),
             Text(''),
             Text(m.about.privacy),
+            Text(''),
+            Text('Device Id: ' + SecUtil.getDeviceID()),
           ],
         ),
       ),

@@ -18,7 +18,7 @@ class SecUtil {
   static Future init() async {
     await _initKeys();
     await _initDeviceInfo();
-    _validSignature = _checkSigature();
+    _validSignature = _checkSignature();
   }
 
   static Future _initKeys() async {
@@ -43,7 +43,7 @@ class SecUtil {
   static bool verify(String input, String signature) {
     final signer = Signer(RSASigner(RSASignDigest.SHA256,
         publicKey: publicKey, privateKey: privateKey));
-    return signer.verify64(input.toUpperCase(), signature);
+    return signer.verify64(input, signature);
   }
 
   static Future _initDeviceInfo() async {
@@ -119,7 +119,7 @@ class SecUtil {
     return null;
   }
 
-  static bool _checkSigature() {
+  static bool _checkSignature() {
     String path = Util.docDir.path + "/" + signatureFileName;
     if (!FileUtil.fileExist(path)) {
       return false;
@@ -129,6 +129,17 @@ class SecUtil {
       String devId = getDeviceID();
       return verify(devId, s);
     } catch (e) {
+      return false;
+    }
+  }
+
+  static bool saveSignature(String sig) {
+    String path = Util.docDir.path + "/" + signatureFileName;
+    try {
+      File(path).writeAsStringSync(sig);
+      return true;
+    } catch(e) {
+      Log.error("Save signature failed", error: e);
       return false;
     }
   }

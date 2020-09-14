@@ -32,5 +32,5 @@ void main(List<String> arguments) async {
   final signer = Signer(RSASigner(RSASignDigest.SHA256,
       publicKey: publicKey, privateKey: privateKey));
   String s = results['device-id'];
-  print(signer.sign(s.toUpperCase()).base64);
+  print(signer.sign(s).base64);
 }

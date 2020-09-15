@@ -118,7 +118,7 @@ class _PasswordSettingsWidgetState extends State<PasswordSettingsWidget> {
   void _confirm() {
     if (_formKey.currentState.validate()) {
       data.passwordPolicy = _passwordPolicy.clone();
-      UiUtil.confirmAll(context);
+      UiUtil.makeChange(context);
     }
   }
 }

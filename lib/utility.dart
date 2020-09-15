@@ -11,6 +11,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:simple_password/data.dart';
 import 'package:simple_password/i18n/i18n.dart';
+import 'package:package_info/package_info.dart';
 
 final int fileVersion = 0;
 
@@ -46,10 +47,12 @@ class Util {
   static final String digits = "0123456789";
   static final String historyFilesKey = "HISTORY_FILES";
   static final String languageKey = "LANGUAGE";
+  static final String paymentKey = "PAYMENT";
   static final String themeKey = 'THEME';
   static Locale locale = Locale('en', '');
   static LocaleChangeCallback localeChangeCallback;
   static final String defaultTheme = 'blue';
+  static String version = "1.0.1+0";
 
   static String dateTimeToString(DateTime d) {
     return formatter.format(d);
@@ -217,6 +220,10 @@ class Util {
     return lang;
   }
 
+  static String getPayment() {
+    return sp.getString(paymentKey);
+  }
+
   static String getPath(String fn) {
     return Util.docDir.path + "/" + fn + ext;
   }
@@ -241,8 +248,6 @@ class Util {
     sp = await SharedPreferences.getInstance();
     docDir = await getApplicationDocumentsDirectory();
     tmpDir = await getTemporaryDirectory();
-    _createDir(docDir);
-    _createDir(tmpDir);
     String lang = getLanguage();
     if (lang == null || lang == '') {
       lang = 'en';
@@ -250,15 +255,9 @@ class Util {
     }
     locale = Locale(lang, '');
     loadMessage(locale.languageCode);
-  }
-
-  static void _createDir(Directory dir) {
-    try {
-      if (dir != null && !dir.existsSync()) {
-        dir.createSync(recursive: true);
-      }
-    } catch (e) {
-      Log.error("Create dir $dir failed.", error: e);
+    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    if (packageInfo != null) {
+      version = packageInfo.version + "+" + packageInfo.buildNumber;
     }
   }
 
@@ -326,6 +325,10 @@ class Util {
   static Future<bool> setLanguage(String language) {
     loadMessage(language);
     return sp.setString(languageKey, language);
+  }
+
+  static Future<bool> setPayment(String payment) {
+    return sp.setString(paymentKey, payment);
   }
 
   static Future<bool> setTheme(String theme) {

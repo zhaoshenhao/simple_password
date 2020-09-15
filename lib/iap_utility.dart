@@ -6,11 +6,13 @@ import 'dart:async';
 
 import 'utility.dart';
 import 'i18n/i18n.dart';
+import 'security_utility.dart';
 
-class ProUtil {
+class IapUtil {
   static final int minGroup = 5;
-  static final int minPassword = 5;
+  static final int minPassword = 10;
   static final _productId = "com.syspole.simplepasswordpro";
+  //static final _productId = "com.syspole.simplepassword";
   static final List<String> _products = <String>[_productId];
   static final int _checkInterval = 60 * 60 * 24 * 30 * 1000;
   static InAppPurchaseConnection _connection;
@@ -25,30 +27,38 @@ class ProUtil {
   static get isLocalValide => _localValid;
   static get isPaid => _paid;
 
-  static void init() async {
-    InAppPurchaseConnection.enablePendingPurchases();
-    _connection = InAppPurchaseConnection.instance;
-    _purchaseUpdated = InAppPurchaseConnection.instance.purchaseUpdatedStream;
-    _productDetails = await _getProductDetails();
+  static bool isProductAvailable() {
+    return _productDetails != null && _productDetails.id != null;
+  }
+
+  static Future init() async {
     bool localCheck = checkLocal();
     _localValid = _isValid();
     // if local check is valid, return
+    if (SecUtil.isValidSignature) {
+      _paid = true;
+      return;
+    }
     if (localCheck && _localValid) {
       _paid = true;
       return;
     }
+    InAppPurchaseConnection.enablePendingPurchases();
+    _connection = InAppPurchaseConnection.instance;
+    _purchaseUpdated = InAppPurchaseConnection.instance.purchaseUpdatedStream;
+    _productDetails = await _getProductDetails();
     _paid = await checkPayment();
   }
 
   static int groupLimit() {
-    if (isPaid()) {
+    if (isPaid) {
       return 0;
     }
     return minGroup;
   }
 
   static int passwordLimit() {
-    if (isPaid()) {
+    if (isPaid) {
       return 0;
     }
     return minPassword;
@@ -106,10 +116,6 @@ class ProUtil {
   }
 
   static Future<String> _getPastPurchase() async {
-    if (!await iapIsAvailable()) {
-      return null;
-    }
-
     QueryPurchaseDetailsResponse purchaseResponse;
     try {
       purchaseResponse = await _connection.queryPastPurchases();
@@ -143,15 +149,24 @@ class ProUtil {
     return null;
   }
 
-  static void checkPastPurchase() async {
+  static Future checkPastPurchase() async {
     _paid = await checkPayment();
   }
 
   static Future<bool> checkPayment() async {
+    if (!(await iapIsAvailable())) {
+      return false;
+    }
     String s = await _getPastPurchase();
     if (s != null) {
       await _setPayment(s);
       return true;
+    }
+    if (_productDetails == null) {
+      _productDetails = await _getProductDetails();
+      if (_productDetails == null) {
+        return false;
+      }
     }
     return false;
   }

@@ -86,24 +86,6 @@ class _BackupSettingsWidgetState extends State<BackupSettingsWidget> {
                       })),
               UiUtil.headingRow(m.settings.sec),
               SwitchListTile(
-                title: Text(m.settings.autoHide),
-                value: _securityPolicy.autoHide,
-                onChanged: readOnly
-                    ? null
-                    : (bool val) =>
-                        setState(() => _securityPolicy.autoHide = val),
-              ),
-              UiUtil.spinRow(
-                  m.settings.autoHideInterval,
-                  10,
-                  300,
-                  _securityPolicy.autoHideInterval.toDouble(),
-                  (double newValue) => setState(() {
-                        if (!readOnly) {
-                          _securityPolicy.autoHideInterval = newValue.toInt();
-                        }
-                      })),
-              SwitchListTile(
                 title: Text(m.settings.autoSave),
                 value: _securityPolicy.autoSave,
                 onChanged: readOnly
@@ -134,7 +116,7 @@ class _BackupSettingsWidgetState extends State<BackupSettingsWidget> {
     if (_formKey.currentState.validate()) {
       data.backupPolicy = _backupPolicy.clone();
       data.securityPolicy = _securityPolicy.clone();
-      UiUtil.confirmAll(context);
+      UiUtil.makeChange(context);
     }
   }
 }

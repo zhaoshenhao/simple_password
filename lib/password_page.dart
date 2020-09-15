@@ -136,7 +136,7 @@ class _OnePasswordWidgetState extends State<OnePasswordWidget> {
               TextFormField(
                 cursorColor: UiUtil.currentTheme.accentColor,
                 readOnly: readOnly,
-                keyboardType: TextInputType.text,
+                keyboardType: TextInputType.url,
                 decoration: InputDecoration(
                   labelText: m.common.url,
                   hintText: m.pswd.urlHint,
@@ -240,7 +240,7 @@ class _OnePasswordWidgetState extends State<OnePasswordWidget> {
       _op.copyFrom(tmp);
       _og.copyFrom(_tgroup);
       setState(() {});
-      UiUtil.confirmAll(context);
+      UiUtil.makeChange(context);
     }
   }
 

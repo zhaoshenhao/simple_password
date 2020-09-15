@@ -8,6 +8,7 @@
 .buildlog/
 .history
 .svn/
+go/
 
 # IntelliJ related
 *.iml
@@ -85,3 +86,4 @@ app.*.map.json
 !**/ios/**/default.perspectivev3
 !/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
 
+assets/private.pem

@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:simple_password/data.dart';
 import 'package:simple_password/globals.dart';
 import 'package:simple_password/i18n/i18n.dart';
 import 'package:simple_password/password_page.dart';
 import 'package:simple_password/save_utility.dart';
-import 'package:simple_password/pro_utility.dart';
+import 'package:simple_password/iap_utility.dart';
 import 'package:simple_password/ui_utility.dart';
 import 'package:simple_password/utility.dart';
+import 'package:adaptive_dialog/adaptive_dialog.dart';
 
 Group _group;
 Group _og;
@@ -77,7 +79,7 @@ class _GroupWidgetState extends State<GroupWidget> {
     if (readOnly) {
       return;
     }
-    int limit = ProUtil.groupLimit();
+    int limit = IapUtil.passwordLimit();
     if (limit > 0 && _group.passwords.length >= limit) {
       UiUtil.alert(
           m.iap.freeVer, "${m.iap.unpaid}\n${m.iap.freeLimit}", context);
@@ -113,6 +115,14 @@ class _GroupWidgetState extends State<GroupWidget> {
       ),
       actions: <Widget>[
         IconSlideAction(
+          caption: m.common.move,
+          color: readOnly
+              ? UiUtil.currentTheme.disabledColor
+              : UiUtil.currentTheme.accentColor,
+          icon: Icons.code,
+          onTap: readOnly ? null : () async => _op(i),
+        ),
+        IconSlideAction(
           caption: m.common.delete,
           color: readOnly
               ? UiUtil.currentTheme.disabledColor
@@ -121,14 +131,102 @@ class _GroupWidgetState extends State<GroupWidget> {
           onTap: readOnly ? null : () async => _delete(i),
         ),
       ],
+      secondaryActions: <Widget>[
+        IconSlideAction(
+          caption: m.common.password,
+          color: UiUtil.currentTheme.accentColor,
+          icon: Icons.content_copy,
+          onTap: readOnly ? null : () async => _copyPswd(i),
+        ),
+        IconSlideAction(
+          caption: m.common.un,
+          color: UiUtil.currentTheme.accentColor,
+          icon: Icons.content_copy,
+          onTap: readOnly ? null : () async => _copyUn(i),
+        ),
+        IconSlideAction(
+          caption: m.common.url,
+          color: UiUtil.currentTheme.accentColor,
+          icon: Icons.content_copy,
+          onTap: readOnly ? null : () async => _copyUrl(i),
+        ),
+      ],
     );
+  }
+
+  List<AlertDialogAction<int>> _getActions() {
+    List<AlertDialogAction<int>> list = List();
+    if (data == null || data.groups == null || data.groups.length < 1) {
+      return list;
+    }
+    for (int n = 0; n < data.groups.length; n++) {
+      list.add(new AlertDialogAction(
+        key: n,
+        label: data.groups[n].basicData.name +
+            "(" +
+            data.groups[n].passwords.length.toString() +
+            ")",
+      ));
+    }
+    return list;
+  }
+
+  void _op(int i) async {
+    int gi = await showConfirmationDialog<int>(
+        context: context,
+        title: m.common.move,
+        message: m.pswd.movePswd,
+        okLabel: m.common.confirm,
+        cancelLabel: m.common.cancel,
+        style: AdaptiveStyle.material,
+        actions: _getActions());
+    int len = data.groups.length;
+    if (gi == null || gi < 0 && gi >= len) {
+      return;
+    }
+    DateTime d = _group.basicData.createTime;
+    Group g = data.groups[gi];
+    if (g.basicData.createTime == d) {
+      // Copy
+      Password p = _group.passwords[i].clone();
+      p.basicData.name = p.basicData.name + "-copy";
+      _group.passwords.add(p);
+    } else {
+      // Move
+      Password p = _group.passwords.removeAt(i);
+      g.passwords.add(p);
+    }
+    _change();
+    setState(() {});
+  }
+
+  void _copyPswd(int i) {
+    Password _password = _group.passwords[i];
+    String tmp = _password.password;
+    String p = Util.decryptPassword(tmp, data.key, _password.key);
+    Clipboard.setData(ClipboardData(text: p));
+    Scaffold.of(context).showSnackBar(UiUtil.snackBar(m.pswd.pswdCopied));
+  }
+
+  void _copyUn(int i) {
+    Clipboard.setData(ClipboardData(text: _group.passwords[i].username));
+    Scaffold.of(context).showSnackBar(UiUtil.snackBar(m.pswd.unCopied));
+  }
+
+  void _copyUrl(int i) {
+    Clipboard.setData(ClipboardData(text: _group.passwords[i].url));
+    Scaffold.of(context).showSnackBar(UiUtil.snackBar(m.pswd.urlCopied));
+  }
+
+  void _change() {
+    _group.basicData.deltaTime = DateTime.now();
+    _og.copyFrom(_group);
+    UiUtil.makeChange(context);
   }
 
   void _confirm() {
     if (_formKey.currentState.validate()) {
-      _group.basicData.deltaTime = DateTime.now();
-      _og.copyFrom(_group);
-      UiUtil.confirmAll(context);
+      _change();
     }
   }
 

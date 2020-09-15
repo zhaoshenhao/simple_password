@@ -150,8 +150,8 @@ class Password {
     this.key = p.key;
     this.notes = p.notes;
     this.password = p.password;
-    this.url = this.url;
-    this.username = this.username;
+    this.url = p.url;
+    this.username = p.username;
   }
 }
 

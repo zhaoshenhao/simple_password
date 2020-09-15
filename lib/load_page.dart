@@ -8,7 +8,8 @@ import 'package:simple_password/file_utility.dart';
 import 'package:simple_password/globals.dart';
 import 'package:simple_password/i18n/i18n.dart';
 import 'package:simple_password/local_auth_utility.dart';
-import 'package:simple_password/pro_utility.dart';
+import 'package:simple_password/iap_utility.dart';
+import 'package:simple_password/save_utility.dart';
 import 'package:simple_password/ui_utility.dart';
 import 'package:simple_password/utility.dart';
 import 'package:toggle_switch/toggle_switch.dart';
@@ -17,11 +18,11 @@ class LoadPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: m.common.appName(ProUtil.isPaid()),
+        title: m.common.appName(IapUtil.isPaid),
         theme: UiUtil.currentTheme,
         home: new Scaffold(
           appBar: AppBar(
-            title: Text(m.common.appName(ProUtil.isPaid())),
+            title: Text(m.common.appName(IapUtil.isPaid)),
           ),
           body: new Center(
             child: new LoadPageWidget(),
@@ -131,7 +132,7 @@ class _LoadPageWidgetState extends State<LoadPageWidget> {
   }
 
   Widget _getBioButton() {
-    if (currentFilename == null || !ProUtil.isPaid()) {
+    if (currentFilename == null || !IapUtil.isPaid) {
       return null;
     }
     Icon icon;
@@ -181,7 +182,7 @@ class _LoadPageWidgetState extends State<LoadPageWidget> {
   }
 
   bool _canUseLocalAuth() {
-    return currentFilename == choosed && ProUtil.isPaid();
+    return currentFilename == choosed && IapUtil.isPaid;
   }
 
   void _localAuth() async {
@@ -249,28 +250,10 @@ class _LoadPageWidgetState extends State<LoadPageWidget> {
     return new Container(width: _twidth, child: Text(text));
   }
 
-  bool _load(String path, String secKey) {
-    String short = Util.getBasename(path);
-    if (!FileUtil.fileExist(path)) {
-      UiUtil.alert(
-          m.file.fileNotFound, m.file.fileNotFoundErr("$short.sp"), context);
-      return false;
-    }
-    try {
-      data = FileUtil.load(path, secKey);
-    } catch (e) {
-      Log.error(m.file.openFailedErr("$short.sp"), error: e);
-      UiUtil.alert(m.file.openErr,
-          m.file.openFailedErr("$short.sp") + "\n${m.pswd.checkKey}", context);
-      return false;
-    }
-    return true;
-  }
-
   void _loadAndUnlock() async {
     if (!Util.isInCurrentDir(choosed)) {
       Log.fine("${m.file.loadNew}: $choosed");
-      if (_load(choosed, secKey)) {
+      if (SaveUtil.load(choosed, secKey, context)) {
         choosed = FileUtil.makeCopy(choosed);
         _unlock();
       }
@@ -287,7 +270,7 @@ class _LoadPageWidgetState extends State<LoadPageWidget> {
       return;
     }
     String path = Util.getPath(choosed);
-    if (_load(path, secKey)) {
+    if (SaveUtil.load(path, secKey, context)) {
       Log.fine("${m.file.loadNew}: $choosed");
       _unlock();
     }

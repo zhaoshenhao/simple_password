@@ -7,6 +7,7 @@ import 'dart:async';
 import 'utility.dart';
 import 'i18n/i18n.dart';
 import 'security_utility.dart';
+import 'utility.dart';
 
 class IapUtil {
   static final int minGroup = 5;
@@ -32,6 +33,10 @@ class IapUtil {
   }
 
   static Future init() async {
+    if (!Util.isMobile) {
+      _paid = true;
+      return;
+    }
     bool localCheck = checkLocal();
     _localValid = _isValid();
     // if local check is valid, return
@@ -46,8 +51,8 @@ class IapUtil {
     InAppPurchaseConnection.enablePendingPurchases();
     _connection = InAppPurchaseConnection.instance;
     _purchaseUpdated = InAppPurchaseConnection.instance.purchaseUpdatedStream;
-    _productDetails = await _getProductDetails();
-    _paid = await checkPayment();
+    //_productDetails = await _getProductDetails();
+    //_paid = await checkPayment();
   }
 
   static int groupLimit() {
@@ -199,6 +204,10 @@ class IapUtil {
   }
 
   static Future<bool> buy(Function listener) async {
+    if (_paid) {
+      // Paid, no buy action
+      return false;
+    }
     if (!await iapIsAvailable()) {
       lastError = m.iap.error3;
       return false;
@@ -208,6 +217,11 @@ class IapUtil {
       if (_productDetails == null) {
         return false;
       }
+    }
+    _paid = await checkPayment();
+    if (_paid) {
+      // Pending payment found, no buy action
+      return false;
     }
     PurchaseParam purchaseParam = PurchaseParam(
         productDetails: _productDetails,

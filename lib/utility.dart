@@ -53,6 +53,8 @@ class Util {
   static LocaleChangeCallback localeChangeCallback;
   static final String defaultTheme = 'blue';
   static String version = "1.0.1+0";
+  static bool _isMobile = false;
+  static get isMobile => _isMobile;
 
   static String dateTimeToString(DateTime d) {
     return formatter.format(d);
@@ -245,6 +247,7 @@ class Util {
   }
 
   static Future init() async {
+    _isMobile = Platform.isAndroid || Platform.isIOS;
     sp = await SharedPreferences.getInstance();
     docDir = await getApplicationDocumentsDirectory();
     tmpDir = await getTemporaryDirectory();

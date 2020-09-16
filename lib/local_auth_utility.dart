@@ -13,6 +13,9 @@ class LocalAuthUtil {
   static var error;
 
   static Future init() async {
+    if (!Util.isMobile) {
+      return;
+    }
     canCheckBiometrics = await auth.canCheckBiometrics;
     if (!canCheckBiometrics) {
       return;

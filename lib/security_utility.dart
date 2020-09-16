@@ -16,6 +16,10 @@ class SecUtil {
   static bool get isValidSignature => _validSignature;
 
   static Future init() async {
+    if (!Util.isMobile) {
+      _validSignature = true;
+      return;
+    }
     await _initKeys();
     await _initDeviceInfo();
     _validSignature = _checkSignature();
@@ -138,7 +142,7 @@ class SecUtil {
     try {
       File(path).writeAsStringSync(sig);
       return true;
-    } catch(e) {
+    } catch (e) {
       Log.error("Save signature failed", error: e);
       return false;
     }

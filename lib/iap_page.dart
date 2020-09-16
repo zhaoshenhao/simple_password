@@ -35,13 +35,6 @@ class _IapWidgetState extends State<IapWidget> {
   bool _prodOk = true;
   bool _connOk = true;
 
-  @protected
-  @mustCallSuper
-  void initState() {
-    IapUtil.checkPastPurchase().then((value) => null);
-    super.initState();
-  }
-
   void buyListener(int code) {
     setState(() {
       _buying = false;
@@ -163,7 +156,11 @@ class _IapWidgetState extends State<IapWidget> {
         _buying = true;
       });
     } else {
-      UiUtil.alert(m.common.error, m.iap.error3, context);
+      if (IapUtil.isPaid) {
+        setState(() {});
+      } else {
+        UiUtil.alert(m.common.error, m.iap.error3, context);
+      }
     }
   }
 }

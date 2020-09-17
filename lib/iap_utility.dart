@@ -7,7 +7,6 @@ import 'dart:async';
 import 'utility.dart';
 import 'i18n/i18n.dart';
 import 'security_utility.dart';
-import 'utility.dart';
 
 class IapUtil {
   static final int minGroup = 5;
@@ -102,7 +101,7 @@ class IapUtil {
     } catch (e) {
       return false;
     }
-    String h = _hash(l[1], _lastCheck);
+    String h = _hash(l[2], _lastCheck);
     return (h == l[0]);
   }
 

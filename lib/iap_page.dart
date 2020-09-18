@@ -62,12 +62,12 @@ class _IapWidgetState extends State<IapWidget> {
       setState(() {});
       return;
     }
-    IapUtil.checkPastPurchase().then((value) => {});
+    await IapUtil.checkPastPurchase();
     if (!IapUtil.isPaid) {
-      IapUtil.iapIsAvailable().then((value) => _connOk = value);
+      _connOk = await IapUtil.iapIsAvailable();
       _prodOk = IapUtil.isProductAvailable();
+      setState(() {});
     }
-    setState(() {});
   }
 
   @override
@@ -159,7 +159,7 @@ class _IapWidgetState extends State<IapWidget> {
       if (IapUtil.isPaid) {
         setState(() {});
       } else {
-        UiUtil.alert(m.common.error, m.iap.error3, context);
+        UiUtil.alert(m.common.error, m.iap.buyError1, context);
       }
     }
   }

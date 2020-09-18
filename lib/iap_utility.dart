@@ -93,7 +93,7 @@ class IapUtil {
       return false;
     }
     List<String> l = s.split(":");
-    if (l.length != 3) {
+    if (l.length < 3) {
       return false;
     }
     try {
@@ -101,7 +101,13 @@ class IapUtil {
     } catch (e) {
       return false;
     }
-    String h = _hash(l[2], _lastCheck);
+    String s2;
+    if (l.length == 3) {
+      s2 = l[2];
+    } else {
+      s2 = l.sublist(2).join(":");
+    }
+    String h = _hash(s2, _lastCheck);
     return (h == l[0]);
   }
 
@@ -168,9 +174,6 @@ class IapUtil {
     }
     if (_productDetails == null) {
       _productDetails = await _getProductDetails();
-      if (_productDetails == null) {
-        return false;
-      }
     }
     return false;
   }

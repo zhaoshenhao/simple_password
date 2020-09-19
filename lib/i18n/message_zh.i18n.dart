@@ -57,6 +57,7 @@ class CommonMessage_zh extends CommonMessage {
 	String get gen => """生成""";
 	String get group => """密码组""";
 	String get groups => """密码组""";
+	String get info => """消息""";
 	String get lastAccess => """最近访问""";
 	String get lastCreate => """创建时间""";
 	String get lastDelta => """最近修改""";
@@ -77,6 +78,9 @@ class CommonMessage_zh extends CommonMessage {
 	String get passwords => """密码""";
 	String get privacy => """隐私保护条款""";
 	String get recent => """最近""";
+	String get rename => """重命名""";
+	String get renameBad => """重命名失败""";
+	String get renameGood => """重命名完成""";
 	String get reset => """回复""";
 	String get ro => """只读""";
 	String get rw => """可读写""";
@@ -173,10 +177,15 @@ class LoadMessage_zh extends LoadMessage {
 	String get loadFile => """载入""";
 	String get loadPswdFile => """载入密宝文件""";
 	String get newFile => """新建""";
+	String oldChanged(String f1, f2) => """App 目录下的同名文件: ${f1} 
+另存为: 
+${f2}.""";
 	String get openInRo => """只读模式打开""";
 	String get openOther => """从其他目录打开""";
 	String get auth => """请进行认证来打开密宝""";
 	String get authErr => """设备认证出错。\n请检查您的系统认证设置，\n确认无误后重试.""";
+	String get oldOverwritten => """覆盖老文件""";
+	String get oldRename => """自动重命名老文件""";
 }
 
 class SbsMessage_zh extends SbsMessage {
@@ -192,6 +201,7 @@ class SbsMessage_zh extends SbsMessage {
 	String get donePolicy => """备份策略已执行.""";
 	String get enableSync => """同步修改到本地共享或云端目录""";
 	String fileDeleted(String f) => """文件 $f.sp 已删除""";
+	String get newName => """新文件名""";
 	String get pswdFileStatus => """密宝文件状态""";
 	String get roMode => """只读模式""";
 	String get sbp => """保存前按备份策略执行备份""";

@@ -24,6 +24,7 @@ common:
   gen: Produire
   group: Groupe
   groups: Groupes
+  info: Information
   lastAccess: Dernier accès
   lastCreate: Dernière création
   lastDelta: Dernière modification
@@ -45,6 +46,9 @@ common:
   privacy: Confidentialité
   recent: Récent
   reset: Réinitialiser
+  rename: Renommer
+  renameBad: Le changement de nom du fichier a échoué
+  renameGood: Fichier renommé
   ro: Lecture seulement
   rw: Lire écrire
   save: Sauver
@@ -122,10 +126,13 @@ load:
   loadFile: Fichier ouvert
   loadPswdFile: Charger le Fichier de Mot de Passe
   newFile: Nouveau Fichier
+  oldChanged(String f1, f2): "Un ancien fichier dans le répertoire de l'application:\n$f1 \nest renommé en:\n${f2}."
   openInRo: Ouvrir en mode lecture seule
   openOther: Ouvert depuis un autre endroit
   auth: Veuillez vous authentifier pour ouvrir cette application
   authErr: Erreur d'authentification de l'appareil.\nVeuillez vérifier l'authentification de votre système.\nEt réessayer plus tard.
+  oldOverwritten: Écraser l'ancien fichier
+  oldRename: Renommer automatiquement l'ancien fichier
 
 sbs:
   bkClean: Nettoyage de Sauvegarde
@@ -138,6 +145,7 @@ sbs:
   donePolicy: Politique de sauvegarde effectuée
   enableSync: Synchroniser les modifications dans un dossier local ou cloud
   fileDeleted(String f): Fichier $f.sp supprimé
+  newName: Nouveau nom
   pswdFileStatus: État du fichier de mot de passe
   roMode: Mode lecture seule
   sbp: Exécutez la politique de sauvegarde avant d'enregistrer

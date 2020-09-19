@@ -24,6 +24,7 @@ common:
   gen: Generate
   group: Group
   groups: Groups
+  info: Information
   lastAccess: Last Accessed
   lastCreate: Last Created
   lastDelta: Last Modified
@@ -44,6 +45,9 @@ common:
   passwords: Passwords
   privacy: Privacy
   recent: Recent
+  rename: Rename
+  renameBad: File renaming failed
+  renameGood: File renamed
   reset: Reset
   ro: Read-only
   rw: Read-write
@@ -122,10 +126,13 @@ load:
   loadFile: Open File
   loadPswdFile: Load Password File
   newFile: New File
+  oldChanged(String f1, f2): "An old file in app directory:\n$f1 \nis renamed to:\n${f2}."
   openInRo: Open in read-only mode
   openOther: Open from other location
   auth: Please authenticate yourself to open this app
   authErr: Device authencation error.\nPlease check your system authencation.\nAnd try again later.
+  oldOverwritten: Overwirte old file
+  oldRename: Auto-rename old file
 
 sbs:
   bkClean: Backup Cleanup
@@ -138,6 +145,7 @@ sbs:
   donePolicy: Backup policy performed.
   enableSync: Sync changes to a local or cloud folder
   fileDeleted(String f): File $f.sp deleted
+  newName: New name
   pswdFileStatus: Password file status
   roMode: Read-only mode
   sbp: Run backup policy before save

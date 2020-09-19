@@ -56,6 +56,7 @@ class CommonMessage {
 	String get gen => """Generate""";
 	String get group => """Group""";
 	String get groups => """Groups""";
+	String get info => """Information""";
 	String get lastAccess => """Last Accessed""";
 	String get lastCreate => """Last Created""";
 	String get lastDelta => """Last Modified""";
@@ -76,6 +77,9 @@ class CommonMessage {
 	String get passwords => """Passwords""";
 	String get privacy => """Privacy""";
 	String get recent => """Recent""";
+	String get rename => """Rename""";
+	String get renameBad => """File renaming failed""";
+	String get renameGood => """File renamed""";
 	String get reset => """Reset""";
 	String get ro => """Read-only""";
 	String get rw => """Read-write""";
@@ -172,10 +176,16 @@ class LoadMessage {
 	String get loadFile => """Open File""";
 	String get loadPswdFile => """Load Password File""";
 	String get newFile => """New File""";
+	String oldChanged(String f1, f2) => """An old file in app directory:
+$f1 
+is renamed to:
+${f2}.""";
 	String get openInRo => """Open in read-only mode""";
 	String get openOther => """Open from other location""";
 	String get auth => """Please authenticate yourself to open this app""";
 	String get authErr => """Device authencation error.\nPlease check your system authencation.\nAnd try again later.""";
+	String get oldOverwritten => """Overwirte old file""";
+	String get oldRename => """Auto-rename old file""";
 }
 
 class SbsMessage {
@@ -191,6 +201,7 @@ class SbsMessage {
 	String get donePolicy => """Backup policy performed.""";
 	String get enableSync => """Sync changes to a local or cloud folder""";
 	String fileDeleted(String f) => """File $f.sp deleted""";
+	String get newName => """New name""";
 	String get pswdFileStatus => """Password file status""";
 	String get roMode => """Read-only mode""";
 	String get sbp => """Run backup policy before save""";

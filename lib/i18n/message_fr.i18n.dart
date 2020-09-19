@@ -57,6 +57,7 @@ class CommonMessage_fr extends CommonMessage {
 	String get gen => """Produire""";
 	String get group => """Groupe""";
 	String get groups => """Groupes""";
+	String get info => """Information""";
 	String get lastAccess => """Dernier accès""";
 	String get lastCreate => """Dernière création""";
 	String get lastDelta => """Dernière modification""";
@@ -78,6 +79,9 @@ class CommonMessage_fr extends CommonMessage {
 	String get privacy => """Confidentialité""";
 	String get recent => """Récent""";
 	String get reset => """Réinitialiser""";
+	String get rename => """Renommer""";
+	String get renameBad => """Le changement de nom du fichier a échoué""";
+	String get renameGood => """Fichier renommé""";
 	String get ro => """Lecture seulement""";
 	String get rw => """Lire écrire""";
 	String get save => """Sauver""";
@@ -173,10 +177,16 @@ class LoadMessage_fr extends LoadMessage {
 	String get loadFile => """Fichier ouvert""";
 	String get loadPswdFile => """Charger le Fichier de Mot de Passe""";
 	String get newFile => """Nouveau Fichier""";
+	String oldChanged(String f1, f2) => """Un ancien fichier dans le répertoire de l'application:
+$f1 
+est renommé en:
+${f2}.""";
 	String get openInRo => """Ouvrir en mode lecture seule""";
 	String get openOther => """Ouvert depuis un autre endroit""";
 	String get auth => """Veuillez vous authentifier pour ouvrir cette application""";
 	String get authErr => """Erreur d'authentification de l'appareil.\nVeuillez vérifier l'authentification de votre système.\nEt réessayer plus tard.""";
+	String get oldOverwritten => """Écraser l'ancien fichier""";
+	String get oldRename => """Renommer automatiquement l'ancien fichier""";
 }
 
 class SbsMessage_fr extends SbsMessage {
@@ -192,6 +202,7 @@ class SbsMessage_fr extends SbsMessage {
 	String get donePolicy => """Politique de sauvegarde effectuée""";
 	String get enableSync => """Synchroniser les modifications dans un dossier local ou cloud""";
 	String fileDeleted(String f) => """Fichier $f.sp supprimé""";
+	String get newName => """Nouveau nom""";
 	String get pswdFileStatus => """État du fichier de mot de passe""";
 	String get roMode => """Mode lecture seule""";
 	String get sbp => """Exécutez la politique de sauvegarde avant d'enregistrer""";

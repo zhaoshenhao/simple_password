@@ -10,6 +10,7 @@ import 'package:simple_password/save_utility.dart';
 import 'package:simple_password/ui_utility.dart';
 import 'package:simple_password/utility.dart';
 import 'package:toggle_switch/toggle_switch.dart';
+import 'package:adaptive_dialog/adaptive_dialog.dart';
 
 class SaveAndBackupPage extends StatelessWidget {
   @override
@@ -75,6 +76,51 @@ class _SaveAndBackupWidgetState extends State<SaveAndBackupWidget> {
     }
   }
 
+  List<DialogTextField> _getInput(String f) {
+    List<DialogTextField> list = List();
+    list.add(DialogTextField(
+      initialText: f,
+      validator: (value) {
+        if (value == null || value == '') {
+          return m.common.notEmpty;
+        }
+        if (value == f) {
+          return m.common.noChange;
+        }
+        return null;
+      },
+    ));
+    return list;
+  }
+
+  Future<void> _rename(String f1) async {
+    List<String> fns = await showTextInputDialog(
+      title: m.common.rename,
+      message: m.sbs.newName,
+      context: context,
+      style: AdaptiveStyle.material,
+      textFields: _getInput(f1),
+    );
+    if (fns == null || fns.isEmpty) {
+      return;
+    }
+    String f2 = fns[0];
+    if (f2 == null || f2 == '') {
+      return;
+    }
+    String p2 = Util.getPath(f2);
+    if (FileUtil.fileExist(p2)) {
+      UiUtil.alert(m.common.error, m.file.fileExistErr(f2), context);
+    } else {
+      if (FileUtil.rename(f1, f2)) {
+        Scaffold.of(context).showSnackBar(UiUtil.snackBar(m.common.renameGood));
+      } else {
+        Scaffold.of(context).showSnackBar(UiUtil.snackBar(m.common.renameBad));
+      }
+    }
+    setState(() {});
+  }
+
   List<Widget> _getFiles() {
     List<String> files = FileUtil.listSpFiles();
     if (files == null || files.isEmpty) {
@@ -102,6 +148,12 @@ class _SaveAndBackupWidgetState extends State<SaveAndBackupWidget> {
           icon: Icons.delete,
           color: UiUtil.currentTheme.accentColor,
           onTap: () async => _delete(f),
+        ),
+        IconSlideAction(
+          caption: m.common.rename,
+          icon: Icons.text_fields,
+          color: UiUtil.currentTheme.accentColor,
+          onTap: () async => _rename(f),
         ),
       ],
     );

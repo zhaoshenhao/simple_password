@@ -24,6 +24,7 @@ common:
   gen: 生成
   group: 密码组
   groups: 密码组
+  info: 消息
   lastAccess: 最近访问
   lastCreate: 创建时间
   lastDelta: 最近修改
@@ -44,6 +45,9 @@ common:
   passwords: 密码
   privacy: 隐私保护条款
   recent: 最近
+  rename: 重命名
+  renameBad: 重命名失败
+  renameGood: 重命名完成
   reset: 回复
   ro: 只读
   rw: 可读写
@@ -122,11 +126,14 @@ load:
   loadFile: 载入
   loadPswdFile: 载入密宝文件
   newFile: 新建
+  oldChanged(String f1, f2): "App 目录下的同名文件: ${f1} \n另存为: \n${f2}."
   openInRo: 只读模式打开
   openOther: 从其他目录打开
   auth: 请进行认证来打开密宝
   authErr: 设备认证出错。\n请检查您的系统认证设置，\n确认无误后重试.
-
+  oldOverwritten: 覆盖老文件
+  oldRename: 自动重命名老文件
+  
 sbs:
   bkClean: 清理备份文件
   bkCurrent: 备份当前文件
@@ -138,6 +145,7 @@ sbs:
   donePolicy: 备份策略已执行.
   enableSync: 同步修改到本地共享或云端目录
   fileDeleted(String f): 文件 $f.sp 已删除
+  newName: 新文件名
   pswdFileStatus: 密宝文件状态
   roMode: 只读模式
   sbp: 保存前按备份策略执行备份

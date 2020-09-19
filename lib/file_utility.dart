@@ -166,15 +166,30 @@ class FileUtil {
   }
 
   ///Make a copy to Doc dir.
-  static String makeCopy(String p) {
+  static String makeCopy(String p, int act) {
     File f = new File(p);
     if (!f.existsSync()) {
       return null;
     }
     String bn = Util.getBasename(p);
     String nbn = getValidCopyName(bn);
-    f.copySync(Util.getPath(nbn));
-    return nbn;
+    if (bn != nbn && act == 1) {
+      rename(bn, nbn);
+    }
+    f.copySync(Util.getPath(bn));
+    return bn;
+  }
+
+  static bool rename(String fn1, String fn2) {
+    String p1 = Util.getPath(fn1);
+    String p2 = Util.getPath(fn2);
+    File f1 = File(p1);
+    File f2 = File(p2);
+    if (!f1.existsSync() || f2.existsSync()) {
+      return false;
+    }
+    f1.renameSync(p2);
+    return true;
   }
 
   static bool matchVersion(int v) {

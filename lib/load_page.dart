@@ -13,6 +13,7 @@ import 'package:simple_password/save_utility.dart';
 import 'package:simple_password/ui_utility.dart';
 import 'package:simple_password/utility.dart';
 import 'package:toggle_switch/toggle_switch.dart';
+import 'package:adaptive_dialog/adaptive_dialog.dart';
 
 class LoadPage extends StatelessWidget {
   @override
@@ -250,11 +251,40 @@ class _LoadPageWidgetState extends State<LoadPageWidget> {
     return new Container(width: _twidth, child: Text(text));
   }
 
+  List<AlertDialogAction<int>> _getActions() {
+    List<AlertDialogAction<int>> list = List();
+    list.add(new AlertDialogAction(
+      key: 0,
+      label: m.load.oldOverwritten,
+    ));
+    list.add(new AlertDialogAction(
+      key: 1,
+      label: m.load.oldRename,
+    ));
+    return list;
+  }
+
   void _loadAndUnlock() async {
     if (!Util.isInCurrentDir(choosed)) {
       Log.fine("${m.file.loadNew}: $choosed");
+      String bf = Util.getBasename(choosed);
+      String p = Util.getPath(bf);
+      int i;
+      if (FileUtil.fileExist(p)) {
+        i = await showConfirmationDialog<int>(
+            context: context,
+            title: m.common.confirm,
+            message: m.file.fileExists,
+            okLabel: m.common.confirm,
+            cancelLabel: m.common.cancel,
+            style: AdaptiveStyle.material,
+            actions: _getActions());
+        if (i == null || i < 0 || i > 1) {
+          return;
+        }
+      }
       if (SaveUtil.load(choosed, secKey, context)) {
-        choosed = FileUtil.makeCopy(choosed);
+        choosed = FileUtil.makeCopy(choosed, i);
         _unlock();
       }
       return;

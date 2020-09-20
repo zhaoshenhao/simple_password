@@ -138,6 +138,7 @@ class SecUtil {
   }
 
   static bool saveSignature(String sig) {
+    _validSignature = true;
     String path = Util.docDir.path + "/" + signatureFileName;
     try {
       File(path).writeAsStringSync(sig);

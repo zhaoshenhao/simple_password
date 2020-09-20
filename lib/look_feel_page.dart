@@ -92,14 +92,22 @@ class _LookFeelWidgetState extends State<LookFeelWidget> {
       String lang2 = Util.locale.languageCode;
       String theme2 = UiUtil.currentThemeName;
       bool hasChange = false;
+      if (theme != theme2) {
+        if (IapUtil.isPaid) {
+          hasChange = true;
+          UiUtil.setTheme(theme);
+        } else {
+          UiUtil.alert(
+              m.iap.title,
+              "${m.iap.unpaid}\n${m.iap.benefits}\n${m.iap.benefits1}\n${m.iap.benefits2}\n${m.iap.benefits3}",
+              context);
+          return;
+        }
+      }
       if (lang != lang2) {
         Util.locale = Locale(lang, '');
         hasChange = true;
         Util.setLanguage(lang);
-      }
-      if (theme != theme2) {
-        hasChange = true;
-        UiUtil.setTheme(theme);
       }
       if (hasChange) {
         Util.localeChangeCallback();
@@ -135,7 +143,6 @@ class _LookFeelWidgetState extends State<LookFeelWidget> {
               color: Colors.white,
               fontWeight: FontWeight.bold),
         )));
-    if (IapUtil.isPaid) {
     list.add(DropdownMenuItem<String>(
         value: 'teal',
         child: Text(
@@ -163,7 +170,6 @@ class _LookFeelWidgetState extends State<LookFeelWidget> {
               color: Colors.white,
               fontWeight: FontWeight.bold),
         )));
-    }
     return list;
   }
 }

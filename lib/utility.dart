@@ -250,7 +250,9 @@ class Util {
     _isMobile = Platform.isAndroid || Platform.isIOS;
     sp = await SharedPreferences.getInstance();
     docDir = await getApplicationDocumentsDirectory();
+    _mkdir(docDir);
     tmpDir = await getTemporaryDirectory();
+    _mkdir(tmpDir);
     String lang = getLanguage();
     if (lang == null || lang == '') {
       lang = 'en';
@@ -260,7 +262,22 @@ class Util {
     loadMessage(locale.languageCode);
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
     if (packageInfo != null) {
-      version = packageInfo.version + "+" + packageInfo.buildNumber;
+      if (packageInfo.version == packageInfo.buildNumber) {
+        version = packageInfo.version;
+      } else {
+        version = packageInfo.version + "+" + packageInfo.buildNumber;
+      }
+    }
+  }
+
+  static void _mkdir(Directory d) {
+    if (d.existsSync()) {
+      return;
+    }
+    try {
+      d.createSync(recursive: true);
+    } catch (e) {
+      Log.error("Create ${d.path} failed.", error: e);
     }
   }
 

@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:io';
 import 'package:catcher/catcher.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_lock/flutter_app_lock.dart';

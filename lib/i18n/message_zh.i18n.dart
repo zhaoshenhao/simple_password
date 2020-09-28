@@ -89,8 +89,9 @@ class CommonMessage_zh extends CommonMessage {
 	String get settings => """配置""";
 	String get terms => """使用条款""";
 	String get title => """名称""";
-	String get unsaved => """未保存的修改""";
 	String get un => """用户名""";
+	String get unsaved => """未保存的修改""";
+	String get unsavedMsg => """请先保存您的修改""";
 	String get url => """URL""";
 	String get version => """版本""";
 	String get yes => """是""";
@@ -272,7 +273,7 @@ class IapMessage_zh extends IapMessage {
 	String get buyRefund => """如需退款，请联系我们: https://www.syspole.com""";
 	String get error1 => """获取产品信息失败.""";
 	String get error2 => """产品信息未找到.""";
-	String get error3 => """购买功能不可用.""";
+	String get error3 => """应用内购买功能不可用. 请检查设备的设置.""";
 	String get failed => """请稍后重试.""";
 	String get freeVer => """免费版本限制""";
 	String get freeLimit => """您可以最多创建 5 个密码组，每个密码组最多包含 5 个密码。升级到 Pro 版本，可以创建任意多的密码组和密码。""";

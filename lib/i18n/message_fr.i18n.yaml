@@ -56,8 +56,9 @@ common:
   settings: Paramètres
   terms: Conditions d'utilisation
   title: Titre
-  unsaved: Modifications non enregistrées
   un: Nom
+  unsaved: Modifications non enregistrées
+  unsavedMsg: Veuillez d'abord sauvegarder
   url: URL
   version: Version
   yes: Oui
@@ -204,7 +205,7 @@ iap:
   buyRefund: "Si un remboursement est requis, veuillez nous contacter sur https://www.syspole.com"
   error1: L'obtention des détails de production a échoué.
   error2: Produit non trouvé.
-  error3: La fonction d'achat n'est pas disponible.
+  error3: L'achat via l'application n'est pas disponible. Veuillez vérifier votre réglage.
   failed: Veuillez réessayer.
   freeVer: Free Version
   freeLimit: Vous pouvez avoir jusqu'à 5 groupes de mots de passe et 5 mots de passe dans chaque groupe. Passez à la version Pro pour avoir des groupes et des mots de passe illimités.

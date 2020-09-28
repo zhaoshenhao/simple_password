@@ -122,8 +122,7 @@ class _IapWidgetState extends State<IapWidget> {
     list.add(ListTile(title: Text(m.common.error, style: header)));
     if (!_connOk) {
       list.add(_addBulletin(m.iap.error3));
-    }
-    if (!_prodOk) {
+    } else if (!_prodOk) {
       list.add(_addBulletin(m.iap.error2));
     }
     list.add(_addBulletin(m.iap.failed));

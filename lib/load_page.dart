@@ -265,12 +265,32 @@ class _LoadPageWidgetState extends State<LoadPageWidget> {
   }
 
   void _loadAndUnlock() async {
-    if (!Util.isInCurrentDir(choosed)) {
+    bool isExtFile = !Util.isInCurrentDir(choosed);
+    String bf = Util.getBasename(choosed);
+    bool isCurrentFile = (currentFilename == choosed);
+    if (!isCurrentFile && changes > 0) {
+      // Check existing changes
+      UiUtil.alert(m.common.unsaved, m.common.unsavedMsg, context);
+      return;
+    }
+    if (isCurrentFile) {
+      // reopen file
+      Log.fine("${m.file.loadCurrent}: $choosed");
+      String password = Util.decryptPassword(secPassword, data.key, randomIdx);
+      if (password == secKey) {
+        _unlock(current: true);
+      } else {
+        UiUtil.alert(m.common.error, m.pswd.pswdHint, context);
+      }
+      return;
+    }
+    if (isExtFile) {
+      // Open ext file
       Log.fine("${m.file.loadNew}: $choosed");
-      String bf = Util.getBasename(choosed);
       String p = Util.getPath(bf);
       int i;
       if (FileUtil.fileExist(p)) {
+        // dup file name in app container
         i = await showConfirmationDialog<int>(
             context: context,
             title: m.common.confirm,
@@ -284,18 +304,9 @@ class _LoadPageWidgetState extends State<LoadPageWidget> {
         }
       }
       if (SaveUtil.load(choosed, secKey, context)) {
+        // i = 0: overwrite, i = 1: auto-rename old
         choosed = FileUtil.makeCopy(choosed, i);
         _unlock();
-      }
-      return;
-    }
-    if (currentFilename == choosed) {
-      Log.fine("${m.file.loadCurrent}: $choosed");
-      String password = Util.decryptPassword(secPassword, data.key, randomIdx);
-      if (password == secKey) {
-        _unlock(current: true);
-      } else {
-        UiUtil.alert(m.common.error, m.pswd.pswdHint, context);
       }
       return;
     }
@@ -314,12 +325,12 @@ class _LoadPageWidgetState extends State<LoadPageWidget> {
   }
 
   void _openFile() async {
-    String f = await FilePicker.getFilePath();
+    FilePickerResult f = await FilePicker.platform.pickFiles();
     if (f == null) {
       return;
     }
-    otherFile = f;
-    choosed = f;
+    otherFile = f.files.single.path;
+    choosed = otherFile;
     setState(() {});
   }
 
@@ -328,9 +339,11 @@ class _LoadPageWidgetState extends State<LoadPageWidget> {
       AppLock.of(context).didUnlock();
       return;
     }
+    changes = 0;
     currentFilename = choosed;
     randomIdx = Util.randomKey();
     secPassword = Util.encryptPassword(secKey, data.key, randomIdx);
+    newSecPassword = null;
     historyFiles = Util.getHistoryFiles();
     List<String> list = List();
     for (String f in historyFiles) {

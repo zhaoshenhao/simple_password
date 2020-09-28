@@ -89,8 +89,9 @@ class CommonMessage_fr extends CommonMessage {
 	String get settings => """Paramètres""";
 	String get terms => """Conditions d'utilisation""";
 	String get title => """Titre""";
-	String get unsaved => """Modifications non enregistrées""";
 	String get un => """Nom""";
+	String get unsaved => """Modifications non enregistrées""";
+	String get unsavedMsg => """Please save first.""";
 	String get url => """URL""";
 	String get version => """Version""";
 	String get yes => """Oui""";
@@ -273,7 +274,7 @@ class IapMessage_fr extends IapMessage {
 	String get buyRefund => """Si un remboursement est requis, veuillez nous contacter sur https://www.syspole.com""";
 	String get error1 => """L'obtention des détails de production a échoué.""";
 	String get error2 => """Produit non trouvé.""";
-	String get error3 => """La fonction d'achat n'est pas disponible.""";
+	String get error3 => """L'achat via l'application n'est pas disponible. Veuillez vérifier votre réglage.""";
 	String get failed => """Veuillez réessayer.""";
 	String get freeVer => """Free Version""";
 	String get freeLimit => """Vous pouvez avoir jusqu'à 5 groupes de mots de passe et 5 mots de passe dans chaque groupe. Passez à la version Pro pour avoir des groupes et des mots de passe illimités.""";

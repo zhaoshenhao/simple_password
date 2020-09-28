@@ -90,6 +90,7 @@ class CommonMessage {
 	String get title => """Title""";
 	String get un => """Username""";
 	String get unsaved => """Unsaved changes""";
+	String get unsavedMsg => """Please save first""";
 	String get url => """URL""";
 	String get version => """Version""";
 	String get yes => """Yes""";
@@ -272,7 +273,7 @@ class IapMessage {
 	String get buyTitle => """Buy""";
 	String get error1 => """Getting production detail is failed.""";
 	String get error2 => """Product not found.""";
-	String get error3 => """Purcahse function is not available.""";
+	String get error3 => """In app purchase is not available. Please check your setting.""";
 	String get failed => """Please try again.""";
 	String get freeVer => """Free Version""";
 	String get freeLimit => """You can have up to 5 password groups and 5 passwords in each group. Upgrade to Pro version to have unlimited groups and passwords.""";

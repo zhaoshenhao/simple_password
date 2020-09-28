@@ -56,8 +56,9 @@ common:
   settings: 配置
   terms: 使用条款
   title: 名称
-  unsaved: 未保存的修改
   un: 用户名
+  unsaved: 未保存的修改
+  unsavedMsg: 请先保存您的修改
   url: URL
   version: 版本
   yes: 是
@@ -204,7 +205,7 @@ iap:
   buyRefund: "如需退款，请联系我们: https://www.syspole.com"
   error1: 获取产品信息失败.
   error2: 产品信息未找到.
-  error3: 购买功能不可用.
+  error3: 应用内购买功能不可用. 请检查设备的设置.
   failed: 请稍后重试.
   freeVer: 免费版本限制
   freeLimit: 您可以最多创建 5 个密码组，每个密码组最多包含 5 个密码。升级到 Pro 版本，可以创建任意多的密码组和密码。

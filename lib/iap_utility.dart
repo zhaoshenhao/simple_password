@@ -128,11 +128,10 @@ class IapUtil {
   static Future<String> _getPastPurchase() async {
     QueryPurchaseDetailsResponse purchaseResponse;
     try {
-      purchaseResponse = await _connection.queryPastPurchases();
-      if (purchaseResponse == null && Platform.isIOS) {
+      if (Platform.isIOS) {
         _connection.refreshPurchaseVerificationData();
-        purchaseResponse = await _connection.queryPastPurchases();
       }
+      purchaseResponse = await _connection.queryPastPurchases();
       if (purchaseResponse == null) {
         return null;
       }

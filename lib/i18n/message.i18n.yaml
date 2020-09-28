@@ -58,6 +58,7 @@ common:
   title: Title
   un: Username
   unsaved: Unsaved changes
+  unsavedMsg: Please save first
   url: URL
   version: Version
   yes: Yes
@@ -204,7 +205,7 @@ iap:
   buyTitle: Buy
   error1: Getting production detail is failed.
   error2: Product not found.
-  error3: Purcahse function is not available.
+  error3: In app purchase is not available. Please check your setting.
   failed: Please try again.
   freeVer: Free Version
   freeLimit: You can have up to 5 password groups and 5 passwords in each group. Upgrade to Pro version to have unlimited groups and passwords.
